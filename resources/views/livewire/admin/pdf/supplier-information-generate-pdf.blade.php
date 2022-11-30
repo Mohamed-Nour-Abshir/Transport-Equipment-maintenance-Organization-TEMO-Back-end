@@ -20,7 +20,7 @@
             padding: 0;
         }
         .container{
-            width: 80%;
+            width: 100%;
             margin-right: auto;
             margin-left: auto;
         }
@@ -133,7 +133,7 @@
                 <thead>
                   <tr>
                     <th>SL No.</th>
-                    <th>Supplier Id</th>
+                    <th>Supplier ID</th>
                     <th>Supplier Name</th>
                     <th>Phone No</th>
                     <th>Email Acc</th>

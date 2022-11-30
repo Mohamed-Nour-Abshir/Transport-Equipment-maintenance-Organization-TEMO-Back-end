@@ -17,13 +17,11 @@
              </button>
            </div>
            <div class="row">
-             <div class="col-md-6">
-               <p class="float-start">All Suppliers Information</p>
-             </div>
-             <div class="col-md-6">
-               <a href="{{route('admin-add-supplier')}}" class="btn btn-primary float-end mb-3">Add Suuplier Information</a
-               >
-             </div>
+            <div class="d-flex justify-content-between">
+              <p class="">All Suppliers Information</p>
+              <a href="{{route('pdf-generate-all-suppliers-information')}}" class="btn btn-warning btn-sm mb-4">Generate Pdf <i class="fas fa-download"></i></a>
+              <a href="{{route('admin-add-supplier')}}" class="btn btn-primary mb-4">Add Suuplier Information</a>
+            </div>
            </div>
            <table class="table table-bordered text-light p-5">
              <thead>
