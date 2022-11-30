@@ -21,6 +21,7 @@ class SupplierInformationComponent extends Component
         $search = '%' . $this->searchTerm . '%';
         $suppliers = Supplier::where('supplier_id', 'LIKE', $search)
             ->orwhere('supplier_name', 'LIKE', $search)
+            ->orwhere('supplier_email', 'LIKE', $search)
             ->orwhere('supplier_phone', 'LIKE', $search)
             ->orwhere('date', 'LIKE', $search)
             ->orderBy('id', 'DESC')->paginate(5);
