@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\GenerateSupplierInformationPdf;
+use App\Http\Livewire\Admin\AdminAddSupplierInformation;
+use App\Http\Livewire\Admin\AdminEditSupplierInformation;
 use App\Http\Livewire\Component\ComperativeStatementQuotationPriceBase;
 use App\Http\Livewire\Component\DeadStock;
 use App\Http\Livewire\Component\DemandForm;
@@ -15,6 +18,7 @@ use App\Http\Livewire\Component\WorkorderLetter;
 use App\Http\Livewire\Component\WorkorderTotal;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\PartsInformationComponent;
+use App\Http\Livewire\PDF\SupplierInformationPdfGenerate;
 use App\Http\Livewire\QuotationInformationComponent;
 use App\Http\Livewire\SupplierInformationComponent;
 use Illuminate\Support\Facades\Route;
@@ -55,4 +59,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/vehcile-reg-as-respect-workorder', VehicleRegWiseAsRespectWorkorder::class)->name('vehcile-reg-as-respect-workorder');
     Route::get('/workorder-letter', WorkorderLetter::class)->name('workorder-letter');
     Route::get('/workorder-total', WorkorderTotal::class)->name('workorder-total');
+
+    // Admin Routes 
+    Route::get('/admin-add-supplier-information', AdminAddSupplierInformation::class)->name('admin-add-supplier');
+    Route::get('/admin-edit-supplier-information/{supplierid}', AdminEditSupplierInformation::class)->name('admin-edit-supplier');
+    Route::get('/pdf-generate-supplier-information/{supplierid}', [GenerateSupplierInformationPdf::class, 'supplierInformation'])->name('pdf-generate-supplier-information');
 });
