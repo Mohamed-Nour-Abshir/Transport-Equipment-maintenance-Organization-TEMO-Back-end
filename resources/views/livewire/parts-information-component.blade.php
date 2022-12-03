@@ -53,6 +53,9 @@
 
               </tbody>
             </table>
+            <div class="d-flex">
+                {{ $parts->links() }}
+            </div>
           </div>
         </div>
       </div>

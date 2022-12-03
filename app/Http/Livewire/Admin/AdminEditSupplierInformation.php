@@ -58,6 +58,6 @@ class AdminEditSupplierInformation extends Component
     }
     public function render()
     {
-        return view('livewire.admin.admin-edit-supplier-information')->layout('layouts.base');
+        return view('livewire.admin.admin-edit-supplier-information')->layout('layouts.test');
     }
 }

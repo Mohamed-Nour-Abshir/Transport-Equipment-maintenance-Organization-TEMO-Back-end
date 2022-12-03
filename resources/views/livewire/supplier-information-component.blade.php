@@ -19,7 +19,7 @@
                         <p class="">All Suppliers Information</p>
                         <a href="{{ route('pdf-generate-all-suppliers-information') }}"
                             class="btn btn-warning btn-sm mb-4">Generate Pdf <i class="fas fa-download"></i></a>
-                        <a href="{{ route('admin-add-supplier') }}" class="btn btn-primary mb-4">Add Suuplier
+                        <a href="{{ route('admin-add-supplier') }}" class="btn btn-primary mb-3">Add Suuplier
                             Information</a>
                     </div>
                 </div>

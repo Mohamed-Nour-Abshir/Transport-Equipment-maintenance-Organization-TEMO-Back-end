@@ -19,7 +19,7 @@
       referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="assets/css/style.css" />
     @livewireStyles
-    
+
   </head>
   <body>
     <div class="header-nav p-2">
@@ -53,8 +53,7 @@
               <a
                 class="nav-link"
                 aria-current="page"
-                href="{{route('suplier-information')}}"
-              >
+                href="{{route('suplier-information')}}">
                 <i
                   class="fas fa-user-tie text-center"
                   style="margin-left: 60px"
@@ -65,7 +64,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="{{route('vehicle-information')}}"
                 ><i
                   class="fa-solid fa-truck"
                   style="color: yellow; margin-left: 60px"
@@ -126,9 +125,9 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-      
+
                   <p id="output" class="text-danger mb-3"></p>
-      
+
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="reportList" id="QuotationLowestPrice">
                     <label class="form-check-label" for="QuotationLowestPrice">

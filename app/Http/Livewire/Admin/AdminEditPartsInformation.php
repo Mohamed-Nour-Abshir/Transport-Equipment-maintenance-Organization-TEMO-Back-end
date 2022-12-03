@@ -58,6 +58,6 @@ class AdminEditPartsInformation extends Component
     }
     public function render()
     {
-        return view('livewire.admin.admin-edit-parts-information')->layout('layouts.base');
+        return view('livewire.admin.admin-edit-parts-information')->layout('layouts.test');
     }
 }

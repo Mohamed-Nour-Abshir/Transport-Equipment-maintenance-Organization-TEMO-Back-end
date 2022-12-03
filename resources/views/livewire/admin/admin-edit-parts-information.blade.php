@@ -1,5 +1,5 @@
 <div>
-    <div class="container p-5" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
+    <div class="container p-5 mt-5 mb-5" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
         @if (Session::has('message'))
             <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
         @endif
