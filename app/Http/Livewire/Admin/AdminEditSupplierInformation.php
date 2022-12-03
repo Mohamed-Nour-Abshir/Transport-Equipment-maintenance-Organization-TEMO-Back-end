@@ -54,7 +54,7 @@ class AdminEditSupplierInformation extends Component
         $supplier->supplier_address = $this->supplier_address;
         $supplier->date = $this->date;
         $supplier->save();
-        session()->flash('message', 'Supplier Information has been updated successfully');
+        session()->flush('message', 'Supplier Information has been updated successfully');
     }
     public function render()
     {

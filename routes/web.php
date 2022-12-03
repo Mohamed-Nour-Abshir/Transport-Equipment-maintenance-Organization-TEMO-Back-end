@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\GeneratePartsInformationPdf;
 use App\Http\Controllers\GenerateSupplierInformationPdf;
+use App\Http\Livewire\Admin\AdminAddPartsInformation;
 use App\Http\Livewire\Admin\AdminAddSupplierInformation;
+use App\Http\Livewire\Admin\AdminEditPartsInformation;
 use App\Http\Livewire\Admin\AdminEditSupplierInformation;
 use App\Http\Livewire\Component\ComperativeStatementQuotationPriceBase;
 use App\Http\Livewire\Component\DeadStock;
@@ -60,9 +63,16 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/workorder-letter', WorkorderLetter::class)->name('workorder-letter');
     Route::get('/workorder-total', WorkorderTotal::class)->name('workorder-total');
 
-    // Admin Routes 
+    // Admin Routes
+    // Supplier Information setup routes
     Route::get('/admin-add-supplier-information', AdminAddSupplierInformation::class)->name('admin-add-supplier');
     Route::get('/admin-edit-supplier-information/{supplierid}', AdminEditSupplierInformation::class)->name('admin-edit-supplier');
     Route::get('/pdf-generate-supplier-information/{supplierid}', [GenerateSupplierInformationPdf::class, 'supplierInformation'])->name('pdf-generate-supplier-information');
     Route::get('/pdf-generate-supplier-information', [GenerateSupplierInformationPdf::class, 'allSuppliersInformation'])->name('pdf-generate-all-suppliers-information');
+
+    // parts information setup routes
+    Route::get('/admin-add-parts-information', AdminAddPartsInformation::class)->name('add.parts');
+    Route::get('/admin-edit-parts-information/{parts_id}', AdminEditPartsInformation::class)->name('edit.parts');
+    Route::get('/pdf-generate-parts-information/{parts_id}', [GeneratePartsInformationPdf::class, 'partInformation'])->name('pdf-generate-parts-information');
+    Route::get('/pdf-generate-parts-information', [GeneratePartsInformationPdf::class, 'allPartsInformation'])->name('pdf-generate-all-parts-information');
 });

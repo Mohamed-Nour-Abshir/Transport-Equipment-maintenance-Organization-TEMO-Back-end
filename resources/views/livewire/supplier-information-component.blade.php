@@ -1,72 +1,74 @@
 <div>
-       <!-- main-section Start -->
-       <div
-       class="container p-5"
-       style="background: rgb(113, 113, 245); color: #ffff; width: auto"
-     >
-     @if (Session::has('message'))
-        <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
-      @endif
-       <div class="row">
-         <div class="col-md-12">
-           <h1 class="h1 mb-5">Supplier Information Setup</h1>
-           <div class="input-group mb-3 float-none text-center mb-5">
-             <input type="text" class="form-control" placeholder="Search Supplier data" aria-label="Search Supplier data" aria-describedby="button-addon2" wire:model="searchTerm"/>
-             <button class="btn btn-primary" type="submit" id="button-addon2">
-               Serach
-             </button>
-           </div>
-           <div class="row">
-            <div class="d-flex justify-content-between">
-              <p class="">All Suppliers Information</p>
-              <a href="{{route('pdf-generate-all-suppliers-information')}}" class="btn btn-warning btn-sm mb-4">Generate Pdf <i class="fas fa-download"></i></a>
-              <a href="{{route('admin-add-supplier')}}" class="btn btn-primary mb-4">Add Suuplier Information</a>
+    <!-- main-section Start -->
+    <div class="container p-5" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
+        @if (Session::has('message'))
+            <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+        @endif
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="h1 mb-5">Supplier Information Setup</h1>
+                <div class="input-group mb-3 float-none text-center mb-5">
+                    <input type="text" class="form-control" placeholder="Search Supplier data"
+                        aria-label="Search Supplier data" aria-describedby="button-addon2" wire:model="searchTerm" />
+                    <button class="btn btn-primary" type="submit" id="button-addon2">
+                        Serach
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="d-flex justify-content-between">
+                        <p class="">All Suppliers Information</p>
+                        <a href="{{ route('pdf-generate-all-suppliers-information') }}"
+                            class="btn btn-warning btn-sm mb-4">Generate Pdf <i class="fas fa-download"></i></a>
+                        <a href="{{ route('admin-add-supplier') }}" class="btn btn-primary mb-4">Add Suuplier
+                            Information</a>
+                    </div>
+                </div>
+                <table class="table table-bordered text-light p-5">
+                    <thead>
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Supplier Id</th>
+                            <th>Supplier Name</th>
+                            <th>Phone No</th>
+                            <th>Email Acc</th>
+                            <th>Supplier Address</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($suppliers as $supplier)
+                            <tr>
+                                <td>{{ $supplier->id }}</td>
+                                <td>{{ $supplier->supplier_id }}</td>
+                                <td>{{ $supplier->supplier_name }}</td>
+                                <td>{{ $supplier->supplier_phone }}</td>
+                                <td>{{ $supplier->supplier_email }}</td>
+                                <td>{{ $supplier->supplier_address }}</td>
+                                <td>{{ $supplier->date }}</td>
+                                <td>
+                                    <a href="{{ route('admin-edit-supplier', ['supplierid' => $supplier->id]) }}"
+                                        title="Edit"><i class="fas fa-edit text-primary fa-1x"></i></a>
+                                    <a href="#" onclick="confirm('Are you sure to Delete this Supplier Information?') || event.stopImmediatePropagation()" wire:click.prevent="deleteSupplier({{ $supplier->id }})" title="delete"><i class="fas fa-remove text-danger fa-1x"></i></a>
+                                    <a href="{{ route('pdf-generate-supplier-information', ['supplierid' => $supplier->id]) }}"
+                                        title="Print"><i class="fas fa-print text-warning fa-1x"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+                <div class="d-flex">
+                    {{ $suppliers->links() }}
+                </div>
             </div>
-           </div>
-           <table class="table table-bordered text-light p-5">
-             <thead>
-               <tr>
-                 <th>SL No.</th>
-                 <th>Supplier Id</th>
-                 <th>Supplier Name</th>
-                 <th>Phone No</th>
-                 <th>Email Acc</th>
-                 <th>Supplier Address</th>
-                 <th>Date</th>
-                 <th>Action</th>
-               </tr>
-             </thead>
-             <tbody>
-              @foreach ($suppliers as $supplier)
-              <tr>
-                <td>{{$supplier->id}}</td>
-                <td>{{$supplier->supplier_id}}</td>
-                <td>{{$supplier->supplier_name}}</td>
-                <td>{{$supplier->supplier_phone}}</td>
-                <td>{{$supplier->supplier_email}}</td>
-                <td>{{$supplier->supplier_address}}</td>
-                <td>{{$supplier->date}}</td>
-                <td>
-                  <a href="{{route('admin-edit-supplier',['supplierid'=>$supplier->id])}}" title="Edit"><i class="fas fa-edit text-primary fa-1x"></i></a>
-                  <a href="#" onclick="confirm('Are you sure to Delete this Supplier Information?') || event.stopImmediatePropagation()" wire:click.prevent="deleteSupplier({{$supplier->id}})" title="delete"><i class="fas fa-remove text-danger fa-1x"></i></a>
-                  <a href="{{route('pdf-generate-supplier-information',['supplierid'=>$supplier->id])}}" title="Print"><i class="fas fa-print text-warning fa-1x"></i></a>
-                </td>
-              </tr>
-              @endforeach
-               
-             </tbody>
-           </table>
-           <div class="d-flex">
-            {{ $suppliers->links() }}
         </div>
-         </div>
-       </div>
-     </div>
- 
-     <!-- main-section End -->
- 
-     <!-- Modal Supplier Information Modal-->
-     {{-- <div
+    </div>
+
+    <!-- main-section End -->
+
+    <!-- Modal Supplier Information Modal-->
+    {{-- <div
        class="modal fade"
        id="SupplierInformation"
        tabindex="-1"

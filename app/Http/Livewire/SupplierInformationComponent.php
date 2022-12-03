@@ -24,8 +24,8 @@ class SupplierInformationComponent extends Component
             ->orwhere('supplier_email', 'LIKE', $search)
             ->orwhere('supplier_phone', 'LIKE', $search)
             ->orwhere('date', 'LIKE', $search)
-            ->orderBy('id', 'DESC')->paginate(5);
-        // $suppliers = Supplier::paginate(5);
+            ->orwhere('id', 'LIKE', $search)
+            ->orderBy('id', 'DESC')->paginate(10);
         return view('livewire.supplier-information-component', ['suppliers' => $suppliers])->layout('layouts.base');
     }
 }
