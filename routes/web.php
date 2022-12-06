@@ -4,6 +4,7 @@ use App\Http\Controllers\GeneratePartsInformationPdf;
 use App\Http\Controllers\GenerateSupplierInformationPdf;
 use App\Http\Controllers\GenerateVehicleInformationPdf;
 use App\Http\Livewire\Admin\AdminAddPartsInformation;
+use App\Http\Livewire\Admin\AdminAddQuotationInformation;
 use App\Http\Livewire\Admin\AdminAddSupplierInformation;
 use App\Http\Livewire\Admin\AdminAddVehicleInformation;
 use App\Http\Livewire\Admin\AdminEditPartsInformation;
@@ -83,7 +84,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     // Vehicle information
     Route::get('/admin-add-vehicle-information', AdminAddVehicleInformation::class)->name('add.vehicle');
-    Route::get('admin-edit-vehicle-information/{vehicle_id}', AdminEditVehicleInformation::class)->name('edit.vehicle');
-    Route::get('pdf-generate-vehicle-information/{vehicle_id}', [GenerateVehicleInformationPdf::class, 'vehicleInformation'])->name('pdf.vehicle');
-    Route::get('pdf-generate-vehicle-information', [GenerateVehicleInformationPdf::class, 'allVehicleInformation'])->name('pdf.all-vehicles');
+    Route::get('/admin-edit-vehicle-information/{vehicle_id}', AdminEditVehicleInformation::class)->name('edit.vehicle');
+    Route::get('/pdf-generate-vehicle-information/{vehicle_id}', [GenerateVehicleInformationPdf::class, 'vehicleInformation'])->name('pdf.vehicle');
+    Route::get('/pdf-generate-vehicle-information', [GenerateVehicleInformationPdf::class, 'allVehicleInformation'])->name('pdf.all-vehicles');
+
+    //Quotation Information
+    Route::get('/admin-add-quotation-information', AdminAddQuotationInformation::class)->name('add.quotation');
 });

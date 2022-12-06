@@ -24,13 +24,7 @@
                <p class="float-start">All Quotation Information</p>
              </div>
              <div class="col-md-6">
-               <a
-                 href=""
-                 class="btn btn-primary float-end mb-3"
-                 data-bs-toggle="modal"
-                 data-bs-target="#SupplierInformation"
-                 >Add Quotation Information</a
-               >
+               <a href="{{route('add.quotation')}}" class="btn btn-primary float-end mb-3">Add Quotation Information</a>
              </div>
            </div>
            <table class="table table-bordered text-light p-5">
@@ -62,128 +56,9 @@
                  <td>BATTERY-NX-1207L</td>
                  <td>12,00000 TK</td>
                  <td>
-                   <a href="" title="Edit"><i class="fas fa-edit text-success fa-2x"></i></a>
-                   <a href="" title="delete"><i class="fas fa-remove text-danger fa-2x"></i></a>
-                   <a href="" title="Print"><i class="fas fa-print text-warning fa-2x"></i></a>
-                 </td>
-               </tr>
-               <tr>
-                 <td>688439</td>
-                 <td>26-11-2022</td>
-                 <td>30-11-2022</td>
-                 <td>S01</td>
-                 <td>BAT</td>
-                 <td>Alfaros</td>
-                 <td>BMW</td>
-                 <td>B008</td>
-                 <td>BATTERY-NX-1207L</td>
-                 <td>12,00000 TK</td>
-                 <td>
-                   <a href="" title="Edit"><i class="fas fa-edit text-success fa-2x"></i></a>
-                   <a href="" title="delete"><i class="fas fa-remove text-danger fa-2x"></i></a>
-                   <a href="" title="Print"><i class="fas fa-print text-warning fa-2x"></i></a>
-                 </td>
-               </tr>
-               <tr>
-                 <td>688439</td>
-                 <td>26-11-2022</td>
-                 <td>30-11-2022</td>
-                 <td>S01</td>
-                 <td>BAT</td>
-                 <td>Alfaros</td>
-                 <td>BMW</td>
-                 <td>B008</td>
-                 <td>BATTERY-NX-1207L</td>
-                 <td>12,00000 TK</td>
-                 <td>
-                   <a href="" title="Edit"><i class="fas fa-edit text-success fa-2x"></i></a>
-                   <a href="" title="delete"><i class="fas fa-remove text-danger fa-2x"></i></a>
-                   <a href="" title="Print"><i class="fas fa-print text-warning fa-2x"></i></a>
-                 </td>
-               </tr>
-               <tr>
-                 <td>688439</td>
-                 <td>226-11-2022</td>
-                 <td>30-11-2022</td>
-                 <td>S01</td>
-                 <td>BAT</td>
-                 <td>Alfaros</td>
-                 <td>BMW</td>
-                 <td>B008</td>
-                 <td>BATTERY-NX-1207L</td>
-                 <td>12,00000 TK</td>
-                 <td>
-                   <a href="" title="Edit"><i class="fas fa-edit text-success fa-2x"></i></a>
-                   <a href="" title="delete"><i class="fas fa-remove text-danger fa-2x"></i></a>
-                   <a href="" title="Print"><i class="fas fa-print text-warning fa-2x"></i></a>
-                 </td>
-               </tr>
-               <tr>
-                 <td>688439</td>
-                 <td>226-11-2022</td>
-                 <td>30-11-2022</td>
-                 <td>S01</td>
-                 <td>BAT</td>
-                 <td>Alfaros</td>
-                 <td>BMW</td>
-                 <td>B008</td>
-                 <td>BATTERY-NX-1207L</td>
-                 <td>12,00000 TK</td>
-                 <td>
-                   <a href="" title="Edit"><i class="fas fa-edit text-success fa-2x"></i></a>
-                   <a href="" title="delete"><i class="fas fa-remove text-danger fa-2x"></i></a>
-                   <a href="" title="Print"><i class="fas fa-print text-warning fa-2x"></i></a>
-                 </td>
-               </tr>
-               <tr>
-                 <td>688439</td>
-                 <td>126-11-2022</td>
-                 <td>30-11-2022</td>
-                 <td>S01</td>
-                 <td>BAT</td>
-                 <td>Alfaros</td>
-                 <td>BMW</td>
-                 <td>B008</td>
-                 <td>BATTERY-NX-1207L</td>
-                 <td>12,00000 TK</td>
-                 <td>
-                   <a href="" title="Edit"><i class="fas fa-edit text-success fa-2x"></i></a>
-                   <a href="" title="delete"><i class="fas fa-remove text-danger fa-2x"></i></a>
-                   <a href="" title="Print"><i class="fas fa-print text-warning fa-2x"></i></a>
-                 </td>
-               </tr>
-               <tr>
-                 <td>688439</td>
-                 <td>226-11-2022</td>
-                 <td>30-11-2022</td>
-                 <td>S01</td>
-                 <td>BAT</td>
-                 <td>Alfaros</td>
-                 <td>BMW</td>
-                 <td>B008</td>
-                 <td>BATTERY-NX-1207L</td>
-                 <td>12,00000 TK</td>
-                 <td>
-                   <a href="" title="Edit"><i class="fas fa-edit text-success fa-2x"></i></a>
-                   <a href="" title="delete"><i class="fas fa-remove text-danger fa-2x"></i></a>
-                   <a href="" title="Print"><i class="fas fa-print text-warning fa-2x"></i></a>
-                 </td>
-               </tr>
-               <tr>
-                 <td>688439</td>
-                 <td>326-11-2022</td>
-                 <td>30-11-2022</td>
-                 <td>S01</td>
-                 <td>BAT</td>
-                 <td>Alfaros</td>
-                 <td>BMW</td>
-                 <td>B008</td>
-                 <td>BATTERY-NX-1207L</td>
-                 <td>12,00000 TK</td>
-                 <td>
-                   <a href="" title="Edit"><i class="fas fa-edit text-success fa-2x"></i></a>
-                   <a href="" title="delete"><i class="fas fa-remove text-danger fa-2x"></i></a>
-                   <a href="" title="Print"><i class="fas fa-print text-warning fa-2x"></i></a>
+                   <a href="" title="Edit"><i class="fas fa-edit text-success"></i></a>
+                   <a href="" title="delete"><i class="fas fa-remove text-danger"></i></a>
+                   <a href="" title="Print"><i class="fas fa-print text-warning"></i></a>
                  </td>
                </tr>
              </tbody>
@@ -191,9 +66,9 @@
          </div>
        </div>
      </div>
- 
+
      <!-- main-section End -->
- 
+
      <!-- Modal Quotation Information setup-->
      <div
        class="modal fade"
@@ -285,7 +160,7 @@
                  </div>
            </div>
            <div class="modal-footer">
-             <button type="button" class="btn btn-primary">Save</button>
+
              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
            </div>
          </form>
