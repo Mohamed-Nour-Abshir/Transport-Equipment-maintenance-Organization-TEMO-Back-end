@@ -8,7 +8,7 @@
          <div class="col-md-12">
            <h1 class="h1 mb-5">Quotation Information Setup</h1>
            <div class="input-group mb-3 float-none text-center mb-5">
-             <input type="text" class="form-control" placeholder="Search Supplier data" aria-label="Search Supplier data" aria-describedby="button-addon2"/>
+             <input type="text" class="form-control" placeholder="Search Quotation Information" aria-label="Search Supplier data" aria-describedby="button-addon2" wire:model="searchTerm"/>
              <button class="btn btn-primary" type="button" id="button-addon2">
                Serach
              </button>
@@ -59,6 +59,7 @@
                 @endforeach
              </tbody>
            </table>
+           {{$quotations->links()}}
          </div>
        </div>
      </div>
