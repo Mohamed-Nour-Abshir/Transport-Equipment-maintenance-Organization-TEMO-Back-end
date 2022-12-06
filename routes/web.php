@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GeneratePartsInformationPdf;
+use App\Http\Controllers\GenerateQuotationInformationPdf;
 use App\Http\Controllers\GenerateSupplierInformationPdf;
 use App\Http\Controllers\GenerateVehicleInformationPdf;
 use App\Http\Livewire\Admin\AdminAddPartsInformation;
@@ -92,4 +93,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     //Quotation Information
     Route::get('/admin-add-quotation-information', AdminAddQuotationInformation::class)->name('add.quotation');
     Route::get('/admin-update-quotation-information/{quotation_id}', AdminUpdateQuotationInformation::class)->name('edit.quation');
+    Route::get('/pdf-generate-quotation-information/{quotation_id}', [GenerateQuotationInformationPdf::class, 'quotationInformation'])->name('pdf.quotation');
+    Route::get('/pdf-generate-quotation-information', [GenerateQuotationInformationPdf::class, 'allquotationsInformation'])->name('pdf.all-quotations');
 });

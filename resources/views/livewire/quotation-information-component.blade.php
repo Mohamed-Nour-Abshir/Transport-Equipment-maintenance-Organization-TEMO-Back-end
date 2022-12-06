@@ -14,12 +14,11 @@
             @if (Session::has('message'))
                 <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
             @endif
-             <div class="col-md-6">
-               <p class="float-start">All Quotation Information</p>
-             </div>
-             <div class="col-md-6">
-               <a href="{{route('add.quotation')}}" class="btn btn-primary float-end mb-3">Add Quotation Information</a>
-             </div>
+            <div class="d-flex justify-content-between">
+               <p class="">All Quotation Information</p>
+               <a href="{{route('pdf.all-quotations')}}" class="btn btn-warning mb-3">Generate Pdf <i class="fas fa-download"></i></a>
+               <a href="{{route('add.quotation')}}" class="btn btn-primary mb-3">Add Quotation Information</a>
+            </div>
            </div>
            <table class="table table-bordered text-light p-5">
              <thead>
@@ -53,7 +52,7 @@
                         <td>
                         <a href="{{route('edit.quation',['quotation_id'=>$quotation->id])}}" title="Edit"><i class="fas fa-edit text-success"></i></a>
                         <a href="#" onclick="confirm('Are you sure to Delete This Information?') || event.stopImmediatePropagation()" wire:click.prevent="deleteQuotation({{ $quotation->id }})" title="delete"><i class="fas fa-remove text-danger"></i></a>
-                        <a href="" title="Print"><i class="fas fa-print text-warning"></i></a>
+                        <a href="{{route('pdf.quotation',['quotation_id'=>$quotation->id])}}" title="Print"><i class="fas fa-print text-warning"></i></a>
                         </td>
                     </tr>
                 @endforeach
