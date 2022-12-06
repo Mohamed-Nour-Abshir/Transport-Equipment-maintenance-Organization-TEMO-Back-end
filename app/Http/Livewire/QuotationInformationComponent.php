@@ -8,6 +8,13 @@ use Livewire\Component;
 class QuotationInformationComponent extends Component
 {
     public $searchTerm;
+
+    public function deleteQuotation($id)
+    {
+        $quotation = Quotation::find($id);
+        $quotation->delete();
+        session()->flash('message', 'Quotation has been deleted successfully');
+    }
     public function render()
     {
         $search = '%' . $this->searchTerm . '%';

@@ -11,6 +11,9 @@
              </button>
            </div>
            <div class="row">
+            @if (Session::has('message'))
+                <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+            @endif
              <div class="col-md-6">
                <p class="float-start">All Quotation Information</p>
              </div>
@@ -48,8 +51,8 @@
                         <td>{{$quotation->parts_name}}</td>
                         <td>{{$quotation->company}} TK</td>
                         <td>
-                        <a href="" title="Edit"><i class="fas fa-edit text-success"></i></a>
-                        <a href="" title="delete"><i class="fas fa-remove text-danger"></i></a>
+                        <a href="{{route('edit.quation',['quotation_id'=>$quotation->id])}}" title="Edit"><i class="fas fa-edit text-success"></i></a>
+                        <a href="#" onclick="confirm('Are you sure to Delete This Information?') || event.stopImmediatePropagation()" wire:click.prevent="deleteQuotation({{ $quotation->id }})" title="delete"><i class="fas fa-remove text-danger"></i></a>
                         <a href="" title="Print"><i class="fas fa-print text-warning"></i></a>
                         </td>
                     </tr>

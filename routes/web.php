@@ -10,6 +10,7 @@ use App\Http\Livewire\Admin\AdminAddVehicleInformation;
 use App\Http\Livewire\Admin\AdminEditPartsInformation;
 use App\Http\Livewire\Admin\AdminEditSupplierInformation;
 use App\Http\Livewire\Admin\AdminEditVehicleInformation;
+use App\Http\Livewire\Admin\AdminUpdateQuotationInformation;
 use App\Http\Livewire\Component\ComperativeStatementQuotationPriceBase;
 use App\Http\Livewire\Component\DeadStock;
 use App\Http\Livewire\Component\DemandForm;
@@ -90,4 +91,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     //Quotation Information
     Route::get('/admin-add-quotation-information', AdminAddQuotationInformation::class)->name('add.quotation');
+    Route::get('/admin-update-quotation-information/{quotation_id}', AdminUpdateQuotationInformation::class)->name('edit.quation');
 });
