@@ -1,9 +1,6 @@
 <div>
        <!-- main-section Start -->
-       <div
-       class="container p-5"
-       style="background: rgb(113, 113, 245); color: #ffff; width: auto"
-     >
+       <div class="container p-5" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
        <div class="row">
          <div class="col-md-12">
            <h1 class="h1 mb-5">Quotation Information Setup</h1>
