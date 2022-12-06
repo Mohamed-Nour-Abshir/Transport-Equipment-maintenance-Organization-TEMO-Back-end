@@ -44,23 +44,25 @@
                </tr>
              </thead>
              <tbody>
-               <tr>
-                 <td>688439</td>
-                 <td>26-11-2022</td>
-                 <td>30-11-2022</td>
-                 <td>S01</td>
-                 <td>BAT</td>
-                 <td>Alfaros</td>
-                 <td>BMW</td>
-                 <td>B008</td>
-                 <td>BATTERY-NX-1207L</td>
-                 <td>12,00000 TK</td>
-                 <td>
-                   <a href="" title="Edit"><i class="fas fa-edit text-success"></i></a>
-                   <a href="" title="delete"><i class="fas fa-remove text-danger"></i></a>
-                   <a href="" title="Print"><i class="fas fa-print text-warning"></i></a>
-                 </td>
-               </tr>
+                @foreach ($quotations as $quotation)
+                    <tr>
+                        <td>{{$quotation->id}}</td>
+                        <td>{{$quotation->from_date}}</td>
+                        <td>{{$quotation->to_date}}</td>
+                        <td>S{{$quotation->supplier_id}}</td>
+                        <td>{{$quotation->vehicle_code}}</td>
+                        <td>{{$quotation->supplier_name}}</td>
+                        <td>{{$quotation->vehicle_name}}</td>
+                        <td>{{$quotation->parts_code}}</td>
+                        <td>{{$quotation->parts_name}}</td>
+                        <td>{{$quotation->company}} TK</td>
+                        <td>
+                        <a href="" title="Edit"><i class="fas fa-edit text-success"></i></a>
+                        <a href="" title="delete"><i class="fas fa-remove text-danger"></i></a>
+                        <a href="" title="Print"><i class="fas fa-print text-warning"></i></a>
+                        </td>
+                    </tr>
+                @endforeach
              </tbody>
            </table>
          </div>
@@ -68,103 +70,4 @@
      </div>
 
      <!-- main-section End -->
-
-     <!-- Modal Quotation Information setup-->
-     <div
-       class="modal fade"
-       id="SupplierInformation"
-       tabindex="-1"
-       aria-labelledby="SupplierInformationLabel"
-       aria-hidden="true"
-     >
-       <div class="modal-dialog">
-         <div class="modal-content">
-           <div class="modal-header">
-             <h5 class="modal-title" id="SupplierInformationLabel">
-               Quotation Information Setup
-             </h5>
-             <button
-               type="button"
-               class="btn-close"
-               data-bs-dismiss="modal"
-               aria-label="Close"
-             ></button>
-           </div>
-           <div class="modal-body">
-             <form action="">
-                 <div class="row">
-                     <div class="col-md-6">
-                         <div class="form-group mb-3">
-                             <label for="supplier-id" class="form-label">From date</label>
-                             <input type="date" id="supplier-id" class="form-control">
-                           </div>
-                     </div>
-                     <div class="col-md-6">
-                         <div class="form-group mb-3">
-                             <label for="supplier-id" class="form-label">To date</label>
-                             <input type="date" id="supplier-id" class="form-control">
-                           </div>
-                     </div>
-                 </div>
-                 <div class="row">
-                     <div class="col-md-6">
-                         <div class="form-group mb-3">
-                             <label for="supplier-id" class="form-label">Supplier ID</label>
-                             <input type="text" id="supplier-id" class="form-control" disabled>
-                           </div>
-                     </div>
-                     <div class="col-md-6">
-                         <div class="form-group mb-3">
-                             <label for="supplier-id" class="form-label">Vehicle Code</label>
-                             <input type="text" id="supplier-id" class="form-control">
-                           </div>
-                     </div>
-                 </div>
-                 <div class="row">
-                     <div class="col-md-6">
-                         <div class="form-group mb-3">
-                             <label for="supplier-id" class="form-label">Supplier Name</label>
-                             <input type="text" id="supplier-id" class="form-control">
-                           </div>
-                     </div>
-                     <div class="col-md-6">
-                         <div class="form-group mb-3">
-                             <label for="supplier-id" class="form-label">Vehicle Name</label>
-                             <input type="text" id="supplier-id" class="form-control">
-                           </div>
-                     </div>
-                 </div>
-                 <div class="parts">
-                     <div class="row">
-                         <div class="col-md-6">
-                             <div class="form-group mb-3">
-                                 <label for="supplier-id" class="form-label">Parts Code</label>
-                                 <input type="text" id="supplier-id" class="form-control">
-                               </div>
-                         </div>
-                         <div class="col-md-6">
-                             <div class="form-group mb-3">
-                                 <label for="supplier-id" class="form-label">Parts Name</label>
-                                 <input type="text" id="supplier-id" class="form-control">
-                               </div>
-                         </div>
-                     </div>
-                     <div class="row">
-                         <div class="col-md-12">
-                             <div class="form-group mb-3">
-                                 <label for="supplier-id" class="form-label">Company Price (TK)</label>
-                                 <textarea type="text" id="supplier-id" rows="10" cols="10" class="form-control"></textarea>
-                               </div>
-                         </div>
-                     </div>
-                 </div>
-           </div>
-           <div class="modal-footer">
-
-             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-           </div>
-         </form>
-         </div>
-       </div>
-     </div>
 </div>
