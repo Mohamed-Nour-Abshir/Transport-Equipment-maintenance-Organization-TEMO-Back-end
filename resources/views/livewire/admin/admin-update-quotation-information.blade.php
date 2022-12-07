@@ -2,7 +2,10 @@
     <div class="container mt-2">
         <h1 class="bg-success text-light text-center p-2 h1">Update Quotation Information</h1>
         @if (Session::has('message'))
-            <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ Session::get('message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endif
         <form wire:submit.prevent='updateQuotationInformation'>
             <div class="row">

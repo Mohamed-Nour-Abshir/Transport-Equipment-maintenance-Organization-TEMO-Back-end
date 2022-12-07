@@ -40,6 +40,7 @@ class AdminAddSupplierInformation extends Component
         $supplier->date = $this->date;
         $supplier->save();
         session()->flash('message', 'Supplier Information has been added successfully');
+        return redirect()->route('supplier-information');
     }
     public function render()
     {

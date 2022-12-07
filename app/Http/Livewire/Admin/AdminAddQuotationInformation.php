@@ -60,6 +60,7 @@ class AdminAddQuotationInformation extends Component
         $quotation->company = $this->company_price;
         $quotation->save();
         session()->flash('message', 'Quotation added successfully');
+        return redirect()->route('quotation-information');
     }
     public function render()
     {

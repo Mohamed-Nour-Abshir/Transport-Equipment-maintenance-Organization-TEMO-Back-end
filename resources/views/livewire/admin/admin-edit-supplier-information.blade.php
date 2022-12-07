@@ -1,8 +1,11 @@
 <div>
     <div class="container p-5 mt-5 mb-5" style="background: rgb(113, 113, 245); color: #ffff; width: auto;">
-     @if (Session::has('message'))
-         <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
-     @endif
+        @if (Session::has('message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ Session::get('message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
      <form wire:submit.prevent="updateSupplierInformation">
         <h1 class="text-light h1 text-center mb-2">Edit Supplier Information</h1>
          <div class="form-group mb-3">

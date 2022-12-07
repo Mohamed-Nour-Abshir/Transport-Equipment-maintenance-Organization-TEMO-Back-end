@@ -15,7 +15,7 @@ class VehicleInformationComponent extends Component
     }
     public function render()
     {
-        $vehicles = Vehicle::paginate(10);
+        $vehicles = Vehicle::orderBy('id', 'DESC')->paginate(10);
         return view('livewire.vehicle-information-component', ['vehicles' => $vehicles])->layout('layouts.base');
     }
 }

@@ -44,6 +44,7 @@ class AdminAddPartsInformation extends Component
         $parts->parts_date = $this->parts_date;
         $parts->save();
         session()->flash('message', 'Parts Information added successfully');
+        return redirect()->route('parts-information');
     }
     public function render()
     {

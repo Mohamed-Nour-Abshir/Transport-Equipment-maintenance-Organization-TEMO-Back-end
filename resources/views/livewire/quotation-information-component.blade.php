@@ -11,9 +11,12 @@
              </button>
            </div>
            <div class="row">
-            @if (Session::has('message'))
-                <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
-            @endif
+                @if (Session::has('message'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ Session::get('message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
             <div class="d-flex justify-content-between">
                <p class="">All Quotation Information</p>
                <a href="{{route('pdf.all-quotations')}}" class="btn btn-warning mb-3">Generate Pdf <i class="fas fa-download"></i></a>

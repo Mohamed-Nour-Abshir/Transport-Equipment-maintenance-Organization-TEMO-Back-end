@@ -1,7 +1,10 @@
 <div>
     <div class="container p-5" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
         @if (Session::has('message'))
-            <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ Session::get('message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endif
         <form wire:submit.prevent="addVehicleInformation">
             <h1 class="h1 text-center"> Vehicle Information Setup</h1>
