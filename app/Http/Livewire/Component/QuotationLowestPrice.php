@@ -2,12 +2,29 @@
 
 namespace App\Http\Livewire\Component;
 
+use App\Models\PartsInfo;
 use Livewire\Component;
 
 class QuotationLowestPrice extends Component
 {
+    // public $searchTerm;
+    public $showTableQuotationTable;
+    public $min_price;
+    public $max_price;
+
+    public function mount()
+    {
+        $this->min_price = 1;
+        $this->max_price = 10000000000;
+    }
+    public function showQuotation()
+    {
+        $this->showTableQuotationTable = true;
+    }
     public function render()
     {
-        return view('livewire.component.quotation-lowest-price')->layout('layouts.base');
+        // $search = '%' . $this->searchTerm . '%';
+        $parts = PartsInfo::whereBetween('parts_price', [$this->min_price, $this->max_price])->orderBy('parts_price', 'ASC')->limit(8)->get();
+        return view('livewire.component.quotation-lowest-price', ['parts' => $parts])->layout('layouts.base');
     }
 }
