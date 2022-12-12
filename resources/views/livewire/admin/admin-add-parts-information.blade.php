@@ -8,10 +8,23 @@
         @endif
         <form wire:submit.prevent="addPartsInformation">
             <h1 class="h1 text-center"> Parts Information Setup</h1>
-            <div class="form-group mb-3">
+            {{-- <div class="form-group mb-3">
                 <label for="supplier-id" class="form-label">Vehicle Code</label>
                 <input type="text" id="supplier-id" class="form-control" wire:model="vehicle_code">
                 @error('vehicle_code')<span class="text-danger">{{ $message }}</span>@enderror <br>
+            </div> --}}
+
+            <div class="form-group mb-3">
+                <label for="vehicle-code" class="form-label">Vehicle Code</label>
+                <select class="form-select" id="vehicle-code" aria-label="Default select example" wire:model="vehicle_code">
+                    @foreach ($vehicles as $vehicle)
+                    <option value="" selected>Please Select Vehicle code</option>
+                        <option value="{{$vehicle->id}}">{{$vehicle->vehicle_code}}</option>
+                    @endforeach
+                    @error('vehicle_code')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror <br>
+                </select>
             </div>
             <div class="form-group mb-3">
                 <label for="supplier-name" class="form-label">Parts Code</label>
@@ -32,6 +45,11 @@
                 <label for="address" class="form-label">Parts Unit</label>
                 <input type="text"  id="address" class="form-control" wire:model="parts_unit">
                 @error('parts_unit')<span class="text-danger">{{ $message }}</span>@enderror <br>
+            </div>
+            <div class="form-group mb-3">
+                <label for="parts_price" class="form-label">Parts Price</label>
+                <input type="text"  id="parts_price" class="form-control" wire:model="parts_price">
+                @error('parts_price')<span class="text-danger">{{ $message }}</span>@enderror <br>
             </div>
             <div class="form-group mb-3">
                 <label for="date" class="form-label">Parts ED</label>

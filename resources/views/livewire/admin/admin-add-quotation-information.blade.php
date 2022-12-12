@@ -129,3 +129,31 @@
         </form>
     </div>
 </div>
+
+
+{{-- @push('script')
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $(document).ready(function() {
+        $('#studentID').change(function(e) {
+            var supplierId = e.target.value;
+            $.ajax({
+                url: "{{ route('add.quotation') }}",
+                type: "POST",
+                data: {
+                    supplierId: supplierId
+                },
+                success: function(data) {
+                    console.log(data);
+                    $('#studentRollNo').val(data.supplierId[0].studentID);
+            })
+        });
+    });
+</script>
+
+@endpush --}}

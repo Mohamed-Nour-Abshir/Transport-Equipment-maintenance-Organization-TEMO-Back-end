@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\PartsInfo;
+use App\Models\Vehicle;
 use Livewire\Component;
 
 class AdminAddPartsInformation extends Component
@@ -13,6 +14,7 @@ class AdminAddPartsInformation extends Component
     public $parts_manufacture;
     public $parts_unit;
     public $parts_date;
+    public $parts_price;
 
     public function updated($fields)
     {
@@ -22,6 +24,7 @@ class AdminAddPartsInformation extends Component
             'parts_name' => 'required',
             'parts_manufacture' => 'required',
             'parts_unit' => 'required',
+            'parts_price' => 'required',
             'parts_date' => 'required|date'
         ]);
     }
@@ -33,14 +36,16 @@ class AdminAddPartsInformation extends Component
             'parts_name' => 'required',
             'parts_manufacture' => 'required',
             'parts_unit' => 'required',
+            'parts_price' => 'required',
             'parts_date' => 'required|date'
         ]);
         $parts = new PartsInfo();
-        $parts->vehicle_code = $this->vehicle_code;
+        $parts->vehicle_id = $this->vehicle_code;
         $parts->parts_code = $this->parts_code;
         $parts->parts_name = $this->parts_name;
         $parts->parts_manufacture = $this->parts_manufacture;
         $parts->parts_unit = $this->parts_unit;
+        $parts->parts_price = $this->parts_price;
         $parts->parts_date = $this->parts_date;
         $parts->save();
         session()->flash('message', 'Parts Information added successfully');
@@ -48,6 +53,7 @@ class AdminAddPartsInformation extends Component
     }
     public function render()
     {
-        return view('livewire.admin.admin-add-parts-information')->layout('layouts.base');
+        $vehicles = Vehicle::all();
+        return view('livewire.admin.admin-add-parts-information', ['vehicles' => $vehicles])->layout('layouts.base');
     }
 }

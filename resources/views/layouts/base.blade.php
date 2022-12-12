@@ -224,13 +224,13 @@
             >
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link px-5 fs-6">Made By, MD.Nour</a>
+            <a href="" class="nav-link px-5 fs-6">Made By, Kaizen IT LTD</a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link px-5 fs-6">24/11/2022</a>
+            <a href="" class="nav-link px-5 fs-6"><?php echo date("d/m/Y");?></a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link px-5 fs-6"> 12:01 PM</a>
+            <a href="" class="nav-link px-5 fs-6"><?php $time = date_default_timezone_set("Asia/Dhaka"); echo date("h:i A");?></a>
           </li>
         </ul>
       </nav>

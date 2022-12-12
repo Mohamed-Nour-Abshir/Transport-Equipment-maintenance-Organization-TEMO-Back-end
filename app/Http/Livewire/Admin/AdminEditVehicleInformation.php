@@ -42,6 +42,7 @@ class AdminEditVehicleInformation extends Component
         $vehicle->vehicle_name = $this->vehicle_name;
         $vehicle->save();
         session()->flash('message', 'Vehicle has been updated successfully');
+        return redirect()->route('vehicle-information');
     }
     public function render()
     {

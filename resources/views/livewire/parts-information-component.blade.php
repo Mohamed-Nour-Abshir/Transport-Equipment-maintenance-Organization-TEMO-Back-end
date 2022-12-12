@@ -40,7 +40,7 @@
                 @foreach ($parts as $item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->vehicle_code}}</td>
+                        <td>{{$item->vehicle->vehicle_code}}</td>
                         <td>{{$item->parts_code}}</td>
                         <td>{{$item->parts_name}}</td>
                         <td>{{$item->parts_manufacture}}</td>

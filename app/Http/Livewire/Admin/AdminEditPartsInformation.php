@@ -13,15 +13,17 @@ class AdminEditPartsInformation extends Component
     public $parts_manufacture;
     public $parts_unit;
     public $parts_date;
+    public $parts_price;
     public $parts_id;
     public function mount($parts_id)
     {
         $parts = PartsInfo::find($parts_id);
-        $this->vehicle_code = $parts->vehicle_code;
+        $this->vehicle_code = $parts->vehicle->vehicle_code;
         $this->parts_code = $parts->parts_code;
         $this->parts_name = $parts->parts_name;
         $this->parts_manufacture = $parts->parts_manufacture;
         $this->parts_unit = $parts->parts_unit;
+        $this->parts_price = $parts->parts_price;
         $this->parts_date = $parts->parts_date;
         $this->parts_id = $parts->id;
     }
@@ -33,6 +35,7 @@ class AdminEditPartsInformation extends Component
             'parts_name' => 'required',
             'parts_manufacture' => 'required',
             'parts_unit' => 'required',
+            'parts_price' => 'required',
             'parts_date' => 'required|date'
         ]);
     }
@@ -44,17 +47,20 @@ class AdminEditPartsInformation extends Component
             'parts_name' => 'required',
             'parts_manufacture' => 'required',
             'parts_unit' => 'required',
+            'parts_price' => 'required',
             'parts_date' => 'required|date'
         ]);
         $parts = PartsInfo::find($this->parts_id);
-        $parts->vehicle_code = $this->vehicle_code;
+        $parts->vehicle->vehicle_id = $this->vehicle_code;
         $parts->parts_code = $this->parts_code;
         $parts->parts_name = $this->parts_name;
         $parts->parts_manufacture = $this->parts_manufacture;
         $parts->parts_unit = $this->parts_unit;
+        $parts->parts_price = $this->parts_price;
         $parts->parts_date = $this->parts_date;
         $parts->save();
         session()->flash('message', 'Parts Information has been updated successfully');
+        return redirect()->route('parts-information');
     }
     public function render()
     {

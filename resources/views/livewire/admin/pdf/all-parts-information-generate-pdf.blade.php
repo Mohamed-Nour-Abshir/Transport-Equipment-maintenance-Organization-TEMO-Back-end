@@ -138,6 +138,7 @@
                         <th>Parts Name</th>
                         <th>Parts Manufacture</th>
                         <th>Parts Unit</th>
+                        <th>Parts Price</th>
                         <th>Parts ED</th>
                       </tr>
                 </thead>
@@ -145,11 +146,12 @@
                     @foreach ($parts as $part)
                     <tr>
                         <td>{{$part->id}}</td>
-                        <td>{{$part->vehicle_code}}</td>
+                        <td>{{$part->vehicle->vehicle_code}}</td>
                         <td>{{$part->parts_code}}</td>
                         <td>{{$part->parts_name}}</td>
                         <td>{{$part->parts_manufacture}}</td>
                         <td>{{$part->parts_unit}}</td>
+                        <td>{{$part->parts_price}}</td>
                         <td>{{$part->parts_date}}</td>
                      </tr>
                     @endforeach
