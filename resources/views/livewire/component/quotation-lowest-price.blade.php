@@ -22,6 +22,12 @@
         </div>
 
         <div class="container p-5">
+        @if($showTableQuotationTable)
+        <div class="d-flex justify-content-between">
+            <p></p>
+            <a href="{{route('pdf-generate-all-parts-information')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
+            <p></p>
+        </div>
           <table class="table table-bordered">
             <thead>
               <tr>
@@ -35,7 +41,6 @@
               </tr>
             </thead>
             <tbody>
-            @if($showTableQuotationTable)
                 @foreach ($parts as $item)
                 <tr>
                     <td>{{$item->parts_code}}</td>

@@ -20,8 +20,10 @@ return new class extends Migration
             $table->string('parts_name')->nullable();
             $table->string('parts_manufacture')->nullable();
             $table->string('parts_unit')->nullable();
+            $table->string('parts_qty')->nullable();
             $table->decimal('parts_price')->nullable();
             $table->date('parts_date')->nullable();
+            $table->string('order_id')->unique();
             $table->timestamps();
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
         });

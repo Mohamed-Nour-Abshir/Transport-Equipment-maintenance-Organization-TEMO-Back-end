@@ -17,8 +17,8 @@
             <div class="form-group mb-3">
                 <label for="vehicle-code" class="form-label">Vehicle Code</label>
                 <select class="form-select" id="vehicle-code" aria-label="Default select example" wire:model="vehicle_code">
-                    @foreach ($vehicles as $vehicle)
                     <option value="" selected>Please Select Vehicle code</option>
+                    @foreach ($vehicles as $vehicle)
                         <option value="{{$vehicle->id}}">{{$vehicle->vehicle_code}}</option>
                     @endforeach
                     @error('vehicle_code')

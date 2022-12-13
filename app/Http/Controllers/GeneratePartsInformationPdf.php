@@ -23,8 +23,11 @@ class GeneratePartsInformationPdf extends Controller
 
     public function allPartsInformation()
     {
+        $min_price = 1;
+        $max_price = 10000000;
 
-        $parts = PartsInfo::all();
+
+        $parts = PartsInfo::whereBetween('parts_price', [$min_price, $max_price])->orderBy('parts_price', 'ASC')->get();
         $data = [
             'parts' => $parts,
         ];
