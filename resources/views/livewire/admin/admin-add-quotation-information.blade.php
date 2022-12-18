@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-        <form wire:submit.prevent='addQuotationInformation'>
+        <form wire:submit.prevent='addQuotationInformation' method="POST">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
@@ -31,8 +31,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
-                        <label for="supplier-id" class="form-label">Supplier ID</label>
-                        <select class="form-select" id="supplier-id" aria-label="Default select example" wire:model="supplier_id">
+                        <label for="supplier_id" class="form-label">Supplier ID</label>
+                        <select class="form-select selectpicker" aria-label="Default select example" wire:model="supplier_id" data-live-search="true" data-style="py-0" id="supplier_id">
                             <option value="" selected>Please Select Supplier ID</option>
                             @foreach ($suppliers as $supplier)
                                 <option value="{{$supplier->id}}">{{$supplier->supplier_id}}</option>
@@ -61,7 +61,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group mb-3">
-                        <label for="supplier-name" class="form-label">Supplier Name</label>
+                        <label for="supplier_name" class="form-label">Supplier Name</label>
+                        {{-- <input type="text" id="supplier_name" class="form-control" wire:model="supplier_name" name="supplier_name" readonly> --}}
                         <select class="form-select" id="supplier-name" aria-label="Default select example" wire:model="supplier_name">
                             <option value="" selected>Please Select Supplier Name</option>
                             @foreach ($suppliers as $supplier)
@@ -90,6 +91,20 @@
             </div>
             <div class="parts">
                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="parts-code" class="form-label">Parts ID</label>
+                            <select class="form-select" id="parts-code" aria-label="Default select example" wire:model="parts_id">
+                                <option value="" selected>Please Select Parts ID</option>
+                                @foreach ($parts as $part)
+                                    <option value="{{$part->id}}">{{$part->id}}</option>
+                                @endforeach
+                                @error('parts_code')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror <br>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="parts-code" class="form-label">Parts Code</label>
@@ -137,7 +152,7 @@
 </div>
 
 
-{{-- @push('script')
+@push('script')
 
 <script>
     $.ajaxSetup({
@@ -146,20 +161,22 @@
         }
     });
     $(document).ready(function() {
-        $('#studentID').change(function(e) {
-            var supplierId = e.target.value;
+        $('#supplier_id').change(function(e) {
+            var qoutationID = e.target.value;
             $.ajax({
-                url: "{{ route('add.quotation') }}",
+                url: "{{ route('quotation-information') }}",
                 type: "POST",
                 data: {
-                    supplierId: supplierId
+                    qoutationID: qoutationID
                 },
                 success: function(data) {
-                    console.log(data);
-                    $('#studentRollNo').val(data.supplierId[0].studentID);
+                    console.log($('#supplier_name').val(data.qoutationID[0].supplier_name));
+                    // $('#supplierID').val(data.qoutationID[0].studentID);
+                    $('#supplier_name').val(data.qoutationID[0].supplier_name);
+                }
             })
         });
     });
 </script>
 
-@endpush --}}
+@endpush

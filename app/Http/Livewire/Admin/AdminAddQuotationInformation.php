@@ -12,6 +12,7 @@ class AdminAddQuotationInformation extends Component
 {
     public $from_date;
     public $to_date;
+    public $parts_id;
     public $supplier_id;
     public $supplier_name;
     public $vehicle_code;
@@ -48,9 +49,11 @@ class AdminAddQuotationInformation extends Component
             'company_price' => 'required'
         ]);
 
+        // $quotations = Quotation::all();
         $quotation = new Quotation();
         $quotation->from_date = $this->from_date;
         $quotation->to_date = $this->to_date;
+        $quotation->parts_id = $this->parts_id;
         $quotation->supplier_id = $this->supplier_id;
         $quotation->supplier_name = $this->supplier_name;
         $quotation->vehicle_code = $this->vehicle_code;

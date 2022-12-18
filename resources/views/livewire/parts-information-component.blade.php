@@ -32,7 +32,9 @@
                   <th>Parts Name</th>
                   <th>Parts Manufacture</th>
                   <th>Parts Unit</th>
-                  <th>Parts ED</th>
+                  <th>Parts Price</th>
+                  <th>Parts Qty</th>
+                  <th>Parts order date</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -45,11 +47,13 @@
                         <td>{{$item->parts_name}}</td>
                         <td>{{$item->parts_manufacture}}</td>
                         <td>{{$item->parts_unit}}</td>
+                        <td>{{$item->parts_price}}</td>
+                        <td>{{$item->parts_qty}}</td>
                         <td>{{$item->parts_date}}</td>
                         <td>
-                        <a href="{{route('edit.parts',['parts_id'=>$item->id])}}" title="Edit"><i class="fas fa-edit text-success fa-2x"></i></a>
-                        <a href="" onclick="confirm('Are you sure to Delete this Information?') || event.stopImmediatePropagation()" wire:click.prevent="deletePartsInfo({{ $item->id }})" title="delete"><i class="fas fa-remove text-danger fa-2x"></i></a>
-                        <a href="{{route('pdf-generate-parts-information',['parts_id'=>$item->id])}}" title="Print"><i class="fas fa-print text-warning fa-2x"></i></a>
+                        <a href="{{route('edit.parts',['parts_id'=>$item->id])}}" title="Edit"><i class="fas fa-edit text-success fa-1x"></i></a>
+                        <a href="" onclick="confirm('Are you sure to Delete this Information?') || event.stopImmediatePropagation()" wire:click.prevent="deletePartsInfo({{ $item->id }})" title="delete"><i class="fas fa-remove text-danger fa-1x"></i></a>
+                        <a href="{{route('pdf-generate-parts-information',['parts_id'=>$item->id])}}" title="Print"><i class="fas fa-print text-warning fa-1x"></i></a>
                         </td>
                     </tr>
                 @endforeach

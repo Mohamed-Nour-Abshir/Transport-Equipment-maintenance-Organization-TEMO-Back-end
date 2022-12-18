@@ -52,7 +52,12 @@
                 @error('parts_price')<span class="text-danger">{{ $message }}</span>@enderror <br>
             </div>
             <div class="form-group mb-3">
-                <label for="date" class="form-label">Parts ED</label>
+                <label for="parts_qty" class="form-label">Parts Quantity</label>
+                <input type="text"  id="parts_qty" class="form-control" wire:model="parts_qty">
+                @error('parts_qty')<span class="text-danger">{{ $message }}</span>@enderror <br>
+            </div>
+            <div class="form-group mb-3">
+                <label for="date" class="form-label">Order Date</label>
                 <input type="date" id="date"  class="form-control" wire:model="parts_date">
                 @error('parts_date')<span class="text-danger">{{ $message }}</span>@enderror <br>
             </div>

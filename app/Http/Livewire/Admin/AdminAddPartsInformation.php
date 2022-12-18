@@ -15,16 +15,18 @@ class AdminAddPartsInformation extends Component
     public $parts_unit;
     public $parts_date;
     public $parts_price;
+    public $parts_qty;
 
     public function updated($fields)
     {
         $this->validateOnly($fields, [
             'vehicle_code' => 'required',
-            'parts_code' => 'required',
+            'parts_code' => 'required|unique:parts_infos,parts_code',
             'parts_name' => 'required',
             'parts_manufacture' => 'required',
             'parts_unit' => 'required',
             'parts_price' => 'required',
+            'parts_qty' => 'required',
             'parts_date' => 'required|date'
         ]);
     }
@@ -32,11 +34,12 @@ class AdminAddPartsInformation extends Component
     {
         $this->validate([
             'vehicle_code' => 'required',
-            'parts_code' => 'required',
+            'parts_code' => 'required|unique:parts_infos,parts_code',
             'parts_name' => 'required',
             'parts_manufacture' => 'required',
             'parts_unit' => 'required',
             'parts_price' => 'required',
+            'parts_qty' => 'required',
             'parts_date' => 'required|date'
         ]);
         $parts = new PartsInfo();
@@ -46,6 +49,7 @@ class AdminAddPartsInformation extends Component
         $parts->parts_manufacture = $this->parts_manufacture;
         $parts->parts_unit = $this->parts_unit;
         $parts->parts_price = $this->parts_price;
+        $parts->parts_qty = $this->parts_qty;
         $parts->parts_date = $this->parts_date;
         $parts->save();
         session()->flash('message', 'Parts Information added successfully');

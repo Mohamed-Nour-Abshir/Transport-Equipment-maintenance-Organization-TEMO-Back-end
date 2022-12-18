@@ -25,7 +25,7 @@ class GenerateQuotationInformationPdf extends Controller
     public function allquotationsInformation()
     {
 
-        $quatations = Quotation::all();
+        $quatations = Quotation::orderBy('company', 'ASC')->get();
         $data = [
             'quatations' => $quatations,
         ];

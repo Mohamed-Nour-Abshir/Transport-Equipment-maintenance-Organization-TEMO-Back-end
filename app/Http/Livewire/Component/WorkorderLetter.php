@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Component;
 
 use App\Models\PartsInfo;
+use App\Models\Quotation;
 use Livewire\Component;
 
 class WorkorderLetter extends Component
@@ -15,7 +16,7 @@ class WorkorderLetter extends Component
     public function render()
     {
         // $search = '%' . $this->searchTerm . '%';
-        $parts = PartsInfo::orderBy('parts_date')->latest()->get();
-        return view('livewire.component.workorder-letter', ['parts' => $parts])->layout('layouts.base');
+        $quotations = Quotation::orderBy('from_date')->get();
+        return view('livewire.component.workorder-letter', ['quotations' => $quotations])->layout('layouts.base');
     }
 }

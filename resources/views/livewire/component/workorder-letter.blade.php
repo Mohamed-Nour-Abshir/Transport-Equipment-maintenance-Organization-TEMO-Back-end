@@ -1,111 +1,51 @@
-{{-- <div>
-       <!-- main-section Start -->
-       <div class="container-fluid pb-3" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
-        <h1 class="p-1">Workorder Letter Issue Report</h1>
-        <form class="row g-3 p-2 mt-3 border border-light" id="generate-form" method="get">
-          <div class="col-auto">
-            <label for="fromdate" class="mt-2">Fiscal Year</label>
-          </div>
-          <div class="col-auto">
-            <input type="date" class="form-control" id="fromdate">
-          </div>
-          <div class="col-auto">
-            <label for="vehiclename" class="mt-2">Workorder No</label>
-          </div>
-          <div class="col-auto">
-            <input type="number" class="form-control" id="vehiclename">
-          </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-outline-light  mb-3">Preview</button>
-          </div>
-        </form>
-    </div>
-
-    <div class="container p-5">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Parts Code</th>
-            <th>Parts Name</th>
-            <th>Manufacture</th>
-            <th>Unit</th>
-            <th>Price</th>
-            <th>Party Name</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-      </table>
-    </div>
-
-    <!-- main-section End -->
-</div> --}}
-
-
 <div>
-    <!-- main-section Start -->
-    <div class="container-fluid pb-3" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
-        <h1 class="p-1">Workorder Letter Issue Report</h1>
-        <form class="row g-3 p-2 mt-3 border border-light" id="generate-form" method="get">
-          <div class="col-auto">
-            <label for="fromdate" class="mt-2">From Date</label>
-          </div>
-          <div class="col-auto">
-            <input type="date" class="form-control" id="fromdate">
-          </div>
-          {{-- <div class="col-auto">
-            <label for="vehiclename" class="mt-2">Vehicle Name</label>
-          </div>
-          <div class="col-auto">
-            <input type="text" class="form-control" id="vehiclename" wire:model="vehicle_name">
-          </div> --}}
-          <div class="col-auto">
-            <button type="button" class="btn btn-outline-light mb-3" wire:click="showQuotation">Preview</button>
-          </div>
-        </form>
-    </div>
+  <!-- main-section Start -->
+  <div class="container-fluid pb-3" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
+      <h1 class="p-1">Workorder Letter</h1>
+      <form class="row g-3 p-2 mt-3 border border-light" id="generate-form" method="get">
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-outline-light mb-3" wire:click="showQuotation">Preview</button>
+        </div>
+      </form>
+  </div>
 
-    <div class="container p-5">
+  <div class="container p-5">
     @if($showTableQuotationTable)
-    <div class="d-flex justify-content-between">
-        <p></p>
-        <a href="{{route('pdf-generate-all-parts-information')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
-        <p></p>
-    </div>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Parts Code</th>
-            <th>Parts Name</th>
-            <th>Manufacture</th>
-            <th>Unit</th>
-            <th>Price</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-            @foreach ($parts as $item)
+      <div class="d-flex justify-content-center">
+          <a href="{{route('pdf-generate-all-parts-information')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
+      </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Order No</th>
+          <th>Order Date</th>
+          <th>Parts Name</th>
+          <th>Unit</th>
+          <th>Qty</th>
+          <th>U/Price</th>
+          <th>Amount</th>
+          <th>Supplier Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($quotations as $quotation)
             <tr>
-                <td>{{$item->parts_date}}</td>
-                <td>{{$item->parts_code}}</td>
-                <td>{{$item->parts_name}}</td>
-                <td>{{$item->parts_manufacture}}</td>
-                <td>{{$item->parts_unit}}</td>
-                <td>{{$item->parts_price}}</td>
-                {{-- <td>{{$item->parts_date}}</td> --}}
-                <td><a href="{{route('pdf-generate-parts-information',['parts_id'=>$item->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td>
+              <td>{{$quotation->id}}</td>
+              <td>{{$quotation->parts->parts_date}}</td>
+              <td>{{$quotation->parts_name}}</td>
+              <td>{{$quotation->parts->parts_unit}}</td>
+              <td>{{$quotation->parts->parts_qty}}</td>
+              <td>{{$quotation->parts->parts_price}}</td>
+              <td>{{ number_format($quotation->parts->parts_price  * $quotation->parts->parts_qty) }}</td>
+              <td>{{$quotation->supplier_name}}</td>
+              <td><a href="{{route('pdf.quotation',['quotation_id'=>$quotation->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td>
             </tr>
-            @endforeach
+        @endforeach
+      </tbody>
+    </table>
+    @endif
+  </div>
 
-        </tbody>
-      </table>
-      <p>Lowest Price Submission: </p>
-      @endif
-    </div>
-
-    <!-- main-section End -->
-
+  <!-- main-section End -->
 </div>

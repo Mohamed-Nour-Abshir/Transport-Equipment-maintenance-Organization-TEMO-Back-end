@@ -21,9 +21,11 @@ return new class extends Migration
             $table->string('supplier_name')->nullable();
             $table->string('vehicle_code')->nullable();
             $table->string('vehicle_name')->nullable();
+            $table->bigInteger('parts_id')->unsigned();
             $table->string('parts_code')->nullable();
             $table->string('parts_name')->nullable();
-            $table->string('company')->nullable();
+            $table->decimal('company')->nullable();
+            $table->foreign('parts_id')->references('id')->on('parts_infos')->onDelete('cascade');
             $table->timestamps();
         });
     }
