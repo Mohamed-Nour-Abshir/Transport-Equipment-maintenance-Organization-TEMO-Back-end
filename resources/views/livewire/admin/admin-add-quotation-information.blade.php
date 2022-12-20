@@ -45,13 +45,13 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group mb-3">
-                        <label for="vehicle-code" class="form-label">Vehicle Code</label>
-                        <select class="form-select" id="vehicle-code" aria-label="Default select example" wire:model="vehicle_code">
-                            <option value="" selected>Please Select Vehicle code</option>
+                        <label for="vehicle-code" class="form-label">Vehicle ID</label>
+                        <select class="form-select" id="vehicle-code" aria-label="Default select example" wire:model="vehicle_id">
+                            <option value="" selected>Please Select Vehicle ID</option>
                             @foreach ($vehicles as $vehicle)
-                                <option value="{{$vehicle->vehicle_code}}">{{$vehicle->vehicle_code}}</option>
+                                <option value="{{$vehicle->id}}">{{$vehicle->id}}</option>
                             @endforeach
-                            @error('vehicle_code')
+                            @error('vehicle_id')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror <br>
                         </select>
@@ -133,6 +133,20 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label for="vehicle-code" class="form-label">Vehicle Code</label>
+                        <select class="form-select" id="vehicle-code" aria-label="Default select example" wire:model="vehicle_code">
+                            <option value="" selected>Please Select Vehicle code</option>
+                            @foreach ($vehicles as $vehicle)
+                                <option value="{{$vehicle->vehicle_code}}">{{$vehicle->vehicle_code}}</option>
+                            @endforeach
+                            @error('vehicle_code')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror <br>
+                        </select>
+                    </div>
+                </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">

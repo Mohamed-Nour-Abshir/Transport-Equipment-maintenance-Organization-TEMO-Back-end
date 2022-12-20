@@ -23,6 +23,7 @@ class SupplierInformationComponent extends Component
             ->orwhere('supplier_name', 'LIKE', $search)
             ->orwhere('supplier_email', 'LIKE', $search)
             ->orwhere('supplier_phone', 'LIKE', $search)
+            ->orwhere('supplier_address', 'LIKE', $search)
             ->orwhere('date', 'LIKE', $search)
             ->orwhere('id', 'LIKE', $search)
             ->orderBy('id', 'DESC')->paginate(10);

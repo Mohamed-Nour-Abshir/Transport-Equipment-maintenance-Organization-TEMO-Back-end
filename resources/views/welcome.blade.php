@@ -27,12 +27,13 @@
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
-                        <div class="p-6">
-                            <img src="{{asset('assets/images/Logo-TEMO.jpg')}}" alt="" width="500" height="500">
+                        <div class="">
+                            <img src="{{asset('assets/images/side-logo.jpg')}}" alt=""class="img-fluid w-100">
                         </div>
 
-                        <div class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                            <img src="{{asset('assets/images/Logo-TEMO.jpg')}}" alt="" width="400" height="100" class="img-fluid">
+                        <div class="border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
+                            <img src="{{asset('assets/images/logo.jpg')}}" alt=""style="height:200px !important;" class="img-fluid">
+                            <div class="p-6 ">
                                 <x-jet-validation-errors class="mb-4 text-danger" />
                             @if (session('status'))
                                 <div class="mb-4 font-medium text-sm text-green-600">
@@ -50,13 +51,13 @@
                                     <label class="form-label" for="form2Example1">Email address</label>
                                   <input type="email" id="form2Example1" class="form-control"  name="email" :value="old('email')" required autofocus />
                                 </div>
-                              
+
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="form2Example2">Password</label>
                                   <input type="password" id="form2Example2" class="form-control" name="password" required autocomplete="current-password"/>
                                 </div>
-                              
+
                                 <!-- 2 column grid layout for inline styling -->
                                 <div class="row mb-4">
                                   <div class="col d-flex justify-content-start">
@@ -78,9 +79,10 @@
                                     <button type="submit" class="btn btn-primary btn-sm mb-4 form-control">Login</button>
                                   </div>
                                 </div>
-                              
+
                               </form>
                         </div>
+                    </div>
 
                     </div>
                 </div>
@@ -90,7 +92,7 @@
                     </div>
 
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        
+
                     </div>
                 </div>
             </div>

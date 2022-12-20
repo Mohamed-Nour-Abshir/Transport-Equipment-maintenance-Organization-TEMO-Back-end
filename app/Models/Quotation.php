@@ -12,4 +12,8 @@ class Quotation extends Model
     {
         return $this->belongsTo(PartsInfo::class);
     }
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
 }

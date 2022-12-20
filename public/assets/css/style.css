@@ -217,7 +217,7 @@ select {
     color: #fff !important;
 }
 
-/* 
+/*
 #generate-form {
     border: 1px solid #fff;
     margin: 0 !important;
@@ -227,4 +227,10 @@ select {
 /* footer section  */
 footer a:last-child {
     border-right: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .header-nav {
+        display: none;
+    }
 }

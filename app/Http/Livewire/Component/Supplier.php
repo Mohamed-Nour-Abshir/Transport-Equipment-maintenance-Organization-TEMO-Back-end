@@ -2,12 +2,20 @@
 
 namespace App\Http\Livewire\Component;
 
+use App\Models\Quotation;
 use Livewire\Component;
 
 class Supplier extends Component
 {
+    public $showTableQuotationTable;
+
+    public function showQuotation()
+    {
+        $this->showTableQuotationTable = true;
+    }
     public function render()
     {
-        return view('livewire.component.supplier')->layout('layouts.base');
+        $quotations = Quotation::orderBy('from_date')->get();
+        return view('livewire.component.supplier', ['quotations' => $quotations])->layout('layouts.base');
     }
 }

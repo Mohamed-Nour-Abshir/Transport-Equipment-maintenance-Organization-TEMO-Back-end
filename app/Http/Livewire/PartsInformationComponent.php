@@ -20,8 +20,6 @@ class PartsInformationComponent extends Component
         $parts = PartsInfo::where('id', 'LIKE', $search)
             ->orwhere('parts_code', 'LIKE', $search)
             ->orwhere('parts_name', 'LIKE', $search)
-            ->orwhere('parts_manufacture', 'LIKE', $search)
-            ->orwhere('parts_unit', 'LIKE', $search)
             ->orwhere('parts_date', 'LIKE', $search)
             ->orderBy('id', 'DESC')->paginate(10);
         return view('livewire.parts-information-component', ['parts' => $parts])->layout('layouts.base');
