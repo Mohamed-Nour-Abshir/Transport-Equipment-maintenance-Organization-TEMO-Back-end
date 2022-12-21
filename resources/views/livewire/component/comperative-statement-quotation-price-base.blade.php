@@ -80,9 +80,8 @@
     <div class="container p-5">
     {{-- @if($showTableQuotationTable) --}}
     <div class="d-flex justify-content-between">
-        <h1 class="h4">{{$from_date}}</h1><br>
-        <h1 class="h4"><?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?> Year</h1>
-        <a href="{{route('pdf-generate-all-parts-information')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
+        <h1 class="h4"><?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?> YEAR</h1>
+        <a href="{{route('pdf.comparartive-statement')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
         <p></p>
     </div>
       <table class="table table-bordered">

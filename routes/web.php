@@ -4,6 +4,9 @@ use App\Http\Controllers\GeneratePartsInformationPdf;
 use App\Http\Controllers\GenerateQuotationInformationPdf;
 use App\Http\Controllers\GenerateSupplierInformationPdf;
 use App\Http\Controllers\GenerateVehicleInformationPdf;
+use App\Http\Controllers\ReportsPDF\CompretiveReoportPDF;
+use App\Http\Controllers\ReportsPDF\QuotationLowestPriceReportPDF;
+use App\Http\Controllers\ReportsPDF\WorkorderLetterReportPDF;
 use App\Http\Livewire\Admin\AdminAddPartsInformation;
 use App\Http\Livewire\Admin\AdminAddQuotationInformation;
 use App\Http\Livewire\Admin\AdminAddSupplierInformation;
@@ -95,4 +98,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/admin-update-quotation-information/{quotation_id}', AdminUpdateQuotationInformation::class)->name('edit.quation');
     Route::get('/pdf-generate-quotation-information/{quotation_id}', [GenerateQuotationInformationPdf::class, 'quotationInformation'])->name('pdf.quotation');
     Route::get('/pdf-generate-quotation-information', [GenerateQuotationInformationPdf::class, 'allquotationsInformation'])->name('pdf.all-quotations');
+
+    // Report Routes
+    Route::get('/comparativeStatement-pdf', [CompretiveReoportPDF::class, 'ComparativeStatementPDF'])->name('pdf.comparartive-statement');
+    Route::get('/quotationLowestPrice-pdf', [QuotationLowestPriceReportPDF::class, 'quotationLowestPrice'])->name('pdf.quotationLowestPrice');
+    Route::get('/workorderLetter-pdf', [WorkorderLetterReportPDF::class, 'workorderLetterPDF'])->name('pdf.workorderLetter');
 });

@@ -135,7 +135,7 @@
     {{-- @if($showTableQuotationTable) --}}
     <div class="d-flex justify-content-between">
         <h1 class="h4"><?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?> Year</h1>
-        <a href="{{route('pdf-generate-all-parts-information')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
+        <a href="{{route('pdf.workorderLetter')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
         <p></p>
     </div>
       <table class="table table-bordered">
