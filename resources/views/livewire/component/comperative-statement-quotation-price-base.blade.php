@@ -67,47 +67,54 @@
             <input type="text" class="form-control" id="vehiclename" wire:model="vehicle_name">
           </div> --}}
           <form class="row g-3 p-2 mt-3 border border-light" id="generate-form" method="get">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-between">
+              <div class="input-group mb-3 float-start text-center mb-5">
+                <input type="text" class="form-control me-5" placeholder="Search By Parts name" aria-label="Search Supplier data" aria-describedby="button-addon2" wire:model="searchTerm"/>
+              </div>
+              <p class="ms-5"></p>
               <button type="button" class="btn btn-outline-light mb-3" wire:click="showQuotation">Preview</button>
             </div>
           </form>
     </div>
 
     <div class="container p-5">
-    @if($showTableQuotationTable)
+    {{-- @if($showTableQuotationTable) --}}
     <div class="d-flex justify-content-between">
-        <p></p>
+        <h1 class="h4">{{$from_date}}</h1><br>
+        <h1 class="h4"><?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?> Year</h1>
         <a href="{{route('pdf-generate-all-parts-information')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
         <p></p>
     </div>
       <table class="table table-bordered">
         <thead>
           <tr>
+            <th>SL NO.</th>
             <th>Parts Code</th>
             <th>Parts Name</th>
             <th>Manufacture</th>
-            <th>Unit</th>
-            <th>Price</th>
-            <th>Date</th>
-            <th>Action</th>
+            <th>Parts Unit</th>
+            @foreach ($quotations as $supplier)
+                <th>{{$supplier->supplier_name}}</th>
+            @endforeach
           </tr>
         </thead>
         <tbody>
             @foreach ($quotations as $item)
             <tr>
+                <td>{{$item->id}}</td>
                 <td>{{$item->parts_code}}</td>
                 <td>{{$item->parts_name}}</td>
                 <td>{{$item->parts->parts_manufacture}}</td>
                 <td>{{$item->parts->parts_unit}}</td>
-                <td>{{$item->parts->parts_price}}</td>
-                <td>{{$item->parts->parts_date}}</td>
-                <td><a href="{{route('pdf.quotation',['quotation_id'=>$item->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td>
+                @foreach ($quotations as $quotation)
+                  <td @if($quotation->company === $minNumber) class="bg-secondary text-warning" @endif>{{$quotation->company}}</td>
+                @endforeach
             @endforeach
 
         </tbody>
       </table>
       {{-- <p>Lowest Price Submission: </p> --}}
-      @endif
+      {{-- @endif --}}
     </div>
 
     <!-- main-section End -->

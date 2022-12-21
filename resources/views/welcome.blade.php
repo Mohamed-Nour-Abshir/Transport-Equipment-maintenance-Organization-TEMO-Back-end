@@ -18,6 +18,7 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+        <link rel="stylesheet" href="assets/css/style.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
     <body class="antialiased">
@@ -28,11 +29,11 @@
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
                         <div class="">
-                            <img src="{{asset('assets/images/side-logo.jpg')}}" alt=""class="img-fluid w-100">
+                            <img src="{{asset('assets/images/side-logo.jpg')}}" alt=""class="img-fluid w-100 side-logo">
                         </div>
 
-                        <div class="border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l">
-                            <img src="{{asset('assets/images/logo.jpg')}}" alt=""style="height:200px !important;" class="img-fluid">
+                        <div class="border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-0">
+                            <img src="{{asset('assets/images/logo.jpg')}}" alt=""style="height:150px !important;" class="img-fluid">
                             <div class="p-6 ">
                                 <x-jet-validation-errors class="mb-4 text-danger" />
                             @if (session('status'))

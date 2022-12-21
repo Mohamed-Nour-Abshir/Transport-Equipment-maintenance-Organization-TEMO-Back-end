@@ -233,4 +233,8 @@ footer a:last-child {
     .header-nav {
         display: none;
     }
+
+    .side-logo {
+        display: none !important;
+    }
 }
