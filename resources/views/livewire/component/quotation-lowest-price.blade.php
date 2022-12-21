@@ -134,7 +134,7 @@
     <div class="container p-5">
     {{-- @if($showTableQuotationTable) --}}
     <div class="d-flex justify-content-between">
-        <h1 class="h4"><?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?> Year</h1>
+        <h1 class="h4">Fiscal Year: <?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></h1>
         <a href="{{route('pdf.quotationLowestPrice')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
         <p></p>
     </div>
@@ -160,7 +160,7 @@
                 <td>{{$item->parts->parts_manufacture}}</td>
                 <td>{{$item->parts->parts_unit}}</td>
                 @foreach ($quotations as $quotation)
-                  <td @if($quotation->company === $minNumber) class="bg-secondary text-warning" @endif>{{$quotation->company}}</td>
+                  <td @if($quotation->company === $minNumber) class="bg-secondary text-dark" @endif>{{$quotation->company}}</td>
                 @endforeach
             @endforeach
 

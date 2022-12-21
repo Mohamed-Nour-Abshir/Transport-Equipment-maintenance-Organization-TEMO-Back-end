@@ -28,7 +28,7 @@ class ComperativeStatementQuotationPriceBase extends Component
     {
         // $quotations = Quotation::whereBetween('company', [$this->min_price, $this->max_price])->orderBy('company', 'ASC')->get();
         $search = '%' . $this->searchTerm . '%';
-        $quotations = Quotation::orderBy('company', 'ASC')->get();
+        $quotations = Quotation::orderBy('company', 'ASC')->where('parts_name', 'LIKE', $search)->get();
         $minNumber = DB::table('quotations')->min('company');
         return view('livewire.component.comperative-statement-quotation-price-base', ['quotations' => $quotations, 'minNumber' => $minNumber])->layout('layouts.base');
     }
