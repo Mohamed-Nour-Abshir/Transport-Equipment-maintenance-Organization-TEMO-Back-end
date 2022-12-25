@@ -15,6 +15,18 @@ return new class extends Migration
     {
         Schema::create('work_orders', function (Blueprint $table) {
             $table->id();
+            $table->string('quotation_from')->nullable();
+            $table->string('quotation_to')->nullable();
+            $table->string('supplier_id')->nullable();
+            $table->string('supplier_name')->nullable();
+            $table->string('vehicle_code')->nullable();
+            $table->string('vehicle_name')->nullable();
+            $table->string('vehicle_type')->nullable();
+            $table->string('parts_code')->nullable();
+            $table->string('parts_name')->nullable();
+            $table->string('parts_price')->nullable();
+            $table->string('parts_qty')->nullable();
+            $table->string('order_parts_price')->nullable();
             $table->string('order_no')->nullable();
             $table->string('order_date')->nullable();
             $table->timestamps();

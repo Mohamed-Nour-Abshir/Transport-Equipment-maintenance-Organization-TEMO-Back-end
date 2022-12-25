@@ -4,16 +4,14 @@ use App\Http\Controllers\GeneratePartsInformationPdf;
 use App\Http\Controllers\GenerateQuotationInformationPdf;
 use App\Http\Controllers\GenerateSupplierInformationPdf;
 use App\Http\Controllers\GenerateVehicleInformationPdf;
+use App\Http\Controllers\GenerateWorkorderInformationPDF;
 use App\Http\Controllers\ReportsPDF\CompretiveReoportPDF;
 use App\Http\Controllers\ReportsPDF\QuotationLowestPriceReportPDF;
 use App\Http\Controllers\ReportsPDF\WorkorderLetterReportPDF;
-use App\Http\Livewire\Admin\AdminAddPartsInformation;
-use App\Http\Livewire\Admin\AdminAddQuotationInformation;
-use App\Http\Livewire\Admin\AdminAddSupplierInformation;
-use App\Http\Livewire\Admin\AdminAddVehicleInformation;
 use App\Http\Livewire\Admin\AdminEditPartsInformation;
 use App\Http\Livewire\Admin\AdminEditSupplierInformation;
 use App\Http\Livewire\Admin\AdminEditVehicleInformation;
+use App\Http\Livewire\Admin\AdminEditWorkorderInformation;
 use App\Http\Livewire\Admin\AdminUpdateQuotationInformation;
 use App\Http\Livewire\Component\ComperativeStatementQuotationPriceBase;
 use App\Http\Livewire\Component\DeadStock;
@@ -34,6 +32,7 @@ use App\Http\Livewire\PDF\SupplierInformationPdfGenerate;
 use App\Http\Livewire\QuotationInformationComponent;
 use App\Http\Livewire\SupplierInformationComponent;
 use App\Http\Livewire\VehicleInformationComponent;
+use App\Http\Livewire\WorkorderInformationComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,6 +57,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/parts-information', PartsInformationComponent::class)->name('parts-information');
     Route::get('/quotation-information', QuotationInformationComponent::class)->name('quotation-information');
     Route::get('/vehicle-information', VehicleInformationComponent::class)->name('vehicle-information');
+    Route::get('/workorder-information', WorkorderInformationComponent::class)->name('workorder-information');
 
     // Report components
     Route::get('/comperative-statement-quotation-price-base', ComperativeStatementQuotationPriceBase::class)->name('comperative-statement-quotation-price-base');
@@ -76,28 +76,28 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     // Admin Routes
     // Supplier Information setup routes
-    Route::get('/admin-add-supplier-information', AdminAddSupplierInformation::class)->name('admin-add-supplier');
     Route::get('/admin-edit-supplier-information/{supplierid}', AdminEditSupplierInformation::class)->name('admin-edit-supplier');
     Route::get('/pdf-generate-supplier-information/{supplierid}', [GenerateSupplierInformationPdf::class, 'supplierInformation'])->name('pdf-generate-supplier-information');
     Route::get('/pdf-generate-supplier-information', [GenerateSupplierInformationPdf::class, 'allSuppliersInformation'])->name('pdf-generate-all-suppliers-information');
 
     // parts information setup routes
-    Route::get('/admin-add-parts-information', AdminAddPartsInformation::class)->name('add.parts');
     Route::get('/admin-edit-parts-information/{parts_id}', AdminEditPartsInformation::class)->name('edit.parts');
     Route::get('/pdf-generate-parts-information/{parts_id}', [GeneratePartsInformationPdf::class, 'partInformation'])->name('pdf-generate-parts-information');
     Route::get('/pdf-generate-parts-information', [GeneratePartsInformationPdf::class, 'allPartsInformation'])->name('pdf-generate-all-parts-information');
 
     // Vehicle information
-    Route::get('/admin-add-vehicle-information', AdminAddVehicleInformation::class)->name('add.vehicle');
     Route::get('/admin-edit-vehicle-information/{vehicle_id}', AdminEditVehicleInformation::class)->name('edit.vehicle');
     Route::get('/pdf-generate-vehicle-information/{vehicle_id}', [GenerateVehicleInformationPdf::class, 'vehicleInformation'])->name('pdf.vehicle');
     Route::get('/pdf-generate-vehicle-information', [GenerateVehicleInformationPdf::class, 'allVehicleInformation'])->name('pdf.all-vehicles');
 
     //Quotation Information
-    Route::get('/admin-add-quotation-information', AdminAddQuotationInformation::class)->name('add.quotation');
     Route::get('/admin-update-quotation-information/{quotation_id}', AdminUpdateQuotationInformation::class)->name('edit.quation');
     Route::get('/pdf-generate-quotation-information/{quotation_id}', [GenerateQuotationInformationPdf::class, 'quotationInformation'])->name('pdf.quotation');
     Route::get('/pdf-generate-quotation-information', [GenerateQuotationInformationPdf::class, 'allquotationsInformation'])->name('pdf.all-quotations');
+
+    // Workorder Information
+    Route::get('/admin-edit-workorders/{workorder_id}', AdminEditWorkorderInformation::class)->name('edit.workorders');
+    Route::get('/pdf-generate-all-workorders', [GenerateWorkorderInformationPDF::class, 'allWorkorders'])->name('pdf.workorders');
 
     // Report Routes
     Route::get('/comparativeStatement-pdf', [CompretiveReoportPDF::class, 'ComparativeStatementPDF'])->name('pdf.comparartive-statement');

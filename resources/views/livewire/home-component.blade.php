@@ -85,7 +85,7 @@
                 </a>
               </div>
               <div class="col-md-4">
-                <a href="" style="font-size: 20px">
+                <a href="{{route('workorder-information')}}" style="font-size: 20px">
                   <div class="card p-5">
                     <div class="card-block">
                       <h6 class="card-subtitle text-muted text-center">

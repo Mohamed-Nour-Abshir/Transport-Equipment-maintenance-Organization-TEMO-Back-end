@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('vehicle_code')->nullable();
             $table->string('vehicle_type')->nullable();
             $table->string('vehicle_name')->nullable();
+            $table->string('vehicle_madein')->nullable();
+            $table->string('date')->nullable();
             $table->timestamps();
         });
     }

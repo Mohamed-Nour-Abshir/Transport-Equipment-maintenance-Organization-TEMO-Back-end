@@ -33,7 +33,8 @@
                         </div>
 
                         <div class="border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-0">
-                            <img src="{{asset('assets/images/logo.jpg')}}" alt=""style="height:150px !important;" class="img-fluid">
+                            <h1 class="h1 text-center mt-5">Login</h1>
+                            {{-- <img src="{{asset('assets/images/logo.jpg')}}" alt=""style="height:150px !important;" class="img-fluid"> --}}
                             <div class="p-6 ">
                                 <x-jet-validation-errors class="mb-4 text-danger" />
                             @if (session('status'))

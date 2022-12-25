@@ -90,7 +90,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="{{route('workorder-information')}}"
                 ><i class="fa-solid fa-receipt" style="margin-left: 70px"></i>
                 <br />Work Order Information</a
               >

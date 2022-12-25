@@ -6,44 +6,45 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-        <form wire:submit.prevent="updatePartsInformation">
-            <h1 class="h1 text-center">Edit Parts Information</h1>
-            <div class="form-group mb-3">
-                <label for="supplier-id" class="form-label">Vehicle Code</label>
-                <input type="text" id="supplier-id" class="form-control" wire:model="vehicle_code">
-                @error('vehicle_code')<span class="text-danger">{{ $message }}</span>@enderror <br>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form wire:submit.prevent="updatePartsInformation">
+                    <h1 class="h1 text-center">Edit Parts Information</h1>
+                    <div class="form-group mb-3">
+                        <label for="supplier-id" class="form-label">Vehicle Code</label>
+                        <input type="text" id="supplier-id" class="form-control" wire:model="vehicle_code">
+                        @error('vehicle_code')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="supplier-name" class="form-label">Parts Code</label>
+                        <input type="text" id="supplier-name" class="form-control" wire:model="parts_code">
+                        @error('parts_code')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="phone-no" class="form-label">Parts Name</label>
+                        <input type="text" id="phone-no" class="form-control" wire:model="parts_name">
+                        @error('parts_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label">Parts Manufacture</label>
+                        <input type="text" id="email" class="form-control" wire:model="parts_manufacture">
+                        @error('parts_manufacture')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="address" class="form-label">Parts Unit</label>
+                        <input type="text"  id="address" class="form-control" wire:model="parts_unit">
+                        @error('parts_unit')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="date" class="form-label">Parts ED</label>
+                        <input type="date" id="date"  class="form-control" wire:model="parts_date">
+                        @error('parts_date')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-edit fa-lg"></i>&nbsp; Update</button>
+                </form>
             </div>
-            <div class="form-group mb-3">
-                <label for="supplier-name" class="form-label">Parts Code</label>
-                <input type="text" id="supplier-name" class="form-control" wire:model="parts_code">
-                @error('parts_code')<span class="text-danger">{{ $message }}</span>@enderror <br>
-            </div>
-            <div class="form-group mb-3">
-                <label for="phone-no" class="form-label">Parts Name</label>
-                <input type="text" id="phone-no" class="form-control" wire:model="parts_name">
-                @error('parts_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
-            </div>
-            <div class="form-group mb-3">
-                <label for="email" class="form-label">Parts Manufacture</label>
-                <input type="text" id="email" class="form-control" wire:model="parts_manufacture">
-                @error('parts_manufacture')<span class="text-danger">{{ $message }}</span>@enderror <br>
-            </div>
-            <div class="form-group mb-3">
-                <label for="address" class="form-label">Parts Unit</label>
-                <input type="text"  id="address" class="form-control" wire:model="parts_unit">
-                @error('parts_unit')<span class="text-danger">{{ $message }}</span>@enderror <br>
-            </div>
-            <div class="form-group mb-3">
-                <label for="parts_price" class="form-label">Parts Price</label>
-                <input type="text"  id="parts_price" class="form-control" wire:model="parts_price">
-                @error('parts_price')<span class="text-danger">{{ $message }}</span>@enderror <br>
-            </div>
-            <div class="form-group mb-3">
-                <label for="date" class="form-label">Parts ED</label>
-                <input type="date" id="date"  class="form-control" wire:model="parts_date">
-                @error('parts_date')<span class="text-danger">{{ $message }}</span>@enderror <br>
-            </div>
-            <button type="submit" class="btn btn-success btn-sm">Update Parts</button>
-        </form>
+            <div class="col-md-2"></div>
+        </div>
     </div>
 </div>

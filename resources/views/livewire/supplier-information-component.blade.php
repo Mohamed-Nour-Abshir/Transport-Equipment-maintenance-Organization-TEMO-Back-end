@@ -1,28 +1,26 @@
 <div>
     <!-- main-section Start -->
     <div class="container p-5" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
-        @if (Session::has('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ Session::get('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
         <div class="row">
             <div class="col-md-12">
                 <h1 class="h1 mb-5">Supplier Information Setup</h1>
                 <div class="input-group mb-3 float-none text-center mb-5">
                     <input type="text" class="form-control" placeholder="Search Supplier data"
                         aria-label="Search Supplier data" aria-describedby="button-addon2" wire:model="searchTerm" />
-                    <button class="btn btn-primary" type="submit" id="button-addon2">
-                        Serach
-                    </button>
                 </div>
+                @if (Session::has('message'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ Session::get('message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="d-flex justify-content-between">
                         <p class="">All Suppliers Information</p>
                         <a href="{{ route('pdf-generate-all-suppliers-information') }}"
                             class="btn btn-warning btn-sm mb-4">Generate Pdf <i class="fas fa-download"></i></a>
-                        <a href="{{ route('admin-add-supplier') }}" class="btn btn-primary mb-3">Add Suuplier
+                        <a href=""  data-bs-toggle="modal"
+                        data-bs-target="#SupplierInformation" class="btn btn-primary mb-3">Add Suuplier
                             Information</a>
                     </div>
                 </div>
@@ -70,14 +68,14 @@
 
     <!-- main-section End -->
 
-    <!-- Modal Supplier Information Modal-->
-    {{-- <div
+    <!-- Modal Add Supplier Information Modal-->
+    <div
        class="modal fade"
        id="SupplierInformation"
        tabindex="-1"
        aria-labelledby="SupplierInformationLabel"
        aria-hidden="true"
-     >
+     wire:ignore.self>
        <div class="modal-dialog">
          <div class="modal-content">
            <div class="modal-header">
@@ -95,11 +93,11 @@
              <form wire:submit.prevent="addSupplierInformation">
                <div class="form-group mb-3">
                  <label for="supplier-sl-no" class="form-label">SL NO.</label>
-                 <input type="text" id="supplier-sl-no" class="form-control" disabled>
+                 <input type="text" id="supplier-sl-no" class="form-control bg-danger" disabled>
                </div>
                <div class="form-group mb-3">
-                 <label for="supplier-id" class="form-label">Supplier id</label>
-                 <input type="text" id="supplier-id" class="form-control" disabled>
+                 <label for="supplier-id" class="form-label">Supplier ID</label>
+                 <input type="text" id="supplier-id" class="form-control bg-danger" disabled>
                </div>
                <div class="form-group mb-3">
                  <label for="supplier-name" class="form-label">Supplier Name</label>
@@ -118,7 +116,7 @@
                </div>
                <div class="form-group mb-3">
                  <label for="address" class="form-label">Supplier Address</label>
-                 <textarea  id="address" cols="30" rows="10" class="form-control" wire:model="supplier_address"></textarea>
+                 <textarea  id="address" cols="5" rows="5" class="form-control" wire:model="supplier_address"></textarea>
                  @error('supplier_address')<span class="text-danger">{{$message}}</span> @enderror <br>
                </div>
                <div class="form-group mb-3">
@@ -134,5 +132,7 @@
            </div>
          </div>
        </div>
-     </div> --}}
+     </div>
+
+
 </div>
