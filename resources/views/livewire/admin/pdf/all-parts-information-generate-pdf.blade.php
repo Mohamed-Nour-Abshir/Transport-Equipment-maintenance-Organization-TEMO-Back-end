@@ -7,7 +7,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico')}}">
     <style>
         body{
-            background-color: #F6F6F6;
+            /* background-color: #F6F6F6; */
             margin: 0;
             padding: 0;
         }
@@ -25,12 +25,13 @@
             margin-left: auto;
         }
         .brand-section{
-           background-color: rgb(113, 113, 245)
+           /* background-color: rgb(113, 113, 245) */
            /* padding: 10px 40px; */
            padding-top: 0;
            padding-right: 10;
-           padding-bottom: 60px;
+           padding-bottom: 10px;
            padding-left: 10;
+           border-bottom: 1px solid #000;
         }
         .logo{
             width: 50%;
@@ -45,20 +46,21 @@
             flex: 0 0 auto;
         }
         .text-white{
-            color: #fff;
+            color: #000;
         }
         .company-details{
-            float: right;
-            text-align: right;
+            float: none;
+            text-align: center;
             padding-bottom: 10px;
         }
         .body-section{
             padding: 16px;
-            border: 1px solid gray;
+            /* border: 1px solid gray; */
         }
         .heading{
             font-size: 20px;
-            margin-bottom: 08px;
+            margin-bottom: -10px;
+            text-align: center;
         }
         .sub-heading{
             color: #262626;
@@ -85,7 +87,7 @@
             box-shadow: 0px 0px 5px 0.5px gray;
         }
         .table-bordered td, .table-bordered th {
-            border: 1px solid #dee2e6;
+            border: 1px solid black;
         }
         .text-right{
             text-align: end;
@@ -103,14 +105,12 @@
     <div class="container">
         <div class="brand-section">
             <div>
-                <div class="logo">
-                    <h1 class="text-white">TEMO</h1>
-                </div>
+
                 <div>
                     <div class="company-details">
-                        <p class="text-white">Transport & Equipment maintenance Organization(TEMO)</p>
+                        <h3 class="text-white">Transport & Equipment Maintenance Organization(TEMO)</h3>
                         <p class="text-white"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p>
-                        <p class="text-white">+8801730931984</p>
+                        {{-- <p class="text-white">+8801730931984</p> --}}
                     </div>
                 </div>
             </div>
@@ -119,15 +119,13 @@
         <div class="body-section">
             <div class="row">
                 <div class="">
-                    <h2 class="heading">Parts Information</h2>
-
+                    <p class="heading" style="text-decoration:underline;">All parts</p>
                 </div>
-
             </div>
         </div>
 
         <div class="body-section">
-            <h3 class="heading">All Parts Information</h3>
+            <p class="heading">Fiscal Year: <?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></p>
             <br>
             <table class="table table-bordered text-light p-5">
                 <thead>
@@ -169,3 +167,12 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
