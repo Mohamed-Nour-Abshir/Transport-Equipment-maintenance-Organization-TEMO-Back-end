@@ -5,6 +5,7 @@ use App\Http\Controllers\GenerateQuotationInformationPdf;
 use App\Http\Controllers\GenerateSupplierInformationPdf;
 use App\Http\Controllers\GenerateVehicleInformationPdf;
 use App\Http\Controllers\GenerateWorkorderInformationPDF;
+use App\Http\Controllers\ReportControllers\ComperativeStatementQuotationPriceBaseController;
 use App\Http\Controllers\ReportsPDF\CompretiveReoportPDF;
 use App\Http\Controllers\ReportsPDF\QuotationLowestPriceReportPDF;
 use App\Http\Controllers\ReportsPDF\WorkorderLetterReportPDF;

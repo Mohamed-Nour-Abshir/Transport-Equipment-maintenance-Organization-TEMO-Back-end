@@ -2,28 +2,30 @@
     <!-- main-section Start -->
     <div class="container-fluid pb-3" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
         <h1 class="p-1">Comperative Statement Quotation Price</h1>
-        {{-- <form class="row g-3 p-2 mt-3 border border-light" id="generate-form" method="get">
-          <div class="col-auto">
+        <form class="row g-3 p-2 mt-3 border border-light" id="generate-form" action="comperative-statement-quotation-price-base" method="GET">
+            <div class="col-auto">
             <label for="fromdate" class="mt-2">From Date</label>
-          </div>
-          <div class="col-auto">
-            <input type="date" class="form-control" id="fromdate">
-          </div> --}}
-          {{-- <div class="col-auto">
-            <label for="vehiclename" class="mt-2">Vehicle Name</label>
-          </div>
-          <div class="col-auto">
-            <input type="text" class="form-control" id="vehiclename" wire:model="vehicle_name">
-          </div> --}}
-          <form class="row g-3 p-2 mt-3 border border-light" id="generate-form" method="get">
-            <div class="d-flex justify-content-between">
-              <div class="input-group mb-3 float-start text-center mb-5">
-                <input type="text" class="form-control me-5" placeholder="Search By Parts name" aria-label="Search Supplier data" aria-describedby="button-addon2" wire:model="searchTerm"/>
-              </div>
-              <p class="ms-5"></p>
-              <button type="button" class="btn btn-outline-light mb-3" wire:click="showQuotation">Preview</button>
             </div>
-          </form>
+            <div class="col-auto">
+            <input type="date" class="form-control" id="fromdate" name="from_date">
+            </div>
+            <div class="col-auto">
+            <label for="todate" class="mt-2">To Date</label>
+            </div>
+            <div class="col-auto">
+            <input type="date" class="form-control" id="todate" name="to_date">
+            </div>
+            <div class="col-auto">
+            <label for="vehiclename" class="mt-2">Vehicle Name</label>
+            </div>
+            <div class="col-auto">
+            <input type="text" class="form-control" id="vehiclename" name="vehicle_name">
+            </div>
+            <div class="col-auto">
+            <button type="submit" class="btn btn-outline-light  mb-3">Preview</button>
+            </div>
+        </form>
+        </div>
     </div>
 
     <div class="container p-5">
@@ -47,21 +49,23 @@
           </tr>
         </thead>
         <tbody>
-            @foreach ($quotations as $item)
+        @if(isset($searchVehicleName))
+            @forelse ($quotations as $item)
             <tr>
                 <td>{{$item->id}}</td>
                 <td>{{$item->parts_code}}</td>
                 <td>{{$item->parts_name}}</td>
                 <td>{{$item->parts->parts_manufacture}}</td>
                 <td>{{$item->parts->parts_unit}}</td>
-                {{-- @if ($userDuplicates) --}}
                 @foreach ($quotations as $quotation)
-                  <td @if($quotation->company === $minNumber) class="bg-secondary text-dark" @endif>{{$quotation->company}}</td>
+                  <td @if($quotation->order_parts_price === $minNumber) class="bg-secondary text-dark" @endif>{{$quotation->order_parts_price}}</td>
                 @endforeach
-                {{-- @else
-                <td>{{$item->company}}</td>
-                @endif --}}
-            @endforeach
+            </tr>
+            @empty
+                <td>No data available</td>
+            @endforelse
+
+            @endif
 
         </tbody>
       </table>

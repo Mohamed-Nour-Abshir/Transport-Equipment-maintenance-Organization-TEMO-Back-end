@@ -192,8 +192,8 @@
                           </div>
 
                           <div class="form-group mb-3">
-                            <label for="supplier-id" class="form-label">Workorder No</label>
-                            <input type="text" id="supplier-id" class="form-control">
+                            <label for="supplier-id" class="form-label">parts ID</label>
+                            <input type="text" id="supplier-id" class="form-control" wire:model="parts_id">
                          </div>
                           <div class="form-group mb-3">
                             <label for="supplier-id" class="form-label">Vehicle Type</label>

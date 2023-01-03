@@ -150,7 +150,7 @@
                         <td>{{$item->parts->parts_manufacture}}</td>
                         <td>{{$item->parts->parts_unit}}</td>
                         @foreach ($quotations as $quotation)
-                          <td @if($quotation->company === $minNumber) class="bg-secondary text-warning" @endif>{{$quotation->company}}</td>
+                          <td @if($quotation->order_parts_price === $minNumber) class="bg-secondary text-warning" @endif>{{$quotation->order_parts_price}}</td>
                         @endforeach
                     @endforeach
 

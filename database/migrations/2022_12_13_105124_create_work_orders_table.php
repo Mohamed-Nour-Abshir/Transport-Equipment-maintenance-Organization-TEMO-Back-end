@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('work_orders', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('parts_id')->unsigned()->nullable();
             $table->string('quotation_from')->nullable();
             $table->string('quotation_to')->nullable();
             $table->string('supplier_id')->nullable();
@@ -26,9 +27,10 @@ return new class extends Migration
             $table->string('parts_name')->nullable();
             $table->string('parts_price')->nullable();
             $table->string('parts_qty')->nullable();
-            $table->string('order_parts_price')->nullable();
+            $table->decimal('order_parts_price')->nullable();
             $table->string('order_no')->nullable();
             $table->string('order_date')->nullable();
+            $table->foreign('parts_id')->references('id')->on('parts_infos')->onDelete('cascade');
             $table->timestamps();
         });
     }

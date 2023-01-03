@@ -25,6 +25,7 @@ class WorkorderInformationComponent extends Component
     public $parts_qty;
     public $order_parts_price;
     public $order_date;
+    public $parts_id;
 
     public function updated($fields)
     {
@@ -76,6 +77,7 @@ class WorkorderInformationComponent extends Component
         $workorder->parts_qty = $this->parts_qty;
         $workorder->order_parts_price = $this->order_parts_price;
         $workorder->order_date = $this->order_date;
+        $workorder->parts_id = $this->parts_id;
         $workorder->save();
         session()->flash('message', 'Workorder has been added successfully');
         return redirect()->route('workorder-information');

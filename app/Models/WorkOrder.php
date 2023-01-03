@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class WorkOrder extends Model
 {
     use HasFactory;
+
+
+    public function parts()
+    {
+        return $this->belongsTo(PartsInfo::class, 'parts_id');
+    }
+
     protected static function boot()
     {
         parent::boot();

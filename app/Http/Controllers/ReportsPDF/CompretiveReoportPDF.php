@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ReportsPDF;
 
 use App\Http\Controllers\Controller;
 use App\Models\Quotation;
+use App\Models\WorkOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,8 +14,8 @@ class CompretiveReoportPDF extends Controller
     public function ComparativeStatementPDF()
     {
 
-        $quatations = Quotation::orderBy('company', 'ASC')->get();
-        $minNumber = DB::table('quotations')->min('company');
+        $quatations = WorkOrder::orderBy('order_parts_price', 'ASC')->get();
+        $minNumber = DB::table('work_orders')->min('order_parts_price');
         $data = [
             'quatations' => $quatations,
             'minNumber' => $minNumber,
