@@ -7,6 +7,7 @@ use App\Http\Controllers\GenerateVehicleInformationPdf;
 use App\Http\Controllers\GenerateWorkorderInformationPDF;
 use App\Http\Controllers\ReportControllers\ComperativeStatementQuotationPriceBaseController;
 use App\Http\Controllers\ReportsPDF\CompretiveReoportPDF;
+use App\Http\Controllers\ReportsPDF\GeneratePDFall;
 use App\Http\Controllers\ReportsPDF\QuotationLowestPriceReportPDF;
 use App\Http\Controllers\ReportsPDF\WorkorderLetterReportPDF;
 use App\Http\Livewire\Admin\AdminEditPartsInformation;
@@ -100,8 +101,16 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/admin-edit-workorders/{workorder_id}', AdminEditWorkorderInformation::class)->name('edit.workorders');
     Route::get('/pdf-generate-all-workorders', [GenerateWorkorderInformationPDF::class, 'allWorkorders'])->name('pdf.workorders');
 
-    // Report Routes
+    // Report Routes Generate PDF
     Route::get('/comparativeStatement-pdf', [CompretiveReoportPDF::class, 'ComparativeStatementPDF'])->name('pdf.comparartive-statement');
     Route::get('/quotationLowestPrice-pdf', [QuotationLowestPriceReportPDF::class, 'quotationLowestPrice'])->name('pdf.quotationLowestPrice');
     Route::get('/workorderLetter-pdf', [WorkorderLetterReportPDF::class, 'workorderLetterPDF'])->name('pdf.workorderLetter');
+    Route::get('/vehicle-reg-wise-as-respected-workorder',[GeneratePDFall::class, 'vehicleRegWiseAsRespectedWorkorder'])->name('vehicle-reg-as-respectedWorkorder');
+    Route::get('/spareparts-wise-as-respected-workorder',[GeneratePDFall::class, 'sparePartsWiseAsRespectedWorkorder'])->name('spareparts-reg-as-respectedWorkorder');
+    Route::get('/supplier-reportPdf',[GeneratePDFall::class, 'supplierReportPdf'])->name('supplier-reportPdf');
+    Route::get('/repair-reportPdf',[GeneratePDFall::class, 'repairReportPdf'])->name('repair-reportPdf');
+    Route::get('/demandForm-reportPdf',[GeneratePDFall::class, 'demandFormReoprtPdf'])->name('demandForm-reportPdf');
+    Route::get('/workorder-total-reportPdf',[GeneratePDFall::class, 'workorderTotal'])->name('workorder-total-reportPdf');
+    Route::get('/repairVehicleList-reportPdf',[GeneratePDFall::class, 'repairVehicleList'])->name('repairVehicleList-reportPdf');
+    Route::get('/dead-stock-reportPdf',[GeneratePDFall::class, 'deadStock'])->name('dead-stock-reportPdf');
 });
