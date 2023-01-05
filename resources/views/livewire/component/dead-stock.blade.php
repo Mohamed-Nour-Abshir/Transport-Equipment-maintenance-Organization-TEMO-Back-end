@@ -32,6 +32,7 @@
       <div class="d-flex justify-content-center">
           <a href="{{route('dead-stock-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
       </div>
+      <h1 class="h4">Fiscal Year: <?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></h1>
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -47,6 +48,7 @@
       </thead>
       <tbody>
         @foreach ($quotations as $quotation)
+        @if ($quotation->created_at->format('Y') !== date("Y"))
             <tr>
               <td>{{$quotation->id}}</td>
               <td>{{$quotation->order_date}}</td>
@@ -56,6 +58,7 @@
               <td>{{$quotation->parts_qty}}</td>
               <td></td>
               {{-- <td><a href="{{route('pdf.quotation',['quotation_id'=>$quotation->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
+              @endif
             </tr>
         @endforeach
       </tbody>

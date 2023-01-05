@@ -137,11 +137,11 @@
                     <th>Unit</th>
                     <th>Quantity</th>
                     <th>Remarks</th>
-                    {{-- <th>Action</th> --}}
                   </tr>
                 </thead>
                 <tbody>
                   @foreach ($workorders as $quotation)
+                    @if ($quotation->created_at->format('Y') !== date("Y"))
                       <tr>
                         <td>{{$quotation->id}}</td>
                         <td>{{$quotation->order_date}}</td>
@@ -150,8 +150,7 @@
                         <td>{{$quotation->parts->parts_unit}}</td>
                         <td>{{$quotation->parts_qty}}</td>
                         <td></td>
-                        {{-- <td><a href="{{route('pdf.quotation',['quotation_id'=>$quotation->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
-                      </tr>
+                    @endif
                   @endforeach
                 </tbody>
               </table>
