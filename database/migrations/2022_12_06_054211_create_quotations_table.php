@@ -15,8 +15,6 @@ return new class extends Migration
     {
         Schema::create('quotations', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('parts_id')->unsigned();
-            $table->bigInteger('vehicle_id')->unsigned();
             $table->string('from_date')->nullable();
             $table->string('to_date')->nullable();
             $table->string('supplier_id')->nullable();
@@ -26,8 +24,6 @@ return new class extends Migration
             $table->string('parts_code')->nullable();
             $table->string('parts_name')->nullable();
             $table->decimal('company')->nullable();
-            $table->foreign('parts_id')->references('id')->on('parts_infos')->onDelete('cascade');
-            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
             $table->timestamps();
         });
     }

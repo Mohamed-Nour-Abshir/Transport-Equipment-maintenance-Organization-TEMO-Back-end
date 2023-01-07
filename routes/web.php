@@ -5,6 +5,7 @@ use App\Http\Controllers\GenerateQuotationInformationPdf;
 use App\Http\Controllers\GenerateSupplierInformationPdf;
 use App\Http\Controllers\GenerateVehicleInformationPdf;
 use App\Http\Controllers\GenerateWorkorderInformationPDF;
+use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\ReportControllers\ComperativeStatementQuotationPriceBaseController;
 use App\Http\Controllers\ReportsPDF\CompretiveReoportPDF;
 use App\Http\Controllers\ReportsPDF\GeneratePDFall;
@@ -57,7 +58,18 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/home', HomeComponent::class)->name('home');
     Route::get('/supplier-information', SupplierInformationComponent::class)->name('suplier-information');
     Route::get('/parts-information', PartsInformationComponent::class)->name('parts-information');
-    Route::get('/quotation-information', QuotationInformationComponent::class)->name('quotation-information');
+
+    // Route::get('/quotation-information', QuotationInformationComponent::class)->name('quotation-information');
+    // Route::get('/findSupplier', [QuotationInformationComponent::class,'findSupplier'])->name('findSupplier');
+
+
+    Route::get('/quotation-information', [QuotationController::class,'render'])->name('quotation-information');
+    Route::post('/quotation-information', [QuotationController::class,'addQuotationInformation'])->name('addQuotationInformation');
+    Route::get('/quotation-information/{id}', [QuotationController::class,'deleteQuotation'])->name('deleteQuotation');
+    Route::get('/findSupplier', [QuotationController::class,'findSupplier'])->name('findSupplier');
+    Route::get('/findVehicle', [QuotationController::class,'findVehicle'])->name('findVehicle');
+    Route::get('/findParts', [QuotationController::class,'findParts'])->name('findParts');
+
     Route::get('/vehicle-information', VehicleInformationComponent::class)->name('vehicle-information');
     Route::get('/workorder-information', WorkorderInformationComponent::class)->name('workorder-information');
 

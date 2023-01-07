@@ -1,22 +1,18 @@
 <?php
 
-namespace App\Http\Livewire;
-
+namespace App\Http\Controllers;
 use App\Models\PartsInfo;
 use App\Models\Quotation;
-use App\Models\Supplier;
 use App\Models\Vehicle;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Livewire\Component;
 
-class QuotationInformationComponent extends Component
+class QuotationController extends Controller
 {
+    //
     public $searchTerm;
     public $from_date;
     public $to_date;
-    public $parts_id;
-    public $vehicle_id;
     public $supplier_id;
     public $supplier_name;
     public $vehicle_code;
@@ -40,9 +36,9 @@ class QuotationInformationComponent extends Component
             'company_price' => 'required'
         ]);
     }
-    public function addQuotationInformation()
+    public function addQuotationInformation(Request $request)
     {
-        $this->validate([
+        $validated = $request->validate([
             'from_date' => 'required',
             'to_date' => 'required',
             'supplier_id' => 'required',
@@ -56,17 +52,15 @@ class QuotationInformationComponent extends Component
 
         // $quotations = Quotation::all();
         $quotation = new Quotation();
-        $quotation->parts_id = $this->parts_id;
-        $quotation->vehicle_id = $this->vehicle_id;
-        $quotation->from_date = $this->from_date;
-        $quotation->to_date = $this->to_date;
-        $quotation->supplier_id = $this->supplier_id;
-        $quotation->supplier_name = $this->supplier_name;
-        $quotation->vehicle_code = $this->vehicle_code;
-        $quotation->vehicle_name = $this->vehicle_name;
-        $quotation->parts_code = $this->parts_code;
-        $quotation->parts_name = $this->parts_name;
-        $quotation->company = $this->company_price;
+        $quotation->from_date = $request->from_date;
+        $quotation->to_date = $request->to_date;
+        $quotation->supplier_id = $request->supplier_id;
+        $quotation->supplier_name = $request->supplier_name;
+        $quotation->vehicle_code = $request->vehicle_code;
+        $quotation->vehicle_name = $request->vehicle_name;
+        $quotation->parts_code = $request->parts_code;
+        $quotation->parts_name = $request->parts_name;
+        $quotation->company = $request->company_price;
         $quotation->save();
         session()->flash('message', 'Quotation added successfully');
         return redirect()->route('quotation-information');
@@ -78,11 +72,12 @@ class QuotationInformationComponent extends Component
         $quotation = Quotation::find($id);
         $quotation->delete();
         session()->flash('message', 'Quotation has been deleted successfully');
+        return redirect()->route('quotation-information');
     }
 
-    public function render()
+    public function render(Request $request)
     {
-        $search = '%' . $this->searchTerm . '%';
+        $search = '%' . $request->searchTerm . '%';
         $quotations = Quotation::where('supplier_id', 'LIKE', $search)
             ->orwhere('supplier_name', 'LIKE', $search)
             ->orwhere('vehicle_code', 'LIKE', $search)
@@ -96,7 +91,7 @@ class QuotationInformationComponent extends Component
         $suppliers = Supplier::all();
         $parts = PartsInfo::all();
         $vehicles = Vehicle::all();
-        return view('livewire.quotation-information-component', ['quotations' => $quotations, 'suppliers' => $suppliers, 'parts' => $parts, 'vehicles' => $vehicles])->layout('layouts.base');
+        return view('livewire.quotation-api-component', compact(['quotations', 'suppliers', 'parts','vehicles']));
     }
 
         //generate supplier data by json format
@@ -104,6 +99,21 @@ class QuotationInformationComponent extends Component
             $parent_id = $request->supplier_id;
             $supplierdetails = Supplier::select('supplier_name')->where('id', $parent_id)->first();
             return response()->json($supplierdetails);
+
+        }
+
+        //generate vehicle data by json format
+        public function findVehicle(Request $request){
+            $parent_id = $request->vehicle_code;
+            $vehicledetails = Vehicle::select('vehicle_name')->where('vehicle_code', $parent_id)->first();
+            return response()->json($vehicledetails);
+
+        }
+        //generate parts data by json format
+        public function findParts(Request $request){
+            $parent_id = $request->parts_code;
+            $partsdetails = PartsInfo::select('parts_name')->where('parts_code', $parent_id)->first();
+            return response()->json($partsdetails);
 
         }
 }

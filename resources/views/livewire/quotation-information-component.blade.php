@@ -85,12 +85,12 @@
           ></button>
         </div>
         <div class="modal-body">
-            <form wire:submit.prevent='addQuotationInformation' method="POST">
+            <form wire:submit.prevent='addQuotationInformation' method="get">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="form-date" class="form-label">From date</label>
-                            <input type="date" id="form-date" class="form-control" wire:model="from_date">
+                            <input type="date" id="form-date" class="form-control @error('from_date') is-invalid @enderror" wire:model="from_date">
                             @error('from_date')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror <br>
@@ -99,21 +99,21 @@
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="to-date" class="form-label">To date</label>
-                            <input type="date" id="to-date" class="form-control" wire:model="to_date">
+                            <input type="date" id="to-date" class="form-control @error('to_date') is-invalid @enderror" wire:model="to_date">
                             @error('to_date')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror <br>
                           </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" wire:ignore>
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="supplier_id" class="form-label">Supplier ID</label>
-                            <select class="form-select selectpicker" aria-label="Default select example" wire:model="supplier_id" data-live-search="true" data-style="py-0" id="supplier_id">
-                                <option value="" selected>Please Select Supplier ID</option>
+                            <select class="form-select selectpicker" aria-label="Default select example" wire:model="supplier_id" data-live-search="true" data-style="py-0" id="supplier_id" wire:ignore>
+                                <option value="" disabled="true">--Please Select Supplier ID--</option>
                                 @foreach ($suppliers as $supplier)
-                                    <option value="{{$supplier->id}}">{{$supplier->supplier_id}}</option>
+                                    <option value="{{$supplier->id}}">{{$supplier->id}}</option>
                                 @endforeach
                                 @error('supplier_id')
                                     <span class="text-danger">{{ $message }}</span>
@@ -121,6 +121,25 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-6" wire:ignore>
+                        <div class="form-group mb-3">
+                            <label for="supplierName" class="form-label">Supplier Name</label>
+                            <input type="text" id="supplierName" class="form-control @error('supplier_name') is-invalid @enderror" wire:model="supplier_name" readonly>
+
+                            {{-- <select class="form-select" id="supplier-name" aria-label="Default select example" wire:model="supplier_name">
+                                <option value="" selected>Please Select Supplier Name</option>
+                                @foreach ($suppliers as $supplier)
+                                    <option value="{{$supplier->supplier_name}}">{{$supplier->supplier_name}}</option>
+                                @endforeach
+
+                            </select> --}}
+                            @error('supplier_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                            @enderror <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="vehicle-code" class="form-label">Vehicle Code</label>
@@ -130,23 +149,6 @@
                                     <option value="{{$vehicle->vehicle_code}}">{{$vehicle->vehicle_code}}</option>
                                 @endforeach
                                 @error('vehicle_code')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror <br>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group mb-3">
-                            <label for="supplier_name" class="form-label">Supplier Name</label>
-                            {{-- <input type="text" id="supplier_name" class="form-control" wire:model="supplier_name" name="supplier_name" readonly> --}}
-                            <select class="form-select" id="supplier-name" aria-label="Default select example" wire:model="supplier_name">
-                                <option value="" selected>Please Select Supplier Name</option>
-                                @foreach ($suppliers as $supplier)
-                                    <option value="{{$supplier->supplier_name}}">{{$supplier->supplier_name}}</option>
-                                @endforeach
-                                @error('supplier_name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror <br>
                             </select>
@@ -204,7 +206,7 @@
                         <div class="col-md-12">
                             <div class="form-group mb-2">
                                 <label for="company-price" class="form-label">Company Price (TK)</label>
-                                <textarea type="text" id="company-price" rows="2" cols="10" class="form-control" wire:model="company_price"></textarea>
+                                <textarea type="text" id="company-price" rows="2" cols="10" class="form-control @error('company_price') is-invalid @enderror" wire:model="company_price"></textarea>
                                 @error('company_price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror <br>
@@ -221,32 +223,37 @@
       </div>
     </div>
   </div>
+
 </div>
 
+  @push('scripts')
+  <script>
+    $(document).ready(function(){
+        $('#supplier_id').change(function(e)  {
+            var supplier_id = e.target.value;
+			console.log(supplier_id);
+			var op="";
+			$.ajax({
+				type:"get",
+				url:"{{route('findSupplier')}}",
+				data:{
+                    supplier_id:supplier_id
+                },
+				success:function(data){
+					console.log(data);
+					console.log(data.supplier_name);
+					// here supplier_name is coloumn name in suppliers table data.coln name
+                    $(".form-group").find('#supplierName').val(data.supplier_name);
+				},
+				error:function(){
 
-  {{-- <div class="form-group mb-3">
-                                <label for="parts-code" class="form-label">Parts ID</label>
-                                <select class="form-select" id="parts-code" aria-label="Default select example" wire:model="parts_id">
-                                    <option value="" selected>Please Select Parts ID</option>
-                                    @foreach ($parts as $part)
-                                        <option value="{{$part->id}}">{{$part->id}}</option>
-                                    @endforeach
-                                    @error('parts_code')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror <br>
-                                </select>
-                            </div> --}}
+				}
+			});
 
 
-                            {{-- <div class="form-group mb-3">
-                            <label for="vehicle-code" class="form-label">Vehicle ID</label>
-                            <select class="form-select" id="vehicle-code" aria-label="Default select example" wire:model="vehicle_id">
-                                <option value="" selected>Please Select Vehicle ID</option>
-                                @foreach ($vehicles as $vehicle)
-                                    <option value="{{$vehicle->id}}">{{$vehicle->id}}</option>
-                                @endforeach
-                                @error('vehicle_id')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror <br>
-                            </select>
-                        </div> --}}
+		});
+
+	});
+</script>
+  @endpush
+

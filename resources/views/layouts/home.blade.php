@@ -19,7 +19,6 @@
       referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="assets/css/style.css" />
     @stack('styles')
-    @livewireStyles
 
   </head>
   <body>
@@ -114,7 +113,7 @@
     <!-- Navbar-section End -->
 
 
-    {{$slot}}
+    @yield('content')
     @stack('modals')
 
 
@@ -256,7 +255,6 @@
     </script>
     <script src="assets/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    @livewireScripts
     @stack('scripts')
   </body>
 </html>
