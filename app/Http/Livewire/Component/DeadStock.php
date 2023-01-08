@@ -22,7 +22,7 @@ class DeadStock extends Component
            $searchVehicleName = request('fiscal_year');
            $searchFromDate = request('from_date');
            $searchToDate = request('to_date');
-           $quotations = WorkOrder::latest('order_date')->where('quotation_from', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
+           $quotations = WorkOrder::latest('order_date')->where('fiscal_year', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
            return view('livewire.component.dead-stock', compact('quotations'))->layout('layouts.base');
        } else {
            $quotations = WorkOrder::latest('order_date')->get();

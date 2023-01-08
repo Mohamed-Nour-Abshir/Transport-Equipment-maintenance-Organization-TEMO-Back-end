@@ -138,12 +138,14 @@
                 </thead>
                 <tbody>
                   @foreach ($workorders as $quotation)
+                  @if ($quotation->fiscal_year !== date("Y")."-".date('Y', strtotime('+1 year')))
                       <tr>
                         <td>{{$quotation->order_no}}</td>
                         <td>{{$quotation->order_date}}</td>
                         <td>{{ number_format($quotation->order_parts_price  * $quotation->parts_qty) }}</td>
                         <td>{{$quotation->supplier_name}}</td>
                       </tr>
+                    @endif
                   @endforeach
                 </tbody>
               </table>

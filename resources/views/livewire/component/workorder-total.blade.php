@@ -67,7 +67,7 @@
       </thead>
       <tbody>
         @foreach ($quotations as $quotation)
-        @if ($quotation->fiscal_year === date("Y")." - ".date('Y', strtotime('+1 year')))
+        @if ($quotation->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
             <tr>
               <td>{{$quotation->order_no}}</td>
               <td>{{$quotation->order_date}}</td>

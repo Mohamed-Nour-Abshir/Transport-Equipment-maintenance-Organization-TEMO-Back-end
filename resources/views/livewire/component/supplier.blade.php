@@ -56,7 +56,7 @@
       </thead>
       <tbody>
         @foreach ($quotations as $workorder)
-        @if ($workorder->fiscal_year === date("Y")." - ".date('Y', strtotime('+1 year')))
+        @if ($workorder->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
             <tr>
               <td>{{$workorder->order_no}}</td>
               <td>{{$workorder->quotation_from}}</td>

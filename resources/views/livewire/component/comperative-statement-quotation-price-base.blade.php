@@ -51,7 +51,7 @@
         <tbody>
         @if(isset($searchVehicleName))
             @forelse ($quotations as $item)
-            @if ($item->fiscal_year === date("Y")." - ".date('Y', strtotime('+1 year')))
+            @if ($item->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
 
 
             <tr>

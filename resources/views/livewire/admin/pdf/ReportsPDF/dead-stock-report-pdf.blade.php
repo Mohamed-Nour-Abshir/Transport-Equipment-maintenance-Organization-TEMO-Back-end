@@ -141,7 +141,7 @@
                 </thead>
                 <tbody>
                   @foreach ($workorders as $quotation)
-                    @if ($quotation->created_at->format('Y') !== date("Y"))
+                  @if ($quotation->fiscal_year !== date("Y")."-".date('Y', strtotime('+1 year')))
                       <tr>
                         <td>{{$quotation->id}}</td>
                         <td>{{$quotation->order_date}}</td>

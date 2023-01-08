@@ -143,6 +143,7 @@
                 </thead>
                 <tbody>
                     @foreach ($quotations as $item)
+                    @if ($item->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
                     <tr>
                         <td>{{$item->id}}</td>
                         <td>{{$item->parts_code}}</td>
@@ -152,6 +153,7 @@
                         @foreach ($quotations as $quotation)
                           <td @if($quotation->order_parts_price === $minNumber) class="bg-secondary text-warning" @endif>{{$quotation->order_parts_price}}</td>
                         @endforeach
+                        @endif
                     @endforeach
 
                 </tbody>
