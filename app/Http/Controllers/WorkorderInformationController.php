@@ -30,7 +30,7 @@ class WorkorderInformationController extends Controller
 
     public function updated(Request $request, $fields)
     {
-        $validated= $request->validateOnly($fields, [
+        $request->validateOnly($fields, [
             'quotation_from' => 'required',
             'quotation_to' => 'required',
             'supplier_id' => 'required',
@@ -48,7 +48,7 @@ class WorkorderInformationController extends Controller
     }
     public function addWorkorderInformation(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'quotation_from' => 'required',
             'quotation_to' => 'required',
             'supplier_id' => 'required',

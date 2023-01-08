@@ -31,7 +31,8 @@
     <div class="container p-5">
     {{-- @if($showTableQuotationTable) --}}
     <div class="d-flex justify-content-between">
-        <h1 class="h4">Fiscal Year: <?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></h1>
+        @isset($searchVehicleName) <p>Comperative Statement for  {{$searchVehicleName}} </p>@endisset
+        <h1 class="h4"><?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></h1>
         <a href="{{route('pdf.comparartive-statement')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
         <p></p>
     </div>

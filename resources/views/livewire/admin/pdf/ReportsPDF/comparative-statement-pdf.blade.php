@@ -119,14 +119,14 @@
         <div class="body-section">
             <div class="row">
                 <div class="">
-                    <p class="heading" style="text-decoration:underline;">Comparative Statement Quotation Price Base</p>
+                    <p class="heading" style="text-decoration:underline;">Comparative Statement For {{$minNumber}}</p>
                 </div>
 
             </div>
         </div>
 
         <div class="body-section">
-            <p class="heading">Fiscal Year: <?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></p>
+            <p class="heading"><?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?> YEAR</p>
             <br>
             <table class="table table-bordered">
                 <thead>

@@ -196,6 +196,7 @@
                       <div class="form-group mb-3">
                         <label for="parts-id" class="form-label">Parts ID</label>
                         <input type="text" id="parts-id" class="form-control" name="parts_id" readonly>
+                        @error('parts_id')<span class="text-danger">{{ $message }}</span>@enderror <br>
                      </div>
                       <div class="form-group mb-3">
                         <label for="vehicle_type" class="form-label">Vehicle Type</label>
