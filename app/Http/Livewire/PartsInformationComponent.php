@@ -14,6 +14,7 @@ class PartsInformationComponent extends Component
     public $parts_name;
     public $parts_manufacture;
     public $parts_unit;
+    public $parts_price;
     public $parts_date;
 
     public function updated($fields)
@@ -43,6 +44,7 @@ class PartsInformationComponent extends Component
         $parts->parts_name = $this->parts_name;
         $parts->parts_manufacture = $this->parts_manufacture;
         $parts->parts_unit = $this->parts_unit;
+        $parts->parts_price = $this->parts_price;
         $parts->parts_date = $this->parts_date;
         $parts->save();
         session()->flash('message', 'Parts Information added successfully');

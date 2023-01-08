@@ -44,6 +44,8 @@ class ComperativeStatementQuotationPriceBase extends Component
             $quotations = WorkOrder::orderBy('order_parts_price', 'ASC')->get();
             $minNumber = DB::table('work_orders')->min('order_parts_price');
         }
+        // $date = WorkOrder::select('order_date')->first();
+        // $order_date = date_format($date,'Y');
         return view('livewire.component.comperative-statement-quotation-price-base', ['quotations' => $quotations, 'minNumber' => $minNumber])->layout('layouts.base');
     }
 }

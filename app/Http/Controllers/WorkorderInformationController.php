@@ -78,6 +78,9 @@ class WorkorderInformationController extends Controller
         $workorder->parts_qty = $request->parts_qty;
         $workorder->order_parts_price = $request->order_parts_price;
         $workorder->order_date = $request->order_date;
+        $fiscalYear = date("Y");
+        $fiscalYear2 = date('Y', strtotime('+1 year'));
+        $workorder->fiscal_year = $fiscalYear." - ".$fiscalYear2;
         $workorder->parts_id = $request->parts_id;
         $workorder->save();
         session()->flash('message', 'Workorder has been added successfully');

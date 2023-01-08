@@ -56,6 +56,7 @@
       </thead>
       <tbody>
         @foreach ($quotations as $workorder)
+        @if ($workorder->fiscal_year === date("Y")." - ".date('Y', strtotime('+1 year')))
             <tr>
               <td>{{$workorder->order_no}}</td>
               <td>{{$workorder->quotation_from}}</td>
@@ -69,6 +70,7 @@
               <td>{{ number_format($workorder->order_parts_price  * $workorder->parts_qty) }}</td>
               {{-- <td><a href="{{route('pdf.workorder',['workorder_id'=>$workorder->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
             </tr>
+            @endif
         @endforeach
       </tbody>
     </table>

@@ -50,6 +50,7 @@
       </thead>
       <tbody>
         @foreach ($quotations as $quotation)
+        @if ($quotation->fiscal_year === date("Y")." - ".date('Y', strtotime('+1 year')))
             <tr>
               <td>{{$quotation->id}}</td>
               <td>{{$quotation->parts_name}}</td>
@@ -57,6 +58,7 @@
               <td>{{$quotation->parts_qty}}</td>
               {{-- <td><a href="{{route('pdf.quotation',['quotation_id'=>$quotation->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
             </tr>
+            @endif
         @endforeach
       </tbody>
     </table>

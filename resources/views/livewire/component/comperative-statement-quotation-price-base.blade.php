@@ -51,6 +51,9 @@
         <tbody>
         @if(isset($searchVehicleName))
             @forelse ($quotations as $item)
+            @if ($item->fiscal_year === date("Y")." - ".date('Y', strtotime('+1 year')))
+
+
             <tr>
                 <td>{{$item->id}}</td>
                 <td>{{$item->parts_code}}</td>
@@ -61,10 +64,10 @@
                   <td @if($quotation->order_parts_price === $minNumber) class="bg-secondary text-dark" @endif>{{$quotation->order_parts_price}}</td>
                 @endforeach
             </tr>
+            @endif
             @empty
                 <td>No data available</td>
             @endforelse
-
             @endif
 
         </tbody>

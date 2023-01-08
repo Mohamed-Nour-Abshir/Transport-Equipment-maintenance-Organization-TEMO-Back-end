@@ -30,6 +30,7 @@ return new class extends Migration
             $table->decimal('order_parts_price')->nullable();
             $table->string('order_no')->nullable();
             $table->string('order_date')->nullable();
+            $table->string('fiscal_year')->nullable();
             $table->foreign('parts_id')->references('id')->on('parts_infos')->onDelete('cascade');
             $table->timestamps();
         });

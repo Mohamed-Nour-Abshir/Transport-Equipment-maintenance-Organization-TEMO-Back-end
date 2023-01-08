@@ -30,12 +30,14 @@
       </thead>
       <tbody>
         @foreach ($quotations as $quotation)
+        @if ($quotation->fiscal_year === date("Y")." - ".date('Y', strtotime('+1 year')))
             <tr>
               <td>{{$quotation->id}}</td>
               <td>{{$quotation->vehicle_type}}</td>
               <td></td>
               <td></td>
             </tr>
+            @endif
         @endforeach
       </tbody>
     </table>
