@@ -11,6 +11,7 @@ use App\Http\Controllers\ReportsPDF\CompretiveReoportPDF;
 use App\Http\Controllers\ReportsPDF\GeneratePDFall;
 use App\Http\Controllers\ReportsPDF\QuotationLowestPriceReportPDF;
 use App\Http\Controllers\ReportsPDF\WorkorderLetterReportPDF;
+use App\Http\Controllers\WorkorderInformationController;
 use App\Http\Livewire\Admin\AdminEditPartsInformation;
 use App\Http\Livewire\Admin\AdminEditSupplierInformation;
 use App\Http\Livewire\Admin\AdminEditVehicleInformation;
@@ -36,6 +37,7 @@ use App\Http\Livewire\QuotationInformationComponent;
 use App\Http\Livewire\SupplierInformationComponent;
 use App\Http\Livewire\VehicleInformationComponent;
 use App\Http\Livewire\WorkorderInformationComponent;
+use App\Models\Quotation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,7 +64,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // Route::get('/quotation-information', QuotationInformationComponent::class)->name('quotation-information');
     // Route::get('/findSupplier', [QuotationInformationComponent::class,'findSupplier'])->name('findSupplier');
 
-
+// Quotation
     Route::get('/quotation-information', [QuotationController::class,'render'])->name('quotation-information');
     Route::post('/quotation-information', [QuotationController::class,'addQuotationInformation'])->name('addQuotationInformation');
     Route::get('/quotation-information/{id}', [QuotationController::class,'deleteQuotation'])->name('deleteQuotation');
@@ -71,7 +73,15 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/findParts', [QuotationController::class,'findParts'])->name('findParts');
 
     Route::get('/vehicle-information', VehicleInformationComponent::class)->name('vehicle-information');
-    Route::get('/workorder-information', WorkorderInformationComponent::class)->name('workorder-information');
+    // Route::get('/workorder-information', WorkorderInformationComponent::class)->name('workorder-information');
+
+    Route::get('/workorder-information', [WorkorderInformationController::class,'render'])->name('workorder-information');
+    Route::post('/workorder-information', [WorkorderInformationController::class,'addWorkorderInformation'])->name('addWorkorderInformation');
+    Route::get('/workorder-information/{id}', [WorkorderInformationController::class,'deleteWorkorder'])->name('deleteWorkorder');
+    Route::get('/findSupplier', [WorkorderInformationController::class,'findSupplier'])->name('findSupplier');
+    Route::get('/findVehicle', [WorkorderInformationController::class,'findVehicle'])->name('findVehicle');
+    Route::get('/findParts', [WorkorderInformationController::class,'findParts'])->name('findParts');
+
 
     // Report components
     Route::get('/comperative-statement-quotation-price-base', ComperativeStatementQuotationPriceBase::class)->name('comperative-statement-quotation-price-base');
