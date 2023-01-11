@@ -5,6 +5,7 @@ use App\Http\Controllers\GenerateQuotationInformationPdf;
 use App\Http\Controllers\GenerateSupplierInformationPdf;
 use App\Http\Controllers\GenerateVehicleInformationPdf;
 use App\Http\Controllers\GenerateWorkorderInformationPDF;
+use App\Http\Controllers\partsInformation;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\ReportControllers\ComperativeStatementQuotationPriceBaseController;
 use App\Http\Controllers\ReportsPDF\CompretiveReoportPDF;
@@ -59,7 +60,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     // Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
     Route::get('/home', HomeComponent::class)->name('home');
     Route::get('/supplier-information', SupplierInformationComponent::class)->name('suplier-information');
-    Route::get('/parts-information', PartsInformationComponent::class)->name('parts-information');
+    // Route::get('/parts-information', PartsInformationComponent::class)->name('parts-information');
+
+
+    Route::get('/parts-information', [partsInformation::class,'render'])->name('parts-information');
+    Route::post('/parts-information', [partsInformation::class,'addPartsInformation'])->name('addPartsInformation');
+    Route::get('/parts-information/{id}', [partsInformation::class,'deletePartsInfo'])->name('deletePartsInfo');
+    Route::get('/findVehicleParts', [PartsInformationComponent::class,'findVehicleParts'])->name('findVehicleParts');
 
     // Route::get('/quotation-information', QuotationInformationComponent::class)->name('quotation-information');
     // Route::get('/findSupplier', [QuotationInformationComponent::class,'findSupplier'])->name('findSupplier');
@@ -69,8 +76,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/quotation-information', [QuotationController::class,'addQuotationInformation'])->name('addQuotationInformation');
     Route::get('/quotation-information/{id}', [QuotationController::class,'deleteQuotation'])->name('deleteQuotation');
     Route::get('/findSupplier', [QuotationController::class,'findSupplier'])->name('findSupplier');
-    Route::get('/findVehicle', [QuotationController::class,'findVehicle'])->name('findVehicle');
-    Route::get('/findParts', [QuotationController::class,'findParts'])->name('findParts');
+    Route::get('/findVehicleQuotation', [QuotationController::class,'findVehicleQuotation'])->name('findVehicleQuotation');
+    // Route::get('/findParts', [QuotationController::class,'findParts'])->name('findParts');
 
     Route::get('/vehicle-information', VehicleInformationComponent::class)->name('vehicle-information');
     // Route::get('/workorder-information', WorkorderInformationComponent::class)->name('workorder-information');

@@ -103,17 +103,17 @@ class QuotationController extends Controller
         }
 
         //generate vehicle data by json format
-        public function findVehicle(Request $request){
+        public function findVehicleQuotation(Request $request){
             $parent_id = $request->vehicle_code;
-            $vehicledetails = Vehicle::select('vehicle_name')->where('vehicle_code', $parent_id)->first();
+            $vehicledetails = PartsInfo::select('parts_name','parts_code','vehicle_name')->where('vehicle_code', $parent_id)->first();
             return response()->json($vehicledetails);
 
         }
         //generate parts data by json format
-        public function findParts(Request $request){
-            $parent_id = $request->parts_code;
-            $partsdetails = PartsInfo::select('parts_name')->where('parts_code', $parent_id)->first();
-            return response()->json($partsdetails);
+        // public function findParts(Request $request){
+        //     $parent_id = $request->parts_code;
+        //     $partsdetails = PartsInfo::select('parts_name')->where('parts_code', $parent_id)->first();
+        //     return response()->json($partsdetails);
 
-        }
+        // }
 }

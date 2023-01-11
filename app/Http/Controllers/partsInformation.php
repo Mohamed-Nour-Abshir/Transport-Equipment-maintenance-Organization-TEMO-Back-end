@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Livewire;
-
+namespace App\Http\Controllers;
 use App\Models\PartsInfo;
 use App\Models\Vehicle;
-use Livewire\Component;
 use Illuminate\Http\Request;
-class PartsInformationComponent extends Component
+class partsInformation extends Controller
 {
     public $searchTerm;
     public $vehicle_code;
@@ -18,9 +16,9 @@ class PartsInformationComponent extends Component
     public $parts_price;
     public $parts_date;
 
-    public function updated($fields)
+    public function updated(Request $request, $fields)
     {
-        $this->validateOnly($fields, [
+        $request->validateOnly($fields, [
             'vehicle_code' => 'required',
             'vehicle_name' => 'required',
             'parts_code' => 'required|unique:parts_infos,parts_code',
@@ -31,9 +29,9 @@ class PartsInformationComponent extends Component
             'parts_date' => 'required|date'
         ]);
     }
-    public function addPartsInformation()
+    public function addPartsInformation(Request $request)
     {
-        $this->validate([
+        $request->validate([
             'vehicle_code' => 'required',
             'vehicle_name' => 'required',
             'parts_code' => 'required|unique:parts_infos,parts_code',
@@ -44,14 +42,14 @@ class PartsInformationComponent extends Component
             'parts_date' => 'required|date'
         ]);
         $parts = new PartsInfo();
-        $parts->vehicle_code = $this->vehicle_code;
-        $parts->vehicle_name = $this->vehicle_name;
-        $parts->parts_code = $this->parts_code;
-        $parts->parts_name = $this->parts_name;
-        $parts->parts_manufacture = $this->parts_manufacture;
-        $parts->parts_unit = $this->parts_unit;
-        $parts->parts_price = $this->parts_price;
-        $parts->parts_date = $this->parts_date;
+        $parts->vehicle_code = $request->vehicle_code;
+        $parts->vehicle_name = $request->vehicle_name;
+        $parts->parts_code = $request->parts_code;
+        $parts->parts_name = $request->parts_name;
+        $parts->parts_manufacture = $request->parts_manufacture;
+        $parts->parts_unit = $request->parts_unit;
+        $parts->parts_price = $request->parts_price;
+        $parts->parts_date = $request->parts_date;
         $parts->save();
         session()->flash('message', 'Parts Information added successfully');
         return redirect()->route('parts-information');
@@ -62,6 +60,7 @@ class PartsInformationComponent extends Component
         $parts = PartsInfo::find($id);
         $parts->delete();
         session()->flash('message', 'Parts has been deleted successfully');
+        return redirect()->route('parts-information');
     }
     public function render()
     {
@@ -72,7 +71,7 @@ class PartsInformationComponent extends Component
             ->orwhere('parts_date', 'LIKE', $search)
             ->orderBy('id', 'DESC')->paginate(10);
         $vehicles = Vehicle::all();
-        return view('livewire.parts-information-component', ['parts' => $parts, 'vehicles' => $vehicles])->layout('layouts.base');
+        return view('livewire.parts-api-component', compact(['parts', 'vehicles']));
     }
 
     //generate vehicle data by json format

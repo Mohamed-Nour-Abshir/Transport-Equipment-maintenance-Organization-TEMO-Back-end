@@ -136,8 +136,8 @@
              <div class="row">
                  <div class="col-md-6">
                      <div class="form-group mb-3">
-                         <label for="vehicle-code" class="form-label">Vehicle Code</label>
-                         <select class="form-select" id="vehicle-code" aria-label="Default select example" name="vehicle_code">
+                         <label for="vehicle_code" class="form-label">Vehicle Code</label>
+                         <select class="form-select" id="vehicle_code" aria-label="Default select example" name="vehicle_Code">
                              <option value="" selected>--Please Select Vehicle code--</option>
                              @foreach ($vehicles as $vehicle)
                                  <option value="{{$vehicle->vehicle_code}}">{{$vehicle->vehicle_code}}</option>
@@ -158,12 +158,11 @@
                      </div>
                  </div>
              </div>
-             <div class="parts">
                  <div class="row">
                      <div class="col-md-6">
                          <div class="form-group mb-3">
                              <label for="parts-code" class="form-label">Parts Code</label>
-                             <select class="form-select" id="parts-code" aria-label="Default select example" name="parts_code">
+                             {{-- <select class="form-select" id="parts-code" aria-label="Default select example" name="parts_code">
                                  <option value="" selected>--Please Select Parts code--</option>
                                  @foreach ($parts as $part)
                                      <option value="{{$part->parts_code}}">{{$part->parts_code}}</option>
@@ -171,7 +170,12 @@
                                  @error('parts_code')
                                      <span class="text-danger">{{ $message }}</span>
                                  @enderror <br>
-                             </select>
+                             </select> --}}
+
+                             <input type="text" id="parts-code" class="form-control @error('parts_code') is-invalid @enderror" name="parts_code" readonly>
+                             @error('parts_code')
+                                <span class="text-danger">{{ $message }}</span>
+                             @enderror <br>
                          </div>
                      </div>
 
@@ -197,7 +201,6 @@
                          </div>
                      </div>
                  </div>
-             </div>
      </div>
      <div class="modal-footer">
        <button type="submit" class="btn btn-primary">Save</button>
@@ -235,20 +238,23 @@
          });
         });
 
-     $('#vehicle-code').change(function(e)  {
+     $('#vehicle_code').change(function(e)  {
          var vehicle_code = e.target.value;
          console.log(vehicle_code);
          var op="";
          $.ajax({
              type:"get",
-             url:"{{route('findVehicle')}}",
+             url:"{{route('findVehicleQuotation')}}",
              data:{
                  vehicle_code:vehicle_code
              },
              success:function(data){
                  console.log(data);
-                 console.log(data.vehicle_name);
+                 console.log(data.parts_code);
                  // here supplier_name is coloumn name in suppliers table data.coln name
+                //  $(".form-group").find('#vehicle-name').val(data.vehicle_name);
+                 $(".form-group").find('#parts-code').val(data.parts_code);
+                 $(".form-group").find('#parts-name').val(data.parts_name);
                  $(".form-group").find('#vehicle-name').val(data.vehicle_name);
              },
              error:function(){
@@ -258,27 +264,27 @@
         });
 
 
-     $('#parts-code').change(function(e)  {
-         var parts_code = e.target.value;
-         console.log(parts_code);
-         var op="";
-         $.ajax({
-             type:"get",
-             url:"{{route('findParts')}}",
-             data:{
-                 parts_code:parts_code
-             },
-             success:function(data){
-                 console.log(data);
-                 console.log(data.parts_name);
-                 // here supplier_name is coloumn name in suppliers table data.coln name
-                 $(".form-group").find('#parts-name').val(data.parts_name);
-             },
-             error:function(){
+    //  $('#parts-code').change(function(e)  {
+    //      var parts_code = e.target.value;
+    //      console.log(parts_code);
+    //      var op="";
+    //      $.ajax({
+    //          type:"get",
+    //          url:"{{route('findParts')}}",
+    //          data:{
+    //              parts_code:parts_code
+    //          },
+    //          success:function(data){
+    //              console.log(data);
+    //              console.log(data.parts_name);
+    //              // here supplier_name is coloumn name in suppliers table data.coln name
+    //              $(".form-group").find('#parts-name').val(data.parts_name);
+    //          },
+    //          error:function(){
 
-             }
-         });
-        });
+    //          }
+    //      });
+    //     });
 
 
 

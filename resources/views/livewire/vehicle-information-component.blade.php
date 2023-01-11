@@ -106,7 +106,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="ed" class="form-label">Vehicle ED</label>
-                        <input type="text" id="ed" class="form-control" wire:model="vehicle_ed">
+                        <input type="date" id="ed" class="form-control" wire:model="vehicle_ed">
                         @error('vehicle_ed')<span class="text-danger">{{ $message }}</span>@enderror <br>
                     </div>
             <div class="modal-footer">

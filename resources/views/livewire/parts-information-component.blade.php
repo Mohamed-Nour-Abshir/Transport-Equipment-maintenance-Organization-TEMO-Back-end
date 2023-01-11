@@ -38,7 +38,7 @@
                 @foreach ($parts as $item)
                     <tr>
                         <td>{{$item->id}}</td>
-                        <td>{{$item->vehicle->vehicle_code}}</td>
+                        <td>{{$item->vehicle_code}}</td>
                         <td>{{$item->parts_code}}</td>
                         <td>{{$item->parts_name}}</td>
                         <td>{{$item->parts_manufacture}}</td>
@@ -90,12 +90,17 @@
                     <select class="form-select bg-danger" id="vehicle-code" aria-label="Default select example" wire:model="vehicle_code">
                         <option value="" selected>Please Select Vehicle code</option>
                         @foreach ($vehicles as $vehicle)
-                            <option value="{{$vehicle->id}}">{{$vehicle->vehicle_code}}</option>
+                            <option value="{{$vehicle->vehicle_code}}">{{$vehicle->vehicle_code}}</option>
                         @endforeach
                         @error('vehicle_code')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror <br>
                     </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="vehicle-name" class="form-label">Vehicle Name</label>
+                    <input type="text" id="vehicle-name" class="form-control" wire:model="vehicle_name" readonly>
+                    @error('vehicle_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
                 </div>
                 <div class="form-group mb-3">
                     <label for="supplier-name" class="form-label">Parts Code</label>
@@ -137,3 +142,36 @@
     </div>
   </div>
 </div>
+
+@push('scripts')
+<script>
+ $(document).ready(function(){
+
+     $('#vehicle-code').change(function(e)  {
+         var vehicle_code = e.target.value;
+         console.log(vehicle_code);
+         var op="";
+         $.ajax({
+             type:"get",
+             url:"{{route('findVehicleParts')}}",
+             data:{
+                 vehicle_code:vehicle_code
+             },
+             success:function(data){
+                 console.log(data);
+                 console.log(data.vehicle_name);
+                 // here supplier_name is coloumn name in suppliers table data.coln name
+                 $(".form-group").find('#vehicle-name').val(data.vehicle_name);
+             },
+             error:function(){
+
+             }
+         });
+        });
+
+
+ });
+
+
+</script>
+@endpush

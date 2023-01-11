@@ -134,6 +134,7 @@
                     <tr>
                         <th>SL No.</th>
                         <th>Vehicle Code</th>
+                        <th>Vehicle Name</th>
                         <th>Parts Code</th>
                         <th>Parts Name</th>
                         <th>Parts Manufacture</th>
@@ -145,7 +146,8 @@
                 <tbody>
                  <tr>
                     <td>{{$part->id}}</td>
-                    <td>{{$part->vehicle->vehicle_code}}</td>
+                    <td>{{$part->vehicle_code}}</td>
+                    <td>{{$part->vehicle_name}}</td>
                     <td>{{$part->parts_code}}</td>
                     <td>{{$part->parts_name}}</td>
                     <td>{{$part->parts_manufacture}}</td>

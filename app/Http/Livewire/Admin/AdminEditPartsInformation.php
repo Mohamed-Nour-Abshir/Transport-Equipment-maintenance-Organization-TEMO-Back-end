@@ -8,6 +8,7 @@ use Livewire\Component;
 class AdminEditPartsInformation extends Component
 {
     public $vehicle_code;
+    public $vehicle_name;
     public $parts_code;
     public $parts_name;
     public $parts_manufacture;
@@ -18,7 +19,8 @@ class AdminEditPartsInformation extends Component
     public function mount($parts_id)
     {
         $parts = PartsInfo::find($parts_id);
-        $this->vehicle_code = $parts->vehicle->vehicle_code;
+        $this->vehicle_code = $parts->vehicle_code;
+        $this->vehicle_name = $parts->vehicle_name;
         $this->parts_code = $parts->parts_code;
         $this->parts_name = $parts->parts_name;
         $this->parts_manufacture = $parts->parts_manufacture;
@@ -51,7 +53,8 @@ class AdminEditPartsInformation extends Component
             'parts_date' => 'required|date'
         ]);
         $parts = PartsInfo::find($this->parts_id);
-        $parts->vehicle->vehicle_id = $this->vehicle_code;
+        $parts->vehicle_code = $this->vehicle_code;
+        $parts->vehicle_name = $this->vehicle_name;
         $parts->parts_code = $this->parts_code;
         $parts->parts_name = $this->parts_name;
         $parts->parts_manufacture = $this->parts_manufacture;

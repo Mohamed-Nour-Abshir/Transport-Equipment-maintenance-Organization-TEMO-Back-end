@@ -152,6 +152,11 @@
                             </div>
                       </div>
                   </div>
+                  <div class="form-group mb-3">
+                    <label for="parts_qty" class="form-label">Parts Quantity</label>
+                    <input type="text" id="parts_qty" class="form-control" name="parts_qty">
+                    @error('parts_qty')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                 </div>
                   <div class="parts">
                       <div class="row">
                           <div class="col-md-6">
@@ -186,31 +191,25 @@
                         </div>
                         <div class="col-md-6">
                           <div class="form-group mb-3">
-                            <label for="supplier-id" class="form-label">Order Date</label>
-                            <input type="date" id="supplier-id" class="form-control" name="order_date">
+                            <label for="order-date" class="form-label">Order Date</label>
+                            <input type="date" id="order-date" class="form-control" name="order_date">
                             @error('order_date')<span class="text-danger">{{ $message }}</span>@enderror <br>
                          </div>
                         </div>
                       </div>
-
-                      <div class="form-group mb-3">
-                        <label for="parts-id" class="form-label">Parts ID</label>
-                        <input type="text" id="parts-id" class="form-control" name="parts_id" readonly>
-                        @error('parts_id')<span class="text-danger">{{ $message }}</span>@enderror <br>
-                     </div>
                       <div class="form-group mb-3">
                         <label for="vehicle_type" class="form-label">Vehicle Type</label>
                         <input type="text" id="vehicle_type" class="form-control" name="vehicle_type" readonly>
                         @error('vehicle_type')<span class="text-danger">{{ $message }}</span>@enderror <br>
                      </div>
-                      <div class="form-group mb-3">
-                        <label for="supplier-id" class="form-label">Parts Quantity</label>
-                        <input type="text" id="supplier-id" class="form-control" name="parts_qty">
-                        @error('parts_qty')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                     <div class="form-group mb-3">
+                        {{-- <label for="parts-id" class="form-label">Parts ID</label> --}}
+                        <input type="text" id="parts-id" class="form-control" name="parts_id" readonly style="display: none">
+                        @error('parts_id')<span class="text-danger">{{ $message }}</span>@enderror <br>
                      </div>
                       <div class="form-group mb-3">
-                        <label for="supplier-id" class="form-label">Order Parts Price Tk</label>
-                        <input type="text" id="supplier-id" class="form-control" name="order_parts_price">
+                        <label for="total" class="form-label">Order Price Tk</label>
+                        <input type="text" id="total" class="form-control" name="order_parts_price" readonly>
                         @error('order_parts_price')<span class="text-danger">{{ $message }}</span>@enderror <br>
                      </div>
                   </div>
@@ -294,6 +293,12 @@
                  $(".form-group").find('#parts-name').val(data.parts_name);
                  $(".form-group").find('#parts_price').val(data.parts_price);
                  $(".form-group").find('#parts-id').val(data.id);
+
+                 // Calculator for total amount
+                 let parts_price = parseInt($("#parts_price").val());
+                 let quantity = parseInt($("#parts_qty").val());
+                //  let total = parseInt($("#total").val(quantity * parts_price));
+                $("#total").val(quantity * parts_price);
              },
              error:function(){
 
@@ -304,5 +309,7 @@
 
 
  });
+
+
 </script>
 @endpush
