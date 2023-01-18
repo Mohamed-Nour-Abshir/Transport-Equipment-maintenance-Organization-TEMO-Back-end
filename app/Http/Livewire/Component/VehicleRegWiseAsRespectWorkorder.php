@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Component;
 use App\Models\PartsInfo;
 use App\Models\Quotation;
 use App\Models\WorkOrder;
+use App\Models\FiscalYear;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -26,11 +27,15 @@ class VehicleRegWiseAsRespectWorkorder extends Component
             $searchFromDate = request('from_date');
             $searchToDate = request('to_date');
             $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
-            return view('livewire.component.vehicle-reg-wise-as-respect-workorder', compact('quotations'))->layout('layouts.base');
+            $vehicles = WorkOrder::all();
+            $fiscal_year = FiscalYear::all(); 
+            return view('livewire.component.vehicle-reg-wise-as-respect-workorder', compact('quotations','vehicles','fiscal_year'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::latest('order_date')->get();
+            $vehicles = WorkOrder::all();
+            $fiscal_year = FiscalYear::all(); 
         }
         // $quotations = WorkOrder::latest('order_date')->get();
-        return view('livewire.component.vehicle-reg-wise-as-respect-workorder', ['quotations' => $quotations])->layout('layouts.base');
+        return view('livewire.component.vehicle-reg-wise-as-respect-workorder', ['quotations' => $quotations,'vehicles' =>$vehicles,'fiscal_year' =>$fiscal_year])->layout('layouts.base');
     }
 }

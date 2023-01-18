@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Component;
 
 use App\Models\WorkOrder;
+use App\Models\FiscalYear;
 use Livewire\Component;
 
 class WorkorderTotal extends Component
@@ -24,10 +25,14 @@ class WorkorderTotal extends Component
             $searchToDate = request('to_date');
             $searchOrderNo = request('order_no');
             $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->orWhere('order_no',$searchOrderNo)->get();
-            return view('livewire.component.workorder-total', compact('quotations'))->layout('layouts.base');
+            $vehicles = WorkOrder::all();
+            $fiscal_year = FiscalYear::all();
+            return view('livewire.component.workorder-total', compact('quotations','vehicles','fiscal_year'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::latest('order_date')->get();
+            $vehicles = WorkOrder::all();
+            $fiscal_year = FiscalYear::all();
         }
-        return view('livewire.component.workorder-total', ['quotations' => $quotations])->layout('layouts.base');
+        return view('livewire.component.workorder-total', ['quotations' => $quotations,'vehicles' =>$vehicles,'fiscal_year' =>$fiscal_year])->layout('layouts.base');
     }
 }

@@ -4,7 +4,8 @@
     <div class="container p-5" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
         <div class="row">
           <div class="col-md-12">
-            <h1 class="h1 mb-5">Workorder Information Setup</h1>
+            <h1 class="h1 mb-5 float-start">Workorder Information Setup</h1>
+            <button href="" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#fiscalYear"><i class="fas fa-plus"></i> Fiscal year</button>
             <div class="input-group mb-3 float-none text-center mb-5">
               <input
                 type="text"
@@ -66,6 +67,47 @@
       </div>
       <!-- main-section End -->
 
+
+<!-- Fiscal year Modal -->
+<div class="modal fade" id="fiscalYear" tabindex="-1" aria-labelledby="fiscalYearLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="fiscalYearLabel">Fiscal Year</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{route('addFiscalYear')}}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="form-date" class="form-label">Start Date date</label>
+                            <input type="date" id="form-date" class="form-control" name="start_date">
+                            @error('start_date')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror <br>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="to-date" class="form-label">End date</label>
+                            <input type="date" id="to-date" class="form-control" name="end_date">
+                            @error('end_date')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror <br>
+                        </div>
+                    </div>
+                </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
       <!-- Modal Quotation Information setup-->
       <div

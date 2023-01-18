@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Component;
 use App\Models\PartsInfo;
 use App\Models\Quotation;
 use App\Models\WorkOrder;
+use App\Models\FiscalYear;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -32,12 +33,16 @@ class WorkorderLetter extends Component
             $searchToDate = request('to_date');
             $quotations = WorkOrder::where('order_parts_price', '=', $this->minNumber)->where('vehicle_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
             $minNumber = DB::table('work_orders')->min('order_parts_price');
-            return view('livewire.component.workorder-letter', compact('quotations', 'minNumber'))->layout('layouts.base');
+            $vehicles = WorkOrder::all();
+            $fiscal_year = FiscalYear::all(); 
+            return view('livewire.component.workorder-letter', compact('quotations', 'minNumber','vehicles','fiscal_year'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::where('order_parts_price', '=', $this->minNumber)->orderBy('id', 'asc')->get();
             $minNumber = DB::table('work_orders')->min('order_parts_price');
+            $vehicles = WorkOrder::all();
+            $fiscal_year = FiscalYear::all(); 
         }
         // $quotations =  Quotation::where('company', '=', $this->minNumber)->orderBy('id', 'asc')->get();
-        return view('livewire.component.workorder-letter', ['quotations' => $quotations])->layout('layouts.base');
+        return view('livewire.component.workorder-letter', ['quotations' => $quotations,'vehicles' =>$vehicles,'fiscal_year' =>$fiscal_year])->layout('layouts.base');
     }
 }

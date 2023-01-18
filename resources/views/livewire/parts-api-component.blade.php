@@ -102,37 +102,37 @@ aria-hidden="true" wire:ignore.self>
             </div>
             <div class="form-group mb-3">
                 <label for="vehicle-name" class="form-label">Vehicle Name</label>
-                <input type="text" id="vehicle-name" class="form-control" name="vehicle_name" readonly>
+                <input type="text" id="vehicle-name" class="form-control @error('vehicle_name') is-invalid @enderror was-validated" name="vehicle_name" readonly>
                 @error('vehicle_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
             </div>
             <div class="form-group mb-3">
                 <label for="supplier-name" class="form-label">Parts Code</label>
-                <input type="text" id="supplier-name" class="form-control" name="parts_code">
+                <input type="text" id="supplier-name" class="form-control  @error('parts_code') is-invalid @enderror was-validated" name="parts_code">
                 @error('parts_code')<span class="text-danger">{{ $message }}</span>@enderror <br>
             </div>
             <div class="form-group mb-3">
                 <label for="phone-no" class="form-label">Parts Name</label>
-                <input type="text" id="phone-no" class="form-control" name="parts_name">
+                <input type="text" id="phone-no" class="form-control @error('parts_name') is-invalid @enderror was-validated" name="parts_name">
                 @error('parts_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
             </div>
             <div class="form-group mb-3">
                 <label for="email" class="form-label">Parts Manufacture</label>
-                <input type="text" id="email" class="form-control" name="parts_manufacture">
+                <input type="text" id="email" class="form-control @error('parts_manufacture') is-invalid @enderror was-validated" name="parts_manufacture">
                 @error('parts_manufacture')<span class="text-danger">{{ $message }}</span>@enderror <br>
             </div>
             <div class="form-group mb-3">
                 <label for="address" class="form-label">Parts Unit</label>
-                <input type="text"  id="address" class="form-control" name="parts_unit">
+                <input type="text"  id="address" class="form-control @error('parts_unit') is-invalid @enderror was-validated" name="parts_unit">
                 @error('parts_unit')<span class="text-danger">{{ $message }}</span>@enderror <br>
             </div>
             <div class="form-group mb-3">
                 <label for="price" class="form-label">Parts Price</label>
-                <input type="text"  id="price" class="form-control" name="parts_price">
+                <input type="text"  id="price" class="form-control @error('parts_price') is-invalid @enderror was-validated" name="parts_price">
                 @error('parts_price')<span class="text-danger">{{ $message }}</span>@enderror <br>
             </div>
             <div class="form-group mb-3">
                 <label for="date" class="form-label">Parts ED</label>
-                <input type="date" id="date"  class="form-control" name="parts_date">
+                <input type="date" id="date"  class="form-control @error('parts_date') is-invalid @enderror was-validated" name="parts_date">
                 @error('parts_date')<span class="text-danger">{{ $message }}</span>@enderror <br>
             </div>
     </div>
@@ -171,6 +171,15 @@ $(document).ready(function(){
          }
      });
     });
+
+
+//     $('form').submit(function(event) {
+//     if ($(this).hasClass('was-validated')) {
+//         return true;
+//     }
+//     event.preventDefault();
+//     return false;
+// });
 
 
 });

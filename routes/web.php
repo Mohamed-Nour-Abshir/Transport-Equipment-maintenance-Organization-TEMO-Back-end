@@ -75,8 +75,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/quotation-information', [QuotationController::class,'render'])->name('quotation-information');
     Route::post('/quotation-information', [QuotationController::class,'addQuotationInformation'])->name('addQuotationInformation');
     Route::get('/quotation-information/{id}', [QuotationController::class,'deleteQuotation'])->name('deleteQuotation');
-    Route::get('/findSupplier', [QuotationController::class,'findSupplier'])->name('findSupplier');
+    Route::get('/findSupplierQuotation', [QuotationController::class,'findSupplierQuotation'])->name('findSupplierQuotation');
     Route::get('/findVehicleQuotation', [QuotationController::class,'findVehicleQuotation'])->name('findVehicleQuotation');
+    Route::post('/addfiscalYear', [QuotationController::class,'addFiscalYear'])->name('addFiscalYear');
     // Route::get('/findParts', [QuotationController::class,'findParts'])->name('findParts');
 
     Route::get('/vehicle-information', VehicleInformationComponent::class)->name('vehicle-information');

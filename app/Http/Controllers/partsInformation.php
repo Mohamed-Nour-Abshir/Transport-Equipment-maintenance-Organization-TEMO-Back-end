@@ -7,28 +7,6 @@ use Illuminate\Http\Request;
 class partsInformation extends Controller
 {
     public $searchTerm;
-    public $vehicle_code;
-    public $vehicle_name;
-    public $parts_code;
-    public $parts_name;
-    public $parts_manufacture;
-    public $parts_unit;
-    public $parts_price;
-    public $parts_date;
-
-    public function updated(Request $request, $fields)
-    {
-        $request->validateOnly($fields, [
-            'vehicle_code' => 'required',
-            'vehicle_name' => 'required',
-            'parts_code' => 'required|unique:parts_infos,parts_code',
-            'parts_name' => 'required',
-            'parts_manufacture' => 'required',
-            'parts_unit' => 'required',
-            'parts_price' => 'required',
-            'parts_date' => 'required|date'
-        ]);
-    }
     public function addPartsInformation(Request $request)
     {
         $request->validate([
@@ -40,7 +18,8 @@ class partsInformation extends Controller
             'parts_unit' => 'required',
             'parts_price' => 'required',
             'parts_date' => 'required|date'
-        ]);
+        ],['validateOnly' => true]
+    );
         $parts = new PartsInfo();
         $parts->vehicle_code = $request->vehicle_code;
         $parts->vehicle_name = $request->vehicle_name;

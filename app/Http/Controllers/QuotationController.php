@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 use App\Models\PartsInfo;
 use App\Models\Quotation;
 use App\Models\Vehicle;
 use App\Models\Supplier;
-use Illuminate\Http\Request;
+use App\Models\FiscalYear;
 
 class QuotationController extends Controller
 {
@@ -22,23 +23,25 @@ class QuotationController extends Controller
     public $company_price;
     public $iteration = 0;
 
-    public function updated($fields)
-    {
-        $this->validateOnly($fields, [
-            'from_date' => 'required',
-            'to_date' => 'required',
-            'supplier_id' => 'required',
-            'supplier_name' => 'required',
-            'vehicle_code' => 'required',
-            'vehicle_name' => 'required',
-            'parts_code' => 'required',
-            'parts_name' => 'required',
-            'company_price' => 'required'
-        ]);
+    //generate supplier data by json format
+    public function findSupplierQuotation(Request $request){
+        $parent_id = $request->supplier_id;
+        $supplierdetails = Supplier::select('supplier_name')->where('id', $parent_id)->first();
+        return response()->json($supplierdetails);
+
     }
+
+    //generate vehicle data by json format
+    public function findVehicleQuotation(Request $request){
+        $parent_id = $request->vehicle_code;
+        $vehicledetails = PartsInfo::select('parts_name','parts_code','vehicle_name')->where('vehicle_code', $parent_id)->first();
+        return response()->json($vehicledetails);
+
+    }
+
     public function addQuotationInformation(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'from_date' => 'required',
             'to_date' => 'required',
             'supplier_id' => 'required',
@@ -50,13 +53,12 @@ class QuotationController extends Controller
             'company_price' => 'required'
         ]);
 
-        // $quotations = Quotation::all();
         $quotation = new Quotation();
         $quotation->from_date = $request->from_date;
         $quotation->to_date = $request->to_date;
         $quotation->supplier_id = $request->supplier_id;
         $quotation->supplier_name = $request->supplier_name;
-        $quotation->vehicle_code = $request->vehicle_code;
+        $quotation->vehicle_code = $request->vehicle_Code;
         $quotation->vehicle_name = $request->vehicle_name;
         $quotation->parts_code = $request->parts_code;
         $quotation->parts_name = $request->parts_name;
@@ -94,26 +96,17 @@ class QuotationController extends Controller
         return view('livewire.quotation-api-component', compact(['quotations', 'suppliers', 'parts','vehicles']));
     }
 
-        //generate supplier data by json format
-        public function findSupplier(Request $request){
-            $parent_id = $request->supplier_id;
-            $supplierdetails = Supplier::select('supplier_name')->where('id', $parent_id)->first();
-            return response()->json($supplierdetails);
-
-        }
-
-        //generate vehicle data by json format
-        public function findVehicleQuotation(Request $request){
-            $parent_id = $request->vehicle_code;
-            $vehicledetails = PartsInfo::select('parts_name','parts_code','vehicle_name')->where('vehicle_code', $parent_id)->first();
-            return response()->json($vehicledetails);
-
-        }
-        //generate parts data by json format
-        // public function findParts(Request $request){
-        //     $parent_id = $request->parts_code;
-        //     $partsdetails = PartsInfo::select('parts_name')->where('parts_code', $parent_id)->first();
-        //     return response()->json($partsdetails);
-
-        // }
+    // add fiscal_year 
+    public function addFiscalYear(Request $request){
+        $request->validate([
+            'start_date' => 'required',
+            'end_date' => 'required',
+        ]);
+        $year = new FiscalYear();
+        $year->start_date = $request->start_date;
+        $year->end_date = $request->end_date;
+        $year->save();
+        session()->flash('message', 'Fisacal year added successfully');
+        return redirect()->route('quotation-information');
+    }
 }

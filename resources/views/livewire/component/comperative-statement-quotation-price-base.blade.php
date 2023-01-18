@@ -4,22 +4,34 @@
         <h1 class="p-1">Comperative Statement Quotation Price</h1>
         <form class="row g-3 p-2 mt-3 border border-light" id="generate-form" action="comperative-statement-quotation-price-base" method="GET">
             <div class="col-auto">
-            <label for="fromdate" class="mt-2">From Date</label>
+              <label for="fromdate" class="mt-2">From Date</label>
             </div>
             <div class="col-auto">
-            <input type="date" class="form-control" id="fromdate" name="from_date">
+              <select class="form-select selectpicker" aria-label="Default select example" name="from_date" data-live-search="true" data-style="py-0" id="supplier_id">
+                  @foreach ($fiscal_year as $item)
+                      <option value="{{$item->start_date}}">{{$item->start_date}}</option>
+                  @endforeach
+              </select>
             </div>
             <div class="col-auto">
-            <label for="todate" class="mt-2">To Date</label>
+              <label for="todate" class="mt-2">To Date</label>
             </div>
             <div class="col-auto">
-            <input type="date" class="form-control" id="todate" name="to_date">
+              <select class="form-select selectpicker" aria-label="Default select example" name="to_date" data-live-search="true" data-style="py-0" id="supplier_id">
+                  @foreach ($fiscal_year as $item)
+                      <option value="{{$item->end_date}}">{{$item->end_date}}</option>
+                  @endforeach
+              </select>
             </div>
             <div class="col-auto">
-            <label for="vehiclename" class="mt-2">Vehicle Name</label>
+              <label for="supplier_id" class="form-label">Vehicle Name</label>
             </div>
             <div class="col-auto">
-            <input type="text" class="form-control" id="vehiclename" name="vehicle_name">
+              <select class="form-select selectpicker" aria-label="Default select example" name="vehicle_name" data-live-search="true" data-style="py-0" id="supplier_id">
+                  @foreach ($vehicles as $vehicle)
+                      <option value="{{$vehicle->vehicle_name}}">{{$vehicle->vehicle_name}}</option>
+                  @endforeach
+              </select>
             </div>
             <div class="col-auto">
             <button type="submit" class="btn btn-outline-light  mb-3">Preview</button>

@@ -10,23 +10,35 @@
                       <input type="text" class="form-control" id="fiscalYear">
                 </div> --}}
                 <div class="col-auto">
-                      <label for="vehiclename" class="mt-2">Parts Code</label>
-                 </div>
+              <label for="supplier_id" class="form-label">Vehicle Type</label>
+            </div>
+            <div class="col-auto">
+              <select class="form-select selectpicker" aria-label="Default select example" name="parts_code" data-live-search="true" data-style="py-0" id="supplier_id">
+                  @foreach ($vehicles as $vehicle)
+                      <option value="{{$vehicle->parts_code}}">{{$vehicle->parts_code}}</option>
+                  @endforeach
+              </select>
+            </div>
                 <div class="col-auto">
-                      <input type="text" class="form-control" id="vehiclename" name="parts_code">
-                </div>
-                <div class="col-auto">
-                  <label for="fromdate" class="mt-2">From Date</label>
-                </div>
-                <div class="col-auto">
-                  <input type="date" class="form-control" id="fromdate" name="from_date">
-                </div>
-                <div class="col-auto">
-                  <label for="todate" class="mt-2">To Date</label>
-                </div>
-                <div class="col-auto">
-                  <input type="date" class="form-control" id="todate" name="todate">
-                </div>
+              <label for="fromdate" class="mt-2">From Date</label>
+              </div>
+              <div class="col-auto">
+              <select class="form-select selectpicker" aria-label="Default select example" name="from_date" data-live-search="true" data-style="py-0" id="supplier_id">
+                  @foreach ($fiscal_year as $item)
+                      <option value="{{$item->start_date}}">{{$item->start_date}}</option>
+                  @endforeach
+              </select>
+            </div>
+            <div class="col-auto">
+              <label for="todate" class="mt-2">To Date</label>
+            </div>
+            <div class="col-auto">
+              <select class="form-select selectpicker" aria-label="Default select example" name="todate" data-live-search="true" data-style="py-0" id="supplier_id">
+                  @foreach ($fiscal_year as $item)
+                      <option value="{{$item->end_date}}">{{$item->end_date}}</option>
+                  @endforeach
+              </select>
+            </div>
                 <div class="col-auto">
                   <button type="submit" class="btn btn-outline-light  mb-3">Preview</button>
                 </div>
