@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <h1 class="h1 mb-5">Supplier Information Setup</h1>
                 <div class="input-group mb-3 float-none text-center mb-5">
-                    <input type="text" class="form-control" placeholder="Search Supplier data"
+                    <input type="text" class="form-control" placeholder="Search Supplier data by id, name, phone, email, address"
                         aria-label="Search Supplier data" aria-describedby="button-addon2" wire:model="searchTerm" />
                 </div>
                 @if (Session::has('message'))

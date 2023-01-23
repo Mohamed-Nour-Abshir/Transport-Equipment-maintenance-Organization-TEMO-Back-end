@@ -10,12 +10,10 @@
     <div class="row">
       <div class="col-md-12">
         <h1 class="h1 mb-5">Vehicle Information Setup</h1>
-        {{-- <div class="input-group mb-3 float-none text-center mb-5">
-          <input type="text" class="form-control" placeholder="Search Supplier data" aria-label="Search Supplier data" aria-describedby="button-addon2" wire:model='searchTerm'>
-          <button class="btn btn-primary" type="button" id="button-addon2">
-            Serach
-          </button>
-        </div> --}}
+        <div class="input-group mb-3 float-none text-center mb-5">
+            <input type="text" class="form-control" placeholder="Search Vehicles data by ID, vehicle type, vehicle name, vehicle code"
+                aria-label="Search Vehicles data" aria-describedby="button-addon2" wire:model="searchTerm" />
+        </div>
         <div class="row">
             <div class="d-flex justify-content-between">
                 <p class="">All Vehicles Information</p>

@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class VehicleInformationComponent extends Component
 {
+    public $searchTerm;
     public $vehicle_code;
     public $vehicle_type;
     public $vehicle_name;
@@ -51,7 +52,12 @@ class VehicleInformationComponent extends Component
     }
     public function render()
     {
-        $vehicles = Vehicle::orderBy('id', 'DESC')->paginate(10);
+        $search = '%' . $this->searchTerm . '%';
+        $vehicles = Vehicle::where('vehicle_code', 'LIKE', $search)
+            ->orwhere('vehicle_type', 'LIKE', $search)
+            ->orwhere('vehicle_name', 'LIKE', $search)
+            ->orwhere('id', 'LIKE', $search)
+            ->orderBy('id', 'DESC')->paginate(10);
         return view('livewire.vehicle-information-component', ['vehicles' => $vehicles])->layout('layouts.base');
     }
 }

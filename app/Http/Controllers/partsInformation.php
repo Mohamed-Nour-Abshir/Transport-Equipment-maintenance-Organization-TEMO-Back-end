@@ -1,25 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\PartsInfo;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+
 class partsInformation extends Controller
 {
     public $searchTerm;
     public function addPartsInformation(Request $request)
     {
-        $request->validate([
-            'vehicle_code' => 'required',
-            'vehicle_name' => 'required',
-            'parts_code' => 'required|unique:parts_infos,parts_code',
-            'parts_name' => 'required',
-            'parts_manufacture' => 'required',
-            'parts_unit' => 'required',
-            'parts_price' => 'required',
-            'parts_date' => 'required|date'
-        ],['validateOnly' => true]
-    );
+        $request->validate(
+            [
+                'vehicle_code' => 'required',
+                'vehicle_name' => 'required',
+                'parts_code' => 'required|unique:parts_infos,parts_code',
+                'parts_name' => 'required',
+                'parts_manufacture' => 'required',
+                'parts_unit' => 'required',
+                'parts_price' => 'required',
+                'parts_date' => 'required|date'
+            ],
+            ['validateOnly' => true]
+        );
         $parts = new PartsInfo();
         $parts->vehicle_code = $request->vehicle_code;
         $parts->vehicle_name = $request->vehicle_name;
@@ -43,21 +47,22 @@ class partsInformation extends Controller
     }
     public function render()
     {
-        $search = '%' . $this->searchTerm . '%';
-        $parts = PartsInfo::where('id', 'LIKE', $search)
-            ->orwhere('parts_code', 'LIKE', $search)
-            ->orwhere('parts_name', 'LIKE', $search)
-            ->orwhere('parts_date', 'LIKE', $search)
-            ->orderBy('id', 'DESC')->paginate(10);
+        if (request('searchTerm')) {
+            $searchTerm = request('searchTerm');
+            $vehicles = Vehicle::all();
+            $parts = PartsInfo::where('id', $searchTerm)->orwhere('parts_code', $searchTerm)->orwhere('parts_name', $searchTerm)->orwhere('parts_unit', $searchTerm)->paginate(10);
+            return view('livewire.parts-api-component', compact(['parts', 'vehicles']));
+        }
+        $parts = PartsInfo::orderBy('id', 'DESC')->paginate(10);
         $vehicles = Vehicle::all();
         return view('livewire.parts-api-component', compact(['parts', 'vehicles']));
     }
 
     //generate vehicle data by json format
-    public function findVehicleParts(Request $request){
+    public function findVehicleParts(Request $request)
+    {
         $parent_id = $request->vehicle_code;
         $vehicledetails = Vehicle::select('vehicle_name')->where('vehicle_code', $parent_id)->first();
         return response()->json($vehicledetails);
-
     }
 }

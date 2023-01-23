@@ -6,6 +6,7 @@ use App\Models\PartsInfo;
 use App\Models\Vehicle;
 use Livewire\Component;
 use Illuminate\Http\Request;
+
 class PartsInformationComponent extends Component
 {
     public $searchTerm;
@@ -65,21 +66,16 @@ class PartsInformationComponent extends Component
     }
     public function render()
     {
-        $search = '%' . $this->searchTerm . '%';
-        $parts = PartsInfo::where('id', 'LIKE', $search)
-            ->orwhere('parts_code', 'LIKE', $search)
-            ->orwhere('parts_name', 'LIKE', $search)
-            ->orwhere('parts_date', 'LIKE', $search)
-            ->orderBy('id', 'DESC')->paginate(10);
+        $parts = PartsInfo::orderBy('id', 'DESC')->paginate(10);
         $vehicles = Vehicle::all();
         return view('livewire.parts-information-component', ['parts' => $parts, 'vehicles' => $vehicles])->layout('layouts.base');
     }
 
     //generate vehicle data by json format
-    public function findVehicleParts(Request $request){
+    public function findVehicleParts(Request $request)
+    {
         $parent_id = $request->vehicle_code;
         $vehicledetails = Vehicle::select('vehicle_name')->where('vehicle_code', $parent_id)->first();
         return response()->json($vehicledetails);
-
     }
 }
