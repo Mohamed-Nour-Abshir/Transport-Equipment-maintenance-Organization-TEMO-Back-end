@@ -6,9 +6,16 @@
       <div class="col-md-12">
         <h1 class="h1 mb-5 float-start">Quotation Information Setup</h1>
         <button href="" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#fiscalYear"><i class="fas fa-plus"></i> Fiscal year</button>
-        <div class="input-group mb-3 float-none text-center mb-5">
-          <input type="text" class="form-control" placeholder="Search Quotation Information" aria-label="Search Supplier data" aria-describedby="button-addon2" name="searchTerm"/>
-        </div>
+        <form action="quotation-information" method="GET">
+            <div class="input-group mb-3 float-none text-center mb-5">
+              <div class="input-group mb-3 float-none text-center mb-5">
+                    <input type="text" class="form-control" placeholder="Search Quotation data by ID, Parts name, supplier ID, Supplier name, vehicle name" aria-label="Search Supplier data" aria-describedby="button-addon2" name='searchTerm'>
+                    <button class="btn btn-primary" type="submit" id="button-addon2">
+                        Serach
+                    </button>
+                </div>
+            </div>
+        </form>
         <div class="row">
              @if (Session::has('message'))
                  <div class="alert alert-success alert-dismissible fade show" role="alert">

@@ -6,14 +6,16 @@
           <div class="col-md-12">
             <h1 class="h1 mb-5 float-start">Workorder Information Setup</h1>
             <button href="" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#fiscalYear"><i class="fas fa-plus"></i> Fiscal year</button>
-            <div class="input-group mb-3 float-none text-center mb-5">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Search Workorder Information"
-                aria-label="Search Supplier data"
-                aria-describedby="button-addon2" name="searchTerm"/>
-            </div>
+            <form action="workorder-information" method="GET">
+                <div class="input-group mb-3 float-none text-center mb-5">
+                  <div class="input-group mb-3 float-none text-center mb-5">
+                        <input type="text" class="form-control" placeholder="Search Workorders data by Order No, Order Date, supplier ID, Supplier name, Parts name, vehicle name" aria-label="Search Supplier data" aria-describedby="button-addon2" name='searchTerm'>
+                        <button class="btn btn-primary" type="submit" id="button-addon2">
+                            Serach
+                        </button>
+                    </div>
+                </div>
+            </form>
             @if (Session::has('message'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ Session::get('message') }}

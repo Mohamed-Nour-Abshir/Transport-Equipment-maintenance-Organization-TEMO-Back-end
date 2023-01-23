@@ -13,7 +13,6 @@
         <h1 class="h1 mb-5">Parts Information Setup</h1>
         <form action="parts-information" method="GET">
         <div class="input-group mb-3 float-none text-center mb-5">
-          {{-- <input type="text" class="form-control" placeholder="Search parts information" aria-label="Search Supplier data" aria-describedby="button-addon2" name='searchTerm'> --}}
           <div class="input-group mb-3 float-none text-center mb-5">
                 <input type="text" class="form-control" placeholder="Search parts data by ID, Parts name, parts code, parts unit" aria-label="Search Supplier data" aria-describedby="button-addon2" name='searchTerm'>
                 <button class="btn btn-primary" type="submit" id="button-addon2">

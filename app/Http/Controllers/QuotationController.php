@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\PartsInfo;
 use App\Models\Quotation;
@@ -24,19 +25,19 @@ class QuotationController extends Controller
     public $iteration = 0;
 
     //generate supplier data by json format
-    public function findSupplierQuotation(Request $request){
+    public function findSupplierQuotation(Request $request)
+    {
         $parent_id = $request->supplier_id;
         $supplierdetails = Supplier::select('supplier_name')->where('id', $parent_id)->first();
         return response()->json($supplierdetails);
-
     }
 
     //generate vehicle data by json format
-    public function findVehicleQuotation(Request $request){
+    public function findVehicleQuotation(Request $request)
+    {
         $parent_id = $request->vehicle_code;
-        $vehicledetails = PartsInfo::select('parts_name','parts_code','vehicle_name')->where('vehicle_code', $parent_id)->first();
+        $vehicledetails = PartsInfo::select('parts_name', 'parts_code', 'vehicle_name')->where('vehicle_code', $parent_id)->first();
         return response()->json($vehicledetails);
-
     }
 
     public function addQuotationInformation(Request $request)
@@ -79,25 +80,24 @@ class QuotationController extends Controller
 
     public function render(Request $request)
     {
-        $search = '%' . $request->searchTerm . '%';
-        $quotations = Quotation::where('supplier_id', 'LIKE', $search)
-            ->orwhere('supplier_name', 'LIKE', $search)
-            ->orwhere('vehicle_code', 'LIKE', $search)
-            ->orwhere('vehicle_name', 'LIKE', $search)
-            ->orwhere('parts_code', 'LIKE', $search)
-            ->orwhere('parts_name', 'LIKE', $search)
-            ->orwhere('from_date', 'LIKE', $search)
-            ->orwhere('to_date', 'LIKE', $search)
-            ->orwhere('id', 'LIKE', $search)
-            ->orderBy('id', 'DESC')->paginate(10);
+        if (request('searchTerm')) {
+            $searchTerm = request('searchTerm');
+            $suppliers = Supplier::all();
+            $parts = PartsInfo::all();
+            $vehicles = Vehicle::all();
+            $quotations = Quotation::where('id', $searchTerm)->orwhere('supplier_id', $searchTerm)->orwhere('parts_name', $searchTerm)->orwhere('vehicle_name', $searchTerm)->orwhere('supplier_name', $searchTerm)->paginate(10);
+            return view('livewire.quotation-api-component', compact(['quotations', 'suppliers', 'parts', 'vehicles']));
+        }
+        $quotations = Quotation::orderBy('id', 'DESC')->paginate(10);
         $suppliers = Supplier::all();
         $parts = PartsInfo::all();
         $vehicles = Vehicle::all();
-        return view('livewire.quotation-api-component', compact(['quotations', 'suppliers', 'parts','vehicles']));
+        return view('livewire.quotation-api-component', compact(['quotations', 'suppliers', 'parts', 'vehicles']));
     }
 
-    // add fiscal_year 
-    public function addFiscalYear(Request $request){
+    // add fiscal_year
+    public function addFiscalYear(Request $request)
+    {
         $request->validate([
             'start_date' => 'required',
             'end_date' => 'required',
