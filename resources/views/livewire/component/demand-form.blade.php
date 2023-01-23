@@ -2,7 +2,7 @@
   <!-- main-section Start -->
   <div class="container-fluid pb-3" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
       <h1 class="p-1">Demand Form report</h1>
-      <form class="row g-3 p-2 mt-3 border border-light" id="generate-form" method="get">
+      <form class="row g-3 p-2 mt-3 border border-light" id="generate-form" action="demand-form" method="GET">
         {{-- <div class="col-auto">
               <label for="fiscalYear" class="mt-2">Fiscal Year</label>
          </div>
@@ -44,12 +44,18 @@
         </div>
       </form>
   </div>
-
-  <div class="container p-5">
-    {{-- @if($showTableQuotationTable) --}}
+  <div class="d-flex justify-content-center mt-5">
+    <a class="btn btn-warning mb-3 text-center demand-from">Generate Pdf <i class="fas fa-download"></i></a>
+  </div>
+  <div class="container p-5" id="demandFrom">
+    @if(isset($searchVehicleName))
       <div class="d-flex justify-content-center">
-          <a href="{{route('demandForm-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
+          {{-- <a href="{{route('demandForm-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
       </div>
+      <div>
+        <h1 class="text-decoration-underline text-center mb-2 h5">Demand From</h1>
+        <p>Date : {{$searchFromDate}}</p>
+    </div>
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -74,7 +80,7 @@
         @endforeach
       </tbody>
     </table>
-    {{-- @endif --}}
+    @endif
   </div>
 
   <!-- main-section End -->

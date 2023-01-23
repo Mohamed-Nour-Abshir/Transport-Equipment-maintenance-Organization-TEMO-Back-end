@@ -65,12 +65,18 @@
         </div>
       </form>
   </div>
-
-  <div class="container p-5">
-    {{-- @if($showTableQuotationTable) --}}
+  <div class="d-flex justify-content-center mt-5">
+    <a class="btn btn-warning mb-3 text-center workorderTotal">Generate Pdf <i class="fas fa-download"></i></a>
+  </div>
+  <div class="container p-5" id="workorderTotal">
+    @if(isset($searchVehicleName))
       <div class="d-flex justify-content-center">
-          <a href="{{route('workorder-total-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
+          {{-- <a href="{{route('workorder-total-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
       </div>
+      <div>
+        <h1 class="text-decoration-underline text-center mb-2 h5">Order Total</h1>
+        <p class="text-center mb-3"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></p>
+    </div>
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -95,7 +101,7 @@
         @endforeach
       </tbody>
     </table>
-    {{-- @endif --}}
+    @endif
   </div>
 
   <!-- main-section End -->

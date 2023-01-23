@@ -23,17 +23,17 @@ class SparePartsWiseAsRespectWorkorder extends Component
         if (request('parts_code') || request('from_date') || request('to_date')) {
             $searchVehicleName = request('parts_code');
             $searchFromDate = request('from_date');
-            $searchToDate = request('to_date');
+            $searchToDate = request('todate');
             $quotations = WorkOrder::latest('order_date')->where('parts_code', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
             $vehicles = WorkOrder::all();
-            $fiscal_year = FiscalYear::all(); 
-            return view('livewire.component.spare-parts-wise-as-respect-workorder', compact('quotations','vehicles','fiscal_year'))->layout('layouts.base');
+            $fiscal_year = FiscalYear::all();
+            return view('livewire.component.spare-parts-wise-as-respect-workorder', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName','searchFromDate','searchToDate'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::latest('order_date')->get();
             $vehicles = WorkOrder::all();
-            $fiscal_year = FiscalYear::all(); 
+            $fiscal_year = FiscalYear::all();
         }
         // $quotations = WorkOrder::latest('order_date')->get();
-        return view('livewire.component.spare-parts-wise-as-respect-workorder', ['quotations' => $quotations,'vehicles' =>$vehicles,'fiscal_year' =>$fiscal_year])->layout('layouts.base');
+        return view('livewire.component.spare-parts-wise-as-respect-workorder', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year])->layout('layouts.base');
     }
 }

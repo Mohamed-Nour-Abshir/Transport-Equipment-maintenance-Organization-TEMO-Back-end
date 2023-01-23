@@ -73,3 +73,46 @@ $('.printQuotationLowestPrice').on('click', function () { // select print button
 $('.printWorkLetter').on('click', function () { // select print button with class "print," then on click run callback function
     $.print("#WorkLetter"); // inside callback function the section with class "content" will be printed
 });
+
+
+// pdf generate for vehicle-reg-as-respected Workorder
+$('.printVehicleRegWorkorder').on('click', function () { // select print button with class "print," then on click run callback function
+    $.print("#vehicleRegAsRespectedWorkorder"); // inside callback function the section with class "content" will be printed
+});
+
+// pdf generate for spare-parts-as-respected Workorder
+$('.spareParts').on('click', function () { // select print button with class "print," then on click run callback function
+    $.print("#spareParts"); // inside callback function the section with class "content" will be printed
+});
+
+
+// pdf generate for supplier
+$('.supplier').on('click', function () { // select print button with class "print," then on click run callback function
+    $.print("#supplier"); // inside callback function the section with class "content" will be printed
+});
+
+// pdf generate for repair
+$('.repair').on('click', function () { // select print button with class "print," then on click run callback function
+    $.print("#repair"); // inside callback function the section with class "content" will be printed
+});
+
+// pdf generate for demand-from
+$('.demand-from').on('click', function () { // select print button with class "print," then on click run callback function
+    $.print("#demandFrom"); // inside callback function the section with class "content" will be printed
+});
+
+
+// pdf generate for workorderTotal
+$('.workorderTotal').on('click', function () { // select print button with class "print," then on click run callback function
+    $.print("#workorderTotal"); // inside callback function the section with class "content" will be printed
+});
+
+// pdf generate for deadStock
+$('.deadStock').on('click', function () { // select print button with class "print," then on click run callback function
+    $.print("#deadStock"); // inside callback function the section with class "content" will be printed
+});
+
+// pdf generate for repair vehicleList
+$('.vehicleList').on('click', function () { // select print button with class "print," then on click run callback function
+    $.print("#vehicleList"); // inside callback function the section with class "content" will be printed
+});

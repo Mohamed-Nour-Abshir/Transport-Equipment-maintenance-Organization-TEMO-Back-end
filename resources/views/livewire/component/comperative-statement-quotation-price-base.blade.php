@@ -45,10 +45,11 @@
     </div>
 
     <div class="container p-5" id="Comperative">
-    {{-- @if($showTableQuotationTable) --}}
+    @if(isset($searchVehicleName))
     <div class="d-flex justify-content-between">
         @isset($searchVehicleName) <p>Comperative Statement for  {{$searchVehicleName}} </p>@endisset
-        @isset($searchFromDate) <h1 class="h4">{{$searchFromDate}} - {{$searchToDate}}</h1> @endisset
+        {{-- @isset($searchFromDate) <h1 class="h4">{{$searchFromDate}} - {{$searchToDate}}</h1> @endisset --}}
+            <h1 class="h5">{{ date('Y', strtotime($searchFromDate)) }} - {{ date('Y', strtotime($searchToDate)) }}  YEAR</h1>
         {{-- <a href="{{route('pdf.comparartive-statement')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
         <p></p>
     </div>
@@ -66,7 +67,6 @@
           </tr>
         </thead>
         <tbody>
-        @if(isset($searchVehicleName))
             @forelse ($quotations as $item)
             @if ($item->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
 
@@ -85,12 +85,11 @@
             @empty
                 <td>No data available</td>
             @endforelse
-            @endif
 
         </tbody>
       </table>
       {{-- <p>Lowest Price Submission: </p> --}}
-      {{-- @endif --}}
+      @endif
     </div>
 
     <!-- main-section End -->

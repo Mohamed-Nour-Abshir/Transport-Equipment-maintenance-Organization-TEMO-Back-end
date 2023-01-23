@@ -44,13 +44,22 @@
         </div>
       </form>
   </div>
-
-  <div class="container p-5">
-    {{-- @if($showTableQuotationTable) --}}
+  <div class="d-flex justify-content-center mt-5">
+    <a  class="btn btn-warning mb-3 text-center supplier">Generate Pdf <i class="fas fa-download"></i></a>
+  </div>
+  <div class="container p-5" id="supplier">
+    @if(isset($searchVehicleName))
       <div class="d-flex justify-content-center">
-          <a href="{{route('supplier-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
+          {{-- <a href="{{route('supplier-reportPdf')}}" class="btn btn-warning mb-3 text-center supplier">Generate Pdf <i class="fas fa-download"></i></a> --}}
       </div>
+      <div>
+        <h1 class="text-decoration-underline text-center mb-2 h5">Supplier Report</h1>
+        <p class="text-center mb-3"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></p>
+        {{-- <p class="text-center me-5">Fiscal Year</p> --}}
+    </div>
     <table class="table table-bordered">
+        <p class="text-start">Party Name: {{$searchVehicleName}}</p>
+        <p class="text-end">Print Date : {{date("d-m-Y")}}</p>
       <thead>
         <tr>
           <th>Order No</th>
@@ -86,7 +95,7 @@
         @endforeach
       </tbody>
     </table>
-    {{-- @endif --}}
+    @endif
   </div>
 
   <!-- main-section End -->

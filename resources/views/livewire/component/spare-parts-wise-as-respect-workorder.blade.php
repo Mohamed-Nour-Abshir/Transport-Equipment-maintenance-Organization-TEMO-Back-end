@@ -10,7 +10,7 @@
                       <input type="text" class="form-control" id="fiscalYear">
                 </div> --}}
                 <div class="col-auto">
-              <label for="supplier_id" class="form-label">Vehicle Type</label>
+              <label for="supplier_id" class="form-label">Parts Code</label>
             </div>
             <div class="col-auto">
               <select class="form-select selectpicker" aria-label="Default select example" name="parts_code" data-live-search="true" data-style="py-0" id="supplier_id">
@@ -44,11 +44,18 @@
                 </div>
               </form>
         </div>
-
-        <div class="container p-5">
-          {{-- @if($showTableQuotationTable) --}}
+        <div class="d-flex justify-content-center mt-5">
+            <a class="btn btn-warning mb-3 text-center spareParts">Generate Pdf <i class="fas fa-download"></i></a>
+        </div>
+        <div class="container p-5" id="spareParts">
+          @if(isset($searchVehicleName))
             <div class="d-flex justify-content-center">
-                <a href="{{route('spareparts-reg-as-respectedWorkorder')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
+                {{-- <a href="{{route('spareparts-reg-as-respectedWorkorder')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
+            </div>
+            <div>
+                <h1 class="text-decoration-underline text-center mb-2 h5">Spare Parts Report Order Wise</h1>
+                <p class="text-center mb-3"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></p>
+                {{-- <p class="text-center me-5">Fiscal Year</p> --}}
             </div>
           <table class="table table-bordered">
             <thead>
@@ -80,7 +87,7 @@
               @endforeach
             </tbody>
           </table>
-          {{-- @endif --}}
+          @endif
         </div>
 
         <!-- main-section End -->

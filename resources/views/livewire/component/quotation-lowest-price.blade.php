@@ -45,11 +45,16 @@
 
     <div class="container p-5" id="Quotation">
     @if(isset($searchVehicleName))
-    <div class="d-flex justify-content-between">
-        <h1 class="h4">Fiscal Year: <?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></h1>
-        {{-- <a href="{{route('pdf.quotationLowestPrice')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
-        <p></p>
+    <div>
+        <h1 class="text-decoration-underline text-center mb-2 h5">Vehicle Wise</h1>
+        <p class="text-center mb-3"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></p>
     </div>
+    <div class="d-flex justify-content-between">
+        <h1 class="h6">Fiscal Year: <?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></h1>
+        {{-- <a href="{{route('pdf.quotationLowestPrice')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
+        <p>Print {{date("d-m-Y")}}</p>
+    </div>
+    <p class="mb-2 mt-2">Lowest Price for Comperative statment for {{$searchVehicleName}}</p>
       <table class="table table-bordered">
         <thead>
           <tr>

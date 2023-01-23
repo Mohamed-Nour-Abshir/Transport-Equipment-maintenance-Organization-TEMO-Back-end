@@ -2,7 +2,7 @@
   <!-- main-section Start -->
   <div class="container-fluid pb-3" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
       <h1 class="p-1">Repair report</h1>
-      <form class="row g-3 p-2 mt-3 border border-light" id="generate-form" method="get">
+      <form class="row g-3 p-2 mt-3 border border-light" id="generate-form" action="repair" method="GET">
         {{-- <div class="col-auto">
               <label for="fiscalYear" class="mt-2">Fiscal Year</label>
          </div>
@@ -44,13 +44,19 @@
         </div>
       </form>
   </div>
-
-  <div class="container p-5">
-    {{-- @if($showTableQuotationTable) --}}
+  <div class="d-flex justify-content-center mt-5">
+    <a class="btn btn-warning mb-3 text-center repair">Generate Pdf <i class="fas fa-download"></i></a>
+  </div>
+  <div class="container p-5" id="repair">
+    @if(isset($searchVehicleName))
       <div class="d-flex justify-content-center">
-          <a href="{{route('repair-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
+          {{-- <a href="{{route('repair-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
       </div>
+      <div>
+        <h1 class="text-decoration-underline text-center mb-2 h5">Repair Report</h1>
+    </div>
     <table class="table table-bordered">
+        <p class="mb-2">Vehicle Name : {{$searchVehicleName}}</p>
       <thead>
         <tr>
           <th>Sl No</th>
@@ -78,7 +84,7 @@
         @endforeach
       </tbody>
     </table>
-    {{-- @endif --}}
+    @endif
   </div>
 
   <!-- main-section End -->

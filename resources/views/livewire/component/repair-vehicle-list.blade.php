@@ -14,10 +14,14 @@
         </div>
   </div>
 
-  <div class="container p-5">
-    {{-- @if($showTableQuotationTable) --}}
+  <div class="d-flex justify-content-center mt-5">
+    <a class="btn btn-warning mb-3 text-center vehicleList">Generate Pdf <i class="fas fa-download"></i></a>
+  </div>
+
+  <div class="container p-5" id="vehicleList">
+    {{-- @if(isset($searchVehicleName)) --}}
       <div class="d-flex justify-content-center">
-          <a href="{{route('repairVehicleList-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
+          {{-- <a href="{{route('repairVehicleList-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
       </div>
     <table class="table table-bordered">
       <thead>

@@ -27,12 +27,12 @@ class DemandForm extends Component
             $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
             $vehicles = WorkOrder::all();
             $fiscal_year = FiscalYear::all();
-            return view('livewire.component.repair', compact('quotations','vehicles','fiscal_year'))->layout('layouts.base');
+            return view('livewire.component.demand-form', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName','searchFromDate'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::latest('order_date')->get();
             $vehicles = WorkOrder::all();
             $fiscal_year = FiscalYear::all();
         }
-        return view('livewire.component.demand-form', ['quotations' => $quotations,'vehicles' =>$vehicles,'fiscal_year' =>$fiscal_year])->layout('layouts.base');
+        return view('livewire.component.demand-form', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year])->layout('layouts.base');
     }
 }

@@ -64,7 +64,7 @@
             <p>স্মারক নম্বর:- ৪৫.৯০.০০০০.০০২.২০.০৪.২৩/ {{$item->order_no}}      </p>
             <p>তারিখ: {{$item->order_date}}  খ্রিঃ </p>
         </div>
-        <span class="border border-dark border-2 p-2 mb-3">{{$item->supplier_name}} </span>
+        <span class="p-2 mb-3">{{$item->supplier_name}} </span>
         <p class="mt-4">বিষয়: <b class="text-decoration-underline"> সরবরাহ আদেশ প্রসঙ্গে।</b></p>
         <p class="mt-3">আপনার বাৎসরিক This date will be on all letters / {{$item->order_date}} খ্রিঃ  তারিখ দরপত্রের
           বরাতে অবগত করানো যাইতেছে যে, আপনার দরপত্র গ্রহন করা </p> <p class="mt-2"> হইয়েছে।  আপনাকে নিম্ন লিখিত মালামাল
