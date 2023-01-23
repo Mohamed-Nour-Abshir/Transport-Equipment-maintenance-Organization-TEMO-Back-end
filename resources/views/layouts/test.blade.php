@@ -43,7 +43,6 @@
     }
     </script>
     <script src="assets/js/main.js"></script>
-
     @livewireScripts
   </body>
 </html>

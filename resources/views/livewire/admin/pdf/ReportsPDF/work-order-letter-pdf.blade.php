@@ -115,7 +115,6 @@
                 </div>
             </div>
         </div>
-
         <div class="body-section">
             <div class="row">
                 <div class="">
@@ -143,7 +142,7 @@
                 </thead>
                 <tbody>
                     @foreach ($quotations as $item)
-                    @if ($item->fiscal_year !== date("Y")."-".date('Y', strtotime('+1 year')))
+                    @if ($item->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
                     <tr>
                         <td>{{$item->id}}</td>
                         <td>{{$item->parts_code}}</td>
@@ -151,7 +150,7 @@
                         <td>{{$item->parts->parts_manufacture}}</td>
                         <td>{{$item->parts->parts_unit}}</td>
                         @foreach ($quotations as $quotation)
-                          <td @if($quotation->company === $minNumber) class="bg-secondary text-warning" @endif>{{$quotation->company}}</td>
+                          <td @if($quotation->order_parts_price === $minNumber) class="bg-secondary text-warning" @endif>{{$quotation->order_parts_price}}</td>
                         @endforeach
                     </tr>
                     @endif

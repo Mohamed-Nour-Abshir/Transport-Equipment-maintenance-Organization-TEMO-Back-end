@@ -1,4 +1,4 @@
-// Radio click redirect to page Report List 
+// Radio click redirect to page Report List
 const btn = document.querySelector('#generate');
 const radioButtons = document.querySelectorAll('input[name="reportList"]');
 btn.addEventListener("click", () => {
@@ -55,4 +55,21 @@ btn.addEventListener("click", () => {
     }
 
 
+});
+
+// pdf generate for comperative statement
+$('.printComporative').on('click', function () { // select print button with class "print," then on click run callback function
+    $.print("#Comperative"); // inside callback function the section with class "content" will be printed
+});
+
+
+// pdf generate for QuotationLowest Price
+$('.printQuotationLowestPrice').on('click', function () { // select print button with class "print," then on click run callback function
+    $.print("#Quotation"); // inside callback function the section with class "content" will be printed
+});
+
+
+// pdf generate for WorkLetter
+$('.printWorkLetter').on('click', function () { // select print button with class "print," then on click run callback function
+    $.print("#WorkLetter"); // inside callback function the section with class "content" will be printed
 });

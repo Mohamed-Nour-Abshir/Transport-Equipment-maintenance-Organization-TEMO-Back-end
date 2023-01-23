@@ -39,15 +39,15 @@ class QuotationLowestPrice extends Component
             $quotations = WorkOrder::where('order_parts_price', '=', $this->minNumber)->where('vehicle_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
             $minNumber = DB::table('work_orders')->min('order_parts_price');
             $vehicles = WorkOrder::all();
-            $fiscal_year = FiscalYear::all(); 
-            return view('livewire.component.quotation-lowest-price', compact('quotations', 'minNumber','vehicles','fiscal_year'))->layout('layouts.base');
+            $fiscal_year = FiscalYear::all();
+            return view('livewire.component.quotation-lowest-price', compact('quotations', 'minNumber', 'vehicles', 'fiscal_year', 'searchVehicleName'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::where('order_parts_price', '=', $this->minNumber)->orderBy('id', 'asc')->get();
             $minNumber = DB::table('work_orders')->min('order_parts_price');
             $vehicles = WorkOrder::all();
-            $fiscal_year = FiscalYear::all(); 
+            $fiscal_year = FiscalYear::all();
         }
         // $quotations =  WorkOrder::where('order_parts_price', '=', $this->minNumber)->orderBy('id', 'asc')->get();
-        return view('livewire.component.quotation-lowest-price', ['quotations' => $quotations,'vehicles' =>$vehicles,'fiscal_year' =>$fiscal_year])->layout('layouts.base');
+        return view('livewire.component.quotation-lowest-price', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year])->layout('layouts.base');
     }
 }

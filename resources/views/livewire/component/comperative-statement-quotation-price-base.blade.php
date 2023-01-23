@@ -40,12 +40,16 @@
         </div>
     </div>
 
-    <div class="container p-5">
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-warning mt-5 text-center printComporative">Generate Pdf <i class="fas fa-download"></i></a>
+    </div>
+
+    <div class="container p-5" id="Comperative">
     {{-- @if($showTableQuotationTable) --}}
     <div class="d-flex justify-content-between">
         @isset($searchVehicleName) <p>Comperative Statement for  {{$searchVehicleName}} </p>@endisset
-        <h1 class="h4"><?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></h1>
-        <a href="{{route('pdf.comparartive-statement')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
+        @isset($searchFromDate) <h1 class="h4">{{$searchFromDate}} - {{$searchToDate}}</h1> @endisset
+        {{-- <a href="{{route('pdf.comparartive-statement')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
         <p></p>
     </div>
       <table class="table table-bordered">
@@ -92,3 +96,6 @@
     <!-- main-section End -->
 
 </div>
+
+
+

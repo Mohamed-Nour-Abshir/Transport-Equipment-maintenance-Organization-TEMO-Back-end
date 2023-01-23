@@ -40,17 +40,17 @@ class ComperativeStatementQuotationPriceBase extends Component
             $quotations = WorkOrder::where('vehicle_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
             $minNumber = DB::table('work_orders')->min('order_parts_price');
             $vehicles = WorkOrder::all();
-            $fiscal_year = FiscalYear::all(); 
-            return view('livewire.component.comperative-statement-quotation-price-base', compact('quotations', 'minNumber', 'searchVehicleName','vehicles','fiscal_year'))->layout('layouts.base');
+            $fiscal_year = FiscalYear::all();
+            return view('livewire.component.comperative-statement-quotation-price-base', compact('quotations', 'minNumber', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'vehicles', 'fiscal_year'))->layout('layouts.base');
         } else {
             // $quotations = Quotation::whereBetween('company', [$this->min_price, $this->max_price])->orderBy('company', 'ASC')->get();
             $quotations = WorkOrder::orderBy('order_parts_price', 'ASC')->get();
             $minNumber = DB::table('work_orders')->min('order_parts_price');
             $vehicles = WorkOrder::all();
-            $fiscal_year = FiscalYear::all(); 
+            $fiscal_year = FiscalYear::all();
         }
         // $date = WorkOrder::select('order_date')->first();
         // $order_date = date_format($date,'Y');
-        return view('livewire.component.comperative-statement-quotation-price-base', ['quotations' => $quotations, 'minNumber' => $minNumber ,'vehicles' =>$vehicles,'fiscal_year' =>$fiscal_year])->layout('layouts.base');
+        return view('livewire.component.comperative-statement-quotation-price-base', ['quotations' => $quotations, 'minNumber' => $minNumber, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year])->layout('layouts.base');
     }
 }

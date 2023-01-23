@@ -39,11 +39,15 @@
           </form>
     </div>
 
-    <div class="container p-5">
-    {{-- @if($showTableQuotationTable) --}}
+    <div class="d-flex justify-content-center mt-4">
+        <a class="btn btn-warning mb-3 text-center printQuotationLowestPrice">Generate Pdf <i class="fas fa-download"></i></a>
+    </div>
+
+    <div class="container p-5" id="Quotation">
+    @if(isset($searchVehicleName))
     <div class="d-flex justify-content-between">
         <h1 class="h4">Fiscal Year: <?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></h1>
-        <a href="{{route('pdf.quotationLowestPrice')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
+        {{-- <a href="{{route('pdf.quotationLowestPrice')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
         <p></p>
     </div>
       <table class="table table-bordered">
@@ -79,7 +83,7 @@
         </tbody>
       </table>
       {{-- <p>Lowest Price Submission: </p> --}}
-      {{-- @endif --}}
+      @endif
     </div>
 
     <!-- main-section End -->
