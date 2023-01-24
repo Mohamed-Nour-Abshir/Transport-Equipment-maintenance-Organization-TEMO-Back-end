@@ -84,7 +84,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{route('quotation-information')}}"
+              <a class="nav-link" href="{{route('quotationInformation')}}"
                 ><i class="fas fa-dollar" style="margin-left: 60px"></i>
                 <br />Quotation Information</a
               >

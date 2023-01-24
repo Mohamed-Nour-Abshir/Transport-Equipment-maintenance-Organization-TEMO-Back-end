@@ -85,7 +85,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{route('quotation-information')}}"
+              <a class="nav-link" href="{{route('quotationInformation')}}"
                 ><i class="fas fa-dollar" style="margin-left: 60px"></i>
                 <br />Quotation Information</a
               >
@@ -257,7 +257,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.6.2/jQuery.print.min.js" integrity="sha512-t3XNbzH2GEXeT9juLjifw/5ejswnjWWMMDxsdCg4+MmvrM+MwqGhxlWeFJ53xN/SBHPDnW0gXYvBx/afZZfGMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="assets/js/main.js"></script>
-    
+
     @livewireScripts
     @stack('scripts')
   </body>

@@ -13,40 +13,6 @@ use Svg\Tag\Rect;
 class WorkorderInformationController extends Controller
 {
     //
-    public $searchTerm;
-    public $quotation_from;
-    public $quotation_to;
-    public $supplier_id;
-    public $supplier_name;
-    public $vehicle_code;
-    public $vehicle_name;
-    public $vehicle_type;
-    public $parts_code;
-    public $parts_name;
-    public $parts_price;
-    public $parts_qty;
-    public $order_parts_price;
-    public $order_date;
-    public $parts_id;
-
-    public function updated(Request $request, $fields)
-    {
-        $request->validateOnly($fields, [
-            'quotation_from' => 'required',
-            'quotation_to' => 'required',
-            'supplier_id' => 'required',
-            'supplier_name' => 'required',
-            'vehicle_code' => 'required',
-            'vehicle_name' => 'required',
-            'vehicle_type' => 'required',
-            'parts_code' => 'required',
-            'parts_name' => 'required',
-            'parts_price' => 'required',
-            'parts_qty' => 'required',
-            'order_parts_price' => 'required',
-            'order_date' => 'required|date'
-        ]);
-    }
     public function addWorkorderInformation(Request $request)
     {
         $request->validate([

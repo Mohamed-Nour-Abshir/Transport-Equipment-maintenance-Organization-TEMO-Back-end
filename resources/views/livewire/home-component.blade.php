@@ -66,7 +66,8 @@
             <br />
             <div class="row">
               <div class="col-md-4">
-                <a href="{{route('quotation-information')}}" style="font-size: 20px">
+                {{-- {{route('quotation-information')}} --}}
+                <a href="" style="font-size: 20px">
                   <div class="card p-5">
                     <div class="card-block">
                       <h6 class="card-subtitle text-muted text-center">

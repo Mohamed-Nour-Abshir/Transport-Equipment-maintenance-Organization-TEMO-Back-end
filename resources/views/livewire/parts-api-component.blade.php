@@ -2,12 +2,6 @@
 @section('content')
     <!-- main-section Start -->
     <div class="container p-5" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
-        @if (Session::has('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ Session::get('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
     <div class="row">
       <div class="col-md-12">
         <h1 class="h1 mb-5">Parts Information Setup</h1>
@@ -21,6 +15,13 @@
             </div>
         </div>
     </form>
+
+    @if (Session::has('message'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ Session::get('message') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
         <div class="row">
             <div class="d-flex justify-content-between">
                 <p class="">All Parts Information</p>

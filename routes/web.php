@@ -6,8 +6,7 @@ use App\Http\Controllers\GenerateSupplierInformationPdf;
 use App\Http\Controllers\GenerateVehicleInformationPdf;
 use App\Http\Controllers\GenerateWorkorderInformationPDF;
 use App\Http\Controllers\partsInformation;
-use App\Http\Controllers\QuotationController;
-use App\Http\Controllers\ReportControllers\ComperativeStatementQuotationPriceBaseController;
+use App\Http\Controllers\QuotationInformationController;
 use App\Http\Controllers\ReportsPDF\CompretiveReoportPDF;
 use App\Http\Controllers\ReportsPDF\GeneratePDFall;
 use App\Http\Controllers\ReportsPDF\QuotationLowestPriceReportPDF;
@@ -33,12 +32,8 @@ use App\Http\Livewire\Component\WorkorderLetter;
 use App\Http\Livewire\Component\WorkorderTotal;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\PartsInformationComponent;
-use App\Http\Livewire\PDF\SupplierInformationPdfGenerate;
-use App\Http\Livewire\QuotationInformationComponent;
 use App\Http\Livewire\SupplierInformationComponent;
 use App\Http\Livewire\VehicleInformationComponent;
-use App\Http\Livewire\WorkorderInformationComponent;
-use App\Models\Quotation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,38 +52,33 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    // Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
     Route::get('/home', HomeComponent::class)->name('home');
     Route::get('/supplier-information', SupplierInformationComponent::class)->name('suplier-information');
-    // Route::get('/parts-information', PartsInformationComponent::class)->name('parts-information');
 
+    // Quotation
+    Route::get('/quotationInformation', [QuotationInformationController::class, 'index'])->name('quotationInformation');
+    Route::post('addQuotationInformation', [QuotationInformationController::class, 'addQuotation'])->name('addQuotationInformation');
+    Route::get('deleteQuotation/{id}', [QuotationInformationController::class, 'deleteQuotation'])->name('deleteQuotation');
+    Route::get('/findSupplierQuotation', [QuotationInformationController::class, 'findSupplierQuotation'])->name('findSupplierQuotation');
+    Route::get('/findVehicleQuotation', [QuotationInformationController::class, 'findVehicleQuotation'])->name('findVehicleQuotation');
+    Route::post('addFiscalYear', [QuotationInformationController::class, 'addFiscalYear'])->name('addFiscalYear');
 
-    Route::get('/parts-information', [partsInformation::class,'render'])->name('parts-information');
-    Route::post('/parts-information', [partsInformation::class,'addPartsInformation'])->name('addPartsInformation');
-    Route::get('/parts-information/{id}', [partsInformation::class,'deletePartsInfo'])->name('deletePartsInfo');
-    Route::get('/findVehicleParts', [PartsInformationComponent::class,'findVehicleParts'])->name('findVehicleParts');
+    // parts
+    Route::get('/parts-information', [partsInformation::class, 'render'])->name('parts-information');
+    Route::post('/parts-information', [partsInformation::class, 'addPartsInformation'])->name('addPartsInformation');
+    Route::get('/parts-information/{id}', [partsInformation::class, 'deletePartsInfo'])->name('deletePartsInfo');
+    Route::get('/findVehicleParts', [PartsInformationComponent::class, 'findVehicleParts'])->name('findVehicleParts');
 
-    // Route::get('/quotation-information', QuotationInformationComponent::class)->name('quotation-information');
-    // Route::get('/findSupplier', [QuotationInformationComponent::class,'findSupplier'])->name('findSupplier');
-
-// Quotation
-    Route::get('/quotation-information', [QuotationController::class,'render'])->name('quotation-information');
-    Route::post('/quotation-information', [QuotationController::class,'addQuotationInformation'])->name('addQuotationInformation');
-    Route::get('/quotation-information/{id}', [QuotationController::class,'deleteQuotation'])->name('deleteQuotation');
-    Route::get('/findSupplierQuotation', [QuotationController::class,'findSupplierQuotation'])->name('findSupplierQuotation');
-    Route::get('/findVehicleQuotation', [QuotationController::class,'findVehicleQuotation'])->name('findVehicleQuotation');
-    Route::post('/addfiscalYear', [QuotationController::class,'addFiscalYear'])->name('addFiscalYear');
-    // Route::get('/findParts', [QuotationController::class,'findParts'])->name('findParts');
-
+    // vehicles
     Route::get('/vehicle-information', VehicleInformationComponent::class)->name('vehicle-information');
-    // Route::get('/workorder-information', WorkorderInformationComponent::class)->name('workorder-information');
 
-    Route::get('/workorder-information', [WorkorderInformationController::class,'render'])->name('workorder-information');
-    Route::post('/workorder-information', [WorkorderInformationController::class,'addWorkorderInformation'])->name('addWorkorderInformation');
-    Route::get('/workorder-information/{id}', [WorkorderInformationController::class,'deleteWorkorder'])->name('deleteWorkorder');
-    Route::get('/findSupplier', [WorkorderInformationController::class,'findSupplier'])->name('findSupplier');
-    Route::get('/findVehicle', [WorkorderInformationController::class,'findVehicle'])->name('findVehicle');
-    Route::get('/findParts', [WorkorderInformationController::class,'findParts'])->name('findParts');
+    // Workorders
+    Route::get('/workorder-information', [WorkorderInformationController::class, 'render'])->name('workorder-information');
+    Route::post('/workorder-information', [WorkorderInformationController::class, 'addWorkorderInformation'])->name('addWorkorderInformation');
+    Route::get('/workorder-information/{id}', [WorkorderInformationController::class, 'deleteWorkorder'])->name('deleteWorkorder');
+    Route::get('/findSupplier', [WorkorderInformationController::class, 'findSupplier'])->name('findSupplier');
+    Route::get('/findVehicle', [WorkorderInformationController::class, 'findVehicle'])->name('findVehicle');
+    Route::get('/findParts', [WorkorderInformationController::class, 'findParts'])->name('findParts');
 
 
     // Report components
@@ -135,12 +125,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/comparativeStatement-pdf', [CompretiveReoportPDF::class, 'ComparativeStatementPDF'])->name('pdf.comparartive-statement');
     Route::get('/quotationLowestPrice-pdf', [QuotationLowestPriceReportPDF::class, 'quotationLowestPrice'])->name('pdf.quotationLowestPrice');
     Route::get('/workorderLetter-pdf', [WorkorderLetterReportPDF::class, 'workorderLetterPDF'])->name('pdf.workorderLetter');
-    Route::get('/vehicle-reg-wise-as-respected-workorder',[GeneratePDFall::class, 'vehicleRegWiseAsRespectedWorkorder'])->name('vehicle-reg-as-respectedWorkorder');
-    Route::get('/spareparts-wise-as-respected-workorder',[GeneratePDFall::class, 'sparePartsWiseAsRespectedWorkorder'])->name('spareparts-reg-as-respectedWorkorder');
-    Route::get('/supplier-reportPdf',[GeneratePDFall::class, 'supplierReportPdf'])->name('supplier-reportPdf');
-    Route::get('/repair-reportPdf',[GeneratePDFall::class, 'repairReportPdf'])->name('repair-reportPdf');
-    Route::get('/demandForm-reportPdf',[GeneratePDFall::class, 'demandFormReoprtPdf'])->name('demandForm-reportPdf');
-    Route::get('/workorder-total-reportPdf',[GeneratePDFall::class, 'workorderTotal'])->name('workorder-total-reportPdf');
-    Route::get('/repairVehicleList-reportPdf',[GeneratePDFall::class, 'repairVehicleList'])->name('repairVehicleList-reportPdf');
-    Route::get('/dead-stock-reportPdf',[GeneratePDFall::class, 'deadStock'])->name('dead-stock-reportPdf');
+    Route::get('/vehicle-reg-wise-as-respected-workorder', [GeneratePDFall::class, 'vehicleRegWiseAsRespectedWorkorder'])->name('vehicle-reg-as-respectedWorkorder');
+    Route::get('/spareparts-wise-as-respected-workorder', [GeneratePDFall::class, 'sparePartsWiseAsRespectedWorkorder'])->name('spareparts-reg-as-respectedWorkorder');
+    Route::get('/supplier-reportPdf', [GeneratePDFall::class, 'supplierReportPdf'])->name('supplier-reportPdf');
+    Route::get('/repair-reportPdf', [GeneratePDFall::class, 'repairReportPdf'])->name('repair-reportPdf');
+    Route::get('/demandForm-reportPdf', [GeneratePDFall::class, 'demandFormReoprtPdf'])->name('demandForm-reportPdf');
+    Route::get('/workorder-total-reportPdf', [GeneratePDFall::class, 'workorderTotal'])->name('workorder-total-reportPdf');
+    Route::get('/repairVehicleList-reportPdf', [GeneratePDFall::class, 'repairVehicleList'])->name('repairVehicleList-reportPdf');
+    Route::get('/dead-stock-reportPdf', [GeneratePDFall::class, 'deadStock'])->name('dead-stock-reportPdf');
 });
