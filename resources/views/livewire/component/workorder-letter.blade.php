@@ -52,7 +52,7 @@
         </div>
 
         @foreach ($quotations as $item)
-
+        @if ($item->order_parts_price === $minNumber)
         <div class="d-flex flex-column justify-content-center">
             <p class="text-center">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</p><br>
             <p class="text-center">স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়</p><br>
@@ -61,12 +61,12 @@
             <p class="text-center"><a href="http://www.temo.gov.bd/">www.temo.gov.bd</a></p>
         </div>
         <div class="d-flex justify-content-between mt-5 mb-4">
-            <p>স্মারক নম্বর:- ৪৫.৯০.০০০০.০০২.২০.০৪.২৩/ {{$item->order_no}}      </p>
+            <p>স্মারক নম্বর:- ৪৫.৯০.০০০০.০০২.২০.০৪.২৩/ {{$item->order_no}}    </p>
             <p>তারিখ: {{$item->order_date}}  খ্রিঃ </p>
         </div>
         <span class="p-2 mb-3">{{$item->supplier_name}} </span>
         <p class="mt-4">বিষয়: <b class="text-decoration-underline"> সরবরাহ আদেশ প্রসঙ্গে।</b></p>
-        <p class="mt-3">আপনার বাৎসরিক This date will be on all letters / {{$item->order_date}} খ্রিঃ  তারিখ দরপত্রের
+        <p class="mt-3">আপনার বাৎসরিক  {{$item->order_date}} খ্রিঃ  তারিখ দরপত্রের
           বরাতে অবগত করানো যাইতেছে যে, আপনার দরপত্র গ্রহন করা </p> <p class="mt-2"> হইয়েছে।  আপনাকে নিম্ন লিখিত মালামাল
           সরবরাহ করার নির্দেশ দেওয়া যাইতেছে।</p>
 
@@ -89,14 +89,14 @@
                 <td>{{$item->vehicle_type}}</td>
                 <td>{{$item->parts->parts_unit}}</td>
                 <td>{{$item->parts_qty}}</td>
+                <td>{{$item->parts_price}}</td>
                 <td>{{$item->order_parts_price}}</td>
-                <td>{{$item->order_parts_price * $item->parts_qty}}</td>
               </tr>
             </tbody>
           </table>
 
           <p class="mb-2"><b>নিম্নলিখিত শর্ত পালন স্বপেক্ষে বিল পরিশোধ করা হইবে:</b></p>
-          <p class="mt-2">১। মালামাল It will arrive dated as 07 days from the order date {{$item->order_date}} খ্রিঃ তারিখ বেলা ২ ঘটিকার মধ্যে সরবরাহ করিতে হইবে অন্যথায় তাহার সরবরাহ আদেশ বাতিল বলিয়া গণ্য হইবে এবং তালিকাভুক্ত বাতিল বলিয়া গণ্য হইবে।</p>
+          <p class="mt-2">১। মালামাল {{$item->quotation_to}} খ্রিঃ তারিখ বেলা ২ ঘটিকার মধ্যে সরবরাহ করিতে হইবে অন্যথায় তাহার সরবরাহ আদেশ বাতিল বলিয়া গণ্য হইবে এবং তালিকাভুক্ত বাতিল বলিয়া গণ্য হইবে।</p>
           <p class="mt-2">২। মালামাল/যন্ত্রাংশ দরপত্রের বিবরন (স্পেসিফিকেশন) নমুনা অনুযায়ী সরবরাহ করিতে হইবে।</p>
           <p class="mt-2">৩। মালামাল/যন্ত্রাংশ অত্র কার্যালয়ের মান নিয়ন্ত্রন দল কর্তৃক গৃহিত না হইলে সরবরাহকারি মালামাল ফেরৎ লইতে বাধ্য থাকিবেন। </p>
           <div class="d-flex justify-content-between mt-5">
@@ -124,7 +124,7 @@
               <p>+৮৮০২২২২২৯৮৫৯৫</p>
               <p> Email: healthtemo@gmail.com</p>
           </div>
-
+          @endif
         @endforeach
 
       @endif

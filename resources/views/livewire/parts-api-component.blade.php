@@ -181,15 +181,6 @@ $(document).ready(function(){
     });
 
 
-//     $('form').submit(function(event) {
-//     if ($(this).hasClass('was-validated')) {
-//         return true;
-//     }
-//     event.preventDefault();
-//     return false;
-// });
-
-
 });
 
 

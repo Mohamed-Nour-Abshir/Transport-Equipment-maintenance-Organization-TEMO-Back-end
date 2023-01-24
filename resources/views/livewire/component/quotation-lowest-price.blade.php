@@ -70,6 +70,7 @@
         </thead>
         <tbody>
             @forelse ($quotations as $item)
+            @if ($item->order_parts_price === $minNumber)
             @if ($item->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
             <tr>
                 <td>{{$item->id}}</td>
@@ -81,6 +82,7 @@
                   <td @if($quotation->order_parts_price === $minNumber) class="bg-secondary text-dark" @endif>{{$quotation->order_parts_price}}</td>
                 @endforeach
             </tr>
+            @endif
             @endif
             @empty
                 <td>No data available</td>
