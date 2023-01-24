@@ -15,13 +15,4 @@ class WorkOrder extends Model
         return $this->belongsTo(PartsInfo::class, 'parts_id');
     }
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::created(function ($model) {
-            $model->order_no = $model->id;
-            $model->save();
-        });
-    }
 }

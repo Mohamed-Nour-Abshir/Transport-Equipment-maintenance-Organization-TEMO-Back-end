@@ -79,6 +79,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/findSupplier', [WorkorderInformationController::class, 'findSupplier'])->name('findSupplier');
     Route::get('/findVehicle', [WorkorderInformationController::class, 'findVehicle'])->name('findVehicle');
     Route::get('/findParts', [WorkorderInformationController::class, 'findParts'])->name('findParts');
+    Route::get('/findVehicleWorkOrder', [WorkorderInformationController::class, 'findVehicleWorkOrder'])->name('findVehicleWorkOrder');
 
 
     // Report components

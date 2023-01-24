@@ -75,8 +75,8 @@
                 <td>{{$item->id}}</td>
                 <td>{{$item->parts_code}}</td>
                 <td>{{$item->parts_name}}</td>
-                <td>{{$item->parts->parts_manufacture}}</td>
-                <td>{{$item->parts->parts_unit}}</td>
+                <td>{{$item->parts_manufacture}}</td>
+                <td>{{$item->parts_unit}}</td>
                 @foreach ($quotations as $quotation)
                   <td @if($quotation->order_parts_price === $minNumber) class="bg-secondary text-dark" @endif>{{$quotation->order_parts_price}}</td>
                 @endforeach

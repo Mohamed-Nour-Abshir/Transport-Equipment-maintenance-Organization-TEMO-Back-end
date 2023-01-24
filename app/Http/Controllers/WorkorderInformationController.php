@@ -27,6 +27,7 @@ class WorkorderInformationController extends Controller
             'parts_name' => 'required',
             'parts_price' => 'required',
             'parts_qty' => 'required',
+            'order_no' => 'required',
             'order_parts_price' => 'required',
             'order_date' => 'required|date'
         ]);
@@ -43,6 +44,7 @@ class WorkorderInformationController extends Controller
         $workorder->parts_name = $request->parts_name;
         $workorder->parts_price = $request->parts_price;
         $workorder->parts_qty = $request->parts_qty;
+        $workorder->order_no = $request->order_no;
         $workorder->order_parts_price = $request->order_parts_price;
         $workorder->order_date = $request->order_date;
         $fiscalYear = date("Y");
@@ -68,13 +70,13 @@ class WorkorderInformationController extends Controller
             $suppliers = Supplier::all();
             $parts = PartsInfo::all();
             $vehicles = Vehicle::all();
-            $workorders = WorkOrder::where('order_no', $searchTerm)->orwhere('supplier_id', $searchTerm)->orwhere('parts_name', $searchTerm)->orwhere('vehicle_name', $searchTerm)->orwhere('supplier_name', $searchTerm)->orwhere('order_date', $searchTerm)->paginate(10);
+            $workorders = WorkOrder::where('order_no', $searchTerm)->orwhere('supplier_id', $searchTerm)->orwhere('parts_name', $searchTerm)->orwhere('vehicle_name', $searchTerm)->orwhere('supplier_name', $searchTerm)->orwhere('order_date', $searchTerm)->orderBy('order_no', 'DESC')->paginate(10);
             return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders']));
         }
         $suppliers = Supplier::all();
         $parts = PartsInfo::all();
         $vehicles = Vehicle::all();
-        $workorders = WorkOrder::orderBy('id', 'DESC')->paginate(10);
+        $workorders = WorkOrder::orderBy('order_no', 'DESC')->paginate(10);
         return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders']));
     }
 
@@ -99,5 +101,13 @@ class WorkorderInformationController extends Controller
         $parent_id = $request->parts_code;
         $partsdetails = PartsInfo::select('parts_name', 'parts_price', 'id')->where('parts_code', $parent_id)->first();
         return response()->json($partsdetails);
+    }
+
+    //generate vehicle data by json format
+    public function findVehicleWorkOrder(Request $request)
+    {
+        $parent_id = $request->vehicle_code;
+        $vehicledetails = PartsInfo::select('parts_name', 'parts_code', 'vehicle_name', 'parts_price')->where('vehicle_code', $parent_id)->first();
+        return response()->json($vehicledetails);
     }
 }

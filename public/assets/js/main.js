@@ -58,8 +58,22 @@ btn.addEventListener("click", () => {
 });
 
 // pdf generate for comperative statement
-$('.printComporative').on('click', function () { // select print button with class "print," then on click run callback function
-    $.print("#Comperative"); // inside callback function the section with class "content" will be printed
+$('.printComporative').on('click', function () {
+    $("#Comperative").print({
+        globalStyles: true,
+        mediaPrint: false,
+        stylesheet: null,
+        noPrintSelector: ".no-print",
+        iframe: true,
+        append: null,
+        prepend: null,
+        manuallyCopyFormValues: true,
+        deferred: $.Deferred(),
+        timeout: 750,
+        title: null,
+        doctype: '<!doctype html>'
+    });    // select print button with class "print," then on click run callback function
+    // $.print("#Comperative"); // inside callback function the section with class "content" will be printed
 });
 
 

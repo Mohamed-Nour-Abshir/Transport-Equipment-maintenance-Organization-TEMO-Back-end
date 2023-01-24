@@ -206,15 +206,7 @@
                           <div class="col-md-6">
                               <div class="form-group mb-3">
                                 <label for="parts-code" class="form-label">Parts Code</label>
-                                <select class="form-select" id="parts-code" aria-label="Default select example" name="parts_code">
-                                    <option value="" selected>Please Select Parts code</option>
-                                    @foreach ($parts as $part)
-                                        <option value="{{$part->parts_code}}">{{$part->parts_code}}</option>
-                                    @endforeach
-                                    @error('parts_code')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror <br>
-                                </select>
+                                <input type="text" id="parts-code" class="form-control" name="parts_code" readonly>
                                 </div>
                           </div>
                           <div class="col-md-6">
@@ -234,22 +226,26 @@
                            </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="form-group mb-3">
-                            <label for="order-date" class="form-label">Order Date</label>
-                            <input type="date" id="order-date" class="form-control" name="order_date">
-                            @error('order_date')<span class="text-danger">{{ $message }}</span>@enderror <br>
-                         </div>
+                            <div class="form-group mb-3">
+                                <label for="vehicletype" class="form-label">Vehicle Type</label>
+                                <input type="text" id="vehicletype" class="form-control" name="vehicle_type">
+                                @error('vehicle_type')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                             </div>
                         </div>
                       </div>
                       <div class="form-group mb-3">
-                        <label for="vehicle_type" class="form-label">Vehicle Type</label>
-                        <input type="text" id="vehicle_type" class="form-control" name="vehicle_type" readonly>
-                        @error('vehicle_type')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                        <label for="order-date" class="form-label">Order Date</label>
+                        <input type="date" id="order-date" class="form-control" name="order_date">
+                        @error('order_date')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                     </div>
+                      <div class="form-group mb-3">
+                        <label for="order-no" class="form-label">Order No</label>
+                        <input type="text" id="order-no" class="form-control" name="order_no">
+                        @error('order_no')<span class="text-danger">{{ $message }}</span>@enderror <br>
                      </div>
                      <div class="form-group mb-3">
                         {{-- <label for="parts-id" class="form-label">Parts ID</label> --}}
-                        <input type="text" id="parts-id" class="form-control" name="parts_id" readonly style="display: none">
-                        @error('parts_id')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                        <input type="hidden" id="parts-id" class="form-control" name="parts_id" readonly>
                      </div>
                       <div class="form-group mb-3">
                         <label for="total" class="form-label">Order Price Tk</label>
@@ -296,49 +292,76 @@
          });
         });
 
-     $('#vehicle-code').change(function(e)  {
+    //  $('#vehicle-code').change(function(e)  {
+    //      var vehicle_code = e.target.value;
+    //      console.log(vehicle_code);
+    //      var op="";
+    //      $.ajax({
+    //          type:"get",
+    //          url:"{{route('findVehicle')}}",
+    //          data:{
+    //              vehicle_code:vehicle_code
+    //          },
+    //          success:function(data){
+    //              console.log(data);
+    //              console.log(data.vehicle_name);
+    //              // here supplier_name is coloumn name in suppliers table data.coln name
+    //              $(".form-group").find('#vehicle-name').val(data.vehicle_name);
+    //              $(".form-group").find('#vehicle_type').val(data.vehicle_type);
+    //          },
+    //          error:function(){
+
+    //          }
+    //      });
+    //     });
+
+
+    //  $('#parts-code').change(function(e)  {
+    //      var parts_code = e.target.value;
+    //      console.log(parts_code);
+    //      var op="";
+    //      $.ajax({
+    //          type:"get",
+    //          url:"{{route('findParts')}}",
+    //          data:{
+    //              parts_code:parts_code
+    //          },
+    //          success:function(data){
+    //              console.log(data);
+    //              console.log(data.parts_name);
+    //              // here supplier_name is coloumn name in suppliers table data.coln name
+    //              $(".form-group").find('#parts-name').val(data.parts_name);
+    //              $(".form-group").find('#parts_price').val(data.parts_price);
+    //              $(".form-group").find('#parts-id').val(data.id);
+
+    //
+    //          },
+    //          error:function(){
+
+    //          }
+    //      });
+    //     });
+
+
+        $('#vehicle-code').change(function(e)  {
          var vehicle_code = e.target.value;
          console.log(vehicle_code);
          var op="";
          $.ajax({
              type:"get",
-             url:"{{route('findVehicle')}}",
+             url:"{{route('findVehicleWorkOrder')}}",
              data:{
                  vehicle_code:vehicle_code
              },
              success:function(data){
                  console.log(data);
-                 console.log(data.vehicle_name);
+                 console.log(data.parts_code);
                  // here supplier_name is coloumn name in suppliers table data.coln name
-                 $(".form-group").find('#vehicle-name').val(data.vehicle_name);
-                 $(".form-group").find('#vehicle_type').val(data.vehicle_type);
-             },
-             error:function(){
-
-             }
-         });
-        });
-
-
-     $('#parts-code').change(function(e)  {
-         var parts_code = e.target.value;
-         console.log(parts_code);
-         var op="";
-         $.ajax({
-             type:"get",
-             url:"{{route('findParts')}}",
-             data:{
-                 parts_code:parts_code
-             },
-             success:function(data){
-                 console.log(data);
-                 console.log(data.parts_name);
-                 // here supplier_name is coloumn name in suppliers table data.coln name
+                 $(".form-group").find('#parts-code').val(data.parts_code);
                  $(".form-group").find('#parts-name').val(data.parts_name);
                  $(".form-group").find('#parts_price').val(data.parts_price);
-                 $(".form-group").find('#parts-id').val(data.id);
-
-                 // Calculator for total amount
+                 $(".form-group").find('#vehicle-name').val(data.vehicle_name);
+                //  Calculator for total amount
                  let parts_price = parseInt($("#parts_price").val());
                  let quantity = parseInt($("#parts_qty").val());
                 //  let total = parseInt($("#total").val(quantity * parts_price));
