@@ -27,7 +27,9 @@ class WorkorderTotal extends Component
             $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->orWhere('order_no', $searchOrderNo)->get();
             $vehicles = WorkOrder::all();
             $fiscal_year = FiscalYear::all();
-            return view('livewire.component.workorder-total', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate'))->layout('layouts.base');
+            $sum = WorkOrder::sum('order_parts_price');
+            // dd($sum);
+            return view('livewire.component.workorder-total', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'sum'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::latest('order_date')->get();
             $vehicles = WorkOrder::all();

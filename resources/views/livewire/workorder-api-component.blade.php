@@ -243,15 +243,13 @@
                         <input type="text" id="order-no" class="form-control" name="order_no">
                         @error('order_no')<span class="text-danger">{{ $message }}</span>@enderror <br>
                      </div>
-                     <div class="form-group mb-3">
-                        {{-- <label for="parts-id" class="form-label">Parts ID</label> --}}
-                        <input type="hidden" id="parts-id" class="form-control" name="parts_id" readonly>
-                     </div>
                       <div class="form-group mb-3">
                         <label for="total" class="form-label">Order Price Tk</label>
                         <input type="text" id="total" class="form-control" name="order_parts_price" readonly>
                         @error('order_parts_price')<span class="text-danger">{{ $message }}</span>@enderror <br>
                      </div>
+                      {{-- <label for="parts-id" class="form-label">Parts ID</label> --}}
+                      <input type="text" id="parts-id" class="form-control" name="parts_id" readonly style="display: none;">
                   </div>
             </div>
             <div class="modal-footer">

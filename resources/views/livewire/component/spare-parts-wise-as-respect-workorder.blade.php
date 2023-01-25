@@ -55,6 +55,7 @@
             <div>
                 <h1 class="text-decoration-underline text-center mb-2 h5">Spare Parts Report Order Wise</h1>
                 <p class="text-center mb-3"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></p>
+                <p class="text-start mb-3"><b class="me-5"> Parts Code: {{$searchVehicleName}}</b></p>
                 {{-- <p class="text-center me-5">Fiscal Year</p> --}}
             </div>
           <table class="table table-bordered">
@@ -66,7 +67,7 @@
                 <th>Quantity</th>
                 <th>U/Price</th>
                 <th>Parts Amount</th>
-                <th>Parts Name</th>
+                <th>Party Name</th>
                 {{-- <th>Action</th> --}}
               </tr>
             </thead>
@@ -78,9 +79,9 @@
                 <td>{{$workorder->order_date}}</td>
                 <td>{{$workorder->vehicle_type}}</td>
                 <td>{{$workorder->parts_qty}}</td>
-                <td>{{$workorder->order_parts_price}}</td>
-                <td>{{ number_format($workorder->order_parts_price  * $workorder->parts_qty) }}</td>
-                <td>{{$workorder->parts_name}}</td>
+                <td>{{$workorder->parts_price}}</td>
+                <td>{{($workorder->order_parts_price) }}</td>
+                <td>{{$workorder->supplier_name}}</td>
                 {{-- <td><a href="{{route('pdf.quotation',['quotation_id'=>$workorder->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
               </tr>
               @endif

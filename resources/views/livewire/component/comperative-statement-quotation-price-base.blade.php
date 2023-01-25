@@ -61,13 +61,13 @@
             <th>Parts Name</th>
             <th>Manufacture</th>
             <th>Parts Unit</th>
-            @foreach ($quotations as $supplier)
+            @foreach ($workOrders as $supplier)
                 <th>{{$supplier->supplier_name}}</th>
             @endforeach
           </tr>
         </thead>
         <tbody>
-            @forelse ($quotations as $item)
+            @forelse ($workOrders as $item)
             @if ($item->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
 
 
@@ -75,10 +75,10 @@
                 <td>{{$item->id}}</td>
                 <td>{{$item->parts_code}}</td>
                 <td>{{$item->parts_name}}</td>
-                <td>{{$item->parts_manufacture}}</td>
-                <td>{{$item->parts_unit}}</td>
-                @foreach ($quotations as $quotation)
-                  <td @if($quotation->order_parts_price === $minNumber) class="bg-secondary text-dark" @endif>{{$quotation->order_parts_price}}</td>
+                <td>{{$item->parts->parts_manufacture}}</td>
+                <td>{{$item->parts->parts_unit}}</td>
+                @foreach ($workOrders as $workOrder)
+                  <td @if($workOrder->order_parts_price === $minNumber) class="bg-secondary text-dark" @endif>{{$workOrder->order_parts_price}}</td>
                 @endforeach
             </tr>
             @endif

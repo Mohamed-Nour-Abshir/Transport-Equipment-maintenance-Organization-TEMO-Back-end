@@ -55,7 +55,8 @@
             <div>
                 <h1 class="text-decoration-underline text-center mb-2 h5">Vehicle Report Order Wise</h1>
                 <p class="text-center mb-3"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></p>
-                {{-- <p class="text-center me-5">Fiscal Year</p> --}}
+                <p class="text-start"><b class="me-5"> Reg. No-  {{$searchVehicleName}}</b></p>
+                <p class="text-center mb-3"><b class="me-5"> Fiscal Year :   {{ date('Y', strtotime($searchFromDate)) }} - {{ date('Y', strtotime($searchToDate)) }}</b></p>
             </div>
           <table class="table table-bordered">
             <thead>

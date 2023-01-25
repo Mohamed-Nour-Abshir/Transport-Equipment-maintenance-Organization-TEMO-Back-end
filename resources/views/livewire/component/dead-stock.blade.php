@@ -44,7 +44,7 @@
       {{-- <div class="d-flex justify-content-center">
           <a href="{{route('dead-stock-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
       </div> --}}
-      <h1 class="h4">Fiscal Year: <?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></h1>
+      <h1 class="h4">Fiscal Year: {{ date('Y', strtotime($searchFromDate)) }} - {{ date('Y', strtotime($searchToDate)) }}</h1>
       <h1 class="h6 text-center"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></h1>
     <table class="table table-bordered">
       <thead>

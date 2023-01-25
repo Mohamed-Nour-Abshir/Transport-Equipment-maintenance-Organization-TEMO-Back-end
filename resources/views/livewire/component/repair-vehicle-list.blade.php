@@ -23,6 +23,9 @@
       <div class="d-flex justify-content-center">
           {{-- <a href="{{route('repairVehicleList-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
       </div>
+      <div class="d-flex justify-content-end">
+          <p>Print Date : {{date('d/m/Y')}}</p>
+      </div>
     <table class="table table-bordered">
       <thead>
         <tr>

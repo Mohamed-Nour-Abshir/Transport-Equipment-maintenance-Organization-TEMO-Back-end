@@ -76,6 +76,7 @@
       <div>
         <h1 class="text-decoration-underline text-center mb-2 h5">Order Total</h1>
         <p class="text-center mb-3"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></p>
+        <h1><b>Fiscal Year : {{ date('Y', strtotime($searchFromDate)) }} - {{ date('Y', strtotime($searchToDate)) }}</b></h1>
     </div>
     <table class="table table-bordered">
       <thead>
@@ -93,7 +94,7 @@
             <tr>
               <td>{{$quotation->order_no}}</td>
               <td>{{$quotation->order_date}}</td>
-              <td>{{ number_format($quotation->order_parts_price  * $quotation->parts_qty) }}</td>
+              <td>{{ number_format($quotation->order_parts_price) }}</td>
               <td>{{$quotation->supplier_name}}</td>
               {{-- <td><a href="{{route('pdf.quotation',['quotation_id'=>$quotation->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
             </tr>
@@ -101,6 +102,7 @@
         @endforeach
       </tbody>
     </table>
+    <h1 class="text-center" style="margin-left: 150px;"><b>{{$sum}}</b></h1>
     @endif
   </div>
 

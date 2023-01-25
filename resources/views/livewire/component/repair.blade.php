@@ -53,10 +53,18 @@
           {{-- <a href="{{route('repair-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
       </div>
       <div>
-        <h1 class="text-decoration-underline text-center mb-2 h5">Repair Report</h1>
+        <h1 class="text-decoration-underline text-center mb-5 h5"><b>Repair Report</b> </h1>
     </div>
     <table class="table table-bordered">
-        <p class="mb-2">Vehicle Name : {{$searchVehicleName}}</p>
+        <div class="d-flex justify-content-between mb-2">
+            <p class="mb-2"><b>Vehicle Name : </b> {{$searchVehicleName}}</p>
+            <p><b>Department : </b></p>
+            <p><b>Entry Date : </b></p>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+            <p><b>Repair Done By : </b></p>
+            <p><b>Let. Ref. : </b></p>
+        </div>
       <thead>
         <tr>
           <th>Sl No</th>
@@ -76,14 +84,18 @@
               <td>{{$quotation->parts_name}}</td>
               <td>{{$quotation->parts->parts_unit}}</td>
               <td>{{$quotation->parts_qty}}</td>
-              <td>{{$quotation->order_parts_price}}</td>
-              <td>{{ number_format($quotation->order_parts_price  * $quotation->parts_qty) }}</td>
+              <td>{{$quotation->parts_price}}</td>
+              <td>{{ number_format($quotation->order_parts_price) }}</td>
               {{-- <td><a href="{{route('pdf.quotation',['quotation_id'=>$quotation->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
             </tr>
             @endif
         @endforeach
       </tbody>
     </table>
+    <div class="d-flex justify-content-between mt-5">
+        <h1 class="h6"><b>Prepared By</b></h1>
+        <h1 class="h6"><b>Compared By</b></h1>
+    </div>
     @endif
   </div>
 

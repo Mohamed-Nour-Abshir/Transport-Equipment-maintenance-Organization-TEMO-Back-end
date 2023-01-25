@@ -19,7 +19,7 @@
                   @endforeach
               </select>
             </div>
-                <div class="col-auto">
+            <div class="col-auto">
               <label for="fromdate" class="mt-2">From Date</label>
               </div>
               <div class="col-auto">
@@ -55,8 +55,13 @@
       <div>
         <h1 class="text-decoration-underline text-center mb-2 h5">Demand From</h1>
         <p>Date : {{$searchFromDate}}</p>
+        <div class="d-flex justify-content-between">
+            <p class="mt-3">Vehicle Reg. No : {{$searchVehicleName}}</p>
+            <h1 class="h4">Fiscal Year: {{ date('Y', strtotime($searchFromDate)) }} - {{ date('Y', strtotime($searchToDate)) }}</h1>
+            <p>Let. Ref. :</p>
+        </div>
     </div>
-    <table class="table table-bordered">
+    <table class="table table-bordered mb-5">
       <thead>
         <tr>
           <th>Sl No</th>
@@ -74,12 +79,17 @@
               <td>{{$quotation->parts_name}}</td>
               <td>{{$quotation->parts->parts_unit}}</td>
               <td>{{$quotation->parts_qty}}</td>
-              {{-- <td><a href="{{route('pdf.quotation',['quotation_id'=>$quotation->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
             </tr>
             @endif
         @endforeach
       </tbody>
     </table>
+
+    <div class="d-flex justify-content-between mt-5">
+        <h1><b>Requested By:</b></h1>
+        <h1><b>Forwarded By:</b></h1>
+        <h1><b>Approved  By:</b></h1>
+    </div>
     @endif
   </div>
 
