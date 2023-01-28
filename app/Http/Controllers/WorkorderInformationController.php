@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FiscalYear;
 use App\Models\PartsInfo;
 use App\Models\Quotation;
 use App\Models\Supplier;
@@ -70,14 +71,16 @@ class WorkorderInformationController extends Controller
             $suppliers = Supplier::all();
             $parts = PartsInfo::all();
             $vehicles = Vehicle::all();
+            $fiscalyears = FiscalYear::all();
             $workorders = WorkOrder::where('order_no', $searchTerm)->orwhere('supplier_id', $searchTerm)->orwhere('parts_name', $searchTerm)->orwhere('vehicle_name', $searchTerm)->orwhere('supplier_name', $searchTerm)->orwhere('order_date', $searchTerm)->orderBy('order_no', 'DESC')->paginate(10);
-            return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders']));
+            return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders', 'fiscalyears']));
         }
         $suppliers = Supplier::all();
         $parts = PartsInfo::all();
         $vehicles = Vehicle::all();
+        $fiscalyears = FiscalYear::all();
         $workorders = WorkOrder::orderBy('order_no', 'DESC')->paginate(10);
-        return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders']));
+        return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders', 'fiscalyears']));
     }
 
     //generate supplier data by json format

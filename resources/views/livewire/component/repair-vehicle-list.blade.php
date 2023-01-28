@@ -21,6 +21,7 @@
   <div class="container p-5" id="vehicleList">
     {{-- @if(isset($searchVehicleName)) --}}
       <div class="d-flex justify-content-center">
+        <h1 class="text-decoration-underline text-center mb-5 h5"><b>Repaired Vehicle List</b> </h1>
           {{-- <a href="{{route('repairVehicleList-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
       </div>
       <div class="d-flex justify-content-end">

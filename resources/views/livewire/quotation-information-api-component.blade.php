@@ -46,8 +46,8 @@
             @foreach ($quotations as $quotation)
                 <tr>
                     <td>{{$quotation->id}}</td>
-                     <td>{{$quotation->from_date}}</td>
-                     <td>{{$quotation->to_date}}</td>
+                     <td>{{date('d/m/Y', strtotime($quotation->from_date))}}</td>
+                     <td>{{date('d/m/Y', strtotime($quotation->to_date))}}</td>
                      <td>S{{$quotation->supplier_id}}</td>
                      <td>{{$quotation->vehicle_code}}</td>
                      <td>{{$quotation->supplier_name}}</td>
@@ -124,7 +124,11 @@
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="form-date" class="form-label">From date</label>
-                            <input type="date" id="form-date" class="form-control" name="from_date">
+                            <select class="form-select selectpicker" aria-label="Default select example" name="from_date" data-live-search="true" data-style="py-0" id="form-date">
+                                @foreach ($fiscalyears as $fiscalyear)
+                                    <option value="{{$fiscalyear->start_date}}">{{date('d/m/Y', strtotime($fiscalyear->start_date))}}</option>
+                                @endforeach
+                            </select>
                             @error('from_date')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror <br>
@@ -133,8 +137,12 @@
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="to-date" class="form-label">To date</label>
-                            <input type="date" id="to-date" class="form-control" name="to_date">
-                            @error('to_date')
+                            <select class="form-select selectpicker" aria-label="Default select example" name="to_date" data-live-search="true" data-style="py-0" id="to-date">
+                                @foreach ($fiscalyears as $fiscalyear)
+                                    <option value="{{$fiscalyear->end_date}}">{{date('d/m/Y', strtotime($fiscalyear->end_date))}}</option>
+                                @endforeach
+                            </select>
+                            @error('from_date')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror <br>
                         </div>

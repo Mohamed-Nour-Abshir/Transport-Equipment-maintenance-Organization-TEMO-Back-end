@@ -19,7 +19,7 @@ class partsInformation extends Controller
                 'parts_name' => 'required',
                 'parts_manufacture' => 'required',
                 'parts_unit' => 'required',
-                'parts_price' => 'required',
+                // 'parts_price' => 'required',
                 'parts_date' => 'required|date'
             ],
             ['validateOnly' => true]
@@ -31,7 +31,7 @@ class partsInformation extends Controller
         $parts->parts_name = $request->parts_name;
         $parts->parts_manufacture = $request->parts_manufacture;
         $parts->parts_unit = $request->parts_unit;
-        $parts->parts_price = $request->parts_price;
+        // $parts->parts_price = $request->parts_price;
         $parts->parts_date = $request->parts_date;
         $parts->save();
         session()->flash('message', 'Parts Information added successfully');

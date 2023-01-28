@@ -133,11 +133,11 @@ aria-hidden="true" wire:ignore.self>
                 <input type="text"  id="address" class="form-control @error('parts_unit') is-invalid @enderror was-validated" name="parts_unit">
                 @error('parts_unit')<span class="text-danger">{{ $message }}</span>@enderror <br>
             </div>
-            <div class="form-group mb-3">
+            {{-- <div class="form-group mb-3">
                 <label for="price" class="form-label">Parts Price</label>
                 <input type="text"  id="price" class="form-control @error('parts_price') is-invalid @enderror was-validated" name="parts_price">
                 @error('parts_price')<span class="text-danger">{{ $message }}</span>@enderror <br>
-            </div>
+            </div> --}}
             <div class="form-group mb-3">
                 <label for="date" class="form-label">Parts ED</label>
                 <input type="date" id="date"  class="form-control @error('parts_date') is-invalid @enderror was-validated" name="parts_date">

@@ -19,14 +19,16 @@ class QuotationInformationController extends Controller
             $suppliers = Supplier::all();
             $parts = PartsInfo::all();
             $vehicles = Vehicle::all();
+            $fiscalyears = FiscalYear::all();
             $quotations = Quotation::where('id', $searchTerm)->orwhere('supplier_id', $searchTerm)->orwhere('parts_name', $searchTerm)->orwhere('vehicle_name', $searchTerm)->orwhere('supplier_name', $searchTerm)->paginate(10);
-            return view('livewire.quotation-information-api-component', compact('quotations', 'suppliers', 'parts', 'vehicles'));
+            return view('livewire.quotation-information-api-component', compact('quotations', 'suppliers', 'parts', 'vehicles','fiscalyears'));
         }
         $suppliers = Supplier::all();
         $parts = PartsInfo::all();
         $vehicles = Vehicle::all();
+        $fiscalyears = FiscalYear::all();
         $quotations = Quotation::paginate(10);
-        return view('livewire.quotation-information-api-component', compact('quotations', 'suppliers', 'parts', 'vehicles'));
+        return view('livewire.quotation-information-api-component', compact('quotations', 'suppliers', 'parts', 'vehicles','fiscalyears'));
     }
 
 

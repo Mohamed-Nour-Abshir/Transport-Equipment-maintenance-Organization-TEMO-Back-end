@@ -138,15 +138,27 @@
                       <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="quotation_from" class="form-label">Quotation From</label>
-                            <input type="date" id="quotation_from" class="form-control" name='quotation_from'>
-                            @error('quotation_from')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                            <select class="form-select selectpicker" aria-label="Default select example" name="quotation_from" data-live-search="true" data-style="py-0" id="quotation_from">
+                                @foreach ($fiscalyears as $fiscalyear)
+                                    <option value="{{$fiscalyear->start_date}}">{{date('d/m/Y', strtotime($fiscalyear->start_date))}}</option>
+                                @endforeach
+                            </select>
+                            @error('quotation_from')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror <br>
                          </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group mb-3">
-                            <label for="quotation to" class="form-label">Quotation To</label>
-                            <input type="date" id="quotation to" class="form-control" name='quotation_to'>
-                            @error('quotation_to')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                            <label for="quotationto" class="form-label">Quotation To</label>
+                            <select class="form-select selectpicker" aria-label="Default select example" name="quotation_to" data-live-search="true" data-style="py-0" id="quotationto">
+                                @foreach ($fiscalyears as $fiscalyear)
+                                    <option value="{{$fiscalyear->end_date}}">{{date('d/m/Y', strtotime($fiscalyear->end_date))}}</option>
+                                @endforeach
+                            </select>
+                            @error('quotation_to')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror <br>
                         </div>
                       </div>
                   </div>
@@ -198,7 +210,7 @@
                   </div>
                   <div class="form-group mb-3">
                     <label for="parts_qty" class="form-label">Parts Quantity</label>
-                    <input type="text" id="parts_qty" class="form-control" name="parts_qty">
+                    <input type="number" id="parts_qty" class="form-control" name="parts_qty" value="1">
                     @error('parts_qty')<span class="text-danger">{{ $message }}</span>@enderror <br>
                  </div>
                   <div class="parts">
