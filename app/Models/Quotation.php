@@ -22,7 +22,7 @@ class Quotation extends Model
     ];
     public function parts()
     {
-        return $this->belongsTo(PartsInfo::class);
+        return $this->belongsTo(PartsInfo::class, 'parts_id');
     }
     public function vehicle()
     {

@@ -68,7 +68,7 @@
         </thead>
         <tbody>
             @forelse ($workOrders as $item)
-            @if ($item->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
+            {{-- @if ($item->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
 
 
             <tr>
@@ -78,10 +78,10 @@
                 <td>{{$item->parts->parts_manufacture}}</td>
                 <td>{{$item->parts->parts_unit}}</td>
                 @foreach ($workOrders as $workOrder)
-                  <td @if($workOrder->order_parts_price === $minNumber) class="bg-secondary text-dark" @endif>{{$workOrder->order_parts_price}}</td>
+                  <td @if($workOrder->company === $minNumber) class="bg-secondary text-dark" @endif>{{$workOrder->company}}</td>
                 @endforeach
             </tr>
-            @endif
+            {{-- @endif --}}
             @empty
                 <td>No data available</td>
             @endforelse

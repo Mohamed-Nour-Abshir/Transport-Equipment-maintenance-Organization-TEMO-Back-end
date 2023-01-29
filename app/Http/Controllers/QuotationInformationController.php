@@ -18,14 +18,14 @@ class QuotationInformationController extends Controller
             $searchTerm = request('searchTerm');
             $suppliers = Supplier::all();
             $parts = PartsInfo::all();
-            $vehicles = Vehicle::all();
+            $vehicles = PartsInfo::all();
             $fiscalyears = FiscalYear::all();
             $quotations = Quotation::where('id', $searchTerm)->orwhere('supplier_id', $searchTerm)->orwhere('parts_name', $searchTerm)->orwhere('vehicle_name', $searchTerm)->orwhere('supplier_name', $searchTerm)->paginate(10);
             return view('livewire.quotation-information-api-component', compact('quotations', 'suppliers', 'parts', 'vehicles','fiscalyears'));
         }
         $suppliers = Supplier::all();
         $parts = PartsInfo::all();
-        $vehicles = Vehicle::all();
+        $vehicles = PartsInfo::all();
         $fiscalyears = FiscalYear::all();
         $quotations = Quotation::paginate(10);
         return view('livewire.quotation-information-api-component', compact('quotations', 'suppliers', 'parts', 'vehicles','fiscalyears'));
@@ -46,7 +46,19 @@ class QuotationInformationController extends Controller
             'parts_name' => 'required',
             'company' => 'required'
         ]);
-        Quotation::create($request->all());
+        // Quotation::create($request->all());
+        $quotation = new Quotation();
+        $quotation->from_date = $request->from_date;
+        $quotation->to_date = $request->to_date;
+        $quotation->parts_id = $request->parts_id;
+        $quotation->supplier_id = $request->supplier_id;
+        $quotation->supplier_name = $request->supplier_name;
+        $quotation->vehicle_code = $request->vehicle_code;
+        $quotation->vehicle_name = $request->vehicle_name;
+        $quotation->parts_code = $request->parts_code;
+        $quotation->parts_name = $request->parts_name;
+        $quotation->company = $request->company;
+        $quotation->save();
         // dd($request->supplier_id);
         session()->flash('message', 'Quotation has been added successfully');
         return redirect()->route('quotationInformation');

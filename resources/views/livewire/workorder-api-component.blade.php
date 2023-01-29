@@ -369,13 +369,13 @@
                  // here supplier_name is coloumn name in suppliers table data.coln name
                  $(".form-group").find('#parts-code').val(data.parts_code);
                  $(".form-group").find('#parts-name').val(data.parts_name);
-                 $(".form-group").find('#parts_price').val(data.parts_price);
+                 $(".form-group").find('#parts_price').val(data.company);
                  $(".form-group").find('#vehicle-name').val(data.vehicle_name);
                 //  Calculator for total amount
-                 let parts_price = parseInt($("#parts_price").val());
+                 let company = parseInt($("#parts_price").val());
                  let quantity = parseInt($("#parts_qty").val());
                 //  let total = parseInt($("#total").val(quantity * parts_price));
-                $("#total").val(quantity * parts_price);
+                $("#total").val(quantity * company);
              },
              error:function(){
 

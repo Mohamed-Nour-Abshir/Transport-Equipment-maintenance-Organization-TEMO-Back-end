@@ -182,6 +182,7 @@
                               <option value="" selected>Please Select Supplier ID</option>
                               @foreach ($vehicles as $vehicle)
                                   <option value="{{$vehicle->vehicle_code}}">{{$vehicle->vehicle_code}}</option>
+                                  <input type="text" id="parts-id" class="form-control" name="parts_id" value="{{$vehicle->id}}" readonly style="display: none;">
                               @endforeach
                               @error('vehicle_code')
                                   <span class="text-danger">{{ $message }}</span>
