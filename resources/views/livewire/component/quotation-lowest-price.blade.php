@@ -83,6 +83,7 @@
                     @endif
                     @endforeach
                 </td>
+               <td> {{$quotation->supplier_name}}</td>
 
             </tr>
             {{-- @endif --}}
