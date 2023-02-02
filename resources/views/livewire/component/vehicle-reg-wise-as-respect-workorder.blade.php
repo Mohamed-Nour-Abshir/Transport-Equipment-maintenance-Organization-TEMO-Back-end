@@ -82,7 +82,7 @@
                     <td>{{$workorder->parts->parts_unit}}</td>
                     <td>{{$workorder->parts_qty}}</td>
                     <td>{{$workorder->order_parts_price}}</td>
-                    <td>{{ number_format($workorder->order_parts_price  * $workorder->parts_qty) }}</td>
+                    <td>{{ number_format($workorder->parts_price  * $workorder->parts_qty) }}</td>
                     <td>{{$workorder->supplier_name}}</td>
                     {{-- <td><a href="{{route('pdf.quotation',['quotation_id'=>$workorder->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
                   </tr>
@@ -90,6 +90,7 @@
               @endforeach
             </tbody>
           </table>
+          <h1 class="text-center" style="margin-left: 350px;">Order Total (TK.) : <b>{{$sum}}</b></h1>
           @endif
         </div>
 

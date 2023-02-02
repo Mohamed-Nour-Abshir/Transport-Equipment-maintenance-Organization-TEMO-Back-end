@@ -29,7 +29,8 @@ class VehicleRegWiseAsRespectWorkorder extends Component
             $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
             $vehicles = WorkOrder::all();
             $fiscal_year = FiscalYear::all();
-            return view('livewire.component.vehicle-reg-wise-as-respect-workorder', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName','searchFromDate','searchToDate'))->layout('layouts.base');
+            $sum = WorkOrder::sum('order_parts_price');
+            return view('livewire.component.vehicle-reg-wise-as-respect-workorder', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName','searchFromDate','searchToDate','sum'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::latest('order_date')->get();
             $vehicles = WorkOrder::all();

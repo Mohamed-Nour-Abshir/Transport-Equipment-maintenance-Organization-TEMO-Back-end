@@ -238,3 +238,16 @@ footer a:last-child {
         display: none !important;
     }
 }
+
+#special-print{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    color: #000;
+    padding-bottom: 10px;
+}
+#print-p{
+    color: #000;
+    text-align: center;
+    font-size: 18px;
+}

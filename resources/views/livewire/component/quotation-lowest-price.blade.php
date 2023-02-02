@@ -70,8 +70,8 @@
         </thead>
         <tbody>
             @forelse ($quotations as $item)
-            @if ($item->order_parts_price === $minNumber)
-            @if ($item->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
+            @if ($item->company === $minNumber)
+            {{-- @if ($item->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
             <tr>
                 <td>{{$item->id}}</td>
                 <td>{{$item->parts_code}}</td>
@@ -79,10 +79,10 @@
                 <td>{{$item->parts->parts_manufacture}}</td>
                 <td>{{$item->parts->parts_unit}}</td>
                 @foreach ($quotations as $quotation)
-                  <td @if($quotation->order_parts_price === $minNumber) class="bg-secondary text-dark" @endif>{{$quotation->order_parts_price}}</td>
+                  <td @if($quotation->company === $minNumber) class="bg-secondary text-dark" @endif>{{$quotation->company}}</td>
                 @endforeach
             </tr>
-            @endif
+            {{-- @endif --}}
             @endif
             @empty
                 <td>No data available</td>

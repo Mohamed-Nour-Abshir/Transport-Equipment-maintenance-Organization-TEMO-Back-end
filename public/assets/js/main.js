@@ -60,13 +60,13 @@ btn.addEventListener("click", () => {
 // pdf generate for comperative statement
 $('.printComporative').on('click', function () {
     $("#Comperative").print({
+        append : null,
         globalStyles: true,
         mediaPrint: false,
         stylesheet: null,
         noPrintSelector: ".no-print",
         iframe: true,
-        append: null,
-        prepend: null,
+        prepend: '<h1 id="special-print">Transport & Equipment Maintenance Organization(TEMO) <br></h1> <p id="print-p"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p> <hr/>',
         manuallyCopyFormValues: true,
         deferred: $.Deferred(),
         timeout: 750,
@@ -79,54 +79,184 @@ $('.printComporative').on('click', function () {
 
 // pdf generate for QuotationLowest Price
 $('.printQuotationLowestPrice').on('click', function () { // select print button with class "print," then on click run callback function
-    $.print("#Quotation"); // inside callback function the section with class "content" will be printed
+    $("#Quotation").print({
+        append : null,
+        globalStyles: true,
+        mediaPrint: false,
+        stylesheet: null,
+        noPrintSelector: ".no-print",
+        iframe: true,
+        prepend: '<h1 id="special-print">Transport & Equipment Maintenance Organization(TEMO) <br></h1> <p id="print-p"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p> <hr/>',
+        manuallyCopyFormValues: true,
+        deferred: $.Deferred(),
+        timeout: 750,
+        title: null,
+        doctype: '<!doctype html>'
+    });
 });
 
 
 // pdf generate for WorkLetter
 $('.printWorkLetter').on('click', function () { // select print button with class "print," then on click run callback function
-    $.print("#WorkLetter"); // inside callback function the section with class "content" will be printed
+    $("#WorkLetter").print({
+        append : null,
+        globalStyles: true,
+        mediaPrint: false,
+        stylesheet: null,
+        noPrintSelector: ".no-print",
+        iframe: true,
+        prepend: '<h1 id="special-print">Transport & Equipment Maintenance Organization(TEMO) <br></h1> <p id="print-p"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p> <hr/>',
+        manuallyCopyFormValues: true,
+        deferred: $.Deferred(),
+        timeout: 750,
+        title: null,
+        doctype: '<!doctype html>'
+    });
 });
 
 
 // pdf generate for vehicle-reg-as-respected Workorder
 $('.printVehicleRegWorkorder').on('click', function () { // select print button with class "print," then on click run callback function
-    $.print("#vehicleRegAsRespectedWorkorder"); // inside callback function the section with class "content" will be printed
+    $("#vehicleRegAsRespectedWorkorder").print({
+        append : null,
+        globalStyles: true,
+        mediaPrint: false,
+        stylesheet: null,
+        noPrintSelector: ".no-print",
+        iframe: true,
+        prepend: '<h1 id="special-print">Transport & Equipment Maintenance Organization(TEMO) <br></h1> <p id="print-p"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p> <hr/>',
+        manuallyCopyFormValues: true,
+        deferred: $.Deferred(),
+        timeout: 750,
+        title: null,
+        doctype: '<!doctype html>'
+    });
 });
 
 // pdf generate for spare-parts-as-respected Workorder
 $('.spareParts').on('click', function () { // select print button with class "print," then on click run callback function
-    $.print("#spareParts"); // inside callback function the section with class "content" will be printed
+    $("#spareParts").print({
+        append : null,
+        globalStyles: true,
+        mediaPrint: false,
+        stylesheet: null,
+        noPrintSelector: ".no-print",
+        iframe: true,
+        prepend: '<h1 id="special-print">Transport & Equipment Maintenance Organization(TEMO) <br></h1> <p id="print-p"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p> <hr/>',
+        manuallyCopyFormValues: true,
+        deferred: $.Deferred(),
+        timeout: 750,
+        title: null,
+        doctype: '<!doctype html>'
+    });
 });
 
 
 // pdf generate for supplier
 $('.supplier').on('click', function () { // select print button with class "print," then on click run callback function
-    $.print("#supplier"); // inside callback function the section with class "content" will be printed
+    $("#supplier").print({
+        append : null,
+        globalStyles: true,
+        mediaPrint: false,
+        stylesheet: null,
+        noPrintSelector: ".no-print",
+        iframe: true,
+        prepend: '<h1 id="special-print">Transport & Equipment Maintenance Organization(TEMO) <br></h1> <p id="print-p"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p> <hr/>',
+        manuallyCopyFormValues: true,
+        deferred: $.Deferred(),
+        timeout: 750,
+        title: null,
+        doctype: '<!doctype html>'
+    });
 });
 
 // pdf generate for repair
 $('.repair').on('click', function () { // select print button with class "print," then on click run callback function
-    $.print("#repair"); // inside callback function the section with class "content" will be printed
+    $("#repair").print({
+        append : null,
+        globalStyles: true,
+        mediaPrint: false,
+        stylesheet: null,
+        noPrintSelector: ".no-print",
+        iframe: true,
+        prepend: '<h1 id="special-print">Transport & Equipment Maintenance Organization(TEMO) <br></h1> <p id="print-p"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p> <hr/>',
+        manuallyCopyFormValues: true,
+        deferred: $.Deferred(),
+        timeout: 750,
+        title: null,
+        doctype: '<!doctype html>'
+    });
 });
 
 // pdf generate for demand-from
 $('.demand-from').on('click', function () { // select print button with class "print," then on click run callback function
-    $.print("#demandFrom"); // inside callback function the section with class "content" will be printed
+    $("#demandFrom").print({
+        append : null,
+        globalStyles: true,
+        mediaPrint: false,
+        stylesheet: null,
+        noPrintSelector: ".no-print",
+        iframe: true,
+        prepend: '<h1 id="special-print">Transport & Equipment Maintenance Organization(TEMO) <br></h1> <p id="print-p"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p> <hr/>',
+        manuallyCopyFormValues: true,
+        deferred: $.Deferred(),
+        timeout: 750,
+        title: null,
+        doctype: '<!doctype html>'
+    });
 });
 
 
 // pdf generate for workorderTotal
 $('.workorderTotal').on('click', function () { // select print button with class "print," then on click run callback function
-    $.print("#workorderTotal"); // inside callback function the section with class "content" will be printed
+    $("#workorderTotal").print({
+        append : null,
+        globalStyles: true,
+        mediaPrint: false,
+        stylesheet: null,
+        noPrintSelector: ".no-print",
+        iframe: true,
+        prepend: '<h1 id="special-print">Transport & Equipment Maintenance Organization(TEMO) <br></h1> <p id="print-p"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p> <hr/>',
+        manuallyCopyFormValues: true,
+        deferred: $.Deferred(),
+        timeout: 750,
+        title: null,
+        doctype: '<!doctype html>'
+    });
 });
 
 // pdf generate for deadStock
 $('.deadStock').on('click', function () { // select print button with class "print," then on click run callback function
-    $.print("#deadStock"); // inside callback function the section with class "content" will be printed
+    $("#deadStock").print({
+        append : null,
+        globalStyles: true,
+        mediaPrint: false,
+        stylesheet: null,
+        noPrintSelector: ".no-print",
+        iframe: true,
+        prepend: '<h1 id="special-print">Transport & Equipment Maintenance Organization(TEMO) <br></h1> <p id="print-p"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p> <hr/>',
+        manuallyCopyFormValues: true,
+        deferred: $.Deferred(),
+        timeout: 750,
+        title: null,
+        doctype: '<!doctype html>'
+    });
 });
 
 // pdf generate for repair vehicleList
 $('.vehicleList').on('click', function () { // select print button with class "print," then on click run callback function
-    $.print("#vehicleList"); // inside callback function the section with class "content" will be printed
+    $("#vehicleList").print({
+        append : null,
+        globalStyles: true,
+        mediaPrint: false,
+        stylesheet: null,
+        noPrintSelector: ".no-print",
+        iframe: true,
+        prepend: '<h1 id="special-print">Transport & Equipment Maintenance Organization(TEMO) <br></h1> <p id="print-p"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p> <hr/>',
+        manuallyCopyFormValues: true,
+        deferred: $.Deferred(),
+        timeout: 750,
+        title: null,
+        doctype: '<!doctype html>'
+    });
 });

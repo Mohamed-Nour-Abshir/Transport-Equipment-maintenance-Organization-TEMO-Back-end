@@ -20,7 +20,7 @@ class QuotationLowestPrice extends Component
     {
         $this->min_price = 1;
         $this->max_price = 10000000;
-        $this->minNumber = DB::table('work_orders')->min('order_parts_price');
+        $this->minNumber = DB::table('quotations')->min('company');
     }
     public function showQuotation()
     {
@@ -36,18 +36,18 @@ class QuotationLowestPrice extends Component
             $searchVehicleName = request('vehicle_name');
             $searchFromDate = request('from_date');
             $searchToDate = request('to_date');
-            $quotations = WorkOrder::where('order_parts_price', '=', $this->minNumber)->where('vehicle_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
-            $minNumber = DB::table('work_orders')->min('order_parts_price');
-            $vehicles = WorkOrder::all();
+            $quotations = Quotation::where('company', '=', $this->minNumber)->where('vehicle_name', $searchVehicleName)->orWhere('from_date', $searchFromDate)->orWhere('to_date', $searchToDate)->get();
+            $minNumber = DB::table('quotations')->min('company');
+            $vehicles = Quotation::all();
             $fiscal_year = FiscalYear::all();
             return view('livewire.component.quotation-lowest-price', compact('quotations', 'minNumber', 'vehicles', 'fiscal_year', 'searchVehicleName','searchFromDate','searchToDate'))->layout('layouts.base');
         } else {
-            $quotations = WorkOrder::where('order_parts_price', '=', $this->minNumber)->orderBy('id', 'asc')->get();
-            $minNumber = DB::table('work_orders')->min('order_parts_price');
-            $vehicles = WorkOrder::all();
+            $quotations = Quotation::where('company', '=', $this->minNumber)->orderBy('id', 'asc')->get();
+            $minNumber = DB::table('quotations')->min('company');
+            $vehicles = Quotation::all();
             $fiscal_year = FiscalYear::all();
         }
-        // $quotations =  WorkOrder::where('order_parts_price', '=', $this->minNumber)->orderBy('id', 'asc')->get();
+        // $quotations =  WorkOrder::where('company', '=', $this->minNumber)->orderBy('id', 'asc')->get();
         return view('livewire.component.quotation-lowest-price', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year])->layout('layouts.base');
     }
 }

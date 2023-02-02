@@ -110,7 +110,6 @@
                     <div class="company-details">
                         <h3 class="text-white">Transport & Equipment Maintenance Organization(TEMO)</h3>
                         <p class="text-white"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p>
-                        {{-- <p class="text-white">+8801730931984</p> --}}
                     </div>
                 </div>
             </div>
