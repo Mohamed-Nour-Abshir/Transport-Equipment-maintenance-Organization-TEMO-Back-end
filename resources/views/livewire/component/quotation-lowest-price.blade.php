@@ -9,7 +9,7 @@
                 <div class="col-auto">
               <select class="form-select selectpicker" aria-label="Default select example" name="from_date" data-live-search="true" data-style="py-0" id="supplier_id">
                   @foreach ($fiscal_year as $item)
-                      <option value="{{$item->start_date}}">{{$item->start_date}}</option>
+                      <option value="{{$item->start_date}}">{{date("d/m/Y", strtotime($item->start_date))}}</option>
                   @endforeach
               </select>
             </div>
@@ -19,7 +19,7 @@
             <div class="col-auto">
               <select class="form-select selectpicker" aria-label="Default select example" name="to_date" data-live-search="true" data-style="py-0" id="supplier_id">
                   @foreach ($fiscal_year as $item)
-                      <option value="{{$item->end_date}}">{{$item->end_date}}</option>
+                      <option value="{{$item->end_date}}">{{date("d/m/Y", strtotime($item->end_date))}}</option>
                   @endforeach
               </select>
             </div>
@@ -47,10 +47,10 @@
     @if(isset($searchVehicleName))
     <div>
         <h1 class="text-decoration-underline text-center mb-2 h5">Vehicle Wise</h1>
-        <p class="text-center mb-3"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></p>
+        <p class="text-center mb-3"><span class="me-5"> Period From: {{date("d/m/Y", strtotime($searchFromDate))}}</span>   <span class="">To: {{date("d/m/Y", strtotime($searchToDate))}}</span></p>
     </div>
     <div class="d-flex justify-content-between">
-        <h1 class="h6">Fiscal Year: <?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></h1>
+        <h1 class="h6"><b>Fiscal Year: {{ date('Y', strtotime($searchFromDate)) }} - {{ date('Y', strtotime($searchToDate)) }}</b></h1>
         {{-- <a href="{{route('pdf.quotationLowestPrice')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
         <p>Print {{date("d-m-Y")}}</p>
     </div>
@@ -74,12 +74,16 @@
                 <td>{{$item->parts_name}}</td>
                 <td>{{$item->parts_manufacture}}</td>
                 <td>{{$item->parts_unit}}</td>
-                @foreach ($quotations as $quotation)
-                @if ($item->parts_code === $quotation->parts_code)
-                    <td>{{$quotation->company}}</td>
-                    <td>{{$quotation->supplier_name}}</td>
-                @endif
-                @endforeach
+                <td>
+                    @foreach ($quotations as $quotation)
+                    @if ($item->parts_code === $quotation->parts_code)
+                        {{$quotation->company}}
+                    @else
+                    .
+                    @endif
+                    @endforeach
+                </td>
+
             </tr>
             {{-- @endif --}}
             @empty

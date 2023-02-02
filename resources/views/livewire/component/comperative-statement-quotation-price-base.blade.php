@@ -9,7 +9,7 @@
             <div class="col-auto">
               <select class="form-select selectpicker" aria-label="Default select example" name="from_date" data-live-search="true" data-style="py-0" id="supplier_id">
                   @foreach ($fiscal_year as $item)
-                      <option value="{{$item->start_date}}">{{$item->start_date}}</option>
+                      <option value="{{$item->start_date}}">{{date("d/m/Y", strtotime($item->start_date))}}</option>
                   @endforeach
               </select>
             </div>
@@ -19,7 +19,7 @@
             <div class="col-auto">
               <select class="form-select selectpicker" aria-label="Default select example" name="to_date" data-live-search="true" data-style="py-0" id="supplier_id">
                   @foreach ($fiscal_year as $item)
-                      <option value="{{$item->end_date}}">{{$item->end_date}}</option>
+                      <option value="{{$item->end_date}}">{{date("d/m/Y", strtotime($item->end_date))}}</option>
                   @endforeach
               </select>
             </div>
@@ -79,8 +79,8 @@
                 <td>{{$item->parts_unit}}</td>
                 @foreach ($quotations as $quotation)
                   <td @if($quotation->company === $minNumber) @class(['text-danger', 'bg-dark' => true]) @endif>
-                   @if($item->parts_code === $quotation->parts_code) {{$quotation->company}} @else 0 @endif
-                </td>
+                    @if($item->parts_code === $quotation->parts_code) {{$quotation->company}} @else 0 @endif
+                  </td>
                 @endforeach
             </tr>
             @empty
