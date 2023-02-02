@@ -61,26 +61,28 @@
             <th>Parts Name</th>
             <th>Manufacture</th>
             <th>Parts Unit</th>
-            @foreach ($workOrders as $supplier)
+            @foreach ($quotations as $supplier)
                 <th>{{$supplier->supplier_name}}</th>
             @endforeach
           </tr>
         </thead>
         <tbody>
-            @forelse ($workOrders as $item)
-            {{-- @if ($item->company === $minNumber || $item->company !== $minNumber) --}}
+            @php
+                $i = 0;
+            @endphp
+            @forelse ($parts as $item)
             <tr>
-                <td>{{$item->id}}</td>
+                <td>{{++ $i}}</td>
                 <td>{{$item->parts_code}}</td>
                 <td>{{$item->parts_name}}</td>
-                <td>{{$item->parts->parts_manufacture}}</td>
-                <td>{{$item->parts->parts_unit}}</td>
-                @foreach ($workOrders as $workOrder)
-                  <td @if($workOrder->company === $minNumber) class="bg-secondary text-dark" @endif>{{$workOrder->company}}</td>
+                <td>{{$item->parts_manufacture}}</td>
+                <td>{{$item->parts_unit}}</td>
+                @foreach ($quotations as $quotation)
+                  <td @if($quotation->company === $minNumber) @class(['text-danger', 'bg-dark' => true]) @endif>
+                   @if($item->parts_code === $quotation->parts_code) {{$quotation->company}} @else 0 @endif
+                </td>
                 @endforeach
-                {{-- <td>{{$item->min_price}}</td> --}}
             </tr>
-            {{-- @endif --}}
             @empty
                 <td>No data available</td>
             @endforelse

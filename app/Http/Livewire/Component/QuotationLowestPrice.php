@@ -6,6 +6,7 @@ use App\Models\PartsInfo;
 use App\Models\Quotation;
 use App\Models\WorkOrder;
 use App\Models\FiscalYear;
+use App\Models\Vehicle;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -39,15 +40,16 @@ class QuotationLowestPrice extends Component
             $quotations = Quotation::where('company', '=', $this->minNumber)->where('vehicle_name', $searchVehicleName)->orWhere('from_date', $searchFromDate)->orWhere('to_date', $searchToDate)->get();
             $minNumber = DB::table('quotations')->min('company');
             $vehicles = Quotation::all();
+            $parts = PartsInfo::all();
             $fiscal_year = FiscalYear::all();
-            return view('livewire.component.quotation-lowest-price', compact('quotations', 'minNumber', 'vehicles', 'fiscal_year', 'searchVehicleName','searchFromDate','searchToDate'))->layout('layouts.base');
+            return view('livewire.component.quotation-lowest-price', compact('parts','quotations', 'minNumber', 'vehicles', 'fiscal_year', 'searchVehicleName','searchFromDate','searchToDate'))->layout('layouts.base');
         } else {
             $quotations = Quotation::where('company', '=', $this->minNumber)->orderBy('id', 'asc')->get();
             $minNumber = DB::table('quotations')->min('company');
-            $vehicles = Quotation::all();
+            $vehicles = Vehicle::all();
             $fiscal_year = FiscalYear::all();
         }
-        // $quotations =  WorkOrder::where('company', '=', $this->minNumber)->orderBy('id', 'asc')->get();
+        // $quotations =  Quotation::where('company', '=', $this->minNumber)->orderBy('id', 'asc')->get();
         return view('livewire.component.quotation-lowest-price', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year])->layout('layouts.base');
     }
 }

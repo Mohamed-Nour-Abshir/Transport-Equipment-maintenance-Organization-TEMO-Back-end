@@ -50,7 +50,7 @@
         <p class="text-center mb-3"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></p>
     </div>
     <div class="d-flex justify-content-between">
-        <h1 class="h6"><b>Fiscal Year: {{ date('Y', strtotime($searchFromDate)) }} - {{ date('Y', strtotime($searchToDate)) }}</b> </h1>
+        <h1 class="h6">Fiscal Year: <?php echo date("Y");?>-<?php echo date('Y', strtotime('+1 year'));?></h1>
         {{-- <a href="{{route('pdf.quotationLowestPrice')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a> --}}
         <p>Print {{date("d-m-Y")}}</p>
     </div>
@@ -58,32 +58,30 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>SL NO.</th>
             <th>Parts Code</th>
             <th>Parts Name</th>
             <th>Manufacture</th>
             <th>Parts Unit</th>
-            @foreach ($quotations as $supplier)
-                <th>{{$supplier->supplier_name}}</th>
-            @endforeach
+            <th>Price</th>
+            <th>Party Name</th>
           </tr>
         </thead>
         <tbody>
-            @forelse ($quotations as $item)
-            @if ($item->company === $minNumber)
+            @forelse ($parts as $item)
             {{-- @if ($item->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
             <tr>
-                <td>{{$item->id}}</td>
                 <td>{{$item->parts_code}}</td>
                 <td>{{$item->parts_name}}</td>
-                <td>{{$item->parts->parts_manufacture}}</td>
-                <td>{{$item->parts->parts_unit}}</td>
+                <td>{{$item->parts_manufacture}}</td>
+                <td>{{$item->parts_unit}}</td>
                 @foreach ($quotations as $quotation)
-                  <td @if($quotation->company === $minNumber) class="bg-secondary text-dark" @endif>{{$quotation->company}}</td>
+                @if ($item->parts_code === $quotation->parts_code)
+                    <td>{{$quotation->company}}</td>
+                    <td>{{$quotation->supplier_name}}</td>
+                @endif
                 @endforeach
             </tr>
             {{-- @endif --}}
-            @endif
             @empty
                 <td>No data available</td>
             @endforelse
