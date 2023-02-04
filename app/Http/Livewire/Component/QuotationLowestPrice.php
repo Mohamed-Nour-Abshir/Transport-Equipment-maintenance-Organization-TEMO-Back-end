@@ -42,7 +42,13 @@ class QuotationLowestPrice extends Component
             $vehicles = Vehicle::all();
             $parts = PartsInfo::where('vehicle_name', $searchVehicleName)->get();
             $fiscal_year = FiscalYear::all();
-            return view('livewire.component.quotation-lowest-price', compact('parts','quotations', 'minNumber', 'vehicles', 'fiscal_year', 'searchVehicleName','searchFromDate','searchToDate'))->layout('layouts.base');
+            $minimumPrices = Quotation::select('parts_code', 'vehicle_code', 'parts_name', DB::raw('MIN(company) as minimum_price'))
+                ->groupBy('parts_code', 'vehicle_code', 'parts_name')
+                ->get();
+
+            // $data = DB::table('quotations')->pluck('supplier_name');
+
+            return view('livewire.component.quotation-lowest-price', compact('parts', 'quotations', 'minNumber', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'minimumPrices'))->layout('layouts.base');
         } else {
             $quotations = Quotation::where('company', '=', $this->minNumber)->orderBy('id', 'asc')->get();
             $minNumber = DB::table('quotations')->min('company');

@@ -38,13 +38,19 @@ class ComperativeStatementQuotationPriceBase extends Component
             $searchVehicleName = request('vehicle_name');
             $searchFromDate = request('from_date');
             $searchToDate = request('to_date');
-            $quotations = Quotation::where('vehicle_name', $searchVehicleName)->orWhere('from_date', $searchFromDate)->orWhere('to_date', $searchToDate)->get();
+            $quotations = Quotation::where('vehicle_name', $searchVehicleName)->orWhere('from_date', $searchFromDate)->orWhere('to_date', $searchToDate)->orderBy('company','ASC')->get();
             $minNumber = DB::table('quotations')->min('company');
+
+            $minimumPrices = Quotation::select('parts_code', 'vehicle_code','parts_name','company', DB::raw('MIN(company) as minimum_price'))
+            ->groupBy('parts_code', 'vehicle_code','parts_name','company')
+            ->get();
+
+            $company = Quotation::select('company')->get();
 
             $vehicles = Vehicle::all();
             $parts = PartsInfo::where('vehicle_name', $searchVehicleName)->get();
             $fiscal_year = FiscalYear::all();
-            return view('livewire.component.comperative-statement-quotation-price-base', compact('quotations', 'minNumber', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'vehicles', 'fiscal_year','parts'))->layout('layouts.base');
+            return view('livewire.component.comperative-statement-quotation-price-base', compact('quotations', 'minNumber', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'vehicles', 'fiscal_year','parts','minimumPrices','company'))->layout('layouts.base');
         } else {
             // $quotations = Quotation::whereBetween('company', [$this->min_price, $this->max_price])->orderBy('company', 'ASC')->get();
             $quotations = Quotation::orderBy('company', 'ASC')->get();

@@ -35,7 +35,7 @@ class WorkorderLetter extends Component
             $minNumber = DB::table('work_orders')->min('order_parts_price');
             $vehicles = WorkOrder::all();
             $fiscal_year = FiscalYear::all();
-            return view('livewire.component.workorder-letter', compact('quotations', 'minNumber','vehicles','fiscal_year','searchVehicleName'))->layout('layouts.base');
+            return view('livewire.component.workorder-letter', compact('quotations', 'minNumber','vehicles','fiscal_year','searchVehicleName','searchFromDate','searchToDate'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::where('order_parts_price', '=', $this->minNumber)->orderBy('id', 'asc')->get();
             $minNumber = DB::table('work_orders')->min('order_parts_price');

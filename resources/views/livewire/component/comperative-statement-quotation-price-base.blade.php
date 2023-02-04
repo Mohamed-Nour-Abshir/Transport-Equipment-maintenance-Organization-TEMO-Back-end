@@ -77,8 +77,8 @@
                 <td>{{$item->parts_name}}</td>
                 <td>{{$item->parts_manufacture}}</td>
                 <td>{{$item->parts_unit}}</td>
-                @foreach ($quotations as $quotation)
-                  <td @if($quotation->company === $minNumber) @class(['text-danger', 'bg-dark' => true]) @endif>
+                @foreach ($minimumPrices as $quotation)
+                  <td>
                     @if($item->parts_code === $quotation->parts_code) {{$quotation->company}} @else 0 @endif
                   </td>
                 @endforeach
@@ -86,7 +86,6 @@
             @empty
                 <td>No data available</td>
             @endforelse
-
         </tbody>
       </table>
       {{-- <p>Lowest Price Submission: </p> --}}
