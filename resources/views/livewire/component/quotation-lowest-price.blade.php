@@ -75,16 +75,16 @@
                 <td>{{$item->parts_manufacture}}</td>
                 <td>{{$item->parts_unit}}</td>
                 <td>
-                    @foreach ($minimumPrices as $quotation)
-                    @if ($item->parts_code === $quotation->parts_code)
-                        {{$quotation->minimum_price}}
+                    @foreach ($minimumPrices as $partsItem)
+                    @if ($item->parts_code === $partsItem->parts_code)
+                        {{$partsItem->minimum_price}}
                     @endif
                     @endforeach
                 </td>
                <td>
-                @foreach ($minimumPrices as $quotation)
-                @if ($item->parts_code === $quotation->parts_code)
-
+                @foreach ($suppliers as $quotation)
+                @if ($item->parts_code === $quotation->parts_code && $quotation->minimum_price === $quotation->company)
+                    {{$quotation->supplier_name}}
                 @endif
                 @endforeach
             </td>

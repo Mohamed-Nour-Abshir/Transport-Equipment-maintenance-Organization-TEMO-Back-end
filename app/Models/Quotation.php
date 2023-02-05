@@ -28,4 +28,9 @@ class Quotation extends Model
     {
         return $this->belongsTo(Vehicle::class);
     }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class,'supplier_id');
+    }
 }

@@ -131,15 +131,15 @@
                   <p id="output" class="text-danger mb-3"></p>
 
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="reportList" id="ComperativeStatementQuotationPriceBase">
-                    <label class="form-check-label" for="ComperativeStatementQuotationPriceBase">
-                      Comperative Statement Quotation Price Base
-                    </label>
-                  </div>
-                  <div class="form-check">
                     <input class="form-check-input" type="radio" name="reportList" id="QuotationLowestPrice">
                     <label class="form-check-label" for="QuotationLowestPrice">
                       Quotation Lowest Price
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="reportList" id="ComperativeStatementQuotationPriceBase">
+                    <label class="form-check-label" for="ComperativeStatementQuotationPriceBase">
+                      Comperative Statement Quotation Price Base
                     </label>
                   </div>
                   <div class="form-check">

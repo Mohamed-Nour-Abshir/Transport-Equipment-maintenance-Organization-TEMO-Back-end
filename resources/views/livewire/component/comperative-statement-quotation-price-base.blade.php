@@ -78,7 +78,7 @@
                 <td>{{$item->parts_manufacture}}</td>
                 <td>{{$item->parts_unit}}</td>
                 @foreach ($minimumPrices as $quotation)
-                  <td>
+                  <td @if($item->parts_code !== $quotation->parts_code && $quotation->company) class="bg-dark text-danger" @endif>
                     @if($item->parts_code === $quotation->parts_code) {{$quotation->company}} @else 0 @endif
                   </td>
                 @endforeach
