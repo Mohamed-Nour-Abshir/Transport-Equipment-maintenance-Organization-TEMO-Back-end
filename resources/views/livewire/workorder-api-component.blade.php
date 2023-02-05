@@ -218,7 +218,10 @@
                           <div class="col-md-6">
                               <div class="form-group mb-3">
                                 <label for="parts-code" class="form-label">Parts Code</label>
-                                <input type="text" id="parts-code" class="form-control" name="parts_code" readonly>
+                                <select class="form-select" id="parts-code" aria-label="Default select example" name="parts_code">
+                                    <option value="" selected>Please Select Parts code</option>
+                                </select>
+                                {{-- <input type="text" id="parts-code" class="form-control" name="parts_code" readonly> --}}
                                 </div>
                           </div>
                           <div class="col-md-6">
@@ -326,31 +329,37 @@
     //     });
 
 
-    //  $('#parts-code').change(function(e)  {
-    //      var parts_code = e.target.value;
-    //      console.log(parts_code);
-    //      var op="";
-    //      $.ajax({
-    //          type:"get",
-    //          url:"{{route('findParts')}}",
-    //          data:{
-    //              parts_code:parts_code
-    //          },
-    //          success:function(data){
-    //              console.log(data);
-    //              console.log(data.parts_name);
-    //              // here supplier_name is coloumn name in suppliers table data.coln name
-    //              $(".form-group").find('#parts-name').val(data.parts_name);
-    //              $(".form-group").find('#parts_price').val(data.parts_price);
-    //              $(".form-group").find('#parts-id').val(data.id);
+     $('#parts-code').change(function(e)  {
+         var parts_code = e.target.value;
+         console.log(parts_code);
+         var op="";
+         $.ajax({
+             type:"get",
+             url:"{{route('findParts')}}",
+             data:{
+                 parts_code:parts_code
+             },
+             success:function(data){
+                 console.log(data);
+                 console.log(data.parts_id);
+                 // here supplier_name is coloumn name in suppliers table data.coln name
+                 $(".form-group").find('#parts-name').val(data.parts_name);
+                 $(".form-group").find('#parts_price').val(data.company);
+                 $("form").find('#parts-id').val(data.parts_id);
+                 $(".form-group").find('#vehicle-name').val(data.vehicle_name);
+                 //  Calculator for total amount
+                let company = parseInt($("#parts_price").val());
+                let quantity = parseInt($("#parts_qty").val());
+                //  let total = parseInt($("#total").val(quantity * parts_price));
+                $("#total").val(quantity * company);
 
-    //
-    //          },
-    //          error:function(){
 
-    //          }
-    //      });
-    //     });
+             },
+             error:function(){
+
+             }
+         });
+        });
 
 
         $('#vehicle-code').change(function(e)  {
@@ -367,22 +376,52 @@
                  console.log(data);
                  console.log(data.parts_id);
                  // here supplier_name is coloumn name in suppliers table data.coln name
-                 $(".form-group").find('#parts-code').val(data.parts_code);
-                 $(".form-group").find('#parts-name').val(data.parts_name);
-                 $(".form-group").find('#parts_price').val(data.company);
-                 $(".form-group").find('#vehicle-name').val(data.vehicle_name);
-                 $("form").find('#parts-id').val(data.parts_id);
-                //  Calculator for total amount
-                 let company = parseInt($("#parts_price").val());
-                 let quantity = parseInt($("#parts_qty").val());
-                //  let total = parseInt($("#total").val(quantity * parts_price));
-                $("#total").val(quantity * company);
+                 $(".form-group").find('#parts-code').empty();
+                 $(".form-group").find('#parts-code').append('<option value="">Select parts code</option>');
+                 $.each(data.parts, function (key, value) {
+                            $("#parts-code").append('<option value="' + value
+                                .parts_code + '">' + value.parts_code + '</option>');
+                        });
+
              },
              error:function(){
 
              }
          });
         });
+
+
+
+        // $('#vehicle-code').change(function(e)  {
+        //  var vehicle_code = e.target.value;
+        //  console.log(vehicle_code);
+        //  var op="";
+        //  $.ajax({
+        //      type:"get",
+        //      url:"{{route('findVehicleWorkOrder')}}",
+        //      data:{
+        //          vehicle_code:vehicle_code
+        //      },
+        //      success:function(data){
+        //          console.log(data);
+        //          console.log(data.parts_id);
+        //          // here supplier_name is coloumn name in suppliers table data.coln name
+        //          $(".form-group").find('#parts-code').val(data.parts_code);
+        //          $(".form-group").find('#parts-name').val(data.parts_name);
+        //          $(".form-group").find('#parts_price').val(data.company);
+        //          $(".form-group").find('#vehicle-name').val(data.vehicle_name);
+        //          $("form").find('#parts-id').val(data.parts_id);
+        //         //  Calculator for total amount
+        //          let company = parseInt($("#parts_price").val());
+        //          let quantity = parseInt($("#parts_qty").val());
+        //         //  let total = parseInt($("#total").val(quantity * parts_price));
+        //         $("#total").val(quantity * company);
+        //      },
+        //      error:function(){
+
+        //      }
+        //  });
+        // });
 
 
 

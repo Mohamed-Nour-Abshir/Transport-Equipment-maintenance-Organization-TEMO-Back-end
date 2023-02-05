@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('parts_id')->unsigned()->nullable();
             $table->string('vehicle_code')->nullable();
             $table->string('vehicle_type')->nullable();
             $table->string('vehicle_name')->nullable();
             $table->string('vehicle_madein')->nullable();
             $table->string('date')->nullable();
+            $table->foreign('parts_id')->references('id')->on('parts_infos')->onDelete('cascade');
             $table->timestamps();
         });
     }

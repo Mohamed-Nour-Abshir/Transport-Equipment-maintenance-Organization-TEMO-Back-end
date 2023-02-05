@@ -50,7 +50,6 @@ class QuotationInformationController extends Controller
         $quotation = new Quotation();
         $quotation->from_date = $request->from_date;
         $quotation->to_date = $request->to_date;
-        // $quotation->parts_id = $request->parts_id;
         $quotation->supplier_id = $request->supplier_id;
         $quotation->supplier_name = $request->supplier_name;
         $quotation->vehicle_code = $request->vehicle_code;
@@ -58,6 +57,7 @@ class QuotationInformationController extends Controller
         $quotation->parts_code = $request->parts_code;
         $quotation->parts_name = $request->parts_name;
         $quotation->company = $request->company;
+        $quotation->parts_id = $request->parts_id;
         $quotation->save();
         // dd($request->supplier_id);
         session()->flash('message', 'Quotation has been added successfully');
@@ -104,7 +104,7 @@ class QuotationInformationController extends Controller
     public function findVehicleQuotation(Request $request)
     {
         $parent_id = $request->vehicle_code;
-        $vehicledetails = PartsInfo::select('vehicle_name')->where('vehicle_code', $parent_id)->first();
+        $vehicledetails['parts'] = PartsInfo::where('vehicle_code', $parent_id)->get();
         return response()->json($vehicledetails);
     }
 
@@ -112,7 +112,7 @@ class QuotationInformationController extends Controller
     public function findPrtsQuotation(Request $request)
     {
         $parent_id = $request->parts_code;
-        $vehicledetails = PartsInfo::select('parts_name')->where('parts_code', $parent_id)->first();
+        $vehicledetails = PartsInfo::where('parts_code', $parent_id)->first();
         return response()->json($vehicledetails);
     }
 }

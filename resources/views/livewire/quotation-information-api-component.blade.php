@@ -206,10 +206,13 @@
                           <label for="parts_code" class="form-label">Parts Code</label>
                           <select class="form-select selectpicker" aria-label="Default select example" name="parts_code" data-live-search="true" data-style="py-0" id="parts_code">
                             <option value="" selected>Please Select Parts Code</option>
+                        </select>
+                          {{-- <select class="form-select selectpicker" aria-label="Default select example" name="parts_code" data-live-search="true" data-style="py-0" id="parts_code">
+                            <option value="" selected>Please Select Parts Code</option>
                             @foreach ($parts as $part)
                                 <option value="{{$part->parts_code}}">{{$part->parts_code}}</option>
                             @endforeach
-                        </select>
+                        </select> --}}
                         @error('parts_code')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror <br>
@@ -226,6 +229,7 @@
                     </div>
                 </div>
 
+                <input type="text" id="parts-id" class="form-control" name="parts_id" readonly style="display: none;">
 
                 <div class="row">
                     <div class="col-md-12">
@@ -287,8 +291,9 @@
     // vehicles
      $('#vehicle_code').change(function(e)  {
          var vehicle_code = e.target.value;
-         console.log(vehicle_code);
+        //  console.log(vehicle_code);
          var op="";
+        //  if(vehicle_code) {
          $.ajax({
              type:"get",
              url:"{{route('findVehicleQuotation')}}",
@@ -299,12 +304,23 @@
                  console.log(data);
                  console.log(data.vehicle_name);
                  // here supplier_name is coloumn name in suppliers table data.coln name
-                 $(".form-group").find('#vehicle-name').val(data.vehicle_name);
+                 $(".form-group").find('#parts_code').empty();
+                 $(".form-group").find('#parts_code').append('<option value="">Select parts code</option>');
+                 $.each(data.parts, function (key, value) {
+                            $("#parts_code").append('<option value="' + value
+                                .parts_code + '">' + value.parts_code + '</option>');
+                        });
              },
              error:function(){
 
              }
          });
+
+        // }else{
+        //     $(".form-group").find('#parts_code').empty();
+        // }
+
+
         });
 
 
@@ -321,9 +337,13 @@
              },
              success:function(data){
                  console.log(data);
-                 console.log(data.parts_name);
+                //  console.log(data.parts_name);
+                //  console.log(data.vehicle_name);
                  // here supplier_name is coloumn name in suppliers table data.coln name
                  $(".form-group").find('#parts-name').val(data.parts_name);
+                 $(".form-group").find('#vehicle-name').val(data.vehicle_name);
+                 $("form").find('#parts-id').val(data.id);
+                 console.log(data.id);
              },
              error:function(){
 

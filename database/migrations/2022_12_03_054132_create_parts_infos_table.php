@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('parts_infos', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('vehicle_id')->unsigned()->nullable();
             $table->string('vehicle_code')->nullable();
             $table->string('vehicle_name')->nullable();
             $table->string('parts_code')->nullable();
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('parts_unit')->nullable();
             $table->string('parts_price')->nullable();
             $table->date('parts_date')->nullable();
+            $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade');
             $table->timestamps();
         });
     }

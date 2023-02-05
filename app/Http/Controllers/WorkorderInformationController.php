@@ -102,7 +102,7 @@ class WorkorderInformationController extends Controller
     public function findParts(Request $request)
     {
         $parent_id = $request->parts_code;
-        $partsdetails = Quotation::select('parts_name', 'company', 'id')->where('parts_code', $parent_id)->first();
+        $partsdetails = Quotation::select('parts_name', 'company', 'parts_id','vehicle_name')->where('parts_code', $parent_id)->first();
         return response()->json($partsdetails);
     }
 
@@ -110,7 +110,7 @@ class WorkorderInformationController extends Controller
     public function findVehicleWorkOrder(Request $request)
     {
         $parent_id = $request->vehicle_code;
-        $vehicledetails = Quotation::select('parts_name', 'parts_code', 'vehicle_name', 'company','parts_id')->where('vehicle_code', $parent_id)->first();
+        $vehicledetails['parts'] = Quotation::where('vehicle_code', $parent_id)->get();
         return response()->json($vehicledetails);
     }
 }

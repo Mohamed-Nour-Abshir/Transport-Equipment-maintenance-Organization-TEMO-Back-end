@@ -26,6 +26,7 @@ class partsInformation extends Controller
         );
         $parts = new PartsInfo();
         $parts->vehicle_code = $request->vehicle_code;
+        $parts->vehicle_id = $request->vehicle_id;
         $parts->vehicle_name = $request->vehicle_name;
         $parts->parts_code = $request->parts_code;
         $parts->parts_name = $request->parts_name;
@@ -62,7 +63,7 @@ class partsInformation extends Controller
     public function findVehicleParts(Request $request)
     {
         $parent_id = $request->vehicle_code;
-        $vehicledetails = Vehicle::select('vehicle_name')->where('vehicle_code', $parent_id)->first();
+        $vehicledetails = Vehicle::select('vehicle_name', 'id')->where('vehicle_code', $parent_id)->first();
         return response()->json($vehicledetails);
     }
 }
