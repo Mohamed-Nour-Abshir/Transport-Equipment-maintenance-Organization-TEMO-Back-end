@@ -365,12 +365,13 @@
              },
              success:function(data){
                  console.log(data);
-                 console.log(data.parts_code);
+                 console.log(data.parts_id);
                  // here supplier_name is coloumn name in suppliers table data.coln name
                  $(".form-group").find('#parts-code').val(data.parts_code);
                  $(".form-group").find('#parts-name').val(data.parts_name);
                  $(".form-group").find('#parts_price').val(data.company);
                  $(".form-group").find('#vehicle-name').val(data.vehicle_name);
+                 $("form").find('#parts-id').val(data.parts_id);
                 //  Calculator for total amount
                  let company = parseInt($("#parts_price").val());
                  let quantity = parseInt($("#parts_qty").val());

@@ -99,13 +99,11 @@ $('.printQuotationLowestPrice').on('click', function () { // select print button
 // pdf generate for WorkLetter
 $('.printWorkLetter').on('click', function () { // select print button with class "print," then on click run callback function
     $("#WorkLetter").print({
-        append : null,
         globalStyles: true,
         mediaPrint: false,
         stylesheet: null,
         noPrintSelector: ".no-print",
         iframe: true,
-        prepend: '<h1 id="special-print">Transport & Equipment Maintenance Organization(TEMO) <br></h1> <p id="print-p"> Health & Family Welfare Ministry, Mohakhali, Dhaka-1212</p> <hr/>',
         manuallyCopyFormValues: true,
         deferred: $.Deferred(),
         timeout: 750,

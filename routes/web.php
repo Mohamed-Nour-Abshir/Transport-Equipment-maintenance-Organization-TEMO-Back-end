@@ -61,6 +61,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('deleteQuotation/{id}', [QuotationInformationController::class, 'deleteQuotation'])->name('deleteQuotation');
     Route::get('/findSupplierQuotation', [QuotationInformationController::class, 'findSupplierQuotation'])->name('findSupplierQuotation');
     Route::get('/findVehicleQuotation', [QuotationInformationController::class, 'findVehicleQuotation'])->name('findVehicleQuotation');
+    Route::get('/findPrtsQuotation', [QuotationInformationController::class, 'findPrtsQuotation'])->name('findPrtsQuotation');
     Route::post('addFiscalYear', [QuotationInformationController::class, 'addFiscalYear'])->name('addFiscalYear');
 
     // parts
@@ -68,7 +69,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/parts-information', [partsInformation::class, 'addPartsInformation'])->name('addPartsInformation');
     Route::get('/parts-information/{id}', [partsInformation::class, 'deletePartsInfo'])->name('deletePartsInfo');
     Route::get('/findVehicleParts', [partsInformation::class, 'findVehicleParts'])->name('findVehicleParts');
-
     // vehicles
     Route::get('/vehicle-information', VehicleInformationComponent::class)->name('vehicle-information');
 

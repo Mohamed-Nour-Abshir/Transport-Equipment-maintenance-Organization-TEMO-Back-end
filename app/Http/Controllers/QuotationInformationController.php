@@ -104,7 +104,15 @@ class QuotationInformationController extends Controller
     public function findVehicleQuotation(Request $request)
     {
         $parent_id = $request->vehicle_code;
-        $vehicledetails = PartsInfo::select('parts_name', 'parts_code', 'vehicle_name')->where('vehicle_code', $parent_id)->first();
+        $vehicledetails = PartsInfo::select('vehicle_name')->where('vehicle_code', $parent_id)->first();
+        return response()->json($vehicledetails);
+    }
+
+    //generate vehicle data by json format
+    public function findPrtsQuotation(Request $request)
+    {
+        $parent_id = $request->parts_code;
+        $vehicledetails = PartsInfo::select('parts_name')->where('parts_code', $parent_id)->first();
         return response()->json($vehicledetails);
     }
 }

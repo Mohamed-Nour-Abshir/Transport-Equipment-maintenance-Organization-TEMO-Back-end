@@ -9,7 +9,7 @@
               <div class="col-auto">
               <select class="form-select selectpicker" aria-label="Default select example" name="from_date" data-live-search="true" data-style="py-0" id="supplier_id">
                   @foreach ($fiscal_year as $item)
-                      <option value="{{$item->start_date}}">{{$item->start_date}}</option>
+                      <option value="{{$item->start_date}}">{{date("d/m/Y", strtotime($item->start_date))}}</option>
                   @endforeach
               </select>
             </div>
@@ -19,17 +19,17 @@
             <div class="col-auto">
               <select class="form-select selectpicker" aria-label="Default select example" name="to_date" data-live-search="true" data-style="py-0" id="supplier_id">
                   @foreach ($fiscal_year as $item)
-                      <option value="{{$item->end_date}}">{{$item->end_date}}</option>
+                      <option value="{{$item->end_date}}">{{date("d/m/Y", strtotime($item->end_date))}}</option>
                   @endforeach
               </select>
             </div>
             <div class="col-auto">
-              <label for="supplier_id" class="form-label">Vehicle Name</label>
+              <label for="supplier_id" class="form-label">Workorder No.</label>
             </div>
             <div class="col-auto">
               <select class="form-select selectpicker" aria-label="Default select example" name="vehicle_name" data-live-search="true" data-style="py-0" id="supplier_id">
-                  @foreach ($vehicles as $vehicle)
-                      <option value="{{$vehicle->vehicle_name}}">{{$vehicle->vehicle_name}}</option>
+                  @foreach ($workordernos as $workorder)
+                      <option value="{{$workorder->order_no}}">{{$workorder->order_no}}</option>
                   @endforeach
               </select>
             </div>
@@ -44,29 +44,33 @@
         <a class="btn btn-warning mb-3 text-center printWorkLetter">Generate Pdf <i class="fas fa-download"></i></a>
     </div>
 
-    <div class="container p-5" id="WorkLetter">
+    <div class="container" id="WorkLetter">
       @if(isset($searchVehicleName))
         <div class="d-flex justify-content-between">
             <img src="{{asset('assets/images/workr_1.jpg')}}" alt="" width="100px" height="100px">
             <img src="{{asset('assets/images/wokr_2.jpg')}}" alt="" width="100px" height="100px">
         </div>
 
-        @foreach ($quotations as $item)
-        @if ($item->order_parts_price === $minNumber)
+
+        {{-- @if ($item->order_parts_price === $minNumber) --}}
         <div class="d-flex flex-column justify-content-center">
-            <p class="text-center">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</p><br>
-            <p class="text-center">স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়</p><br>
-            <p class="text-center">যানবাহন ও যন্ত্রপাতি রক্ষণাবেক্ষণ সংস্থা (টেমো)</p><br>
-            <p class="text-center">মহাখালী, ঢাকা-১২১২</p><br>
-            <p class="text-center"><a href="http://www.temo.gov.bd/">www.temo.gov.bd</a></p>
+            <p class="text-center" style="margin-top:-10px;">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</p><br>
+            <p class="text-center"  style="margin-top:-10px;">স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়</p><br>
+            <p class="text-center"  style="margin-top:-10px;">যানবাহন ও যন্ত্রপাতি রক্ষণাবেক্ষণ সংস্থা (টেমো)</p><br>
+            <p class="text-center"  style="margin-top:-10px;">মহাখালী, ঢাকা-১২১২</p><br>
+            <p class="text-center"  style="margin-top:-10px;"><a href="http://www.temo.gov.bd/">www.temo.gov.bd</a></p>
         </div>
-        <div class="d-flex justify-content-between mt-5 mb-4">
-            <p>স্মারক নম্বর:- ৪৫.৯০.০০০০.০০২.২০.০৪. {{ date('y', strtotime($searchFromDate)) }} - {{ date('y', strtotime($searchToDate)) }} / {{$item->order_no}}    </p>
-            <p>তারিখ: {{$item->order_date}}  খ্রিঃ </p>
+        <div class="d-flex justify-content-between mt-2 mb-4">
+            <p>স্মারক নম্বর:- ৪৫.৯০.০০০০.০০২.২০.০৪. {{ date('y', strtotime($searchFromDate)) }} - {{ date('y', strtotime($searchToDate)) }} / {{$searchVehicleName}}    </p>
+            @foreach ($items as $item)
+
+            @endforeach
+            <p>তারিখ: {{ date('d/m/Y', strtotime($item->order_date)) }}  খ্রিঃ </p>
         </div>
         <span class="p-2 mb-3"><b>প্রাপক :   </b> {{$item->supplier_name}} </span>
+        <p class="p-2 mb-3 ms-5"><b>{{$item->supplier->supplier_address}}</b> </p>
         <p class="mt-4">বিষয়: <b class="text-decoration-underline"> সরবরাহ আদেশ প্রসঙ্গে।</b></p>
-        <p class="mt-3">আপনার বাৎসরিক  {{$item->order_date}} খ্রিঃ  তারিখ দরপত্রের
+        <p class="mt-3">আপনার বাৎসরিক 29/06/ {{ date('Y', strtotime($searchFromDate)) }} খ্রিঃ  তারিখ দরপত্রের
           বরাতে অবগত করানো যাইতেছে যে, আপনার দরপত্র গ্রহন করা </p> <p class="mt-2"> হইয়েছে।  আপনাকে নিম্ন লিখিত মালামাল
           সরবরাহ করার নির্দেশ দেওয়া যাইতেছে।</p>
 
@@ -83,20 +87,24 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>{{$item->id}}</td>
-                <td>{{$item->parts_name}}</td>
-                <td>{{$item->vehicle_type}}</td>
-                <td>{{$item->parts->parts_unit}}</td>
-                <td>{{$item->parts_qty}}</td>
-                <td>{{$item->parts_price}}</td>
-                <td>{{$item->order_parts_price}}</td>
-              </tr>
+                @foreach ($quotations as $item)
+                    <tr>
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->parts_name}}</td>
+                        <td>{{$item->vehicle_type}}</td>
+                        <td>{{$item->parts->parts_unit}}</td>
+                        <td>{{$item->parts_qty}}</td>
+                        <td>{{$item->parts_price}}</td>
+                        <td>{{$item->order_parts_price}}</td>
+                    </tr>
+                @endforeach
+
             </tbody>
           </table>
+          <h1 class="text-center" style="margin-left: 750px;"><b>Total Taka : </b><b class="ms-5"> {{$sum}}</b></h1>
 
           <p class="mb-2"><b>নিম্নলিখিত শর্ত পালন স্বপেক্ষে বিল পরিশোধ করা হইবে:</b></p>
-          <p class="mt-2">১। মালামাল {{$item->quotation_to}} খ্রিঃ তারিখ বেলা ২ ঘটিকার মধ্যে সরবরাহ করিতে হইবে অন্যথায় তাহার সরবরাহ আদেশ </p> <p class="mt-2">বাতিল বলিয়া গণ্য হইবে এবং তালিকাভুক্ত বাতিল বলিয়া গণ্য হইবে।</p>
+          <p class="mt-2">১। মালামাল {{date('d/m/Y',strtotime('+1 week' .$item->order_date))}} খ্রিঃ তারিখ বেলা ২ ঘটিকার মধ্যে সরবরাহ করিতে হইবে অন্যথায় তাহার সরবরাহ আদেশ </p> <p class="mt-2">বাতিল বলিয়া গণ্য হইবে এবং তালিকাভুক্ত বাতিল বলিয়া গণ্য হইবে।</p>
           <p class="mt-2">২। মালামাল/যন্ত্রাংশ দরপত্রের বিবরন (স্পেসিফিকেশন) নমুনা অনুযায়ী সরবরাহ করিতে হইবে।</p>
           <p class="mt-2">৩। মালামাল/যন্ত্রাংশ অত্র কার্যালয়ের মান নিয়ন্ত্রন দল কর্তৃক গৃহিত না হইলে সরবরাহকারি মালামাল ফেরৎ লইতে বাধ্য থাকিবেন। </p>
           <div class="d-flex justify-content-between mt-5">
@@ -109,25 +117,25 @@
           </div>
           <div class="d-flex justify-content-between mt-4">
             <p>স্মারক নম্বর:- ৪৫.৯০.০০০০.০০২.২০.০৪. {{ date('y', strtotime($searchFromDate)) }} - {{ date('y', strtotime($searchToDate)) }} / {{$item->order_no}}
-            <p> তারিখ: {{$item->order_date}} খ্রিঃ</p>
+            <p> তারিখ:{{ date('d/m/Y', strtotime($item->order_date)) }} খ্রিঃ</p>
           </div>
 
           <p class="mt-5"><b>অনুলিপি, অবগতি ও প্রয়োজনীয় ব্যবস্থা গ্রহণের জন্য প্রেরণ করা হইল:</b></p>
           <p class="mt-2">১। প্রধান হিসাব রক্ষণ কর্মকর্তা, স্বাস্থ্য ও পরিবার কল্যাণ মন্ত্রণালয়, এজিবি ভবন, তৃতীয় ফেজ. সেগুনবাগিচা,ঢাকা।</p>
           <p class="mt-2">২। ষ্টোর অফিসার,টেমো,মহাখালী,ঢাকা।</p>
           <p class="mt-2">৩। হিসাব রক্ষক,টেমো,মহাখালী,ঢাকা।</p>
+          <p class="mt-2">৪। মান নিয়ন্ত্রণ দল, টেমো, মহাখালী,ঢাকা।</p>
 
 
-          <div class="row">
-            <div class="col-md-9"></div>
-            <div class="col-md-3">
+          <div class="d-flex justify-content-between">
+            <div></div>
+            <div>
                 <p class="text-center"> ওয়ার্কসপ ম্যানেজার</p>
                   <p>ফোন নম্বর : +৮৮০২২২২২৯৮৫৯৫</p>
                   <p> Email: healthtemo@gmail.com</p>
             </div>
           </div>
-          @endif
-        @endforeach
+          {{-- @endif --}}
 
       @endif
     </div>

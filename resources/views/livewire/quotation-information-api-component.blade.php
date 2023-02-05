@@ -183,11 +183,10 @@
                               @foreach ($vehicles as $vehicle)
                                   <option value="{{$vehicle->vehicle_code}}">{{$vehicle->vehicle_code}}</option>
                               @endforeach
-                              {{-- <input type="text" id="parts-id" class="form-control" name="parts_id" value="{{$vehicle->id}}" readonly style="display: none;"> --}}
-                              @error('vehicle_code')
-                                  <span class="text-danger">{{ $message }}</span>
-                              @enderror <br>
                           </select>
+                          @error('vehicle_code')
+                               <span class="text-danger">{{ $message }}</span>
+                         @enderror <br>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -205,10 +204,15 @@
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                           <label for="parts_code" class="form-label">Parts Code</label>
-                          <input type="text" id="parts-code" class="form-control" name="parts_code" readonly>
-                          @error('parts_code')
+                          <select class="form-select selectpicker" aria-label="Default select example" name="parts_code" data-live-search="true" data-style="py-0" id="parts_code">
+                            <option value="" selected>Please Select Parts Code</option>
+                            @foreach ($parts as $part)
+                                <option value="{{$part->parts_code}}">{{$part->parts_code}}</option>
+                            @endforeach
+                        </select>
+                        @error('parts_code')
                             <span class="text-danger">{{ $message }}</span>
-                          @enderror <br>
+                        @enderror <br>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -256,6 +260,8 @@
 @push('scripts')
 <script>
  $(document).ready(function(){
+
+    // suppliers
      $('#supplier_id').change(function(e)  {
          var supplier_id = e.target.value;
          console.log(supplier_id);
@@ -278,6 +284,7 @@
          });
         });
 
+    // vehicles
      $('#vehicle_code').change(function(e)  {
          var vehicle_code = e.target.value;
          console.log(vehicle_code);
@@ -290,11 +297,33 @@
              },
              success:function(data){
                  console.log(data);
-                 console.log(data.parts_code);
+                 console.log(data.vehicle_name);
                  // here supplier_name is coloumn name in suppliers table data.coln name
-                 $(".form-group").find('#parts-code').val(data.parts_code);
-                 $(".form-group").find('#parts-name').val(data.parts_name);
                  $(".form-group").find('#vehicle-name').val(data.vehicle_name);
+             },
+             error:function(){
+
+             }
+         });
+        });
+
+
+        // parts
+     $('#parts_code').change(function(e)  {
+         var parts_code = e.target.value;
+         console.log(parts_code);
+         var op="";
+         $.ajax({
+             type:"get",
+             url:"{{route('findPrtsQuotation')}}",
+             data:{
+                 parts_code:parts_code
+             },
+             success:function(data){
+                 console.log(data);
+                 console.log(data.parts_name);
+                 // here supplier_name is coloumn name in suppliers table data.coln name
+                 $(".form-group").find('#parts-name').val(data.parts_name);
              },
              error:function(){
 

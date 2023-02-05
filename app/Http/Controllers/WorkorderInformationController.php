@@ -46,12 +46,12 @@ class WorkorderInformationController extends Controller
         $workorder->parts_price = $request->parts_price;
         $workorder->parts_qty = $request->parts_qty;
         $workorder->order_no = $request->order_no;
+        $workorder->parts_id = $request->parts_id;
         $workorder->order_parts_price = $request->order_parts_price;
         $workorder->order_date = $request->order_date;
         $fiscalYear = date("Y");
         $fiscalYear2 = date('Y', strtotime('+1 year'));
         $workorder->fiscal_year = $fiscalYear . "-" . $fiscalYear2;
-        $workorder->parts_id = $request->parts_id;
         $workorder->save();
         session()->flash('message', 'Workorder has been added successfully');
         return redirect()->route('workorder-information');
@@ -110,7 +110,7 @@ class WorkorderInformationController extends Controller
     public function findVehicleWorkOrder(Request $request)
     {
         $parent_id = $request->vehicle_code;
-        $vehicledetails = Quotation::select('parts_name', 'parts_code', 'vehicle_name', 'company')->where('vehicle_code', $parent_id)->first();
+        $vehicledetails = Quotation::select('parts_name', 'parts_code', 'vehicle_name', 'company','parts_id')->where('vehicle_code', $parent_id)->first();
         return response()->json($vehicledetails);
     }
 }
