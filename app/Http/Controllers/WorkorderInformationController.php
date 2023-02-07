@@ -9,6 +9,7 @@ use App\Models\Supplier;
 use App\Models\Vehicle;
 use App\Models\WorkOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Svg\Tag\Rect;
 
 class WorkorderInformationController extends Controller
@@ -102,7 +103,7 @@ class WorkorderInformationController extends Controller
     public function findParts(Request $request)
     {
         $parent_id = $request->parts_code;
-        $partsdetails = Quotation::select('parts_name', 'company', 'parts_id','vehicle_name')->where('parts_code', $parent_id)->first();
+        $partsdetails = Quotation::select('parts_name', 'parts_id','vehicle_name',DB::raw('MIN(company) as minimum_price'))->groupBy('parts_name','vehicle_name','parts_id')->where('parts_code', $parent_id)->first();
         return response()->json($partsdetails);
     }
 
@@ -110,7 +111,7 @@ class WorkorderInformationController extends Controller
     public function findVehicleWorkOrder(Request $request)
     {
         $parent_id = $request->vehicle_code;
-        $vehicledetails['parts'] = Quotation::where('vehicle_code', $parent_id)->get();
+        $vehicledetails['parts'] = Quotation::select('parts_code')->groupBy('parts_code')->where('vehicle_code', $parent_id)->get();
         return response()->json($vehicledetails);
     }
 }

@@ -344,7 +344,7 @@
                  console.log(data.parts_id);
                  // here supplier_name is coloumn name in suppliers table data.coln name
                  $(".form-group").find('#parts-name').val(data.parts_name);
-                 $(".form-group").find('#parts_price').val(data.company);
+                 $(".form-group").find('#parts_price').val(data.minimum_price);
                  $("form").find('#parts-id').val(data.parts_id);
                  $(".form-group").find('#vehicle-name').val(data.vehicle_name);
                  //  Calculator for total amount

@@ -80,6 +80,7 @@
                 <th>নং</th>
                 <th>যন্ত্রাংশের বিবরণ</th>
                 <th>গাড়ির প্রকার</th>
+                <th>প্রস্ততকারী দেশ</th>
                 <th>একক</th>
                 <th>দর</th>
                 <th>পরিমাণ</th>
@@ -92,9 +93,10 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->parts_name}}</td>
                         <td>{{$item->vehicle_type}}</td>
+                        <td>{{$item->parts->parts_manufacture}}</td>
                         <td>{{$item->parts->parts_unit}}</td>
-                        <td>{{$item->parts_qty}}</td>
                         <td>{{$item->parts_price}}</td>
+                        <td>{{$item->parts_qty}}</td>
                         <td>{{$item->order_parts_price}}</td>
                     </tr>
                 @endforeach
