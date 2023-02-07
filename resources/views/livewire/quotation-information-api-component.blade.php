@@ -78,10 +78,11 @@
           <form action="{{route('addFiscalYear')}}" method="POST">
                   @csrf
                   <div class="row">
+                    @foreach ($fiscalyears as $item)
                       <div class="col-md-6">
                           <div class="form-group mb-3">
                               <label for="form-date" class="form-label">Start Date date</label>
-                              <input type="date" id="form-date" class="form-control" name="start_date">
+                              <input type="date" id="form-date" class="form-control" name="start_date" value="{{$item->start_date}}">
                               @error('start_date')
                                   <span class="text-danger">{{ $message }}</span>
                               @enderror <br>
@@ -90,12 +91,13 @@
                       <div class="col-md-6">
                           <div class="form-group mb-3">
                               <label for="to-date" class="form-label">End date</label>
-                              <input type="date" id="to-date" class="form-control" name="end_date">
+                              <input type="date" id="to-date" class="form-control" name="end_date" value="{{$item->end_date}}">
                               @error('end_date')
                                   <span class="text-danger">{{ $message }}</span>
                               @enderror <br>
                           </div>
                       </div>
+                    @endforeach
                   </div>
         </div>
         <div class="modal-footer">

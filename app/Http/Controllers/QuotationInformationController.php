@@ -19,14 +19,14 @@ class QuotationInformationController extends Controller
             $suppliers = Supplier::all();
             $parts = PartsInfo::all();
             $vehicles = Vehicle::all();
-            $fiscalyears = FiscalYear::all();
+            $fiscalyears = FiscalYear::where('id',1)->get();
             $quotations = Quotation::where('id', $searchTerm)->orwhere('supplier_id', $searchTerm)->orwhere('parts_name', $searchTerm)->orwhere('vehicle_name', $searchTerm)->orwhere('supplier_name', $searchTerm)->paginate(10);
             return view('livewire.quotation-information-api-component', compact('quotations', 'suppliers', 'parts', 'vehicles', 'fiscalyears'));
         }
         $suppliers = Supplier::all();
         $parts = PartsInfo::all();
         $vehicles = Vehicle::all();
-        $fiscalyears = FiscalYear::all();
+        $fiscalyears = FiscalYear::where('id',1)->get();
         $quotations = Quotation::paginate(10);
         return view('livewire.quotation-information-api-component', compact('quotations', 'suppliers', 'parts', 'vehicles', 'fiscalyears'));
     }
@@ -72,7 +72,7 @@ class QuotationInformationController extends Controller
             'start_date' => 'required',
             'end_date' => 'required',
         ]);
-        $year = new FiscalYear();
+        $year = FiscalYear::find(1);
         $year->start_date = $request->start_date;
         $year->end_date = $request->end_date;
         $year->save();
