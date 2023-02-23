@@ -73,15 +73,17 @@ class WorkorderInformationController extends Controller
             $parts = PartsInfo::all();
             $vehicles = Vehicle::all();
             $fiscalyears = FiscalYear::all();
+            $password = FiscalYear::find(1);
             $workorders = WorkOrder::where('order_no', $searchTerm)->orwhere('supplier_id', $searchTerm)->orwhere('parts_name', $searchTerm)->orwhere('vehicle_name', $searchTerm)->orwhere('supplier_name', $searchTerm)->orwhere('order_date', $searchTerm)->orderBy('order_no', 'DESC')->paginate(10);
-            return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders', 'fiscalyears']));
+            return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders', 'fiscalyears','password']));
         }
         $suppliers = Supplier::all();
         $parts = PartsInfo::all();
         $vehicles = Vehicle::all();
         $fiscalyears = FiscalYear::all();
+        $password = FiscalYear::find(1);
         $workorders = WorkOrder::orderBy('order_no', 'DESC')->paginate(10);
-        return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders', 'fiscalyears']));
+        return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders', 'fiscalyears','password']));
     }
 
     //generate supplier data by json format

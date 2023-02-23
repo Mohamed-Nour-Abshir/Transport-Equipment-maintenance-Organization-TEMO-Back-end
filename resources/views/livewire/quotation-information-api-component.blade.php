@@ -2,6 +2,12 @@
 @section('content')
 
 <div class="container p-5" style="background: rgb(113, 113, 245); color: #ffff; width: auto">
+    @if (Session::has('password'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ Session::get('password') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <h1 class="h1 mb-5 float-start">Quotation Information Setup</h1>
     <button href="" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#fiscalYear"><i class="fas fa-plus"></i> Fiscal year</button>
     <form action="quotationInformation" method="GET">
@@ -21,6 +27,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+
 
     <div class="d-flex justify-content-between">
         <p class="">All Quotation Information</p>
@@ -66,6 +73,7 @@
 </div>
 
 
+
   <!-- Fiscal year Modal -->
   <div class="modal fade" id="fiscalYear" tabindex="-1" aria-labelledby="fiscalYearLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -75,35 +83,22 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{route('addFiscalYear')}}" method="POST">
-                  @csrf
-                  <div class="row">
-                    @foreach ($fiscalyears as $item)
-                      <div class="col-md-6">
-                          <div class="form-group mb-3">
-                              <label for="form-date" class="form-label">Start Date date</label>
-                              <input type="date" id="form-date" class="form-control" name="start_date" value="{{$item->start_date}}">
-                              @error('start_date')
-                                  <span class="text-danger">{{ $message }}</span>
-                              @enderror <br>
-                          </div>
-                      </div>
-                      <div class="col-md-6">
-                          <div class="form-group mb-3">
-                              <label for="to-date" class="form-label">End date</label>
-                              <input type="date" id="to-date" class="form-control" name="end_date" value="{{$item->end_date}}">
-                              @error('end_date')
-                                  <span class="text-danger">{{ $message }}</span>
-                              @enderror <br>
-                          </div>
-                      </div>
-                    @endforeach
-                  </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-          </form>
+
+            @if ($password->password)
+                <form method="post" action="{{ route('posts.password', ['post' => $password]) }}">
+                    @csrf
+                    <div class="form-group mb-3">
+                        <label for="password" class="form-label">Enter Password:</label>
+                    <input type="password" id="password" class="form-control" name="password">
+                    @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror <br>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            @endif
+
+
         </div>
       </div>
     </div>

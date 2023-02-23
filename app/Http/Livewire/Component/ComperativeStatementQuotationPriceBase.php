@@ -38,9 +38,9 @@ class ComperativeStatementQuotationPriceBase extends Component
             $searchVehicleName = request('vehicle_name');
             $searchFromDate = request('from_date');
             $searchToDate = request('to_date');
-            $quotations = Quotation::where('vehicle_name', $searchVehicleName)->orWhere('from_date', $searchFromDate)->orWhere('to_date', $searchToDate)->orderBy('company', 'ASC')->get();
+            $quotations = Quotation::select('supplier_name')->groupBy('supplier_name')->where('vehicle_name', $searchVehicleName)->orWhere('from_date', $searchFromDate)->orWhere('to_date', $searchToDate)->orderBy('company', 'ASC')->get();
             $minNumber = DB::table('quotations')->min('company');
-            
+
             $minimumPrices = Quotation::select('parts_code', 'vehicle_code', 'parts_name', 'company', DB::raw('MIN(company) as minimum_price'))
                 ->groupBy('parts_code', 'vehicle_code', 'parts_name', 'company')
                 ->get();

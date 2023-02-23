@@ -8,6 +8,7 @@ use App\Models\Quotation;
 use App\Models\Supplier;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class QuotationInformationController extends Controller
 {
@@ -20,15 +21,17 @@ class QuotationInformationController extends Controller
             $parts = PartsInfo::all();
             $vehicles = Vehicle::all();
             $fiscalyears = FiscalYear::where('id',1)->get();
+            $password = FiscalYear::find(1);
             $quotations = Quotation::where('id', $searchTerm)->orwhere('supplier_id', $searchTerm)->orwhere('parts_name', $searchTerm)->orwhere('vehicle_name', $searchTerm)->orwhere('supplier_name', $searchTerm)->paginate(10);
-            return view('livewire.quotation-information-api-component', compact('quotations', 'suppliers', 'parts', 'vehicles', 'fiscalyears'));
+            return view('livewire.quotation-information-api-component', compact('quotations', 'suppliers', 'parts', 'vehicles', 'fiscalyears','password'));
         }
         $suppliers = Supplier::all();
         $parts = PartsInfo::all();
         $vehicles = Vehicle::all();
         $fiscalyears = FiscalYear::where('id',1)->get();
         $quotations = Quotation::paginate(10);
-        return view('livewire.quotation-information-api-component', compact('quotations', 'suppliers', 'parts', 'vehicles', 'fiscalyears'));
+        $password = FiscalYear::find(1);
+        return view('livewire.quotation-information-api-component', compact('quotations', 'suppliers', 'parts', 'vehicles', 'fiscalyears','password'));
     }
 
 
@@ -75,6 +78,7 @@ class QuotationInformationController extends Controller
         $year = FiscalYear::find(1);
         $year->start_date = $request->start_date;
         $year->end_date = $request->end_date;
+        // $year->password = Hash::make($request->password);
         $year->save();
         session()->flash('message', 'Fisacal year added successfully');
         return redirect()->route('quotationInformation');
@@ -115,4 +119,24 @@ class QuotationInformationController extends Controller
         $vehicledetails = PartsInfo::where('parts_code', $parent_id)->first();
         return response()->json($vehicledetails);
     }
+
+    public function checkPassword(Request $request, FiscalYear $password)
+ {
+    // validate input data
+    $validatedData = $request->validate([
+        'password' => 'required',
+    ]);
+
+    $password = FiscalYear::find(1);
+    // check if password is correct
+    if (Hash::check($validatedData['password'], $password->password)) {
+        // password is correct, show the post
+        $fiscalyears = FiscalYear::where('id',1)->get();
+        return view('livewire.fiscalyear-component',compact('fiscalyears'));
+    } else {
+        // password is incorrect, show an error message
+        return back()->with('password','Incorrect password');
+    }
+}
+
 }

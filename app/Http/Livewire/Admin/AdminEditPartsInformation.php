@@ -37,7 +37,6 @@ class AdminEditPartsInformation extends Component
             'parts_name' => 'required',
             'parts_manufacture' => 'required',
             'parts_unit' => 'required',
-            'parts_price' => 'required',
             'parts_date' => 'required|date'
         ]);
     }
@@ -49,7 +48,6 @@ class AdminEditPartsInformation extends Component
             'parts_name' => 'required',
             'parts_manufacture' => 'required',
             'parts_unit' => 'required',
-            'parts_price' => 'required',
             'parts_date' => 'required|date'
         ]);
         $parts = PartsInfo::find($this->parts_id);
@@ -59,7 +57,6 @@ class AdminEditPartsInformation extends Component
         $parts->parts_name = $this->parts_name;
         $parts->parts_manufacture = $this->parts_manufacture;
         $parts->parts_unit = $this->parts_unit;
-        $parts->parts_price = $this->parts_price;
         $parts->parts_date = $this->parts_date;
         $parts->save();
         session()->flash('message', 'Parts Information has been updated successfully');

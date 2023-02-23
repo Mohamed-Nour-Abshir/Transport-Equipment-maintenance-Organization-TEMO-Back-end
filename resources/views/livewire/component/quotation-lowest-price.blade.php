@@ -67,6 +67,9 @@
           </tr>
         </thead>
         <tbody>
+            @foreach ($items as $supplier)
+
+            @endforeach
             @forelse ($parts as $item)
             {{-- @if ($item->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
             <tr>
@@ -82,11 +85,14 @@
                     @endforeach
                 </td>
                <td>
-                @foreach ($suppliers as $quotation)
+                {{-- @foreach ($suppliers as $quotation)
                 @if ($item->parts_code === $quotation->parts_code && $quotation->minimum_price === $quotation->company)
                     {{$quotation->supplier_name}}
                 @endif
-                @endforeach
+                @endforeach --}}
+                @if ($item->parts_code === $partsItem->parts_code && $partsItem->minimum_price)
+                    {{$supplier->supplier->supplier_name}}
+                @endif
             </td>
 
             </tr>

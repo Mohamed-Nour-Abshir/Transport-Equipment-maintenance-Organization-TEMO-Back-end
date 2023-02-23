@@ -76,7 +76,7 @@ class AdminUpdateQuotationInformation extends Component
         $quotation->company = $this->company_price;
         $quotation->save();
         session()->flash('message', 'Quotation Updated successfully');
-        return redirect()->route('quotation-information');
+        return redirect()->route('quotationInformation');
     }
 
     public function render()

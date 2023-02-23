@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fiscal_years', function (Blueprint $table) {
+        Schema::create('fiscal_year_passwords', function (Blueprint $table) {
             $table->id();
-            $table->string('start_date')->nullable();
-            $table->string('end_date')->nullable();
             $table->string('password')->nullable();
             $table->timestamps();
         });
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fiscal_years');
+        Schema::dropIfExists('fiscal_year_passwords');
     }
 };

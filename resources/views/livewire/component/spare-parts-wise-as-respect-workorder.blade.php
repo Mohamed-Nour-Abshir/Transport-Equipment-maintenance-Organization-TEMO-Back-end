@@ -88,6 +88,7 @@
               @endforeach
             </tbody>
           </table>
+          <h1 class="text-center" style="margin-left: 350px;">Order Total (TK.) : <b>{{$sum}}</b></h1>
           @endif
         </div>
 

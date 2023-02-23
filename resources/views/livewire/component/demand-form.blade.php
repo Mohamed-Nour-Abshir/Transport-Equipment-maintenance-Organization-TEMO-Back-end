@@ -72,10 +72,13 @@
         </tr>
       </thead>
       <tbody>
+        <?php
+            $i = 0;
+            ?>
         @foreach ($quotations as $quotation)
         @if ($quotation->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
             <tr>
-              <td>{{$quotation->id}}</td>
+              <td>{{++ $i}}</td>
               <td>{{$quotation->parts_name}}</td>
               <td>{{$quotation->parts->parts_unit}}</td>
               <td>{{$quotation->parts_qty}}</td>

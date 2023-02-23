@@ -134,4 +134,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/workorder-total-reportPdf', [GeneratePDFall::class, 'workorderTotal'])->name('workorder-total-reportPdf');
     Route::get('/repairVehicleList-reportPdf', [GeneratePDFall::class, 'repairVehicleList'])->name('repairVehicleList-reportPdf');
     Route::get('/dead-stock-reportPdf', [GeneratePDFall::class, 'deadStock'])->name('dead-stock-reportPdf');
+
+
+    Route::post('/fiscalyear/{post}',[QuotationInformationController::class, 'checkPassword'])->name('posts.password');
+
 });

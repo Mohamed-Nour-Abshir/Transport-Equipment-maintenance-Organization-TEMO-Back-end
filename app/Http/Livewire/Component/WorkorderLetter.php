@@ -34,18 +34,18 @@ class WorkorderLetter extends Component
             $quotations = WorkOrder::where('order_no', $searchVehicleName)->get();
             $minNumber = DB::table('work_orders')->min('order_parts_price');
             $workordernos = WorkOrder::select('order_no')->groupBy('order_no')->get();
-            $sum = WorkOrder::where('order_no',$searchVehicleName)->sum('order_parts_price');
-            $items = WorkOrder::select('supplier_name','order_date','supplier_id')->groupBy('supplier_name','order_date','supplier_id')->get();
+            $sum = WorkOrder::where('order_no', $searchVehicleName)->sum('order_parts_price');
+            $items = WorkOrder::select('supplier_name', 'order_date', 'supplier_id')->groupBy('supplier_name', 'order_date', 'supplier_id')->get();
             $fiscal_year = FiscalYear::all();
-            return view('livewire.component.workorder-letter', compact('quotations', 'minNumber','workordernos','fiscal_year','searchVehicleName','searchFromDate','searchToDate','sum','items'))->layout('layouts.base');
+            return view('livewire.component.workorder-letter', compact('quotations', 'minNumber', 'workordernos', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'sum', 'items'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::where('order_parts_price', '=', $this->minNumber)->orderBy('id', 'asc')->get();
             $minNumber = DB::table('work_orders')->min('order_parts_price');
             $workordernos = WorkOrder::select('order_no')->groupBy('order_no')->get();
-            $items = WorkOrder::select('supplier_name','order_date')->groupBy('supplier_name','order_date')->get();
+            $items = WorkOrder::select('supplier_name', 'order_date')->groupBy('supplier_name', 'order_date')->get();
             $fiscal_year = FiscalYear::all();
         }
         // $quotations =  Quotation::where('company', '=', $this->minNumber)->orderBy('id', 'asc')->get();
-        return view('livewire.component.workorder-letter', ['quotations' => $quotations,'workordernos' =>$workordernos,'fiscal_year' =>$fiscal_year,'items'=>$items])->layout('layouts.base');
+        return view('livewire.component.workorder-letter', ['quotations' => $quotations, 'workordernos' => $workordernos, 'fiscal_year' => $fiscal_year, 'items' => $items])->layout('layouts.base');
     }
 }
