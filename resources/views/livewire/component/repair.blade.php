@@ -77,18 +77,21 @@
         </tr>
       </thead>
       <tbody>
+        <?php
+            $i = 0;
+            ?>
         @foreach ($quotations as $quotation)
-        @if ($quotation->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
+        {{-- @if ($quotation->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
             <tr>
-              <td>{{$quotation->id}}</td>
+              <td>{{++ $i}}</td>
               <td>{{$quotation->parts_name}}</td>
               <td>{{$quotation->parts->parts_unit}}</td>
               <td>{{$quotation->parts_qty}}</td>
               <td>{{$quotation->parts_price}}</td>
-              <td>{{ number_format($quotation->order_parts_price) }}</td>
+              <td>{{ $quotation->parts_price * $quotation->parts_qty}}</td>
               {{-- <td><a href="{{route('pdf.quotation',['quotation_id'=>$quotation->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
             </tr>
-            @endif
+            {{-- @endif --}}
         @endforeach
       </tbody>
     </table>

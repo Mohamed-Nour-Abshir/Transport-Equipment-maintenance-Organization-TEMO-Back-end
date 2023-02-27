@@ -31,7 +31,8 @@ class WorkorderLetter extends Component
             $searchVehicleName = request('vehicle_name');
             $searchFromDate = request('from_date');
             $searchToDate = request('to_date');
-            $quotations = WorkOrder::where('order_no', $searchVehicleName)->get();
+            // $parts = WorkOrder::where('order_no', $searchVehicleName)->select('parts_name')->groupBy('parts_name')->get();
+            $quotations = WorkOrder::where('order_no', $searchVehicleName)->select('parts_name', 'parts_code', 'parts_id','vehicle_type','parts_price',DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('parts_name', 'parts_code', 'vehicle_type', 'parts_id', 'parts_price')->get();
             $minNumber = DB::table('work_orders')->min('order_parts_price');
             $workordernos = WorkOrder::select('order_no')->groupBy('order_no')->get();
             $sum = WorkOrder::where('order_no', $searchVehicleName)->sum('order_parts_price');

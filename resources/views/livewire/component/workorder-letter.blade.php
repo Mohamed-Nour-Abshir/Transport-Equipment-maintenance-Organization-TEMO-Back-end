@@ -62,6 +62,9 @@
         </div>
         <div class="d-flex justify-content-between mt-2 mb-4">
             <p>স্মারক নম্বর:- ৪৫.৯০.০০০০.০০২.২০.০৪. {{ date('y', strtotime($searchFromDate)) }} - {{ date('y', strtotime($searchToDate)) }} / {{$searchVehicleName}}    </p>
+            @foreach ($quotations as $quotation)
+
+            @endforeach
             @foreach ($items as $item)
 
             @endforeach
@@ -88,16 +91,19 @@
               </tr>
             </thead>
             <tbody>
+                <?php
+                    $i = 0;
+                    ?>
                 @foreach ($quotations as $item)
                     <tr>
-                        <td>{{$item->id}}</td>
+                        <td>{{++ $i}}</td>
                         <td>{{$item->parts_name}}</td>
                         <td>{{$item->vehicle_type}}</td>
                         <td>{{$item->parts->parts_manufacture}}</td>
                         <td>{{$item->parts->parts_unit}}</td>
                         <td>{{$item->parts_price}}</td>
                         <td>{{$item->parts_qty}}</td>
-                        <td>{{$item->order_parts_price}}</td>
+                        <td>{{$item->parts_price * $item->parts_qty}}</td>
                     </tr>
                 @endforeach
 
@@ -118,8 +124,10 @@
             </div>
           </div>
           <div class="d-flex justify-content-between mt-4">
-            <p>স্মারক নম্বর:- ৪৫.৯০.০০০০.০০২.২০.০৪. {{ date('y', strtotime($searchFromDate)) }} - {{ date('y', strtotime($searchToDate)) }} / {{$item->order_no}}
-            <p> তারিখ:{{ date('d/m/Y', strtotime($item->order_date)) }} খ্রিঃ</p>
+            <p>স্মারক নম্বর:- ৪৫.৯০.০০০০.০০২.২০.০৪. {{ date('y', strtotime($searchFromDate)) }} - {{ date('y', strtotime($searchToDate)) }} / {{$searchVehicleName}}
+            @foreach ($quotations as $date)
+                <p> তারিখ:{{ date('d/m/Y', strtotime($date->order_date)) }} খ্রিঃ</p>
+            @endforeach
           </div>
 
           <p class="mt-5"><b>অনুলিপি, অবগতি ও প্রয়োজনীয় ব্যবস্থা গ্রহণের জন্য প্রেরণ করা হইল:</b></p>

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Component;
 
 use App\Models\WorkOrder;
 use App\Models\FiscalYear;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Supplier extends Component
@@ -23,7 +24,8 @@ class Supplier extends Component
              $searchVehicleName = request('supplier_name');
              $searchFromDate = request('from_date');
              $searchToDate = request('to_date');
-             $quotations = WorkOrder::latest('order_date')->where('supplier_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
+             $quotations = WorkOrder::latest('order_date')->where('supplier_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->select('parts_name', 'parts_code', 'vehicle_type', 'parts_id', 'parts_price','order_no','order_date',DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('parts_name', 'parts_code', 'vehicle_type', 'parts_id', 'parts_price','order_no','order_date')->get();
+            //  $quotations = WorkOrder::latest('order_date')->where('supplier_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
              $vehicles = WorkOrder::all();
              $fiscal_year = FiscalYear::all();
              return view('livewire.component.supplier', compact('quotations','vehicles','fiscal_year','searchVehicleName','searchFromDate','searchToDate'))->layout('layouts.base');

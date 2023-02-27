@@ -73,6 +73,7 @@
         <tr>
           <th>Order No</th>
           <th>Workorder Date</th>
+          <th>Quantity</th>
           <th>Amount</th>
           <th>Supplier Name</th>
           {{-- <th>Action</th> --}}
@@ -80,15 +81,16 @@
       </thead>
       <tbody>
         @foreach ($quotations as $quotation)
-        @if ($quotation->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
+        {{-- @if ($quotation->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
             <tr>
               <td>{{$quotation->order_no}}</td>
               <td>{{$quotation->order_date}}</td>
-              <td>{{ number_format($quotation->order_parts_price) }}</td>
+              <td>{{$quotation->parts_qty}}</td>
+              <td>{{ $quotation->parts_qty * $quotation->parts_price}}</td>
               <td>{{$quotation->supplier_name}}</td>
               {{-- <td><a href="{{route('pdf.quotation',['quotation_id'=>$quotation->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
             </tr>
-            @endif
+            {{-- @endif --}}
         @endforeach
       </tbody>
     </table>

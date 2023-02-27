@@ -77,10 +77,10 @@
       </thead>
       <tbody>
         @foreach ($quotations as $workorder)
-        @if ($workorder->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
+        {{-- @if ($workorder->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
             <tr>
               <td>{{$workorder->order_no}}</td>
-              <td>{{$workorder->quotation_from}}</td>
+              <td>{{$workorder->order_date}}</td>
               <td>{{$workorder->vehicle_type}}</td>
               <td>{{$workorder->parts_code}}</td>
               <td>{{$workorder->parts_name}}</td>
@@ -88,10 +88,10 @@
               <td>{{$workorder->parts->parts_unit}}</td>
               <td>{{$workorder->parts_qty}}</td>
               <td>{{$workorder->parts_price}}</td>
-              <td>{{ number_format($workorder->order_parts_price) }}</td>
+              <td>{{$workorder->parts_qty * $workorder->parts_price}}</td>
               {{-- <td><a href="{{route('pdf.workorder',['workorder_id'=>$workorder->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
             </tr>
-            @endif
+            {{-- @endif --}}
         @endforeach
       </tbody>
     </table>
