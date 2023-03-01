@@ -74,12 +74,8 @@
                 <td>{{$item->parts_name}}</td>
                 <td>{{$item->parts->parts_manufacture}}</td>
                 <td>{{$item->parts->parts_unit}}</td>
-                <td>{{$item->minimum_price}}</td>
-                @foreach ($suppliers as $name)
-
-                @endforeach
-               <td>{{$name->supplier_name}}</td>
-
+                <td>{{$item->company}}</td>
+               <td>{{$item->supplier_name}}</td>
             </tr>
             {{-- @endif --}}
             @empty

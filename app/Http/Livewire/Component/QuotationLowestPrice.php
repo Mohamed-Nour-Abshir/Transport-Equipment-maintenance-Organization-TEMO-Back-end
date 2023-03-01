@@ -38,15 +38,19 @@ class QuotationLowestPrice extends Component
             $searchFromDate = request('from_date');
             $searchToDate = request('to_date');
 
-            $quotations = Quotation::where('vehicle_name', $searchVehicleName)
-                                    ->select('parts_code', 'vehicle_code', 'vehicle_name', 'parts_name', 'parts_id', DB::raw('MIN(company) as minimum_price'))
-                                    ->groupBy('parts_code', 'vehicle_code', 'vehicle_name', 'parts_name', 'parts_id')->get();
-
-            $suppliers = Quotation::select('supplier_name')->groupBy('supplier_name')->get();
+            $quotations = Quotation::join(DB::raw('(SELECT parts_code, vehicle_code,vehicle_name,parts_name, parts_id, MIN(company) as min_price FROM quotations GROUP BY parts_code, vehicle_code, vehicle_name, parts_name, parts_id) as t'), function($join) use ($searchVehicleName) {
+                $join->on('quotations.parts_code', '=', 't.parts_code')
+                     ->on('quotations.vehicle_code', '=', 't.vehicle_code')
+                     ->on('quotations.parts_id', '=', 't.parts_id')
+                     ->on('quotations.company', '=', 't.min_price')
+                     ->where('t.vehicle_name', '=', $searchVehicleName);
+            })
+            // ->select('parts.code', 'parts.name', 't.vehicle_name', 't.parts_name', 't.min_price')
+            ->get();
 
             $fiscal_year = FiscalYear::all();
             $vehicles = Vehicle::all();
-            return view('livewire.component.quotation-lowest-price', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'suppliers'))->layout('layouts.base');
+            return view('livewire.component.quotation-lowest-price', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate'))->layout('layouts.base');
         }
         $vehicles = Vehicle::all();
         $fiscal_year = FiscalYear::all();
