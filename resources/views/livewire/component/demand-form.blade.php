@@ -74,7 +74,7 @@
       <tbody>
         <?php
             $i = 0;
-            ?>
+        ?>
         @foreach ($quotations as $quotation)
         {{-- @if ($quotation->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
             <tr>

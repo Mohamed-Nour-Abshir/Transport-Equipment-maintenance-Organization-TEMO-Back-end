@@ -6,7 +6,7 @@
           <div class="col-md-12">
             <h1 class="h1 mb-5 float-start">Workorder Information Setup</h1>
             <button href="" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#fiscalYear"><i class="fas fa-plus"></i> Fiscal year</button>
-            <button href="" class="btn btn-primary float-end ms-5" data-bs-toggle="modal" data-bs-target="#fiscalYearPassword"><i class="fas fa-lock"></i> Change Password</button>
+            <button href="" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#fiscalYearPassword"><i class="fas fa-lock"></i></button>
             <form action="workorder-information" method="GET">
                 <div class="input-group mb-3 float-none text-center mb-5">
                   <div class="input-group mb-3 float-none text-center mb-5">
@@ -46,9 +46,12 @@
                 </tr>
               </thead>
               <tbody>
+                <?php
+                    $i = 0;
+                ?>
                 @foreach ($workorders as $workorder)
                 <tr>
-                    <td>{{$workorder->id}}</td>
+                    <td>{{++ $i}}</td>
                     <td>{{$workorder->order_no}}</td>
                     <td>{{$workorder->vehicle_type}}</td>
                     <td>{{$workorder->supplier_id}}</td>
@@ -104,29 +107,38 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="fiscalYearPasswordLabel">Fiscal Year</h5>
+        <h5 class="modal-title" id="fiscalYearPasswordLabel">Change Fiscal Year Password</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-                <form method="post" action="{{ route('posts.password', ['post' => $password]) }}">
-                    @csrf
-                    <div class="form-group mb-3">
-                        <label for="password" class="form-label">Old Password:</label>
-                        <input type="password" id="password" class="form-control" name="password">
-                        @error('password')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror <br>
-                    </div>
+        <form method="post" action="{{ route('passwordChange.fiscalYear', ['passwordChange' => $password]) }}">
+            @csrf
+            <div class="form-group mb-3">
+                <label for="Oldpassword" class="form-label">Old Password:</label>
+                <input type="password" id="Oldpassword" class="form-control" name="current_password" required>
+                @error('current_password')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror <br>
+            </div>
 
-                    <div class="form-group mb-3">
-                        <label for="newpassword" class="form-label">New newPassword:</label>
-                        <input type="newpassword" id="newpassword" class="form-control" name="newpassword">
-                        @error('newpassword')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror <br>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+            <div class="form-group mb-3">
+                <label for="newpassword" class="form-label">New Password:</label>
+                <input type="password" id="newpassword" class="form-control" name="password" required>
+                @error('password')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror <br>
+            </div>
+
+            <div class="form-group mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password:</label>
+            <input type="Password" id="confirmPassword" class="form-control" name="confirmation_password" required>
+            @error('confirmation_password')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror <br>
+        </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
 
       </div>

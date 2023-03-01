@@ -44,9 +44,12 @@
             </tr>
           </thead>
           <tbody>
+            <?php
+                $i = 0;
+            ?>
             @foreach ($parts as $item)
                 <tr>
-                    <td>{{$item->id}}</td>
+                    <td>{{++ $i}}</td>
                     <td>{{$item->vehicle_code}}</td>
                     <td>{{$item->parts_code}}</td>
                     <td>{{$item->parts_name}}</td>

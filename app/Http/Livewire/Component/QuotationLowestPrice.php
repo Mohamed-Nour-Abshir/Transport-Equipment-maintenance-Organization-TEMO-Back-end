@@ -32,33 +32,25 @@ class QuotationLowestPrice extends Component
 
         // Set timezone
         date_default_timezone_set('Asia/Dhaka');
-        // If there is set date, find the doctors
+        // If there is set date, find the quotations
         if (request('vehicle_name') || request('from_date') || request('to_date')) {
             $searchVehicleName = request('vehicle_name');
             $searchFromDate = request('from_date');
             $searchToDate = request('to_date');
-            $quotations = Quotation::where('company', '=', $this->minNumber)->where('vehicle_name', $searchVehicleName)->orWhere('from_date', $searchFromDate)->orWhere('to_date', $searchToDate)->get();
-            $minNumber = DB::table('quotations')->min('company');
-            $vehicles = Vehicle::all();
-            $parts = PartsInfo::where('vehicle_name', $searchVehicleName)->get();
-            $fiscal_year = FiscalYear::all();
 
-            $minimumPrices = Quotation::select('parts_code','vehicle_code', 'parts_name', DB::raw('MIN(company) as minimum_price'))
-                                        ->groupBy('parts_code', 'vehicle_code', 'parts_name',)
-                                        ->get();
-                                        $items = Quotation::select('supplier_name','supplier_id')->groupBy('supplier_name','supplier_id')->get();
-            $suppliers = Quotation::select('parts_code','vehicle_code', 'parts_name','supplier_name','company', DB::raw('MIN(company) as minimum_price'))
-                                        ->groupBy('parts_code', 'vehicle_code', 'parts_name','supplier_name','company')
-                                        ->orderBy('company', 'ASC')->get();
+            $quotations = Quotation::where('vehicle_name', $searchVehicleName)
+                                    ->select('parts_code', 'vehicle_code', 'vehicle_name', 'parts_name', 'parts_id', DB::raw('MIN(company) as minimum_price'))
+                                    ->groupBy('parts_code', 'vehicle_code', 'vehicle_name', 'parts_name', 'parts_id')->get();
 
-            return view('livewire.component.quotation-lowest-price', compact('parts', 'quotations', 'minNumber', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'minimumPrices','suppliers','items'))->layout('layouts.base');
-        } else {
-            $quotations = Quotation::where('company', '=', $this->minNumber)->orderBy('id', 'asc')->get();
-            $minNumber = DB::table('quotations')->min('company');
-            $vehicles = Vehicle::all();
+            $suppliers = Quotation::select('supplier_name')->groupBy('supplier_name')->get();
+
             $fiscal_year = FiscalYear::all();
+            $vehicles = Vehicle::all();
+            return view('livewire.component.quotation-lowest-price', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'suppliers'))->layout('layouts.base');
         }
-        // $quotations =  Quotation::where('company', '=', $this->minNumber)->orderBy('id', 'asc')->get();
+        $vehicles = Vehicle::all();
+        $fiscal_year = FiscalYear::all();
+        $quotations = Quotation::orderBy('id', 'asc')->get();
         return view('livewire.component.quotation-lowest-price', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year])->layout('layouts.base');
     }
 }

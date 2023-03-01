@@ -26,12 +26,12 @@ class Supplier extends Component
              $searchToDate = request('to_date');
              $quotations = WorkOrder::latest('order_date')->where('supplier_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->select('parts_name', 'parts_code', 'vehicle_type', 'parts_id', 'parts_price','order_no','order_date',DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('parts_name', 'parts_code', 'vehicle_type', 'parts_id', 'parts_price','order_no','order_date')->get();
             //  $quotations = WorkOrder::latest('order_date')->where('supplier_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
-             $vehicles = WorkOrder::all();
+             $vehicles = WorkOrder::select('supplier_name')->groupBy('supplier_name')->get();
              $fiscal_year = FiscalYear::all();
              return view('livewire.component.supplier', compact('quotations','vehicles','fiscal_year','searchVehicleName','searchFromDate','searchToDate'))->layout('layouts.base');
          } else {
              $quotations = WorkOrder::latest('order_date')->get();
-             $vehicles = WorkOrder::all();
+             $vehicles =WorkOrder::select('supplier_name')->groupBy('supplier_name')->get();
              $fiscal_year = FiscalYear::all();
          }
         // $quotations = Quotation::orderBy('from_date')->get();

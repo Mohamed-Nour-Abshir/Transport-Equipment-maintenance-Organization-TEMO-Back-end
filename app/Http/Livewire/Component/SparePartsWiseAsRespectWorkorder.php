@@ -33,7 +33,7 @@ class SparePartsWiseAsRespectWorkorder extends Component
             return view('livewire.component.spare-parts-wise-as-respect-workorder', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate','sum'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::latest('order_date')->get();
-            $vehicles = WorkOrder::all();
+            $vehicles = WorkOrder::select('parts_code')->groupBy('parts_code')->get();
             $fiscal_year = FiscalYear::all();
         }
         // $quotations = WorkOrder::latest('order_date')->get();

@@ -121,22 +121,38 @@ class QuotationInformationController extends Controller
     }
 
     public function checkPassword(Request $request, FiscalYear $password)
- {
-    // validate input data
-    $validatedData = $request->validate([
-        'password' => 'required',
-    ]);
+    {
+        // validate input data
+        $validatedData = $request->validate([
+            'password' => 'required',
+        ]);
 
-    $password = FiscalYear::find(1);
-    // check if password is correct
-    if (Hash::check($validatedData['password'], $password->password)) {
-        // password is correct, show the post
-        $fiscalyears = FiscalYear::where('id',1)->get();
-        return view('livewire.fiscalyear-component',compact('fiscalyears'));
-    } else {
-        // password is incorrect, show an error message
-        return back()->with('password','Incorrect password');
+        $password = FiscalYear::find(1);
+        // check if password is correct
+        if (Hash::check($validatedData['password'], $password->password)) {
+            // password is correct, show the fiscalyear
+            $fiscalyears = FiscalYear::where('id',1)->get();
+            return view('livewire.fiscalyear-component',compact('fiscalyears'));
+        } else {
+            // password is incorrect, show an error message
+            return back()->with('password','Incorrect password');
+        }
     }
-}
+    public function changePassword(Request $request)
+    {
+        $fiscalyear = FiscalYear::find(1);
+
+        $currentPassword = $request->current_password;
+        $newPassword = $request->password;
+
+        if (Hash::check($currentPassword, $fiscalyear->password)) {
+            $fiscalyear->password = Hash::make($newPassword);
+            $fiscalyear->save();
+            return back()->with('message','Password updated successfully!');
+        } else {
+            return back()->with('password','Incorrect password');
+        }
+    }
+
 
 }

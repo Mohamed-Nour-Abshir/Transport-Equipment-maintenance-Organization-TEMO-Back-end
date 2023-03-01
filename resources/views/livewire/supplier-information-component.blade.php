@@ -38,9 +38,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                            $i = 0;
+                        ?>
                         @foreach ($suppliers as $supplier)
                             <tr>
-                                <td>{{ $supplier->id }}</td>
+                                <td>{{++ $i }}</td>
                                 <td>{{ $supplier->supplier_id }}</td>
                                 <td>{{ $supplier->supplier_name }}</td>
                                 <td>{{ $supplier->supplier_phone }}</td>
