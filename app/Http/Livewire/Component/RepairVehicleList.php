@@ -20,10 +20,10 @@ class RepairVehicleList extends Component
         // If there is set date, find the doctors
         if (request('fiscal_year')) {
             $searchVehicleName = request('fiscal_year');
-            $quotations = WorkOrder::latest('id')->where('fiscal_year', $searchVehicleName)->get();
+            $quotations = WorkOrder::select('vehicle_type')->groupBy('vehicle_type')->get();
             return view('livewire.component.repair-vehicle-list', compact('quotations'))->layout('layouts.base');
         } else {
-            $quotations = WorkOrder::latest('id')->get();
+            $quotations = WorkOrder::select('vehicle_type')->groupBy('vehicle_type')->get();
         }
         return view('livewire.component.repair-vehicle-list', ['quotations' => $quotations])->layout('layouts.base');
     }

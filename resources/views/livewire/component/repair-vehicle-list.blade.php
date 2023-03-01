@@ -37,15 +37,19 @@
         </tr>
       </thead>
       <tbody>
+        <?php
+          $i = 0;
+        ?>
         @foreach ($quotations as $quotation)
-        @if ($quotation->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year')))
+        {{-- @if ($quotation->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
+
             <tr>
-              <td>{{$quotation->id}}</td>
+              <td>{{++ $i}}</td>
               <td>{{$quotation->vehicle_type}}</td>
               <td></td>
               <td></td>
             </tr>
-            @endif
+            {{-- @endif --}}
         @endforeach
       </tbody>
     </table>

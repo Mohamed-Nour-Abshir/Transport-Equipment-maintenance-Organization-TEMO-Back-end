@@ -68,9 +68,6 @@
                     <th>{{$value}}</th>
                 @endforeach
             @endif
-            {{-- @foreach ($suppliers as $supplier)
-                <th>{{$supplier->supplier_name}}</th>
-            @endforeach --}}
           </tr>
         </thead>
         <tbody>

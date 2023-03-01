@@ -25,7 +25,7 @@ class DemandForm extends Component
             $searchVehicleName = request('vehicle_type');
             $searchFromDate = request('from_date');
             $searchToDate = request('todate');
-            $quotations = WorkOrder::latest('order_date')->where('supplier_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->select('parts_name', 'parts_id', DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('parts_name', 'parts_id')->get();
+            $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->select('parts_name', 'parts_id', DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('parts_name', 'parts_id')->get();
             // $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
             $vehicles = WorkOrder::select('vehicle_type')->groupBy('vehicle_type')->get();
             $fiscal_year = FiscalYear::all();

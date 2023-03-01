@@ -62,25 +62,26 @@
         </div>
         <div class="d-flex justify-content-between mt-2 mb-4">
             <p>স্মারক নম্বর:- ৪৫.৯০.০০০০.০০২.২০.০৪. {{ date('y', strtotime($searchFromDate)) }} - {{ date('y', strtotime($searchToDate)) }} / {{$searchVehicleName}}    </p>
-            @foreach ($quotations as $quotation)
+            @foreach ($quotations as $item)
 
             @endforeach
-            @foreach ($items as $item)
+            {{-- @foreach ($items as $item)
 
-            @endforeach
+            @endforeach --}}
             <p>তারিখ: {{ date('d/m/Y', strtotime($item->order_date)) }}  খ্রিঃ </p>
         </div>
-        <span class="p-2 mb-3"><b>প্রাপক :   </b> {{$item->supplier_name}} </span>
-        <p class="p-2 mb-3 ms-5"><b>{{$item->supplier->supplier_address}}</b> </p>
+        <span class="p-2 mb-3"><b>প্রাপক :   </b> {{$item->supplier->supplier_name}} </span>
+        <p class="p-2 mb-3 ms-5 ps-3"><b>{{$item->supplier->supplier_address}}</b> </p>
         <p class="mt-4">বিষয়: <b class="text-decoration-underline"> সরবরাহ আদেশ প্রসঙ্গে।</b></p>
         <p class="mt-3">আপনার বাৎসরিক 29/06/ {{ date('Y', strtotime($searchFromDate)) }} খ্রিঃ  তারিখ দরপত্রের
-          বরাতে অবগত করানো যাইতেছে যে, আপনার দরপত্র গ্রহন করা </p> <p class="mt-2"> হইয়েছে।  আপনাকে নিম্ন লিখিত মালামাল
+          বরাতে অবগত করানো যাইতেছে যে, আপনার দরপত্র গ্রহন করা হইয়েছে।  </p> <p class="mt-2"> আপনাকে নিম্ন লিখিত মালামাল
           সরবরাহ করার নির্দেশ দেওয়া যাইতেছে।</p>
 
           <table class="table table-bordered mt-3">
             <thead class="table-dark">
               <tr>
                 <th>নং</th>
+                <th>কোড নং</th>
                 <th>যন্ত্রাংশের বিবরণ</th>
                 <th>গাড়ির প্রকার</th>
                 <th>প্রস্ততকারী দেশ</th>
@@ -97,6 +98,7 @@
                 @foreach ($quotations as $item)
                     <tr>
                         <td>{{++ $i}}</td>
+                        <td>{{$item->parts_code}}</td>
                         <td>{{$item->parts_name}}</td>
                         <td>{{$item->vehicle_type}}</td>
                         <td>{{$item->parts->parts_manufacture}}</td>
@@ -105,14 +107,22 @@
                         <td>{{$item->parts_qty}}</td>
                         <td>{{$item->parts_price * $item->parts_qty}}</td>
                     </tr>
+                    @php
+                        $numbers = [$item->parts_price * $item->parts_qty] ;
+                    @endphp
                 @endforeach
 
+                @php
+                    $total = array_sum($numbers);
+                @endphp
             </tbody>
           </table>
-          <h1 class="text-center" style="margin-left: 750px;"><b>Total Taka : </b><b class="ms-5"> {{$sum}}</b></h1>
+          <h1 class="text-center" style="margin-left: 750px;"><b>Total Taka : </b><b class="" style="margin-left:200px;"> {{$total}}</b></h1>
+          @foreach ($quotations as $item)
 
+          @endforeach
           <p class="mb-2"><b>নিম্নলিখিত শর্ত পালন স্বপেক্ষে বিল পরিশোধ করা হইবে:</b></p>
-          <p class="mt-2">১। মালামাল {{date('d/m/Y',strtotime('+1 week' .$item->order_date))}} খ্রিঃ তারিখ বেলা ২ ঘটিকার মধ্যে সরবরাহ করিতে হইবে অন্যথায় তাহার সরবরাহ আদেশ </p> <p class="mt-2">বাতিল বলিয়া গণ্য হইবে এবং তালিকাভুক্ত বাতিল বলিয়া গণ্য হইবে।</p>
+          <p class="mt-2">১। মালামাল {{date('d/m/Y',strtotime('+1 week' .$item->order_date))}} খ্রিঃ তারিখ বেলা ২ ঘটিকার মধ্যে সরবরাহ করিতে হইবে অন্যথায় তাহার সরবরাহ আদেশ </p> <p class="ms-3 mt-2">বাতিল বলিয়া গণ্য হইবে এবং তালিকাভুক্ত বাতিল বলিয়া গণ্য হইবে।</p>
           <p class="mt-2">২। মালামাল/যন্ত্রাংশ দরপত্রের বিবরন (স্পেসিফিকেশন) নমুনা অনুযায়ী সরবরাহ করিতে হইবে।</p>
           <p class="mt-2">৩। মালামাল/যন্ত্রাংশ অত্র কার্যালয়ের মান নিয়ন্ত্রন দল কর্তৃক গৃহিত না হইলে সরবরাহকারি মালামাল ফেরৎ লইতে বাধ্য থাকিবেন। </p>
           <div class="d-flex justify-content-between mt-5">
@@ -125,9 +135,7 @@
           </div>
           <div class="d-flex justify-content-between mt-4">
             <p>স্মারক নম্বর:- ৪৫.৯০.০০০০.০০২.২০.০৪. {{ date('y', strtotime($searchFromDate)) }} - {{ date('y', strtotime($searchToDate)) }} / {{$searchVehicleName}}
-            @foreach ($quotations as $date)
-                <p> তারিখ:{{ date('d/m/Y', strtotime($date->order_date)) }} খ্রিঃ</p>
-            @endforeach
+            <p> তারিখ:{{ date('d/m/Y', strtotime($item->order_date)) }} খ্রিঃ</p>
           </div>
 
           <p class="mt-5"><b>অনুলিপি, অবগতি ও প্রয়োজনীয় ব্যবস্থা গ্রহণের জন্য প্রেরণ করা হইল:</b></p>

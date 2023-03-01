@@ -94,7 +94,7 @@
         @endforeach
       </tbody>
     </table>
-    <h1 class="text-center" style="margin-left: 150px;"><b>{{$sum}}</b></h1>
+    <h1 class="text-center" style="margin-left: 150px;"><span class="float-start">Total Workorder (TK) : </span><b class="float-end">{{$sum}}</b></h1>
     @endif
   </div>
 

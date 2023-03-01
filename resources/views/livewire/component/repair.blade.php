@@ -95,6 +95,63 @@
         @endforeach
       </tbody>
     </table>
+    <h1 class="text-center" style="margin-left: 350px;">Order Total (TK.) : <b>{{ $quotation->parts_price * $quotation->parts_qty}}</b></h1>
+    <table class="table ">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Taka</th>
+            </tr>
+        </thead>
+        <tbody class="">
+            <tr>
+                <td>Engin Oil</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Kerosine</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Break Oil</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Gear Oil</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Steerin Oil</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Hydraulic</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Grease</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Petrol</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Diesel</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
     <div class="d-flex justify-content-between mt-5">
         <h1 class="h6"><b>Prepared By</b></h1>
         <h1 class="h6"><b>Compared By</b></h1>

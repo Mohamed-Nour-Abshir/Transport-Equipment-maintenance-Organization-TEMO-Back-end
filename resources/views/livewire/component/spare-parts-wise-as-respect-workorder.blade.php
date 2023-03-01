@@ -55,10 +55,15 @@
             <div>
                 <h1 class="text-decoration-underline text-center mb-2 h5">Spare Parts Report Order Wise</h1>
                 <p class="text-center mb-3"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></p>
-                <p class="text-start mb-3"><b class="me-5"> Parts Code: {{$searchVehicleName}}</b></p>
                 {{-- <p class="text-center me-5">Fiscal Year</p> --}}
             </div>
-          <table class="table table-bordered">
+            @foreach ($quotations as $workorder)
+            @endforeach
+            <p class="fw-bold">Parts Code :  <span style="margin-left: 50px;" class="text-start fw-bold">{{$workorder->parts_code}}</span> </p>
+            <p class="fw-bold">Parts Name :  <span class="ms-5 text-start fw-bold">{{$workorder->parts_name}}</span> </p>
+            <p class="fw-bold">Made :  <span style="margin-left: 90px;" class="text-start fw-bold">{{$workorder->parts->parts_manufacture}}</span> </p>
+            <p class="fw-bold">Unit :  <span style="margin-left: 100px;" class="text-start fw-bold">{{$workorder->parts->parts_unit}}</span> </p>
+          <table class="table table-bordered mt-3">
             <thead>
               <tr>
                 <th>Order No</th>
@@ -86,9 +91,12 @@
               </tr>
               {{-- @endif --}}
               @endforeach
+              @php
+                $total = collect($workorder->parts_price * $workorder->parts_qty)->sum();
+            @endphp
             </tbody>
           </table>
-          <h1 class="text-center" style="margin-left: 350px;">Order Total (TK.) : <b>{{$sum}}</b></h1>
+          <h1 class="text-center" style="margin-left: 350px;">Order Total (TK.) : <b>{{$total}}</b></h1>
           @endif
         </div>
 

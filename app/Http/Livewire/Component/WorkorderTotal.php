@@ -26,7 +26,7 @@ class WorkorderTotal extends Component
             $searchToDate = request('todate');
             $searchOrderNo = request('order_no');
             // $quotations = WorkOrder::latest('order_date')->Where('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
-            $quotations = WorkOrder::latest('order_date')->where('supplier_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->select('order_no','order_date','supplier_name','parts_price', DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('order_no','order_date','parts_price','supplier_name')->get();
+            $quotations = WorkOrder::where('supplier_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->select('order_no','order_date','supplier_name','parts_price', DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('order_no','order_date','parts_price','supplier_name')->orderBy('id')->get();
             $vehicles = WorkOrder::all();
             $fiscal_year = FiscalYear::all();
             $sum = WorkOrder::sum('order_parts_price');
