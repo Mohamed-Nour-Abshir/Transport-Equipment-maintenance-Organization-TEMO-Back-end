@@ -7,6 +7,8 @@ use App\Models\Quotation;
 use App\Models\Supplier;
 use App\Models\Vehicle;
 use App\Models\WorkOrder;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class AdminEditWorkorderInformation extends Component
@@ -108,5 +110,28 @@ class AdminEditWorkorderInformation extends Component
         $parts = PartsInfo::all();
         $vehicles = Vehicle::all();
         return view('livewire.admin.admin-edit-workorder-information', ['suppliers' => $suppliers, 'parts' => $parts, 'vehicles' => $vehicles])->layout('layouts.test');
+    }
+
+    //generate supplier data by json format
+    public function findSupplierWorkorder()
+    {
+        $parent_id = $this->supplier_id;
+        $supplierdetails = Supplier::select('supplier_name')->where('id', $parent_id)->first();
+        return response()->json($supplierdetails);
+    }
+
+    //generate vehicle data by json format
+    public function findVehicleWorkorderEdit()
+    {
+        $parent_id = $this->vehicle_code;
+        $vehicledetails = Vehicle::select('vehicle_name', 'vehicle_type')->where('vehicle_code', $parent_id)->first();
+        return response()->json($vehicledetails);
+    }
+    //generate parts data by json format
+    public function findPartsWorkorder()
+    {
+        $parent_id = $this->parts_code;
+        $partsdetails = PartsInfo::select('parts_name')->where('parts_code', $parent_id)->first();
+        return response()->json($partsdetails);
     }
 }

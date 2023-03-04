@@ -61,24 +61,26 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="supplier-id" class="form-label">Supplier Name</label>
-                                <select class="form-select selectpicker" aria-label="Default select example" wire:model="supplier_name" data-live-search="true" data-style="py-0" id="supplier_id">
+                                {{-- <select class="form-select selectpicker" aria-label="Default select example" wire:model="supplier_name" data-live-search="true" data-style="py-0" id="supplier_id">
                                     <option value="" selected>Please Select Supplier Name</option>
                                     @foreach ($suppliers as $supplier)
                                         <option value="{{$supplier->supplier_name}}">{{$supplier->supplier_name}}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
+                                <input type="text" class="form-control" readonly id="supplier-name" wire:model="supplier_name">
                                 @error('supplier_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
                               </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="supplier-id" class="form-label">Vehicle Name</label>
-                                <select class="form-select" id="vehicle-code" aria-label="Default select example" wire:model="vehicle_name">
+                                {{-- <select class="form-select" id="vehicle-code" aria-label="Default select example" wire:model="vehicle_name">
                                     <option value="" selected>Please Select Vehicle code</option>
                                     @foreach ($vehicles as $vehicle)
                                         <option value="{{$vehicle->vehicle_name}}">{{$vehicle->vehicle_name}}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
+                                <input type="text" class="form-control" readonly id="vehicle-name" wire:model="vehicle_name">
                                 @error('vehicle_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
                               </div>
                         </div>
@@ -111,12 +113,13 @@
                           <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="supplier-id" class="form-label">Parts Name</label>
-                                <select class="form-select" id="parts-code" aria-label="Default select example" wire:model="parts_name">
+                                {{-- <select class="form-select" id="parts-code" aria-label="Default select example" wire:model="parts_name">
                                     <option value="" selected>Please Select Parts Name</option>
                                     @foreach ($parts as $part)
                                         <option value="{{$part->parts_name}}">{{$part->parts_name}}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
+                                <input type="text" class="form-control" readonly id="parts-name" wire:model="parts_name">
                                 @error('parts_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
                              </div>
                           </div>
@@ -130,7 +133,7 @@
                         </div>
                         <div class="form-group mb-3">
                           <label for="supplier-id" class="form-label">Vehicle Type</label>
-                          <input type="text" id="supplier-id" class="form-control" wire:model="vehicle_type">
+                          <input type="text" id="vehicle-type" readonly class="form-control" wire:model="vehicle_type">
                           @error('vehicle_type')<span class="text-danger">{{ $message }}</span>@enderror <br>
                        </div>
                         <div class="form-group mb-3">
@@ -157,3 +160,89 @@
     </div>
  </div>
 
+
+
+ {{-- ajax  --}}
+
+@push('scripts')
+<script>
+ $(document).ready(function(){
+     $('#supplier_id').change(function(e)  {
+         var supplier_id = e.target.value;
+         console.log(supplier_id);
+         var op="";
+         $.ajax({
+             type:"get",
+             url:"{{route('findSupplierWorkorder')}}",
+             data:{
+                 supplier_id:supplier_id
+             },
+             success:function(data){
+                 console.log(data);
+                 console.log(data.supplier_name);
+                 // here supplier_name is coloumn name in suppliers table data.coln name
+                 $(".form-group").find('#supplier-name').val(data.supplier_name);
+             },
+             error:function(){
+
+             }
+         });
+        });
+
+     $('#vehicle-code').change(function(e)  {
+         var vehicle_code = e.target.value;
+         console.log(vehicle_code);
+         var op="";
+         $.ajax({
+             type:"get",
+             url:"{{route('findVehicleWorkorderEdit')}}",
+             data:{
+                 vehicle_code:vehicle_code
+             },
+             success:function(data){
+                 console.log(data);
+                 console.log(data.vehicle_name);
+                 // here supplier_name is coloumn name in suppliers table data.coln name
+                 $(".form-group").find('#vehicle-name').val(data.vehicle_name);
+                 $(".form-group").find('#vehicle-type').val(data.vehicle_type);
+             },
+             error:function(){
+
+             }
+         });
+        });
+
+
+     $('#parts-code').change(function(e)  {
+         var parts_code = e.target.value;
+         console.log(parts_code);
+         var op="";
+         $.ajax({
+             type:"get",
+             url:"{{route('findPartsWorkorder')}}",
+             data:{
+                 parts_code:parts_code
+             },
+             success:function(data){
+                 console.log(data);
+                 console.log(data.parts_id);
+                 // here supplier_name is coloumn name in suppliers table data.coln name
+                 $(".form-group").find('#parts-name').val(data.parts_name);
+
+             },
+             error:function(){
+
+             }
+         });
+        });
+
+
+
+
+
+
+ });
+
+
+</script>
+@endpush

@@ -120,6 +120,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     // Workorder Information
     Route::get('/admin-edit-workorders/{workorder_id}', AdminEditWorkorderInformation::class)->name('edit.workorders');
+
+    Route::get('/findSupplierWorkorder', [AdminEditWorkorderInformation::class, 'findSupplierWorkorder'])->name('findSupplierWorkorder');
+    Route::get('/findVehicleWorkorderEdit', [AdminEditWorkorderInformation::class, 'findVehicleWorkorderEdit'])->name('findVehicleWorkorderEdit');
+    Route::get('/findPartsWorkorder', [AdminEditWorkorderInformation::class, 'findPartsWorkorder'])->name('findPartsWorkorder');
+
     Route::get('/pdf-generate-all-workorders', [GenerateWorkorderInformationPDF::class, 'allWorkorders'])->name('pdf.workorders');
 
     // Report Routes Generate PDF
