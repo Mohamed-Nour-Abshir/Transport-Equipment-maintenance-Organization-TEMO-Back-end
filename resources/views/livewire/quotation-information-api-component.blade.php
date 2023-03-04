@@ -9,7 +9,7 @@
         </div>
     @endif
     <h1 class="h1 mb-5 float-start">Quotation Information Setup</h1>
-    <button href="" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#fiscalYear"><i class="fas fa-plus"></i> Fiscal year</button>
+    <button href="" class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#fiscalYear"><i class="fas fa-plus"></i> </button>
     <button href="" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#fiscalYearPassword"><i class="fas fa-lock"></i></button>
     <form action="quotationInformation" method="GET">
         <div class="input-group mb-3 float-none text-center mb-5">

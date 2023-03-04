@@ -24,6 +24,7 @@ class AdminEditWorkorderInformation extends Component
     public $parts_qty;
     public $order_parts_price;
     public $order_date;
+    public $order_no;
     public $workorder_id;
 
     public function mount()
@@ -42,6 +43,7 @@ class AdminEditWorkorderInformation extends Component
         $this->parts_qty = $workorder->parts_qty;
         $this->order_parts_price = $workorder->order_parts_price;
         $this->order_date = $workorder->order_date;
+        $this->order_no = $workorder->order_no;
         $this->workorder_id = $workorder->id;
     }
 
@@ -95,6 +97,7 @@ class AdminEditWorkorderInformation extends Component
         $workorder->parts_qty = $this->parts_qty;
         $workorder->order_parts_price = $this->order_parts_price;
         $workorder->order_date = $this->order_date;
+        $workorder->order_no = $this->order_no;
         $workorder->save();
         session()->flash('message', 'Workorder has been Updated successfully');
         return redirect()->route('workorder-information');

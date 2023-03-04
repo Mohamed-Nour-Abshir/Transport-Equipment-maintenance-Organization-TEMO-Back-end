@@ -31,7 +31,7 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                               <label for="supplier_id" class="form-label">Supplier ID</label>
-                              <select class="form-select selectpicker bg-danger" aria-label="Default select example" wire:model="supplier_id" data-live-search="true" data-style="py-0" id="supplier_id">
+                              <select class="form-select selectpicker" aria-label="Default select example" wire:model="supplier_id" data-live-search="true" data-style="py-0" id="supplier_id">
                                   <option value="" selected>Please Select Supplier ID</option>
                                   @foreach ($suppliers as $supplier)
                                       <option value="{{$supplier->id}}">{{$supplier->supplier_id}}</option>
@@ -45,7 +45,7 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                               <label for="vehicle-code" class="form-label">Vehicle Code</label>
-                              <select class="form-select bg-danger" id="vehicle-code" aria-label="Default select example" wire:model="vehicle_code">
+                              <select class="form-select" id="vehicle-code" aria-label="Default select example" wire:model="vehicle_code">
                                   <option value="" selected>Please Select Vehicle code</option>
                                   @foreach ($vehicles as $vehicle)
                                       <option value="{{$vehicle->vehicle_code}}">{{$vehicle->vehicle_code}}</option>
@@ -61,14 +61,24 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="supplier-id" class="form-label">Supplier Name</label>
-                                <input type="text" id="supplier-id" class="form-control" wire:model="supplier_name">
+                                <select class="form-select selectpicker" aria-label="Default select example" wire:model="supplier_name" data-live-search="true" data-style="py-0" id="supplier_id">
+                                    <option value="" selected>Please Select Supplier Name</option>
+                                    @foreach ($suppliers as $supplier)
+                                        <option value="{{$supplier->supplier_name}}">{{$supplier->supplier_name}}</option>
+                                    @endforeach
+                                </select>
                                 @error('supplier_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
                               </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="supplier-id" class="form-label">Vehicle Name</label>
-                                <input type="text" id="supplier-id" class="form-control" wire:model="vehicle_name">
+                                <select class="form-select" id="vehicle-code" aria-label="Default select example" wire:model="vehicle_name">
+                                    <option value="" selected>Please Select Vehicle code</option>
+                                    @foreach ($vehicles as $vehicle)
+                                        <option value="{{$vehicle->vehicle_name}}">{{$vehicle->vehicle_name}}</option>
+                                    @endforeach
+                                </select>
                                 @error('vehicle_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
                               </div>
                         </div>
@@ -78,7 +88,7 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
                                   <label for="parts-code" class="form-label">Parts Code</label>
-                                  <select class="form-select bg-danger" id="parts-code" aria-label="Default select example" wire:model="parts_code">
+                                  <select class="form-select" id="parts-code" aria-label="Default select example" wire:model="parts_code">
                                       <option value="" selected>Please Select Parts code</option>
                                       @foreach ($parts as $part)
                                           <option value="{{$part->parts_code}}">{{$part->parts_code}}</option>
@@ -101,7 +111,12 @@
                           <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="supplier-id" class="form-label">Parts Name</label>
-                                <input type="text" id="supplier-id" class="form-control" wire:model="parts_name">
+                                <select class="form-select" id="parts-code" aria-label="Default select example" wire:model="parts_name">
+                                    <option value="" selected>Please Select Parts Name</option>
+                                    @foreach ($parts as $part)
+                                        <option value="{{$part->parts_name}}">{{$part->parts_name}}</option>
+                                    @endforeach
+                                </select>
                                 @error('parts_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
                              </div>
                           </div>
@@ -127,6 +142,11 @@
                           <label for="supplier-id" class="form-label">Order Parts Price Tk</label>
                           <input type="text" id="supplier-id" class="form-control" wire:model="order_parts_price">
                           @error('order_parts_price')<span class="text-danger">{{ $message }}</span>@enderror <br>
+                       </div>
+                        <div class="form-group mb-3">
+                          <label for="orderNo" class="form-label">Order NO.</label>
+                          <input type="text" id="orderNo" class="form-control" wire:model="order_no">
+                          @error('order_no')<span class="text-danger">{{ $message }}</span>@enderror <br>
                        </div>
                     </div>
                     <button type="submit" class="btn btn-success"><i class="fas fa-edit"></i> Update</button>
