@@ -61,7 +61,7 @@
                     <td>{{$workorder->order_parts_price}}</td>
                     <td>{{$workorder->order_date}}</td>
                     <td>
-                      <a href="{{route('edit.workorders',['workorder_id'=>$workorder->id])}}" title="Edit"><i class="fas fa-edit text-primary fa-2x"></i></a>
+                      <a href="{{route('admin.workorders',['id'=>$workorder->id])}}" title="Edit"><i class="fas fa-edit text-primary fa-2x"></i></a>
                       <a href="{{route('deleteWorkorder',$workorder->id)}}" onclick="confirm('Are you sure to Delete this Information?') || event.stopImmediatePropagation()"  title="delete"><i class="fas fa-remove text-danger fa-2x"></i></a>
                     </td>
                   </tr>

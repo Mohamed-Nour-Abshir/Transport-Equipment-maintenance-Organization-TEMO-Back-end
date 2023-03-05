@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminEditWorkorderController;
 use App\Http\Controllers\GeneratePartsInformationPdf;
 use App\Http\Controllers\GenerateQuotationInformationPdf;
 use App\Http\Controllers\GenerateSupplierInformationPdf;
@@ -119,11 +120,12 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/pdf-generate-quotation-information', [GenerateQuotationInformationPdf::class, 'allquotationsInformation'])->name('pdf.all-quotations');
 
     // Workorder Information
-    Route::get('/admin-edit-workorders/{workorder_id}', AdminEditWorkorderInformation::class)->name('edit.workorders');
+    Route::get('/admin-edit-workorders/{id}', [AdminEditWorkorderController::class, 'render'])->name('admin.workorders');
+    Route::post('/admin-edit-workorders/{id}', [AdminEditWorkorderController::class, 'editWorkorderInformation'])->name('edit.workorders');
 
-    Route::get('/findSupplierWorkorder', [AdminEditWorkorderInformation::class, 'findSupplierWorkorder'])->name('findSupplierWorkorder');
-    Route::get('/findVehicleWorkorderEdit', [AdminEditWorkorderInformation::class, 'findVehicleWorkorderEdit'])->name('findVehicleWorkorderEdit');
-    Route::get('/findPartsWorkorder', [AdminEditWorkorderInformation::class, 'findPartsWorkorder'])->name('findPartsWorkorder');
+    Route::get('/findSupplierWorkorder', [AdminEditWorkorderController::class, 'findSupplierWorkorder'])->name('findSupplierWorkorder');
+    Route::get('/findVehicleWorkorderEdit', [AdminEditWorkorderController::class, 'findVehicleWorkorderEdit'])->name('findVehicleWorkorderEdit');
+    Route::get('/findPartsWorkorder', [AdminEditWorkorderController::class, 'findPartsWorkorder'])->name('findPartsWorkorder');
 
     Route::get('/pdf-generate-all-workorders', [GenerateWorkorderInformationPDF::class, 'allWorkorders'])->name('pdf.workorders');
 
