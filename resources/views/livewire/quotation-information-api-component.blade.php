@@ -55,6 +55,7 @@
                 $i = 0;
             ?>
             @foreach ($quotations as $quotation)
+            @if ($quotation->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
                 <tr>
                     <td>{{++ $i}}</td>
                      <td>{{date('d/m/Y', strtotime($quotation->from_date))}}</td>
@@ -71,6 +72,7 @@
                         <a href="{{route('deleteQuotation',$quotation->id)}}" onclick="confirm('Are you sure to Delete This Information?')" title="delete"><i class="fas fa-remove  fa-1x text-danger"></i></a>
                      </td>
                 </tr>
+                @endif
             @endforeach
         </thead>
     </table>

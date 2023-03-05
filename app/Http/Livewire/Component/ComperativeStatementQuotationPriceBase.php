@@ -40,17 +40,19 @@ class ComperativeStatementQuotationPriceBase extends Component
             $searchToDate = request('to_date');
 
             $quotations = Quotation::where('vehicle_name', $searchVehicleName)
-                                    ->select('parts_code', 'vehicle_code', 'parts_name', 'vehicle_name', 'parts_id',DB::raw('GROUP_CONCAT(company) as company'), DB::raw('GROUP_CONCAT(supplier_name) as supplier_name'), DB::raw('MIN(company) as minimum_price'))
-                                    ->groupBy('parts_code', 'vehicle_code', 'vehicle_name', 'parts_name', 'parts_id')->get();
+                                    ->select('parts_code', 'vehicle_code', 'parts_name', 'vehicle_name', 'parts_id','fiscal_year',DB::raw('GROUP_CONCAT(company) as company'), DB::raw('GROUP_CONCAT(supplier_name) as supplier_name'), DB::raw('MIN(company) as minimum_price'))
+                                    ->groupBy('parts_code', 'vehicle_code', 'vehicle_name', 'parts_name', 'parts_id','fiscal_year')->get();
 
             $vehicles = Vehicle::all();
             $fiscal_year = FiscalYear::all();
-            return view('livewire.component.comperative-statement-quotation-price-base', compact('quotations', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'vehicles', 'fiscal_year'))->layout('layouts.base');
+            $fiscalYear = FiscalYear::find(1);
+            return view('livewire.component.comperative-statement-quotation-price-base', compact('quotations', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'vehicles', 'fiscal_year','fiscalYear'))->layout('layouts.base');
         }
 
         $quotations = Quotation::orderBy('company', 'ASC')->get();
         $vehicles = Vehicle::all();
         $fiscal_year = FiscalYear::all();
-        return view('livewire.component.comperative-statement-quotation-price-base', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year])->layout('layouts.base');
+        $fiscalYear = FiscalYear::find(1);
+        return view('livewire.component.comperative-statement-quotation-price-base', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year, 'fiscalYear'=> $fiscalYear])->layout('layouts.base');
     }
 }

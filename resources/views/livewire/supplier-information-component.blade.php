@@ -42,6 +42,7 @@
                             $i = 0;
                         ?>
                         @foreach ($suppliers as $supplier)
+                        @if ($supplier->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
                             <tr>
                                 <td>{{++ $i }}</td>
                                 <td>{{ $supplier->supplier_id }}</td>
@@ -58,6 +59,8 @@
                                         title="Print"><i class="fas fa-print text-warning fa-1x"></i></a>
                                 </td>
                             </tr>
+
+                            @endif
                         @endforeach
 
                     </tbody>

@@ -15,7 +15,9 @@
             <div class="col-auto">
               <select class="form-select selectpicker" aria-label="Default select example" name="vehicle_type" data-live-search="true" data-style="py-0" id="supplier_id">
                   @foreach ($vehicles as $vehicle)
+                  @if ($vehicle->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
                       <option value="{{$vehicle->vehicle_type}}">{{$vehicle->vehicle_type}}</option>
+                    @endif
                   @endforeach
               </select>
             </div>
@@ -76,14 +78,14 @@
             $i = 0;
         ?>
         @foreach ($quotations as $quotation)
-        {{-- @if ($quotation->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
+        @if ($quotation->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
             <tr>
               <td>{{++ $i}}</td>
               <td>{{$quotation->parts_name}}</td>
               <td>{{$quotation->parts->parts_unit}}</td>
               <td>{{$quotation->parts_qty}}</td>
             </tr>
-            {{-- @endif --}}
+            @endif
         @endforeach
       </tbody>
     </table>

@@ -29,7 +29,9 @@
             <div class="col-auto">
               <select class="form-select selectpicker" aria-label="Default select example" name="vehicle_name" data-live-search="true" data-style="py-0" id="supplier_id">
                   @foreach ($workordernos as $workorder)
+                  @if ($workorder->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
                       <option value="{{$workorder->order_no}}">{{$workorder->order_no}}</option>
+                    @endif
                   @endforeach
               </select>
             </div>
@@ -46,6 +48,10 @@
 
     <div class="container" id="WorkLetter">
       @if(isset($searchVehicleName))
+      @foreach ($quotations as $item)
+
+            @endforeach
+      @if ($item->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
         <div class="d-flex justify-content-between">
             <img src="{{asset('assets/images/workr_1.jpg')}}" alt="" width="100px" height="100px">
             <img src="{{asset('assets/images/wokr_2.jpg')}}" alt="" width="100px" height="100px">
@@ -70,8 +76,8 @@
             @endforeach --}}
             <p>তারিখ: {{ date('d/m/Y', strtotime($item->order_date)) }}  খ্রিঃ </p>
         </div>
-        <span class="p-2 mb-3"><b>প্রাপক :   </b> {{$item->supplier->supplier_name}} </span>
-        <p class="p-2 mb-3 ms-5 ps-3"><b>{{$item->supplier->supplier_address}}</b> </p>
+        {{-- <span class="p-2 mb-3"><b>প্রাপক :   </b> {{$item->supplier->supplier_name}} </span>
+        <p class="p-2 mb-3 ms-5 ps-3"><b>{{$item->supplier->supplier_address}}</b> </p> --}}
         <p class="mt-4">বিষয়: <b class="text-decoration-underline"> সরবরাহ আদেশ প্রসঙ্গে।</b></p>
         <p class="mt-3">আপনার বাৎসরিক 29/06/ {{ date('Y', strtotime($searchFromDate)) }} খ্রিঃ  তারিখ দরপত্রের
           বরাতে অবগত করানো যাইতেছে যে, আপনার দরপত্র গ্রহন করা হইয়েছে।  </p> <p class="mt-2"> আপনাকে নিম্ন লিখিত মালামাল
@@ -154,7 +160,7 @@
                   <p> Email: healthtemo@gmail.com</p>
             </div>
           </div>
-          {{-- @endif --}}
+          @endif
 
       @endif
     </div>

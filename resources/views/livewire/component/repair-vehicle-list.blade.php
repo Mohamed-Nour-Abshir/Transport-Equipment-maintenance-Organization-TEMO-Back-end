@@ -41,7 +41,7 @@
           $i = 0;
         ?>
         @foreach ($quotations as $quotation)
-        {{-- @if ($quotation->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
+        @if ($quotation->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
 
             <tr>
               <td>{{++ $i}}</td>
@@ -49,7 +49,7 @@
               <td></td>
               <td></td>
             </tr>
-            {{-- @endif --}}
+            @endif
         @endforeach
       </tbody>
     </table>

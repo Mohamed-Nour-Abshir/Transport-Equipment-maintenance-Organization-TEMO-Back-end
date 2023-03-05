@@ -48,6 +48,7 @@
                 $i = 0;
             ?>
             @foreach ($parts as $item)
+            @if ($item->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
                 <tr>
                     <td>{{++ $i}}</td>
                     <td>{{$item->vehicle_code}}</td>
@@ -63,6 +64,7 @@
                     <a href="{{route('pdf-generate-parts-information',['parts_id'=>$item->id])}}" title="Print"><i class="fas fa-print text-warning fa-1x"></i></a>
                     </td>
                 </tr>
+                @endif
             @endforeach
 
           </tbody>

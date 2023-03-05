@@ -50,6 +50,7 @@
                     $i = 0;
                 ?>
                 @foreach ($workorders as $workorder)
+                @if ($workorder->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
                 <tr>
                     <td>{{++ $i}}</td>
                     <td>{{$workorder->order_no}}</td>
@@ -65,6 +66,7 @@
                       <a href="{{route('deleteWorkorder',$workorder->id)}}" onclick="confirm('Are you sure to Delete this Information?') || event.stopImmediatePropagation()"  title="delete"><i class="fas fa-remove text-danger fa-2x"></i></a>
                     </td>
                   </tr>
+                  @endif
                 @endforeach
               </tbody>
             </table>

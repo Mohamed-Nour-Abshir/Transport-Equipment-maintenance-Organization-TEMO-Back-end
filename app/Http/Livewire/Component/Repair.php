@@ -26,15 +26,17 @@ class Repair extends Component
             $searchFromDate = request('from_date');
             $searchToDate = request('to_date');
             // $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
-            $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->select('parts_name', 'parts_id', 'parts_price', DB::raw('SUM(parts_qty) as parts_qty'),  DB::raw('SUM(order_parts_price) as order_parts_price'))->groupBy('parts_name', 'parts_id', 'parts_price')->get();
-            $vehicles = WorkOrder::select('vehicle_type')->groupBy('vehicle_type')->get();
+            $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->select('parts_name', 'parts_id', 'parts_price','fiscal_year', DB::raw('SUM(parts_qty) as parts_qty'),  DB::raw('SUM(order_parts_price) as order_parts_price'))->groupBy('parts_name', 'parts_id', 'parts_price','fiscal_year')->get();
+            $vehicles = WorkOrder::select('vehicle_type','fiscal_year')->groupBy('vehicle_type','fiscal_year')->get();
             $fiscal_year = FiscalYear::all();
-            return view('livewire.component.repair', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName'))->layout('layouts.base');
+            $fiscalYear = FiscalYear::find(1);
+            return view('livewire.component.repair', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName','fiscalYear'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::latest('order_date')->get();
-            $vehicles = WorkOrder::select('vehicle_type')->groupBy('vehicle_type')->get();
+            $vehicles = WorkOrder::select('vehicle_type','fiscal_year')->groupBy('vehicle_type','fiscal_year')->get();
             $fiscal_year = FiscalYear::all();
+            $fiscalYear = FiscalYear::find(1);
         }
-        return view('livewire.component.repair', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year])->layout('layouts.base');
+        return view('livewire.component.repair', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year,'fiscalYear'=>$fiscalYear])->layout('layouts.base');
     }
 }

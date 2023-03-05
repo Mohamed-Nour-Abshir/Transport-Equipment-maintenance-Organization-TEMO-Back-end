@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\FiscalYear;
 use App\Models\Vehicle;
 use Livewire\Component;
 
@@ -39,6 +40,8 @@ class VehicleInformationComponent extends Component
         $vehicle->vehicle_name = $this->vehicle_name;
         $vehicle->vehicle_madein = $this->madein;
         $vehicle->date = $this->vehicle_ed;
+        $fiscalYear = date('01-07-Y', strtotime('-1 year'));
+        $vehicle->fiscal_year = $fiscalYear;
         $vehicle->save();
         session()->flash('message', 'Vehicle added successfully');
         return redirect()->route('vehicle-information');
@@ -58,6 +61,7 @@ class VehicleInformationComponent extends Component
             ->orwhere('vehicle_name', 'LIKE', $search)
             ->orwhere('id', 'LIKE', $search)
             ->orderBy('id', 'DESC')->paginate(10);
-        return view('livewire.vehicle-information-component', ['vehicles' => $vehicles])->layout('layouts.base');
+        $fiscalYear = FiscalYear::find(1);
+        return view('livewire.vehicle-information-component', ['vehicles' => $vehicles ,'fiscalYear' =>$fiscalYear])->layout('layouts.base');
     }
 }

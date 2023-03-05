@@ -81,7 +81,7 @@
       </thead>
       <tbody>
         @foreach ($quotations as $quotation)
-        {{-- @if ($quotation->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
+        @if ($quotation->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
             <tr>
               <td>{{$quotation->order_no}}</td>
               <td>{{$quotation->order_date}}</td>
@@ -90,7 +90,7 @@
               <td>{{$quotation->supplier_name}}</td>
               {{-- <td><a href="{{route('pdf.quotation',['quotation_id'=>$quotation->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
             </tr>
-            {{-- @endif --}}
+            @endif
         @endforeach
       </tbody>
     </table>
@@ -102,7 +102,9 @@
                 $totalPrice += $item->order_parts_price;
                 @endphp
             @endforeach
-    <h1 class="text-center" style="margin-left: 150px;"><span class="float-start">Total Workorder (TK) : </span><b class="" style="margin-left: -130px;">{{$totalPrice}}</b></h1>
+    @if ($item->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
+        <h1 class="text-center" style="margin-left: 150px;"><span class="float-start">Total Workorder (TK) : </span><b class="" style="margin-left: -130px;">{{$totalPrice}}</b></h1>
+    @endif
     @endif
   </div>
 

@@ -26,17 +26,19 @@ class VehicleRegWiseAsRespectWorkorder extends Component
             $searchVehicleName = request('vehicle_type');
             $searchFromDate = request('from_date');
             $searchToDate = request('to_date');
-            $quotations = WorkOrder::where('vehicle_type', $searchVehicleName)->select('order_no', 'parts_name', 'parts_id', 'parts_price', 'order_date', 'supplier_name', DB::raw('SUM(parts_qty) as parts_qty'), DB::raw('SUM(order_parts_price) as order_parts_price'))->groupBy('parts_name', 'parts_id', 'parts_price', 'order_no', 'order_date', 'supplier_name')->get();
-            $vehicles = WorkOrder::select('vehicle_type')->groupBy('vehicle_type')->get();
+            $quotations = WorkOrder::where('vehicle_type', $searchVehicleName)->select('order_no', 'parts_name', 'parts_id', 'parts_price', 'order_date', 'supplier_name','fiscal_year', DB::raw('SUM(parts_qty) as parts_qty'), DB::raw('SUM(order_parts_price) as order_parts_price'))->groupBy('parts_name', 'parts_id', 'parts_price', 'order_no', 'order_date', 'supplier_name','fiscal_year')->get();
+            $vehicles = WorkOrder::select('vehicle_type','fiscal_year')->groupBy('vehicle_type','fiscal_year')->get();
             $fiscal_year = FiscalYear::all();
             $sum = WorkOrder::sum('order_parts_price');
-            return view('livewire.component.vehicle-reg-wise-as-respect-workorder', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'sum'))->layout('layouts.base');
+            $fiscalYear = FiscalYear::find(1);
+            return view('livewire.component.vehicle-reg-wise-as-respect-workorder', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate', 'sum','fiscalYear'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::latest('order_date')->get();
-            $vehicles = WorkOrder::select('vehicle_type')->groupBy('vehicle_type')->get();
+            $vehicles = WorkOrder::select('vehicle_type','fiscal_year')->groupBy('vehicle_type','fiscal_year')->get();
             $fiscal_year = FiscalYear::all();
+            $fiscalYear = FiscalYear::find(1);
         }
         // $quotations = WorkOrder::latest('order_date')->get();
-        return view('livewire.component.vehicle-reg-wise-as-respect-workorder', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year])->layout('layouts.base');
+        return view('livewire.component.vehicle-reg-wise-as-respect-workorder', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year, 'fiscalYear' => $fiscalYear])->layout('layouts.base');
     }
 }

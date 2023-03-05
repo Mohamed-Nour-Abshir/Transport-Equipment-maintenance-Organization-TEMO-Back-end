@@ -50,9 +50,9 @@ class WorkorderInformationController extends Controller
         $workorder->parts_id = $request->parts_id;
         $workorder->order_parts_price = $request->order_parts_price;
         $workorder->order_date = $request->order_date;
-        $fiscalYear = date("Y");
-        $fiscalYear2 = date('Y', strtotime('+1 year'));
-        $workorder->fiscal_year = $fiscalYear . "-" . $fiscalYear2;
+        // $fiscalYear2 = date('Y', strtotime('+1 year'));
+        $fiscalYear = date('01-07-Y', strtotime('-1 year'));
+        $workorder->fiscal_year = $fiscalYear;
         $workorder->save();
         session()->flash('message', 'Workorder has been added successfully');
         return redirect()->route('workorder-information');
@@ -74,8 +74,9 @@ class WorkorderInformationController extends Controller
             $vehicles = Vehicle::all();
             $fiscalyears = FiscalYear::all();
             $password = FiscalYear::find(1);
+            $fiscalYear = FiscalYear::find(1);
             $workorders = WorkOrder::where('order_no', $searchTerm)->orwhere('supplier_id', $searchTerm)->orwhere('parts_name', $searchTerm)->orwhere('vehicle_name', $searchTerm)->orwhere('supplier_name', $searchTerm)->orwhere('order_date', $searchTerm)->orderBy('order_no', 'DESC')->paginate(10);
-            return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders', 'fiscalyears','password']));
+            return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders', 'fiscalyears','password','fiscalYear']));
         }
         $suppliers = Supplier::all();
         $parts = PartsInfo::all();
@@ -83,7 +84,8 @@ class WorkorderInformationController extends Controller
         $fiscalyears = FiscalYear::all();
         $password = FiscalYear::find(1);
         $workorders = WorkOrder::orderBy('order_no', 'DESC')->paginate(10);
-        return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders', 'fiscalyears','password']));
+        $fiscalYear = FiscalYear::find(1);
+        return view('livewire.workorder-api-component', compact(['suppliers', 'parts', 'vehicles', 'workorders', 'fiscalyears','password','fiscalYear']));
     }
 
     //generate supplier data by json format

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Component;
 
+use App\Models\FiscalYear;
 use App\Models\WorkOrder;
 use Livewire\Component;
 
@@ -20,11 +21,13 @@ class RepairVehicleList extends Component
         // If there is set date, find the doctors
         if (request('fiscal_year')) {
             $searchVehicleName = request('fiscal_year');
-            $quotations = WorkOrder::select('vehicle_type')->groupBy('vehicle_type')->get();
-            return view('livewire.component.repair-vehicle-list', compact('quotations'))->layout('layouts.base');
+            $quotations = WorkOrder::select('vehicle_type','fiscal_year')->groupBy('vehicle_type','fiscal_year')->get();
+            $fiscalYear = FiscalYear::find(1);
+            return view('livewire.component.repair-vehicle-list', compact('quotations','fiscalYear'))->layout('layouts.base');
         } else {
-            $quotations = WorkOrder::select('vehicle_type')->groupBy('vehicle_type')->get();
+            $fiscalYear = FiscalYear::find(1);
+            $quotations = WorkOrder::select('vehicle_type','fiscal_year')->groupBy('vehicle_type','fiscal_year')->get();
         }
-        return view('livewire.component.repair-vehicle-list', ['quotations' => $quotations])->layout('layouts.base');
+        return view('livewire.component.repair-vehicle-list', ['quotations' => $quotations,'fiscalYear' =>$fiscalYear])->layout('layouts.base');
     }
 }

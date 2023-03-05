@@ -40,12 +40,12 @@
     </div>
 
   <div class="container p-5" id="deadStock">
-    @if(isset($searchVehicleName))
+    {{-- @if(isset($searchVehicleName)) --}}
       {{-- <div class="d-flex justify-content-center">
           <a href="{{route('dead-stock-reportPdf')}}" class="btn btn-warning mb-3 text-center">Generate Pdf <i class="fas fa-download"></i></a>
       </div> --}}
-      <h1 class="h4">Fiscal Year: {{ date('Y', strtotime($searchFromDate)) }} - {{ date('Y', strtotime($searchToDate)) }}</h1>
-      <h1 class="h6 text-center"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></h1>
+      {{-- <h1 class="h4">Fiscal Year: {{ date('Y', strtotime($searchFromDate)) }} - {{ date('Y', strtotime($searchToDate)) }}</h1>
+      <h1 class="h6 text-center"><span class="me-5"> Period From: {{$searchFromDate}}</span>   <span class="">To: {{$searchToDate}}</span></h1> --}}
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -60,10 +60,13 @@
         </tr>
       </thead>
       <tbody>
+        <?php
+            $i = 0;
+        ?>
         @foreach ($quotations as $quotation)
-        @if ($quotation->fiscal_year !== date("Y")."-".date('Y', strtotime('+1 year')))
+        @if ($quotation->fiscal_year !== date('d-m-Y',strtotime($fiscalYear->start_date)))
             <tr>
-              <td>{{$quotation->id}}</td>
+              <td>{{++ $i}}</td>
               <td>{{$quotation->order_date}}</td>
               <td>{{$quotation->vehicle_type}}</td>
               <td>{{$quotation->parts_name}}</td>
@@ -76,7 +79,7 @@
         @endforeach
       </tbody>
     </table>
-    @endif
+    {{-- @endif --}}
   </div>
 
   <!-- main-section End -->

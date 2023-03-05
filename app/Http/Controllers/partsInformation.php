@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FiscalYear;
 use App\Models\PartsInfo;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
@@ -34,6 +35,8 @@ class partsInformation extends Controller
         $parts->parts_unit = $request->parts_unit;
         // $parts->parts_price = $request->parts_price;
         $parts->parts_date = $request->parts_date;
+        $fiscalYear = date('01-07-Y', strtotime('-1 year'));
+        $parts->fiscal_year = $fiscalYear;
         $parts->save();
         session()->flash('message', 'Parts Information added successfully');
         return redirect()->route('parts-information');
@@ -51,12 +54,14 @@ class partsInformation extends Controller
         if (request('searchTerm')) {
             $searchTerm = request('searchTerm');
             $vehicles = Vehicle::all();
+            $fiscalYear = FiscalYear::find(1);
             $parts = PartsInfo::where('id', $searchTerm)->orwhere('parts_code', $searchTerm)->orwhere('parts_name', $searchTerm)->orwhere('parts_unit', $searchTerm)->paginate(10);
-            return view('livewire.parts-api-component', compact(['parts', 'vehicles']));
+            return view('livewire.parts-api-component', compact(['parts', 'vehicles','fiscalYear']));
         }
         $parts = PartsInfo::orderBy('id', 'DESC')->paginate(10);
         $vehicles = Vehicle::all();
-        return view('livewire.parts-api-component', compact(['parts', 'vehicles']));
+        $fiscalYear = FiscalYear::find(1);
+        return view('livewire.parts-api-component', compact(['parts', 'vehicles','fiscalYear']));
     }
 
     //generate vehicle data by json format

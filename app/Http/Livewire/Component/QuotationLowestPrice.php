@@ -50,11 +50,13 @@ class QuotationLowestPrice extends Component
 
             $fiscal_year = FiscalYear::all();
             $vehicles = Vehicle::all();
-            return view('livewire.component.quotation-lowest-price', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate'))->layout('layouts.base');
+            $fiscalYear = FiscalYear::find(1);
+            return view('livewire.component.quotation-lowest-price', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate','fiscalYear'))->layout('layouts.base');
         }
         $vehicles = Vehicle::all();
         $fiscal_year = FiscalYear::all();
+        $fiscalYear = FiscalYear::find(1);
         $quotations = Quotation::orderBy('id', 'asc')->get();
-        return view('livewire.component.quotation-lowest-price', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year])->layout('layouts.base');
+        return view('livewire.component.quotation-lowest-price', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year, 'fiscalYear' =>$fiscalYear])->layout('layouts.base');
     }
 }

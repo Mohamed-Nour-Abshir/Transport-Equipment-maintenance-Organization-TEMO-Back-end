@@ -15,7 +15,9 @@
             <div class="col-auto">
               <select class="form-select selectpicker" aria-label="Default select example" name="supplier_name" data-live-search="true" data-style="py-0" id="supplier_id">
                   @foreach ($vehicles as $vehicle)
+                  @if ($vehicle->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
                       <option value="{{$vehicle->supplier_name}}">{{$vehicle->supplier_name}}</option>
+                  @endif
                   @endforeach
               </select>
             </div>
@@ -77,7 +79,7 @@
       </thead>
       <tbody>
         @foreach ($quotations as $workorder)
-        {{-- @if ($workorder->fiscal_year === date("Y")."-".date('Y', strtotime('+1 year'))) --}}
+        @if ($workorder->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
             <tr>
               <td>{{$workorder->order_no}}</td>
               <td>{{$workorder->order_date}}</td>
@@ -91,7 +93,7 @@
               <td>{{$workorder->parts_qty * $workorder->parts_price}}</td>
               {{-- <td><a href="{{route('pdf.workorder',['workorder_id'=>$workorder->id])}}" title="Print" title="preview"><i class="fas fa-eye"></i></a></td> --}}
             </tr>
-            {{-- @endif --}}
+            @endif
         @endforeach
       </tbody>
     </table>
@@ -103,7 +105,9 @@
                 $totalPrice += $item->order_parts_price;
                 @endphp
             @endforeach
-          <h1 class="text-center float-end" style="margin-left: 350px;">Total (TK.) : <b>{{$totalPrice}}</b></h1>
+            @if ($item->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
+                <h1 class="text-center float-end" style="margin-left: 350px;">Total (TK.) : <b>{{$totalPrice}}</b></h1>
+          @endif
     @endif
   </div>
 

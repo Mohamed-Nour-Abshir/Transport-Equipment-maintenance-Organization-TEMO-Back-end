@@ -25,16 +25,18 @@ class DemandForm extends Component
             $searchVehicleName = request('vehicle_type');
             $searchFromDate = request('from_date');
             $searchToDate = request('todate');
-            $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->select('parts_name', 'parts_id', DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('parts_name', 'parts_id')->get();
+            $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->select('parts_name', 'parts_id','fiscal_year', DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('parts_name', 'parts_id','fiscal_year')->get();
             // $quotations = WorkOrder::latest('order_date')->where('vehicle_type', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
-            $vehicles = WorkOrder::select('vehicle_type')->groupBy('vehicle_type')->get();
+            $vehicles = WorkOrder::select('vehicle_type','fiscal_year')->groupBy('vehicle_type','fiscal_year')->get();
             $fiscal_year = FiscalYear::all();
-            return view('livewire.component.demand-form', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate'))->layout('layouts.base');
+            $fiscalYear = FiscalYear::find(1);
+            return view('livewire.component.demand-form', compact('quotations', 'vehicles', 'fiscal_year', 'searchVehicleName', 'searchFromDate', 'searchToDate','fiscalYear'))->layout('layouts.base');
         } else {
             $quotations = WorkOrder::latest('order_date')->get();
-            $vehicles = WorkOrder::select('vehicle_type')->groupBy('vehicle_type')->get();
+            $vehicles = WorkOrder::select('vehicle_type','fiscal_year')->groupBy('vehicle_type','fiscal_year')->get();
             $fiscal_year = FiscalYear::all();
+            $fiscalYear = FiscalYear::find(1);
         }
-        return view('livewire.component.demand-form', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year])->layout('layouts.base');
+        return view('livewire.component.demand-form', ['quotations' => $quotations, 'vehicles' => $vehicles, 'fiscal_year' => $fiscal_year, 'fiscalYear' =>$fiscalYear])->layout('layouts.base');
     }
 }

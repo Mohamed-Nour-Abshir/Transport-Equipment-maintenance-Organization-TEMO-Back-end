@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\FiscalYear;
 use App\Models\Supplier;
 use Livewire\Component;
 use PDF;
@@ -40,6 +41,8 @@ class SupplierInformationComponent extends Component
         $supplier->supplier_email = $this->supplier_email;
         $supplier->supplier_address = $this->supplier_address;
         $supplier->date = $this->date;
+        $fiscalYear = date('01-07-Y', strtotime('-1 year'));
+        $supplier->fiscal_year = $fiscalYear;
         $supplier->save();
         session()->flash('message', 'Supplier Information has been added successfully');
         return redirect()->route('suplier-information');
@@ -65,6 +68,7 @@ class SupplierInformationComponent extends Component
             ->orwhere('date', 'LIKE', $search)
             ->orwhere('id', 'LIKE', $search)
             ->orderBy('id', 'DESC')->paginate(10);
-        return view('livewire.supplier-information-component', ['suppliers' => $suppliers])->layout('layouts.base');
+        $fiscalYear = FiscalYear::find(1);
+        return view('livewire.supplier-information-component', ['suppliers' => $suppliers,'fiscalYear'=>$fiscalYear])->layout('layouts.base');
     }
 }
