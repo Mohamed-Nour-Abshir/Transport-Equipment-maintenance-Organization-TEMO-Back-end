@@ -34,7 +34,7 @@ class WorkorderLetter extends Component
             // $parts = WorkOrder::where('order_no', $searchVehicleName)->select('parts_name')->groupBy('parts_name')->get();
 
             $quotations = WorkOrder::where('order_no', $searchVehicleName)
-                                    ->select('parts_name', 'parts_code', 'parts_id', 'vehicle_type', 'parts_price','supplier_id', DB::raw('SUM(parts_qty) as parts_qty'))
+                                    ->select('parts_name', 'parts_code', 'parts_id', 'vehicle_type', 'parts_price','supplier_id', DB::raw('SUM(parts_qty) as parts_qty'), DB::raw('SUM(order_parts_price) as order_parts_price'))
                                     ->groupBy('parts_name', 'parts_code', 'vehicle_type', 'parts_id', 'parts_price','supplier_id')->get();
 
             // $quotations = WorkOrder::join(DB::raw('(SELECT parts_code, vehicle_code, vehicle_name, order_no, parts_name, parts_id, SUM(parts_qty) as parts_qty FROM work_orders GROUP BY parts_code, vehicle_code, vehicle_name, order_no, parts_name, parts_id) as t'), function($join) use ($searchVehicleName) {

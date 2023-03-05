@@ -24,7 +24,7 @@ class Supplier extends Component
              $searchVehicleName = request('supplier_name');
              $searchFromDate = request('from_date');
              $searchToDate = request('to_date');
-             $quotations = WorkOrder::latest('order_date')->where('supplier_name', $searchVehicleName)->select('parts_name', 'parts_code', 'vehicle_type', 'parts_id', 'parts_price','order_no','order_date',DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('parts_name', 'parts_code', 'vehicle_type', 'parts_id', 'parts_price','order_no','order_date')->get();
+             $quotations = WorkOrder::latest('order_date')->where('supplier_name', $searchVehicleName)->select('parts_name', 'parts_code', 'vehicle_type', 'parts_id', 'parts_price','order_no','order_date',DB::raw('SUM(parts_qty) as parts_qty'), DB::raw('SUM(order_parts_price) as order_parts_price'))->groupBy('parts_name', 'parts_code', 'vehicle_type', 'parts_id', 'parts_price','order_no','order_date')->get();
             //  $quotations = WorkOrder::latest('order_date')->where('supplier_name', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
              $vehicles = WorkOrder::select('supplier_name')->groupBy('supplier_name')->get();
              $fiscal_year = FiscalYear::all();

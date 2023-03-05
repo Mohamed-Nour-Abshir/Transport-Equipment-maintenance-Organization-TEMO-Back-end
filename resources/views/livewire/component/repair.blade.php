@@ -95,7 +95,15 @@
         @endforeach
       </tbody>
     </table>
-    <h1 class="text-center" style="margin-left: 350px;">Order Total (TK.) : <b>{{ $quotation->parts_price * $quotation->parts_qty}}</b></h1>
+    @php
+        $totalPrice = 0;
+          @endphp
+            @foreach ($quotations as $item)
+                @php
+                $totalPrice += $item->order_parts_price;
+                @endphp
+            @endforeach
+    <h1 class="text-center float-end" style="margin-left: 350px;">Order Total (TK.) : <b>{{ $totalPrice}}</b></h1>
     <table class="table ">
         <thead>
             <tr>

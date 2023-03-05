@@ -94,7 +94,15 @@
         @endforeach
       </tbody>
     </table>
-    <h1 class="text-center" style="margin-left: 150px;"><span class="float-start">Total Workorder (TK) : </span><b class="float-end">{{$sum}}</b></h1>
+    @php
+        $totalPrice = 0;
+          @endphp
+            @foreach ($quotations as $item)
+                @php
+                $totalPrice += $item->order_parts_price;
+                @endphp
+            @endforeach
+    <h1 class="text-center" style="margin-left: 150px;"><span class="float-start">Total Workorder (TK) : </span><b class="" style="margin-left: -130px;">{{$totalPrice}}</b></h1>
     @endif
   </div>
 

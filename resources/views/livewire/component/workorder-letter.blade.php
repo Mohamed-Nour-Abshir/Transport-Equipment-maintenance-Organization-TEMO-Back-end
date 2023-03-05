@@ -107,17 +107,18 @@
                         <td>{{$item->parts_qty}}</td>
                         <td>{{$item->parts_price * $item->parts_qty}}</td>
                     </tr>
-                    @php
-                        $numbers = [$item->parts_price * $item->parts_qty] ;
-                    @endphp
                 @endforeach
-
-                @php
-                    $total = array_sum($numbers);
-                @endphp
             </tbody>
           </table>
-          <h1 class="text-center" style="margin-left: 750px;"><b>Total Taka : </b><b class="" style="margin-left:200px;"> {{$total}}</b></h1>
+          @php
+            $totalPrice = 0;
+          @endphp
+            @foreach ($quotations as $item)
+                @php
+                $totalPrice += $item->order_parts_price;
+                @endphp
+            @endforeach
+          <h1 class="text-center" style="margin-left: 750px;"><b>Total Taka : </b><b class="" style="margin-left:200px;"> {{$totalPrice }}</b></h1>
           @foreach ($quotations as $item)
 
           @endforeach

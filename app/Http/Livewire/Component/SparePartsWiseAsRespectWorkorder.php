@@ -25,7 +25,7 @@ class SparePartsWiseAsRespectWorkorder extends Component
             $searchVehicleName = request('parts_code');
             $searchFromDate = request('from_date');
             $searchToDate = request('todate');
-            $quotations = WorkOrder::where('parts_code', $searchVehicleName)->select('order_no','order_date','supplier_name','vehicle_type','parts_price','parts_code','parts_name','parts_id',DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('order_no','order_date','supplier_name','vehicle_type','parts_price','parts_code','parts_name','parts_id')->get();
+            $quotations = WorkOrder::where('parts_code', $searchVehicleName)->select('order_no','order_date','supplier_name','vehicle_type','parts_price','parts_code','parts_name','parts_id',DB::raw('SUM(parts_qty) as parts_qty'), DB::raw('SUM(order_parts_price) as order_parts_price'))->groupBy('order_no','order_date','supplier_name','vehicle_type','parts_price','parts_code','parts_name','parts_id')->get();
             // $quotations = WorkOrder::latest('order_date')->where('parts_code', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
             $vehicles = WorkOrder::select('parts_code')->groupBy('parts_code')->get();
             $fiscal_year = FiscalYear::all();

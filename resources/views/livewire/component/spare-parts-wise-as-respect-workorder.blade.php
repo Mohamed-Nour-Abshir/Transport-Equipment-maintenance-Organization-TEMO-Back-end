@@ -91,12 +91,17 @@
               </tr>
               {{-- @endif --}}
               @endforeach
-              @php
-                $total = collect($workorder->parts_price * $workorder->parts_qty)->sum();
-            @endphp
             </tbody>
           </table>
-          <h1 class="text-center" style="margin-left: 350px;">Order Total (TK.) : <b>{{$total}}</b></h1>
+          @php
+            $totalPrice = 0;
+          @endphp
+            @foreach ($quotations as $item)
+                @php
+                $totalPrice += $item->order_parts_price;
+                @endphp
+            @endforeach
+          <h1 class="text-center" style="margin-left: 350px;">Order Total (TK.) : <b>{{$totalPrice}}</b></h1>
           @endif
         </div>
 
