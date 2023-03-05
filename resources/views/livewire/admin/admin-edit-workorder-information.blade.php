@@ -69,7 +69,7 @@
                                         <option value="{{$supplier->supplier_name}}">{{$supplier->supplier_name}}</option>
                                     @endforeach
                                 </select> --}}
-                                <input type="text" class="form-control" readonly id="supplier-name" name="supplier_name" value="{{$workorder->supplier_name}}">
+                                <input type="text" class="form-control" id="supplier-name" name="supplier_name" value="{{$workorder->supplier_name}}">
                                 @error('supplier_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
                               </div>
                         </div>
@@ -82,7 +82,7 @@
                                         <option value="{{$vehicle->vehicle_name}}">{{$vehicle->vehicle_name}}</option>
                                     @endforeach
                                 </select> --}}
-                                <input type="text" class="form-control" readonly id="vehicle-name" name="vehicle_name" value="{{$workorder->vehicle_name}}">
+                                <input type="text" class="form-control" id="vehicle-name" name="vehicle_name" value="{{$workorder->vehicle_name}}">
                                 @error('vehicle_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
                               </div>
                         </div>
@@ -121,7 +121,7 @@
                                         <option value="{{$part->parts_name}}">{{$part->parts_name}}</option>
                                     @endforeach
                                 </select> --}}
-                                <input type="text" class="form-control" readonly id="parts-name" name="parts_name" value="{{$workorder->parts_name}}">
+                                <input type="text" class="form-control" id="parts-name" name="parts_name" value="{{$workorder->parts_name}}">
                                 @error('parts_name')<span class="text-danger">{{ $message }}</span>@enderror <br>
                              </div>
                           </div>
@@ -135,7 +135,7 @@
                         </div>
                         <div class="form-group mb-3">
                           <label for="supplier-id" class="form-label">Vehicle Type</label>
-                          <input type="text" id="vehicle-type" readonly class="form-control" name="vehicle_type" value="{{$workorder->vehicle_type}}">
+                          <input type="text" id="vehicle-type" class="form-control" name="vehicle_type" value="{{$workorder->vehicle_type}}">
                           @error('vehicle_type')<span class="text-danger">{{ $message }}</span>@enderror <br>
                        </div>
                         <div class="form-group mb-3">

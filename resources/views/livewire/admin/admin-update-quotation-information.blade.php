@@ -70,7 +70,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror <br>
                         </select> --}}
-                        <input type="text" readonly id="supplier-name" class="form-control" name="supplier_name" value="{{$quotation->supplier_name}}">
+                        <input type="text" id="supplier-name" class="form-control" name="supplier_name" value="{{$quotation->supplier_name}}">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -84,7 +84,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror <br>
                         </select> --}}
-                        <input type="text" readonly id="vehicle-name" class="form-control" name="vehicle_name" value="{{$quotation->vehicle_name}}">
+                        <input type="text" id="vehicle-name" class="form-control" name="vehicle_name" value="{{$quotation->vehicle_name}}">
                     </div>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror <br>
                             </select> --}}
-                            <input type="text" readonly id="parts-name" class="form-control" name="parts_name" value="{{$quotation->parts_name}}">
+                            <input type="text" id="parts-name" class="form-control" name="parts_name" value="{{$quotation->parts_name}}">
                         </div>
                     </div>
                 </div>
