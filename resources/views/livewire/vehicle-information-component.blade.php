@@ -38,7 +38,7 @@
                 $i = 0;
             ?>
             @foreach ($vehicles as $vehicle)
-            @if ($vehicle->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
+            {{-- @if ($vehicle->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date))) --}}
                 <tr>
                     <td>{{++ $i}}</td>
                     <td>{{$vehicle->vehicle_code}}</td>
@@ -52,7 +52,7 @@
                     <a href="{{route('pdf.vehicle',['vehicle_id'=>$vehicle->id])}}" title="Print"><i class="fas fa-print text-warning fa-1x"></i></a>
                     </td>
                 </tr>
-            @endif
+            {{-- @endif --}}
             @endforeach
 
           </tbody>

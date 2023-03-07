@@ -29,9 +29,9 @@
             <div class="col-auto">
               <select class="form-select selectpicker" aria-label="Default select example" name="vehicle_name" data-live-search="true" data-style="py-0" id="supplier_id">
                   @foreach ($vehicles as $vehicle)
-                  @if ($vehicle->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
+                  {{-- @if ($vehicle->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date))) --}}
                       <option value="{{$vehicle->vehicle_name}}">{{$vehicle->vehicle_name}}</option>
-                    @endif
+                    {{-- @endif --}}
                   @endforeach
               </select>
             </div>
@@ -77,7 +77,7 @@
                 $i = 0;
             @endphp
             @forelse ($quotations as $item)
-            @if ($item->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
+            {{-- @if ($item->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date))) --}}
             <tr>
                 <td>{{++ $i}}</td>
                 <td>{{$item->parts_code}}</td>
@@ -90,7 +90,7 @@
                     @endforeach
                 @endif
             </tr>
-            @endif
+            {{-- @endif --}}
             @empty
                 <td>No data available</td>
             @endforelse

@@ -42,7 +42,7 @@
                             $i = 0;
                         ?>
                         @foreach ($suppliers as $supplier)
-                        @if ($supplier->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
+                        {{-- @if ($supplier->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date))) --}}
                             <tr>
                                 <td>{{++ $i }}</td>
                                 <td>{{ $supplier->supplier_id }}</td>
@@ -60,7 +60,7 @@
                                 </td>
                             </tr>
 
-                            @endif
+                            {{-- @endif --}}
                         @endforeach
 
                     </tbody>
