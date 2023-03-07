@@ -25,7 +25,7 @@ class DeadStock extends Component
             $searchFromDate = request('from_date');
             $searchToDate = request('to_date');
             // $quotations = WorkOrder::latest('order_date')->where('fiscal_year', $searchVehicleName)->orWhere('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->get();
-            $quotations = WorkOrder::Where('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->select('parts_name', 'parts_id', 'order_date', 'vehicle_type', DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('parts_name', 'parts_id','order_date' ,'vehicle_type')->get();
+            $quotations = WorkOrder::Where('quotation_from', $searchFromDate)->orWhere('quotation_to', $searchToDate)->select('parts_name', 'parts_id', 'order_date', 'vehicle_type','fiscal_year', DB::raw('SUM(parts_qty) as parts_qty'))->groupBy('parts_name', 'parts_id','order_date' ,'vehicle_type','fiscal_year')->get();
             $fiscal_year = FiscalYear::all();
             $fiscalYear = FiscalYear::find(1);
             return view('livewire.component.dead-stock', compact('quotations','fiscal_year','searchFromDate','searchToDate','fiscalYear'))->layout('layouts.base');
