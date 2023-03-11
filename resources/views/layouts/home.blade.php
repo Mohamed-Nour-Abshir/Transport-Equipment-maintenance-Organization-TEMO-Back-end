@@ -130,15 +130,15 @@
                   <p id="output" class="text-danger mb-3"></p>
 
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="reportList" id="ComperativeStatementQuotationPriceBase">
-                    <label class="form-check-label" for="ComperativeStatementQuotationPriceBase">
-                      Comperative Statement Quotation Price Base
-                    </label>
-                  </div>
-                  <div class="form-check">
                     <input class="form-check-input" type="radio" name="reportList" id="QuotationLowestPrice">
                     <label class="form-check-label" for="QuotationLowestPrice">
                       Quotation Lowest Price
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="reportList" id="ComperativeStatementQuotationPriceBase">
+                    <label class="form-check-label" for="ComperativeStatementQuotationPriceBase">
+                      Comperative Statement Quotation Price Base
                     </label>
                   </div>
                   <div class="form-check">
@@ -165,12 +165,12 @@
                       Supplier
                     </label>
                   </div>
-                  {{-- <div class="form-check">
+                  <div class="form-check">
                     <input class="form-check-input" type="radio" name="reportList" id="IssueVoucherForm">
                     <label class="form-check-label" for="IssueVoucherForm">
                       Issue Voucher Form
                     </label>
-                  </div> --}}
+                  </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="reportList" id="Repair">
                     <label class="form-check-label" for="Repair">
@@ -189,12 +189,12 @@
                      Workorder Total
                     </label>
                   </div>
-                  {{-- <div class="form-check">
+                  <div class="form-check">
                     <input class="form-check-input" type="radio" name="reportList" id="PartyWorkorderTotal">
                     <label class="form-check-label" for="PartyWorkorderTotal">
                       Party Workorder Total
                     </label>
-                  </div> --}}
+                  </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="reportList" id="DeadStock">
                     <label class="form-check-label" for="DeadStock">

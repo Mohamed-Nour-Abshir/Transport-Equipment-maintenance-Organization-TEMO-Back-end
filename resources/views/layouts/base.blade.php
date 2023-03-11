@@ -166,12 +166,12 @@
                       Supplier
                     </label>
                   </div>
-                  {{-- <div class="form-check">
+                  <div class="form-check">
                     <input class="form-check-input" type="radio" name="reportList" id="IssueVoucherForm">
                     <label class="form-check-label" for="IssueVoucherForm">
                       Issue Voucher Form
                     </label>
-                  </div> --}}
+                  </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="reportList" id="Repair">
                     <label class="form-check-label" for="Repair">
@@ -190,12 +190,12 @@
                      Workorder Total
                     </label>
                   </div>
-                  {{-- <div class="form-check">
+                  <div class="form-check">
                     <input class="form-check-input" type="radio" name="reportList" id="PartyWorkorderTotal">
                     <label class="form-check-label" for="PartyWorkorderTotal">
                       Party Workorder Total
                     </label>
-                  </div> --}}
+                  </div>
                   <div class="form-check">
                     <input class="form-check-input" type="radio" name="reportList" id="DeadStock">
                     <label class="form-check-label" for="DeadStock">
