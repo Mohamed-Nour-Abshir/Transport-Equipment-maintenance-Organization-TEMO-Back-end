@@ -28,6 +28,7 @@ use App\Http\Livewire\Component\QuotationLowestPrice;
 use App\Http\Livewire\Component\Repair;
 use App\Http\Livewire\Component\RepairVehicleList;
 use App\Http\Livewire\Component\SparePartsWiseAsRespectWorkorder;
+use App\Http\Livewire\Component\StockRegister;
 use App\Http\Livewire\Component\Supplier;
 use App\Http\Livewire\Component\VehicleRegWiseAsRespectWorkorder;
 use App\Http\Livewire\Component\WorkorderLetter;
@@ -98,6 +99,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/vehcile-reg-as-respect-workorder', VehicleRegWiseAsRespectWorkorder::class)->name('vehcile-reg-as-respect-workorder');
     Route::get('/workorder-letter', WorkorderLetter::class)->name('workorder-letter');
     Route::get('/workorder-total', WorkorderTotal::class)->name('workorder-total');
+    Route::get('/Stock-register', StockRegister::class)->name('Stock-register');
 
     // Admin Routes
     // Supplier Information setup routes
@@ -147,8 +149,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/repairVehicleList-reportPdf', [GeneratePDFall::class, 'repairVehicleList'])->name('repairVehicleList-reportPdf');
     Route::get('/dead-stock-reportPdf', [GeneratePDFall::class, 'deadStock'])->name('dead-stock-reportPdf');
 
-    Route::post('/fiscalyear/{post}',[QuotationInformationController::class, 'checkPassword'])->name('posts.password');
+    Route::post('/fiscalyear/{post}', [QuotationInformationController::class, 'checkPassword'])->name('posts.password');
 
-    Route::post('/fiscalyearPasswordChange/{passwordChange}',[QuotationInformationController::class, 'changePassword'])->name('passwordChange.fiscalYear');
-
+    Route::post('/fiscalyearPasswordChange/{passwordChange}', [QuotationInformationController::class, 'changePassword'])->name('passwordChange.fiscalYear');
 });

@@ -203,6 +203,12 @@
                     </label>
                   </div>
                   <div class="form-check">
+                    <input class="form-check-input" type="radio" name="reportList" id="StockRegister">
+                    <label class="form-check-label" for="StockRegister">
+                      Stock Register
+                    </label>
+                  </div>
+                  <div class="form-check">
                     <input class="form-check-input" type="radio" name="reportList" id="RepairVehicleList">
                     <label class="form-check-label" for="RepairVehicleList">
                       Repair Vehicle List

@@ -46,6 +46,9 @@ btn.addEventListener("click", () => {
         case 'DeadStock':
             window.location.assign("Dead-stock");
             break;
+        case 'StockRegister':
+            window.location.assign("Stock-register");
+            break;
         case 'RepairVehicleList':
             window.location.assign("repair-vehicle-list");
             break;
