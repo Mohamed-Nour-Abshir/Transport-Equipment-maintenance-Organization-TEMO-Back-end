@@ -50,7 +50,7 @@
                     $i = 0;
                 ?>
                 @foreach ($workorders as $workorder)
-                @if ($workorder->fiscal_year === date('d-m-Y',strtotime($fiscalYear->start_date)))
+                @if ($workorder->fiscal_year === $fiscalYear->start_date)
                 <tr>
                     <td>{{++ $i}}</td>
                     <td>{{$workorder->order_no}}</td>

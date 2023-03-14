@@ -50,9 +50,9 @@ class WorkorderInformationController extends Controller
         $workorder->parts_id = $request->parts_id;
         $workorder->order_parts_price = $request->order_parts_price;
         $workorder->order_date = $request->order_date;
-        // $fiscalYear2 = date('Y', strtotime('+1 year'));
-        $fiscalYear = date('01-07-Y', strtotime('-1 year'));
-        $workorder->fiscal_year = $fiscalYear;
+        $fiscalYear = FiscalYear::find(1);
+        // $fiscalYear = date('01-07-Y', strtotime('-1 year'));
+        $workorder->fiscal_year = $fiscalYear->start_date;
         $workorder->save();
         session()->flash('message', 'Workorder has been added successfully');
         return redirect()->route('workorder-information');
